@@ -1,0 +1,66 @@
+{
+	code: "choppingblock",
+	class: "iw-choppingblock",
+	entityClass: "iw-choppingblock",
+	// Single data-block: the wood species is no longer a variantgroup — it lives as a stack attribute + a
+	// BlockEntity field and is re-textured at runtime from the source log's textures (see BlockEntityChoppingBlock
+	// / ChoppingBlockTexSource). This drops the hard "game" domain coupling and makes any wood-mod work generically.
+	shape: { base: "immersivewoodworking:block/choppingblock" },
+	// Default textures (oak) for the bare block; the runtime re-texturer overrides M1 (bark) / M2 (treetrunk end)
+	// per stored species. The M1/M2 keys MUST stay — the runtime tex source targets them.
+	textures: {
+		"M1": { base: "game:block/wood/bark/oak" },
+		"M2": { base: "game:block/wood/treetrunk/oak" }
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	creativeinventory: { "general": ["*"] },
+	// extraSections render ONLY on the handbook detail page (never in the held-item tooltip), so the block's
+	// description lives in the handbook while the in-world tooltip stays clean. The section text holds the detailed
+	// chop how-to; the brief "woodworking" overview page (built in code, WoodworkingHandbookInfo.AddGuidePage) deep-links to this page.
+	// The handbook shows ONE generic page for the block — BlockChoppingBlock.GetHandBookStacks returns a single bare
+	// stack so that overview can link to a stable block-...:choppingblock page, exactly like the sawhorse/sawmill
+	// frame; the per-species entries still appear in the CREATIVE menu (code-generated CreativeInventoryStacks).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{
+					title: "immersivewoodworking:choppingblock-handbook-title",
+					text: "immersivewoodworking:choppingblock-handbook-text"
+				}
+			]
+		}
+	},
+	blockmaterial: "Wood",
+	maxStackSize: 1,
+	resistance: 3.5,
+	materialDensity: 700,
+	// Flat burn for every species: the block is now a single code (no per-wood variants), so it can't carry a
+	// per-wood combustible table. One value for all — burns 54s at 800°C regardless of species.
+	combustibleProps: { burnTemperature: 800, burnDuration: 54 },
+	// Identical sound set to game:block/wood/woodtyped/log.json, so placing/breaking/walking/hitting the
+	// chopping block sounds exactly like a log — including the block/chop "thunk" while mining it with an axe.
+	// The "game:" prefix is REQUIRED: an unqualified sound path ("block/planks") resolves to THIS block's
+	// domain (immersivewoodworking), where the .ogg doesn't exist, so nothing plays — that's why the stand
+	// was silent on place/hit/break. (The textures above are game-prefixed for the exact same reason.)
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks",
+		byTool: {
+			"Axe": { hit: "game:block/chop", break: "game:block/planks" }
+		}
+	},
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.6875, z2: 1 },
+	// selectionbox capped at the cell top (y=1.0), NOT the top of the raised billet. The billet is drawn up to
+	// y≈1.32 (PoseLaidContent), but VS raycasts the cursor cell-by-cell (DDA) and only tests a block's boxes while
+	// the ray is inside THAT block's own 1×1×1 cell — the part of any box poking above y=1.0 lives in the cell above,
+	// which holds air, so a flat look-angle ray sails right over it and the click misses (T03.01, adversarial-verified
+	// against decompiled engine). An earlier fix raised this box to 1.340625 to "cover the pile"; that region was
+	// never actually clickable, so the tall box only lied about where the cursor would register. Capping at 1.0 makes
+	// the highlight equal the reliably-clickable region: it lights up on the stand and the lower billet and vanishes
+	// over the top, which self-teaches the player to aim at the base. Fixing the dead zone itself (lower the visual,
+	// or occupy the cell above) was deferred as too costly for the payoff — decision В, see ModDbBugfixPlan T03.01.
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1.0, z2: 1 }
+}

@@ -1,0 +1,56 @@
+{
+	code: "sawmillcarriage",
+	// PLACEHOLDER sawmill part (T02.02) — the carriage. A plain Item on purpose: no `class`/`tool`/`behaviors`, so
+	// it loads on the base Item class (no registration needed) and shows in creative. Behaviour arrives in E03/T03.07,
+	// where it is RMB-installed into the placed `sawmill-frame` via TryAddPart (pulverizer-style, mirrors `pounder`).
+	// Mandatory part — the CARRIAGE assembly (telezhka + pruzhina): carries/holds the log on the rails and feeds it
+	// through the saw (render group carriage + spring, T07.00). Crafted from planks + a saw (tool, not consumed) + a
+	// rusty gear (recipe sawmill_carriage, T02.05). Install order is free except the blade kit needs the sash first.
+	shape: { base: "immersivewoodworking:item/sawmill/carriage" },
+	// Two-handed carry in third person, mirroring the frame (blocktypes/sawmill/frame.json): these bulky machine
+	// assemblies are hauled with both hands. ONLY the idle hold pose is copied — the frame's ready/place anims
+	// (heldblockready/twohandplaceblock) are block-placement-only and don't apply to an installed item. The blade kit is
+	// left one-handed on purpose. The tp-hand + ground transforms in the block below are user-tuned in-game via .tfedit
+	// (2026-07-04) — item-scale, NOT the frame's block-scale numbers.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// One transform per .tfedit tab so the editor opens EVERY tab without the engine's null-transform crash (a missing
+	// transform → NRE in GuiDialogTransformEditor.OnGuiOpened on tab switch). tp (3rd-person hand) + ground are CALIBRATED
+	// (2026-07-04); fp (1st-person) + tpOffHand (off-hand) stay at the frame-derived starting stubs — not yet calibrated.
+	fpHandTransform:    { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	tpHandTransform:    { translation: { x: -1.05, y: -0.8, z: -0.6 }, rotation: { x: 2, y: 99, z: -152 }, scale: 0.5299 },
+	tpOffHandTransform: { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	groundTransform:    { translation: { x: 0, y: 0, z: 0 }, rotation: { x: -89, y: 4, z: 0 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 3.31 },
+	// Authored Blender mesh (sawmill_carriage_parts) — keys oak (cart wood) + metal (hardware) + rope (lashings) +
+	// a stray Blender material null.001 (no slot → placeholder oak so it isn't magenta). "game:" prefix REQUIRED (an
+	// unqualified path resolves to this mod's empty texture folder → magenta, memory vs-mod-asset-path-domain).
+	textures: {
+		"oak":      { base: "game:block/wood/debarked/oak" },
+		"metal":    { base: "game:block/metal/plate/iron" },
+		"rope":     { base: "game:item/resource/rope" },
+		"rope.001": { base: "game:item/resource/rope" },
+		"null.001": { base: "game:block/wood/debarked/oak" },
+		// "0" = Blender faces without a material slot (re-emitted on every re-export → remap owns them, like
+		// frame.json). WOOD per the author → oak.
+		"0":        { base: "game:block/wood/debarked/oak" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (T08.02-style, mirrors the blocks' attributes.handbook.extraSections).
+	// NOTE: the engine's auto "item-handbooktext-<code>" lang path can't be used for a MOD-domain item — it keys off
+	// Code.ToShortString() = "immersivewoodworking:sawmillcarriage", so the lang lookup never matches a plain key. The
+	// JSON extraSections path is the working equivalent (it renders in the same handbook section). Shared lang key.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmillpart-handbook-title", text: "immersivewoodworking:sawmillpart-handbook-text" }
+			]
+		}
+	},
+	// Block-style isometric GUI transform so the placeholder cube reads as a 3D part in the inventory slot. Retuned
+	// with `.tfedit` once the Blender model lands (as the pit saw's transforms were).
+	guiTransform: {
+		rotate: false,
+		rotation: { x: -22.6, y: -45, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1
+	}
+}

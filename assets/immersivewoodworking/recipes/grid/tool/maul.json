@@ -1,0 +1,24 @@
+[
+	{
+		// Assemble the splitting maul = head + handle, the ordinary way (WITHOUT Toolsmith) — mirrors the vanilla axe
+		// (game:recipes/grid/tool/axe.json = axehead + stick) and this mod's pitsaw/barkspud as a 1-wide column:
+		//   H   H = head   (maulhead-*, name:metal — drives the {metal} output)
+		//   S   S = stick  (game:stick — the haft)
+		// ONE head only, because Toolsmith maps exactly one head → one tool. name:"metal" on the H slot binds the head's
+		// metal AND captures {metal} for the output, so a copper head → copper maul with no mixed-metal craft.
+		// Vanilla ingredients MUST be game:-prefixed: an unqualified code in a MOD recipe resolves to this mod's domain
+		// (immersivewoodworking), where stick doesn't exist (memory vs-mod-asset-path-domain). The mod's own head
+		// `maulhead-*` and output `maul-*` stay unqualified so they resolve in-domain.
+		// applyquenchablebuffs carries an iron/steel head's quench buff onto the assembled maul (Buffable), exactly like
+		// the vanilla axe and the mod's pitsaw. NO rope binding — the ordinary craft matches vanilla (head + stick), and
+		// under Toolsmith the workbench makes a binding optional.
+		ingredientPattern: "H,S",
+		ingredients: {
+			"H": { type: "item", code: "maulhead-*", name: "metal" },
+			"S": { type: "item", code: "game:stick" }
+		},
+		width: 1,
+		height: 2,
+		output: { type: "item", code: "maul-{metal}", quantity: 1, recipeAttributes: { "applyquenchablebuffs": true } }
+	}
+]

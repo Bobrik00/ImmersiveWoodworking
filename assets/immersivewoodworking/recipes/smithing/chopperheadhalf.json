@@ -1,0 +1,41 @@
+{
+	// Anvil smithing recipe for ONE HALF of the chopper head `chopperheadhalf-{metal}` (head redesign, user 2026-07-10).
+	// The assembled head is no longer forged whole: the player forges TWO of these identical halves of the SAME metal
+	// and joins them with a hammer on the grid (recipes/grid/chopper_head.json) into chopperhead-{metal}. Mirrors this
+	// mod's other single-piece toolhead forges (pitsawblade.json · barkspudhead.json) and the vanilla toolheads
+	// (game:recipes/smithing/axe.json · saw.json): one hot ingot silhouette hammered flat. Auto-loaded from this mod's
+	// domain with no code registration — recipes/smithing/* is scanned across every domain, exactly like recipes/grid/*.
+	//
+	// METALS = the head's FULL 9-metal set (itemtypes/chopper/head.json + headhalf.json durabilitybytype/variantgroup,
+	// copper..steel incl. soft gold/silver). name:"metal" binds the ingot's metal to the {metal} output, so a copper
+	// ingot yields chopperheadhalf-copper, steel yields chopperheadhalf-steel; a single ingot, one metal, no mixing.
+	// allowedVariants pins the wildcard to EXACTLY those 9 so a lead/tin/etc. ingot can't forge a non-existent variant
+	// (memory vs-vanilla-ingredient-codes: ingot-* + name + allowedVariants).
+	//
+	// Voxel silhouette (ONE flat layer, like every vanilla toolhead — outer array length 1): a chunky maul-head HALF —
+	// THREE full body rows over a TWO-row bevelled cutting edge (user 2026-07-10: the lower edge slopes in over two
+	// rows instead of one, for a squarer body with a deeper bevel). 56 voxels -> ceil(56 / ItemIngot.VoxelCount 42)
+	// = 2 INGOTS per half, so the assembled head costs 4 ingots — the SAME metal as the pre-redesign whole-head grid
+	// recipe (_I_,III,_H_ = 4 ingots), now spent as two anvil forges + a hammer assembly instead of one grid craft.
+	// This is a BALANCE DRAFT (user tunes): drop the filled-voxel count to 42 or fewer and each half forges from a
+	// SINGLE ingot (2 per head); raise it above 84 for 3 ingots. The count is what matters — MatchesRecipe (BEAnvil)
+	// demands a metal voxel in every recipe cell, so any recipe over 42 filled voxels forces a second welded ingot.
+	//
+	// `game:` is REQUIRED on the ingot — an unqualified `ingot-*` resolves to THIS mod's domain
+	// (immersivewoodworking:ingot-*), matches NO collectible, expands to ZERO sub-recipes and silently never registers
+	// (memory vs-mod-asset-path-domain). The output stays bare so it resolves in-domain to immersivewoodworking:.
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"__############__",
+		"__############__",
+		"__############__",
+		"___##########___",
+		"___##########___"
+	]],
+	// `name` is an identifier (parsed to an AssetLocation), NOT a display label: the anvil selector lists recipes by
+	// their OUTPUT item (chopperheadhalf-{metal}, named via lang), so no recipe-name lang entry is needed. RecipeLoader
+	// defaults a null Name to the asset path; vanilla still sets a short one, so we mirror.
+	name: "chopperheadhalf",
+	code: "chopperheadhalf-{metal}",
+	output: { type: "item", code: "chopperheadhalf-{metal}" }
+}

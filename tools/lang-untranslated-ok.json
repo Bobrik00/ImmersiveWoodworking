@@ -1,0 +1,18 @@
+{
+	"_comment": "Read by tools/check-lang.py, check 12. A value in a translated lang file that is byte-identical to the English one is what an untranslated string looks like, so the check treats it as a finding. The strings below are identical on purpose; each one is listed with the language it applies to and the reason. Two rules keep the list honest: an entry without a reason fails, and an entry whose string has since diverged fails as well, so this file records what is true now rather than what was once waved through. Strict JSON, no comments outside this key.",
+
+	"exceptions": [
+		{
+			"domain": "immersivewoodworking",
+			"key": "item-bark-bast",
+			"langs": ["de"],
+			"why": "German for bast IS Bast. Same word, not a missed translation."
+		},
+		{
+			"domain": "immersivewoodworking",
+			"key": "bark-bast-handbook-title",
+			"langs": ["de"],
+			"why": "The handbook heading over the same item, and the same word again."
+		}
+	]
+}

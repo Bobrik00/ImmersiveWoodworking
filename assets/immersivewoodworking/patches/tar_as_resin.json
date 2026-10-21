@@ -1,0 +1,101 @@
+[
+	// ============================================================================================================
+	// TAR AS RESIN (BarkPlan/E04, T04.06, decision D26) — make barktar an EQUIVALENT of game:resin everywhere the
+	// vanilla accepts resin, plus the bow's finish slot.
+	//
+	// WHY TAGS, NOT allowedVariants (engine-verified against vsapi source):
+	//   barktar is immersivewoodworking:barktar; every resin recipe references game:resin — a DIFFERENT domain.
+	//   * `allowedVariants` (array form) and `{named}` variants both keep the recipe FILE's domain:
+	//       - WildcardUtil.Match (WildcardUtil.cs:83) returns false when wildCard.Domain != inCode.Domain and the
+	//         wildcard domain is not "*"; MatchesVariants compares only the PATH. A game:* wildcard can never reach
+	//         immersivewoodworking:barktar, and "*:*" matches EVERYTHING (short-circuits before allowedVariants).
+	//       - FillPlaceHolder (CraftingRecipeIngredient.cs) does Code.CopyWithPath(path.Replace("{k}", v)) — it rewrites
+	//         the PATH only, keeping the file domain, so "immersivewoodworking:barktar" would become the invalid
+	//         game: + path "immersivewoodworking:barktar".
+	//   * A plain `code:"resin"` ingredient is EXACT (GetMatchType, RecipeBaseApi.cs:107) and IGNORES allowedVariants
+	//     entirely (SatisfiesAsIngredient.cs:318 takes the ResolvedItemStack.Satisfies branch).
+	//   * The ONLY cross-domain match is a TAG: CheckTags (CraftingRecipeIngredient.cs:342) matches on the
+	//     collectible's own tags, domain-agnostic. Vanilla precedent for a CONSUMED tag-only grid ingredient:
+	//     survival/recipes/grid/stonecoffinlid.json ("F": {type:"item", tags:["flux"]}).
+	//   So both resin (patched below) and barktar (itemtypes/barktar.json) carry `pitch`, and every resin-consuming
+	//   grid recipe is converted to match tags:["pitch"] — ONE clean recipe accepts resin OR tar OR any mod's
+	//   pitch-tagged item, with no handbook duplicate. This is the plan's tag philosophy applied to resin.
+	//
+	// SCOPE — what is NOT here and why (engine-forced):
+	//   * game:recipes/grid/torch.json — the two resin torch recipes are enabled:false in vanilla (dead), nothing to do.
+	//   * game:recipes/grid/churn.json — its single grid recipe is ALSO enabled:false in vanilla (dead, same as torch):
+	//     the game filters disabled recipes out of the active registry, so a resin->pitch conversion there would never
+	//     register (neither resin nor tar crafts a churn). Omitted for consistency with the torch exclusion.
+	//   * game:blocktypes/mechanics/waterwheel.json — resin lives in a RightClickConstructable stage. Matching would
+	//     honor tags, BUT ConstructionStage.GetDrops (RightClickConstruction.cs:223) calls ResolvedItemStack.Clone(),
+	//     which is NULL for a tag-only ingredient (Resolve returns true early for non-Exact without resolving a stack)
+	//     -> NullReferenceException when the wheel is broken after a resin stage. So the waterwheel stays resin-only;
+	//     since 1.3.12 tar reaches it by being boiled into real resin (recipes/cooking/resin-tar.json).
+	//   * recipes/cooking/glue.json — the glue chain is task T04.07 (a cooking recipe, different structure).
+	//
+	// BRITTLENESS NOTE: JSONPatch can only address arrays by numeric index, so the recipe paths below are pinned to
+	// the vanilla recipe ORDER (verified against 1.20 survival assets). If a game update reorders a file, re-verify.
+	// Index maps are given per file. barktar's own `pitch`/`bowfinish` tags are declared in itemtypes/barktar.json.
+	// ============================================================================================================
+
+	// --- ITEM TAGS -------------------------------------------------------------------------------------------------
+	// resin gains BOTH tags (it is the resin-equivalent AND a valid bow coating). fat-rendered and beeswax gain only
+	// `bowfinish` (bow coatings, not general pitch). Raw fat (game:itemtypes/resource/fat.json) is deliberately
+	// untouched — only the RENDERED fat is a bow finish.
+	// AddMerge, NOT Add: all three targets have no `tags` member today, so AddMerge simply CREATES the array (identical
+	// to Add right now). But `pitch`/`bowfinish` are SHARED cross-mod tags on very commonly-patched vanilla items
+	// (resin above all); a plain Add maps to Newtonsoft `jToken["tags"]=value`, which REPLACES a pre-existing array —
+	// so if another mod (or a future game version) also tags one of these items, Add would silently drop their tags.
+	// AddMerge appends into an existing array instead (creates it when absent), which the engine's own docs recommend
+	// for mod compatibility.
+	{ "file": "game:itemtypes/resource/resin.json",        "op": "AddMerge", "path": "/tags", "value": ["pitch", "bowfinish"] },
+	{ "file": "game:itemtypes/resource/fat-rendered.json", "op": "AddMerge", "path": "/tags", "value": ["bowfinish"] },
+	{ "file": "game:itemtypes/resource/beeswax.json",      "op": "AddMerge", "path": "/tags", "value": ["bowfinish"] },
+
+	// --- LAMELLAR ARMOR (game:recipes/grid/armor/lamellar.json) ----------------------------------------------------
+	// Wood lamellar helmet/armor/pants: slot "G" = resin qty1, at array indices 0..6 (indices 7+ are metal lamellar,
+	// no resin). Convert each to the `pitch` tag.
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/0/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/1/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/2/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/3/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/4/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/5/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/armor/lamellar.json", "op": "Replace", "path": "/6/ingredients/G", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+
+	// (churn omitted — its recipe is enabled:false; see SCOPE note above.)
+
+	// --- FRUIT PRESS (game:recipes/grid/fruitpress.json) -----------------------------------------------------------
+	// Array of one recipe: slot "R" = resin qty2.
+	{ "file": "game:recipes/grid/fruitpress.json", "op": "Replace", "path": "/0/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+
+	// --- MECHANICAL POWER BLOCKS (game:recipes/grid/mechpowerblocks.json) ------------------------------------------
+	// Slot "R" = resin at indices 0,1,5,6,7,10,11,12,13,15,16,17,18 (index 2's "R" is rod-{metal}, NOT resin — skip).
+	// Quantities preserved: qty1 at 0,1,5,6,7,12; qty2 at 10,11,15,16,17,18; qty4 at 13.
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/0/ingredients/R",  "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/1/ingredients/R",  "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/5/ingredients/R",  "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/6/ingredients/R",  "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/7/ingredients/R",  "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/10/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/11/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/12/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 1 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/13/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 4 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/15/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/16/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/17/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+	{ "file": "game:recipes/grid/mechpowerblocks.json", "op": "Replace", "path": "/18/ingredients/R", "value": { "type": "item", "tags": ["pitch"], "quantity": 2 } },
+
+	// --- BOW COATING (game:recipes/grid/tool/bow.json) -------------------------------------------------------------
+	// bow-long (indices 2 and 3) uses slot "F": code "{coating}" with a recipe-level allowedVariants list
+	// {coating:[fat-rendered, resin, beeswax]}. Convert the slot to the `bowfinish` tag (which now covers all three
+	// vanilla finishes PLUS barktar). The recipe-level allowedVariants is REMOVED purely as hygiene: once F is tag-only
+	// with no {coating} placeholder, GenerateRecipesForAllIngredientCombinations returns [this] and the allowedVariants
+	// dict is never consulted (it drives expansion only for ingredients whose code contains {...}), so a leftover dict
+	// would be inert — but it would dangle, referencing variants no ingredient uses, so we drop it. F keeps quantity 1
+	// (vanilla default). Recurve (index 4) uses bone, not a coating — untouched.
+	{ "file": "game:recipes/grid/tool/bow.json", "op": "Replace", "path": "/2/ingredients/F", "value": { "type": "item", "tags": ["bowfinish"] } },
+	{ "file": "game:recipes/grid/tool/bow.json", "op": "Remove",  "path": "/2/allowedVariants" },
+	{ "file": "game:recipes/grid/tool/bow.json", "op": "Replace", "path": "/3/ingredients/F", "value": { "type": "item", "tags": ["bowfinish"] } },
+	{ "file": "game:recipes/grid/tool/bow.json", "op": "Remove",  "path": "/3/allowedVariants" }
+]

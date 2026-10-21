@@ -1,0 +1,82 @@
+[
+	// ============================================================================================================
+	// BARK-MEDICINAL AS THE THIRD POULTICE AGENT + ITS HEALING (BarkPlan/E05, T05.03 + T05.04). Adds `bark-medicinal` to
+	// vanilla poultice's `agent` axis, next to `honey-sulfur` and `horsetail`, and gives every material x bark-medicinal
+	// combo its HealingItem numbers. NAMING (user): the finished poultice AGENT is `bark-medicinal`; the intermediate
+	// boiled LIQUID it is spread from is `barkbrew` (itemtypes/liquid/barkbrew.json). Closes the real gap the whole chain
+	// exists for: horsetail does not grow everywhere (none in the deep south), so a purely-forest first-aid needs a third
+	// agent that comes from trees, not wetlands.
+	//
+	// SCOPE SPLIT: this patch owns the AGENT axis + healing. The bark-medicinal agent's TEXTURES are pre-wired in the
+	// sibling poultice_bast.json (the single texturesByType owner — byType is first-match, so a "*"-catch-all added there
+	// would shadow an agent key added here; hence all texture routing lives in one patch). The SHAPE needs no entry: shape
+	// is per-material (bast->reed, linen->linen via the shapeByType "*" fallback), shared across every agent incl.
+	// bark-medicinal. The grid recipes that craft poultice-{material}-bark-medicinal are T05.05 (recipes/grid/poultice-bark.json).
+	//
+	// HEALING (T05.04, retuned at the 2026-07-28 playtest pass): the original design made bark WORSE by APPLICATION TIME
+	// (7 s vs vanilla 3 s) so it was camp-only. The playtester chose to DROP that penalty for vanilla parity (3 s) — the
+	// intended combat drawback is deliberately removed. Bark stays balanced by HP alone: it heals LESS than the honey-sulfur
+	// agents (reed+bark-medicinal 2, bast+bark-medicinal 3, linen+bark-medicinal 4, vs honey-sulfur's 4/7), so at 3 s it is
+	// never strictly better than the water-biome reagents — its only edge is being fully forest-sourced. bast+bark-medicinal
+	// 3 is the "fully-forest" bonus that justifies bast without making it beat reed in every cell. All other fields mirror
+	// vanilla poultice exactly (applicationtimesec 3 / maxapplicationtimesec 10 / effectdurationsec / ticks / cancel*), so
+	// ONLY the HP differs now. Numbers hardcoded pending the E08 config pass, like the rest of BarkPlan's scalars.
+	//
+	// variantgroups[1] is the `agent` axis (index 0 is `material`); behaviors[0] is the single HealingItem behavior.
+	// ============================================================================================================
+
+	// 1) Add `bark-medicinal` to the agent axis -> generates poultice-{linen,reed,bast}-bark-medicinal.
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/variantgroups/1/states/-",
+		"value": "bark-medicinal"
+	},
+
+	// 2) Healing for each material x bark-medicinal (slow application, HP per the plan grid).
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/behaviors/0/propertiesByType/*-reed-bark-medicinal",
+		"value": {
+			"health": 2,
+			"applicationtimesec": 3,
+			"maxapplicationtimesec": 10,
+			"effectdurationsec": 10,
+			"ticks": 10,
+			"cancelinair": false,
+			"cancelwhileswimming": false,
+			"delaytocancelsec": 0.5
+		}
+	},
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/behaviors/0/propertiesByType/*-bast-bark-medicinal",
+		"value": {
+			"health": 3,
+			"applicationtimesec": 3,
+			"maxapplicationtimesec": 10,
+			"effectdurationsec": 10,
+			"ticks": 10,
+			"cancelinair": false,
+			"cancelwhileswimming": false,
+			"delaytocancelsec": 0.5
+		}
+	},
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/behaviors/0/propertiesByType/*-linen-bark-medicinal",
+		"value": {
+			"health": 4,
+			"applicationtimesec": 3,
+			"maxapplicationtimesec": 10,
+			"effectdurationsec": 10,
+			"ticks": 10,
+			"cancelinair": false,
+			"cancelwhileswimming": false,
+			"delaytocancelsec": 0.5
+		}
+	}
+]

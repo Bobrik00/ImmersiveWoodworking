@@ -1,0 +1,48 @@
+{
+	code: "sawmilllevers",
+	// sawmill part (T02.05) — the feed LEVERS (rychagi). Plain Item: no class/tool/behaviors. Mandatory part;
+	// RMB-installed into `sawmill-frame` (E03/T03.07). The ratchet linkage (big wheel + swinging levers) that advances
+	// the carriage one step per axle revolution — the machine's FEED drive (REPLACES the retired `sawmillfeed`).
+	// Render group: leveler_*/connector/rotor_metal (T07.00). WOOD + NAILS + a metal PLATE part (recipe sawmill_levers).
+	// NO bronze cap — mechanical power is itself the tech gate (decision 2026-06-19, see PLAN.md).
+	shape: { base: "immersivewoodworking:item/sawmill/levers" },
+	// Two-handed carry in third person, mirroring the frame (blocktypes/sawmill/frame.json): these bulky machine
+	// assemblies are hauled with both hands. ONLY the idle hold pose is copied — the frame's ready/place anims
+	// (heldblockready/twohandplaceblock) are block-placement-only and don't apply to an installed item. The blade kit is
+	// left one-handed on purpose. The tp-hand + ground transforms in the block below are user-tuned in-game via .tfedit
+	// (2026-07-04) — item-scale, NOT the frame's block-scale numbers.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// One transform per .tfedit tab so the editor opens EVERY tab without the engine's null-transform crash (a missing
+	// transform → NRE in GuiDialogTransformEditor.OnGuiOpened on tab switch). tp (3rd-person hand) + ground are CALIBRATED
+	// (2026-07-04); fp (1st-person) + tpOffHand (off-hand) stay at the frame-derived starting stubs — not yet calibrated.
+	fpHandTransform:    { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	tpHandTransform:    { translation: { x: -1.7, y: -1.2, z: -0.8 }, rotation: { x: -30, y: -3, z: -111 }, scale: 0.46 },
+	tpOffHandTransform: { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	groundTransform:    { translation: { x: 0, y: 0.2, z: 0 }, rotation: { x: 1, y: 0, z: 0 }, origin: { x: 0.5, y: 0.5, z: 0.5299 }, scale: 2.22 },
+	// Authored Blender mesh (sawmill_feedlevers_part) — keys oak (wood levers) + metal (the big wheel + ratchet
+	// hardware). Placeholder game: textures ("game:" required, vs-mod-asset-path-domain); user repaints at final art.
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" },
+		// "0" = Blender faces without a material slot (re-emitted on every re-export → remap owns them, like
+		// frame.json). WOOD per the author → oak.
+		"0":     { base: "game:block/wood/debarked/oak" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (mod-domain items can't use the auto item-handbooktext-<code> lang
+	// path — see carriage.json — so use JSON extraSections; shared lang key).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmillpart-handbook-title", text: "immersivewoodworking:sawmillpart-handbook-text" }
+			]
+		}
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 4, y: 1, z: 0 },
+		rotation: { x: 89, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.03
+	}
+}

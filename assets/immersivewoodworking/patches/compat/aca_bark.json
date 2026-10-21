@@ -1,0 +1,61 @@
+[
+	// ACA COMPAT (BarkPlan/E07, T07.02) — give A Culinary Artillery's oak bark OUR tags so it flows into the IW chains.
+	//
+	// IW's bark SINKS match TAGS, not a bark CODE: `bark-tannin` for the tanning barrels (E03/T03.02) and
+	// `bark-compost` for the compost barrel (T06.01). ACA's bark ships with no tags, so tagging its dry oak bark drops
+	// it into the tanning chain at the green tier (the 72 h `bark-tannin` rows of weaktannin-bark.json and
+	// strongtannin-bark.json), and it then behaves exactly like our own `bark-tan-green`, compost exclusion included
+	// (see below). (The pit-kiln stick layer, T06.02, is deliberately NOT a tag sink
+	// — it accepts the EXACT code `bark-generic` to keep birch / tannin / foreign bark out of the fire — so tagged
+	// ACA bark never becomes kiln kindling. That is intended.)
+	//
+	// THE BRIDGE IS TWO ONE-WAY LINKS (checked against ACA 2.0.0-dev.24 on 2026-09-26):
+	//   - IW -> ACA: `bark-generic` simmers into `aculinaryartillery:bark-oak-boiled`, ACA's cork feedstock (T07.01,
+	//     recipes/simmering/aca_boiledbark.json).
+	//   - ACA -> IW: `bark-oak-dry` joins our green tannin tier through the tag below.
+	// Two ACA sinks get nothing from IW, because both name the exact code `aculinaryartillery:bark-oak-dry`: ACA's own
+	// barrel tannin (recipes/barrel/tannins.json, added in dev.23) and the Material Needs dark-brown dye that ACA
+	// redirects onto its bark (patches/compatibility/materialneeds/bark.json).
+	// Under IW defaults ACA bark also has no survival source. ACA's only source is a `returnedStack` it patches onto
+	// game:recipes/grid/debarkedlog.json, and DisableVanillaDebarkCrafting (on by default) strips that recipe by its
+	// debarkedlog-* output (IsLogToDebarkedLog). So this tag only reaches ACA bark that exists anyway: stacks from
+	// before IW, the creative inventory, or a server that turned the flag off. While In Dappled Groves is loaded, ACA
+	// skips `bark-oak-dry` altogether (its patches/compatibility/indappledgroves/boiledbark.json), so the tagsByType
+	// key below matches no variant and the tags land on no item.
+	//
+	// ONLY the dry raw bark (`bark-oak-dry`) is tagged, via tagsByType keyed on the full code (ACA's bark.json has no
+	// `tags`/`tagsByType`, so `op: add /tagsByType` creates it). The BOILED intermediate (`bark-oak-boiled`) is left
+	// untagged on purpose — it is ACA's cork feedstock, not raw bark, and letting it into our compost/tannin would be
+	// nonsense. `bark` + `bark-tannin` because ACA bark is oak = tannin-rich, so it earns the tanning tag too.
+	//
+	// NO `bark-compost` HERE (AuditFixPlan/T08.01, finding F-L7-01). ACA's oak bark is TANNING bark, and our own two
+	// tanning states lost the compost route in that task so that the compost barrel would stop intercepting the
+	// weak-tannin one (16 tanning bark + a bucket of water used to seal into 2 compost). Handing ACA bark the compost
+	// tag anyway would make foreign tanning bark behave differently from ours, which is the opposite of the point of
+	// this file. `bark` stays on it as the identity marker (bark.json); by itself that tag no longer feeds any recipe.
+	//
+	// No `side` (Universal): collectible tags must match on both sides — the server recipe registry matches on them and
+	// the client handbook reads them, exactly as our own itemtypes/bark.json declares its tags on both sides.
+	//
+	// SCOPE (T07.02, user decision): only ACA is tagged here. The reason given at the time, that AncientTools, In
+	// Dappled Groves and MaterialNeeds were not installed and their bark itemtype paths could not be verified, no
+	// longer holds for two of them. .shared/reference-mods carries (checked 2026-09-26):
+	//   - In Dappled Groves 3.0.1-rc.5, modid `indappledgroves`: indappledgroves:itemtypes/resources/bark.json,
+	//     codes bark-{wood}-{dry|soaked}, no tags.
+	//   - the AncientTools fork 1.6.5, modid `ancienttoolsfork` while its asset domain stays `ancienttools`:
+	//     ancienttools:itemtypes/resources/bark.json, codes bark-{wood}, no tags.
+	// Their tag patches are not written and wait on a separate decision. BarkPlan closed on 2026-07-31 without them;
+	// T07.06, which this note used to name as their home, was the modpack smoke run. For whoever writes them: the patch
+	// loader matches each `dependsOn` entry against Mod.Info.ModID exactly and ANDs the entries, so a gate on
+	// `ancienttools` (the modid ACA's own compat patches use) never fires for the fork, and covering both the original
+	// mod and the fork takes one patch per modid.
+	// MaterialNeeds is still absent. Its bark is the vanilla orphan game:oakbark, which BarkPlan scope deliberately
+	// does not touch.
+	{
+		"file": "aculinaryartillery:itemtypes/bark.json",
+		"op": "add",
+		"path": "/tagsByType",
+		"value": { "bark-oak-dry": ["bark", "bark-tannin"] },
+		"dependsOn": [{ "modid": "aculinaryartillery" }]
+	}
+]

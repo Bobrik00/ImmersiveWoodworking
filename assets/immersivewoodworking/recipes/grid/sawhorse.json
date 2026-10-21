@@ -1,0 +1,29 @@
+{
+	// TEMPLATE, not a live recipe — "enabled: false" makes the vanilla RecipeLoader skip it. It is registered in
+	// code (ImmersiveWoodworkingModSystem.RegisterSawhorseCraftingRecipe, in AssetsFinalize, server-side) ONLY when
+	// Config.CraftableSawhorse is on — so the SAME single flag both enables this craft AND disables the in-world
+	// stick build (BehaviorSawhorseBuild passes the stick's plain right-click through to vanilla). Why register in
+	// code rather than ship it enabled: a static `enabled` value can't read config, and the alternative (ship enabled
+	// + strip when off) is more fragile than the mod's established "enabled:false template, clone+enable in code"
+	// pattern (see choppingblock.json).
+	//
+	// Stick + rope + stick in a single row. It's a 3x1 SHAPED recipe, so the order is fixed (stick-rope-stick, all
+	// horizontal) but GridRecipe.Matches slides the pattern over the grid, so it crafts from ANY of the three rows.
+	// Vanilla ingredients MUST be game:-prefixed: an unqualified code in a mod recipe resolves to this mod's domain
+	// (immersivewoodworking), where stick/rope don't exist (same reason pitsaw.json game:-prefixes its sawblade/stick).
+	// rope is game:rope (the same item the in-world build consumes to finish a trestle), an item, not flaxtwine.
+	//
+	// Output is the finished trestle BLOCK (the mod's own domain → unqualified "sawhorse" resolves in-domain). It has
+	// no wood variants, so no per-species stamping is needed; BlockSawhorse.OnBlockPlaced jumps the placed BE straight
+	// to Complete. The block's break drop (2 sticks + 1 rope, BlockEntitySawhorse.OnBlockBroken) matches this cost, so
+	// crafting then breaking is balance-neutral.
+	enabled: false,
+	ingredientPattern: "SRS",
+	ingredients: {
+		"S": { type: "item", code: "game:stick" },
+		"R": { type: "item", code: "game:rope" }
+	},
+	width: 3,
+	height: 1,
+	output: { type: "block", code: "sawhorse", quantity: 1 }
+}

@@ -1,0 +1,448 @@
+[
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "sawing",
+                      "animation":  "sawing",
+                      "animationSpeed":  0.5,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  8,
+                      "easeOutSpeed":  12,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400,
+                                            "UpperTorso":  0.8,
+                                            "LowerTorso":  0.8,
+                                            "ItemAnchor":  100
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage",
+                                               "UpperTorso":  "Average",
+                                               "LowerTorso":  "Average",
+                                               "ItemAnchor":  "Average"
+                                           },
+                      "animationSounds":  [
+                                              {
+                                                  "frame":  5,
+                                                  "location":  "immersivewoodworking:saw/sawing_ff*",
+                                                  "range":  16,
+                                                  "pitch":  {
+                                                                "avg":  1,
+                                                                "var":  0.1,
+                                                                "dist":  "uniform"
+                                                            },
+                                                  "chance":  1
+                                              },
+                                              {
+                                                  "frame":  10,
+                                                  "location":  "immersivewoodworking:saw/sawing_fb*",
+                                                  "range":  16,
+                                                  "pitch":  {
+                                                                "avg":  1,
+                                                                "var":  0.1,
+                                                                "dist":  "uniform"
+                                                            },
+                                                  "chance":  1
+                                              }
+                                          ]
+                  }
+    },
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "sawing-fp",
+                      "animation":  "sawing-fp",
+                      "animationSpeed":  0.5,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  8,
+                      "easeOutSpeed":  12,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400,
+                                            "UpperTorso":  0.8,
+                                            "LowerTorso":  0.8,
+                                            "ItemAnchor":  100
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage",
+                                               "UpperTorso":  "Average",
+                                               "LowerTorso":  "Average",
+                                               "ItemAnchor":  "Average"
+                                           }
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "sawing",
+                      "code":  "sawing",
+                      "version":  0,
+                      "quantityframes":  11,
+                      "onActivityStopped":  "EaseOut",
+                      "onAnimationEnd":  "Repeat",
+                      "keyframes":  [
+                                        {
+                                            "frame":  1,
+                                            "elements":  {
+                                                             "LowerTorso":  {
+                                                                                "rotationX":  2.6917590866294997E-08,
+                                                                                "rotationY":  -7.611404009164005,
+                                                                                "rotationZ":  15.56512856179259,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotationX":  2.284174914124113,
+                                                                                "rotationY":  7.766884727882885,
+                                                                                "rotationZ":  -25.736951924740936,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotationX":  0.16766684341523833,
+                                                                                "rotationY":  -0.12383019573422871,
+                                                                                "rotationZ":  8.034068921609089,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotationX":  2.5192819781869993,
+                                                                                "rotationY":  7.263744819089419,
+                                                                                "rotationZ":  -7.563087250975343,
+                                                                                "offsetX":  0.179509699344635,
+                                                                                "offsetY":  -0.20158912241458893,
+                                                                                "offsetZ":  0.012772951275110245
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotationX":  0.007568916817431943,
+                                                                                "rotationY":  -0.010618321139929776,
+                                                                                "rotationZ":  -0.6203563069563529,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotationX":  1.726723029190792E-15,
+                                                                                "rotationY":  1.0934299148888292E-16,
+                                                                                "rotationZ":  8.67492422709023,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  0.7211185659652525,
+                                                                               "rotationY":  -18.710915618014553,
+                                                                               "rotationZ":  -47.17304642724616,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  0.1469942086751369,
+                                                                               "rotationY":  -22.113336787015953,
+                                                                               "rotationZ":  -69.11971123058817,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  -5.343295834401886,
+                                                                               "rotationY":  13.976392409901774,
+                                                                               "rotationZ":  48.59516352942909,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -8.082803175110769,
+                                                                               "rotationY":  -1.9497596742936025,
+                                                                               "rotationZ":  -50.310545048910285,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "Neck":  {
+                                                                          "rotationX":  1.0124796016408928,
+                                                                          "rotationY":  -0.31474402821663716,
+                                                                          "rotationZ":  7.943650023602815,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "Head":  {
+                                                                          "rotationX":  0.7489225585290818,
+                                                                          "rotationY":  -0.432414847402697,
+                                                                          "rotationZ":  6.477844470167534,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "ItemAnchor":  {
+                                                                                "rotationX":  -1.6522714253239315,
+                                                                                "rotationY":  9.613642374728334,
+                                                                                "rotationZ":  -34.40155232090069,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  10,
+                                            "elements":  {
+                                                             "UpperTorso":  {
+                                                                                "rotationX":  0.6297817545675511,
+                                                                                "rotationY":  -13.23869612104727,
+                                                                                "rotationZ":  8.74800639743572,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  4.835627510188695,
+                                                                               "rotationY":  0.07313831263283888,
+                                                                               "rotationZ":  -83.67848484271292,
+                                                                               "offsetX":  -0.7500008344650269,
+                                                                               "offsetY":  -1.1124944686889648,
+                                                                               "offsetZ":  0.37713223695755005
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  -0.3482832986100154,
+                                                                               "rotationY":  -0.8580184487381999,
+                                                                               "rotationZ":  -3.1484986413224334,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  4.212427816825215,
+                                                                               "rotationY":  19.166955396065237,
+                                                                               "rotationZ":  -1.859637249186008,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -10.392737293915957,
+                                                                               "rotationY":  -1.8223341710339527,
+                                                                               "rotationZ":  -47.427231917208175,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotationX":  -3.381989938759773,
+                                                                                "rotationY":  13.28352265257005,
+                                                                                "rotationZ":  0.9930009693450756,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            }
+                                                         }
+                                        }
+                                    ]
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "sawing-fp",
+                      "code":  "sawing-fp",
+                      "version":  0,
+                      "quantityframes":  11,
+                      "onActivityStopped":  "EaseOut",
+                      "onAnimationEnd":  "Repeat",
+                      "keyframes":  [
+                                        {
+                                            "frame":  1,
+                                            "elements":  {
+                                                             "LowerTorso":  {
+                                                                                "rotationX":  2.6917590866294997E-08,
+                                                                                "rotationY":  -7.611404009164005,
+                                                                                "rotationZ":  15.56512856179259,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotationX":  2.284174914124113,
+                                                                                "rotationY":  7.766884727882885,
+                                                                                "rotationZ":  -25.736951924740936,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotationX":  0.16766684341523833,
+                                                                                "rotationY":  -0.12383019573422871,
+                                                                                "rotationZ":  8.034068921609089,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotationX":  2.5192819781869993,
+                                                                                "rotationY":  7.263744819089419,
+                                                                                "rotationZ":  -7.563087250975343,
+                                                                                "offsetX":  0.179509699344635,
+                                                                                "offsetY":  -0.20158912241458893,
+                                                                                "offsetZ":  0.012772951275110245
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotationX":  0.007568916817431943,
+                                                                                "rotationY":  -0.010618321139929776,
+                                                                                "rotationZ":  -0.6203563069563529,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotationX":  1.726723029190792E-15,
+                                                                                "rotationY":  1.0934299148888292E-16,
+                                                                                "rotationZ":  8.67492422709023,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  0.7211185659652525,
+                                                                               "rotationY":  -18.710915618014553,
+                                                                               "rotationZ":  -47.17304642724616,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  0.1469942086751369,
+                                                                               "rotationY":  -22.113336787015953,
+                                                                               "rotationZ":  -69.11971123058817,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  -5.343295834401886,
+                                                                               "rotationY":  13.976392409901774,
+                                                                               "rotationZ":  48.59516352942909,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -8.082803175110769,
+                                                                               "rotationY":  -1.9497596742936025,
+                                                                               "rotationZ":  -50.310545048910285,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "Neck":  {
+                                                                          "rotationX":  1.0124796016408928,
+                                                                          "rotationY":  -0.31474402821663716,
+                                                                          "rotationZ":  7.943650023602815,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "Head":  {
+                                                                          "rotationX":  0.7489225585290818,
+                                                                          "rotationY":  -0.432414847402697,
+                                                                          "rotationZ":  6.477844470167534,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "ItemAnchor":  {
+                                                                                "rotationX":  -1.4411485705315386,
+                                                                                "rotationY":  10.159963593228266,
+                                                                                "rotationZ":  -34.36193380862005,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  10,
+                                            "elements":  {
+                                                             "UpperTorso":  {
+                                                                                "rotationX":  0.6297817545675511,
+                                                                                "rotationY":  -13.23869612104727,
+                                                                                "rotationZ":  8.74800639743572,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  4.835627510188695,
+                                                                               "rotationY":  0.07313831263283888,
+                                                                               "rotationZ":  -83.67848484271292,
+                                                                               "offsetX":  -0.7500008344650269,
+                                                                               "offsetY":  -1.1124944686889648,
+                                                                               "offsetZ":  0.37713223695755005
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  -0.3482832986100154,
+                                                                               "rotationY":  -0.8580184487381999,
+                                                                               "rotationZ":  -3.1484986413224334,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  4.212427816825215,
+                                                                               "rotationY":  19.166955396065237,
+                                                                               "rotationZ":  -1.859637249186008,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -10.392737293915957,
+                                                                               "rotationY":  -1.8223341710339527,
+                                                                               "rotationZ":  -47.427231917208175,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotationX":  -3.6161719390769917,
+                                                                                "rotationY":  13.804129916392176,
+                                                                                "rotationZ":  1.0735169468284766,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            }
+                                                         }
+                                        }
+                                    ]
+                  }
+    }
+]

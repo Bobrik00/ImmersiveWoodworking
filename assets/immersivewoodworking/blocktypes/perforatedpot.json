@@ -1,0 +1,241 @@
+{
+	// PERFORATED POT (BarkPlan/E04, T04.02, decisions D7/D8/D10). The upper vessel of the two-pot birch-tar rig: an
+	// ordinary fired-clay pot with a PERFORATED bottom, so during dry distillation (per descensum) the ash/char stay on
+	// top and the liquid tar drips down into a buried claypot receiver. A dedicated tool pot, NO colour axis (it is
+	// equipment, not decor — one raw/fired pair, formed from any clay). Reusable: returned when the fired tar pot is
+	// opened (T04.05).
+	//
+	// FULL PARITY WITH THE VANILLA CLAY POT (user request 2026-07-29). Everything below that is not tar-specific is a
+	// verbatim mirror of `game:claypot` — raw from survival/blocktypes/clay/raw/pot.json, fired from .../fired/pot.json.
+	// Until now the FIRED pot was a normal PLACED block, which broke that parity in three visible ways:
+	//   • it went into the CENTRE of a cell only, while a clay pot goes either dead centre or four to a cell in the
+	//     quadrants (BEGroundStorage.cs:490-499 flips Quadrants to SingleCenter when you aim within 2/16 of the middle
+	//     of an EMPTY cell — that is the whole "centre or four" behaviour, and it comes free with GroundStorable);
+	//   • breaking it played `game:block/ceramicbreak`, the loot-VESSEL shatter (vanilla uses it only in
+	//     survival/blocktypes/clay/lootvessel.json and for a mould cracking) — a clay pot has no break sound at all,
+	//     because it is never a block in the world: you break the ground-storage cell, and `groundstorage.json`
+	//     declares no sounds;
+	//   • it was held with the small-item pose while a fired clay pot uses the large one.
+	// So the fired pot is now GroundStorable+Unplaceable exactly like `claypot-*-fired`, and its pack level rides the
+	// STACK (BlockPerforatedPot implements IContainedInteractable/IContainedMeshSource) instead of a BlockEntity — the
+	// same re-architecture the assembled rig went through on 2026-07-28, and for the same reason.
+	//
+	// Why it is still a BLOCK and not an item: the code, the recipes, the tar rig and every save in the wild address it
+	// as `block:immersivewoodworking:perforatedpot-*`. Vanilla `claypot` is a block for exactly the same reason (its own
+	// JSON says "should be an item, but is kept a block for backwards compatibility"), so mirroring it is also the most
+	// faithful thing to do.
+	//
+	// FIRING (verified against the engine, BEPitKiln.cs): the pit kiln is BlockGroundStorage-based — it fires whatever
+	// is GROUND-STORED in it, reading each stack's combustibleProps.SmeltedStack in OnFired (StackSize / SmeltedRatio).
+	// So the RAW pot mirrors vanilla claypot-raw exactly: GroundStorable (to enter the kiln) + Unplaceable + a
+	// raw->fired combustibleProps. game:pitkiln carries a "*" fallback modelConfig, so an unknown pot fires with the
+	// default kiln look WITHOUT a modelConfigs patch (a custom in-kiln model is optional T04.04 polish).
+	code: "perforatedpot",
+
+	// T04.03: the shared block class handles the fired pot's held Shift+RMB assembly onto a clay pot (HeldPriorityInteract
+	// is set for fired in OnLoaded), its bark packing while ground-stored, and its per-stage mesh. It is a no-op for the raw
+	// variant. There is NO BlockEntity any more (the fired pot is not placeable), so the pack level lives in the stack's
+	// `fillPoints` attribute and survives storing, taking, dropping and assembly on its own. The class string MUST match
+	// RegisterBlockClass("iw-perforatedpot") in the ModSystem.
+	class: "iw-perforatedpot",
+
+	// TWO axes (playtest 2026-07-28 — the pot must match its clay colour like all other pottery): colour x type (raw
+	// clayforming output -> fired working pot). Colour is RESTRICTED to the three real clays (blue/fire/red) rather than
+	// mirroring vanilla claypot's ten (2026-07-28 cleanup): clay only comes in blue/fire/red, so a wider axis produced 14
+	// unobtainable variants ("куча ненужных перфорированных горшков" — clutter in creative/handbook that could never be
+	// crafted). All six variants here ARE reachable: blue/fire/red raw by clayforming, their fired forms by firing them.
+	// A tar pot whose receiver was an exotic-colour claypot (only reachable in creative) opens to perforatedpot-blue-fired
+	// via the blue fallback in BehaviorTarPotOpen — never a dead variant.
+	variantgroups: [
+		{ code: "color", states: ["blue", "fire", "red"] },
+		{ code: "type", states: ["raw", "fired"] }
+	],
+
+	// Authored shape (T04.01/D20, re-materialled 2026-07-28): a claypot ring with an open/perforated bottom. Its single
+	// body texture key is `pot-combined-empty-top`. Per-colour textures: FIRED pots take the fired claypot texture of
+	// their colour (game:block/clay/pot/{color}); each RAW pot takes its raw-clay colour (blue/fire/red). {color} fills
+	// per-variant inside each byType value (the pemmican/poultice idiom — placeholders resolve after the wildcard selects
+	// the entry). All three raw colours have an explicit entry now that the axis is restricted to the real clays.
+	shape: { base: "immersivewoodworking:block/pot-perforated" },
+	texturesByType: {
+		"perforatedpot-*-fired":  { "pot-combined-empty-top": { base: "game:block/clay/pot/{color}" } },
+		"perforatedpot-blue-raw": { "pot-combined-empty-top": { base: "game:block/clay/blueclay" } },
+		"perforatedpot-fire-raw": { "pot-combined-empty-top": { base: "game:block/clay/fireclay" } },
+		"perforatedpot-red-raw":  { "pot-combined-empty-top": { base: "game:block/clay/redclay" } }
+	},
+
+	// BOTH states are vanilla-pottery behaviour now: ground-store a pile (centre or four per cell), pick one back up with
+	// a plain right click, build a pit kiln over the raw ones. The lists are copied from vanilla claypot verbatim,
+	// including the flat 0.125-high storage collisionBox and the fired pot having NO RightClickPickup (a ground-stored pot
+	// is taken by the pile's own right click, not by that behaviour). `placeRemoveSound` is deliberately OMITTED on both:
+	// the C# default `new AssetLocation("sounds/player/build")` (BehaviorGroundStorable.cs:45) already resolves in the
+	// `game` domain, whereas spelling it out unqualified would stamp THIS mod's domain onto it and go silent (the D44 bug
+	// the sealed tar pot hit).
+	//
+	// `iw-sneaktoplace` ON THE FIRED POT ONLY (D50). A plain right click with the pot in hand used to do nothing at all —
+	// no sound, no message — because Unplaceable answers the placement path with the `__ignore__` silencer. Vanilla's
+	// FIRED clay pot is not silent there: its class BlockCookingContainer short-circuits TryPlaceBlock with
+	// `failureCode = "onlywhensneaking"` before Unplaceable can silence it, so the player gets "Hold down [Shift] to place
+	// this block". The behaviour restores exactly that line (it only SPEAKS — it never claims the click). It is NOT given
+	// to the RAW pot on purpose: vanilla `claypot-*-raw` declares no class, so it IS silent, and this file's whole premise
+	// is verbatim parity per state.
+	behaviorsByType: {
+		"perforatedpot-*-raw": [
+			{ name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "Unplaceable" },
+			{ name: "RightClickPickup" }
+		],
+		"perforatedpot-*-fired": [
+			{ name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "Unplaceable" },
+			{ name: "iw-sneaktoplace" }
+		]
+	},
+
+	// Held pose per state, mirroring the two vanilla pot files: a FIRED pot is carried with the large two-handed idle
+	// (fired/pot.json), a raw one with the small one (raw/pot.json). Both use the same place animation. First-match order
+	// matters — the "*" fallback must stay last.
+	heldTpIdleAnimationByType: {
+		"perforatedpot-*-fired": "holdbothhandslarge",
+		"*": "holdbothhands"
+	},
+	heldTpUseAnimation: "twohandplaceblock",
+
+	// Kiln firing raw -> fired. Mirrors claypot-raw's combustibleProps verbatim (meltingPoint/duration are unused by the
+	// pit kiln, which fires on BurnTimeHours; they keep parity with vanilla pottery for any other fire source). smeltedRatio
+	// 1 => one raw pot yields one fired pot; smeltingType "fire"; requiresContainer false; smeltedStack the fired block.
+	combustiblePropsByType: {
+		"perforatedpot-*-raw": {
+			meltingPoint: 600,
+			meltingDuration: 30,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			requiresContainer: false,
+			// {color} preserves the clay colour through firing (the toolmold idiom): perforatedpot-blue-raw -> -blue-fired.
+			smeltedStack: { type: "block", code: "immersivewoodworking:perforatedpot-{color}-fired" }
+		}
+	},
+
+	doNotRenderAtLod2: true,
+	blockmaterial: "Ceramic",
+	replaceable: 400,
+	resistance: 1.5,
+	maxStackSize: 8,
+	lightAbsorption: 0,
+	// ONLY `walk`, exactly like vanilla claypot. Both states are Unplaceable, so the block never stands in the world and
+	// place/hit/break can never fire: laying a pot down or taking it back is the ground-storage pile's own
+	// `placeRemoveSound`, and breaking the cell is the `groundstorage` block, which declares no sounds at all. The
+	// previous `place`/`hit`/`break` trio was a consequence of the fired pot being placeable; `break` in particular was
+	// `game:block/ceramicbreak`, the loot-vessel shatter, which no pot has ever played.
+	sounds: {
+		walk: "game:walk/stone"
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	collisionbox: { x1: 0.28, y1: 0, z1: 0.28, x2: 0.72, y2: 0.35, z2: 0.72 },
+	selectionbox: { x1: 0.28, y1: 0, z1: 0.28, x2: 0.72, y2: 0.35, z2: 0.72 },
+
+	creativeinventory: { general: ["*"], decorative: ["*"] },
+
+	// groupBy so the two states share one handbook family reference (per D6 groupBy does NOT merge the pages — each
+	// variant is its own page — it only groups the icon when OTHER pages cite this pot). The prose itself, and the cut
+	// from six pages to two, live in attributesByType below (AuditFixPlan/T08.04).
+	//
+	// The rest is claypot parity: shelvable + the shelf display size, the glow-when-hot mode, and the tong poses. The
+	// COOKING attributes of the fired clay pot (mealContainer / servingCapacity / cookingContainerSlots / inFirePitProps /
+	// attachableToEntity) are deliberately NOT copied — a pot with holes in its bottom is not a cooking vessel, and giving
+	// it those keys would offer it in the firepit and meal UIs as a container that then leaks whatever went into it.
+	attributes: {
+		tempGlowMode: 1,
+		shelvable: true,
+		handbook: { groupBy: ["perforatedpot-*-{type}"] },
+		onTongTransform: {
+			translation: { x: -0.63, y: -0.95, z: -0.77 },
+			rotation: { x: 2, y: -2, z: 6 }
+		},
+		onMetalTongTransform: {
+			translation: { x: -1.02, y: -0.61, z: -0.51 },
+			rotation: { x: -6, y: 0, z: 76 },
+			origin: { x: 0.5, y: 0.3, z: 0.5 },
+			scale: 0.9
+		},
+		displayable: {
+			shelf: {
+				size: { width: 7, height: 5.5, length: 7 }
+			}
+		}
+	},
+	// attributesByType MERGES into attributes rather than replacing it (proven by vanilla claypot: `*-cooked` carries its
+	// own entry yet still needs `servingCapacity` from the shared block, which BlockCookedContainerBase reads). Two jobs
+	// here: the fired pot's tong pose, which vanilla tunes differently from the raw one, and ONE HANDBOOK PAGE PER STATE.
+	//
+	// SIX VARIANTS, TWO PAGES (AuditFixPlan/T08.04, F-L7-15). `creativeinventory: ["*"]` above mints a page per variant
+	// (Collectible.GetHandBookStacks), so the book carried six entries whose only difference was the clay colour — a
+	// parity axis with no mechanic behind it, and one neither NAME mentions ("Perforated pot", "Perforated pot (Raw)").
+	// The blue variant of each state keeps the page and carries the prose; the other four are excluded from the book but
+	// stay in creative, so every clay colour is still pickable. Nothing is orphaned by that: the clayforming output icon,
+	// the raw pot's "Fires into" arrow and the H key all resolve their target through
+	// `BlockPerforatedPot.HandbookPageCodeForStack`, which sends the whole colour axis to the surviving page.
+	//
+	// ORDER IS LOAD-BEARING: solveByType takes the FIRST matching key and breaks, so `perforatedpot-blue-fired` must
+	// precede `perforatedpot-*-fired` and the catch-all must stay last. That is also why the blue-fired entry repeats
+	// the fired tong pose — a byType entry wins whole, it does not stack with the sibling it shadowed.
+	attributesByType: {
+		"perforatedpot-blue-fired": {
+			onTongTransform: {
+				translation: { x: -1.23, y: -0.9, z: -0.51 },
+				rotation: { x: 5, y: 0, z: 72 },
+				scale: 0.8
+			},
+			handbook: {
+				groupBy: ["perforatedpot-*-{type}"],
+				extraSections: [
+					{ title: "immersivewoodworking:perforatedpot-fired-handbook-title", text: "immersivewoodworking:perforatedpot-fired-handbook-text" }
+				]
+			}
+		},
+		"perforatedpot-*-fired": {
+			onTongTransform: {
+				translation: { x: -1.23, y: -0.9, z: -0.51 },
+				rotation: { x: 5, y: 0, z: 72 },
+				scale: 0.8
+			},
+			handbook: { groupBy: ["perforatedpot-*-{type}"], exclude: true }
+		},
+		"perforatedpot-blue-raw": {
+			handbook: {
+				groupBy: ["perforatedpot-*-{type}"],
+				extraSections: [
+					{ title: "immersivewoodworking:perforatedpot-raw-handbook-title", text: "immersivewoodworking:perforatedpot-raw-handbook-text" }
+				]
+			}
+		},
+		"*": {
+			handbook: { groupBy: ["perforatedpot-*-{type}"], exclude: true }
+		}
+	},
+
+	// Transforms carried from claypot — per state, since vanilla tunes the fired pot's hand pose separately from the raw
+	// one. Recalibrated in-game via .tfedit at the T04.08 visual pass. First-match order: the "*" fallback stays last.
+	guiTransform: {
+		origin: { x: 0.5, y: 0.2, z: 0.5 },
+		scale: 2
+	},
+	groundTransform: {
+		scale: 3
+	},
+	tpHandTransformByType: {
+		"perforatedpot-*-fired": {
+			translation: { x: -0.6799, y: 0.06, z: -0.37 },
+			rotation: { x: -82, y: 19, z: -103 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.76
+		},
+		"*": {
+			translation: { x: -0.7, y: 0.06, z: -0.47 },
+			rotation: { x: -52, y: 20, z: -110 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.76
+		}
+	}
+}

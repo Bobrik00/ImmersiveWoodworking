@@ -1,0 +1,67 @@
+{
+	// ── MIGRATION HUSK (E05 / T05.01), variant A: same base code as the live block ──────────────────────────────
+	// Worlds made BEFORE the data-block redesign saved the chopping block as a per-species VARIANT code
+	// `choppingblock-{wood}` (oak/birch/…). The live block is now a single, variant-less `choppingblock`
+	// (blocktypes/choppingblock.json), so those old codes would resolve to "unknown block" and the placed stands
+	// would vanish. This file re-registers EXACTLY the old resolved codes — base `code: "choppingblock"` + a
+	// `wood` variantgroup `loadFromProperties: block/wood` — so an old `choppingblock-oak` still resolves on load.
+	//
+	// Why this coexists with the live variant-less `choppingblock`: the engine keys blocks by their RESOLVED code,
+	// and bare `choppingblock` (live) vs `choppingblock-oak` (here) are disjoint, so the two blocktype files with
+	// the same base code don't collide — the exact pattern vanilla uses for legacy/door.json (base `door`) beside
+	// the modern wood/woodtyped/door.json (also base `door`). Using `loadFromProperties: block/wood` means this
+	// husk covers the SAME dynamic species set the original block did (vanilla + wildcrafttree + any wood mod),
+	// which a static remaps.json could never enumerate for modded woods — that's why we migrate in-code, not by
+	// remap (see PLAN.md "Решение 1" / the T05.01 task file).
+	//
+	// It is a TRANSIENT husk: its only job is to keep the old code resolvable and host the shared `ChoppingBlock`
+	// BlockEntity, which self-heals on load (T05.02) — reads the species from this block's `wood` variant,
+	// ExchangeBlocks the position to the live `choppingblock`, and writes the species onto the new BE. So the
+	// minimal class below carries no behaviour; it never appears in creative/handbook/recipes (hidden via the
+	// empty creativeinventory + handbook.exclude below), and a player effectively never interacts with it.
+	code: "choppingblock",
+	class: "iw-choppingblock-legacy",
+	// Same BlockEntity class as the live block, so an old saved BE (its 1-slot inventory tree is unchanged) loads
+	// straight into it and the self-heal (T05.02) runs from there.
+	entityClass: "iw-choppingblock",
+	variantgroups: [
+		// Reproduces the original per-species codes `choppingblock-{wood}`. block/wood is the all-domain wood
+		// property, so this expands to the identical species set the pre-redesign block had on any given install.
+		{ code: "wood", loadFromProperties: "block/wood" }
+	],
+	shape: { base: "immersivewoodworking:block/choppingblock" },
+	// Default (oak) textures only — this husk is rendered for at most the sub-second window before the BE
+	// self-heals, and the BE draws the block's own default mesh while its species is still unknown (wood == null),
+	// so a per-species template here would only risk a missing-texture warning for a modded wood. game: paths
+	// always exist; the correct per-species look comes after the heal, from the live block's runtime re-texturer.
+	textures: {
+		"M1": { base: "game:block/wood/bark/oak" },
+		"M2": { base: "game:block/wood/treetrunk/oak" }
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	// Hidden everywhere a player browses: empty creative filter (legacy/door.json idiom) + handbook.exclude
+	// (legacy/hardenedclay.json idiom). The live `choppingblock` owns the creative/handbook entries.
+	creativeinventory: { "general": [""] },
+	attributes: {
+		handbook: { exclude: true }
+	},
+	blockmaterial: "Wood",
+	maxStackSize: 1,
+	resistance: 3.5,
+	materialDensity: 700,
+	// Mirror the live block's flat burn so a fire that reaches an un-healed husk behaves identically (a heal
+	// normally beats any such interaction, but matching keeps the pre-heal window indistinguishable).
+	combustibleProps: { burnTemperature: 800, burnDuration: 54 },
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks",
+		byTool: {
+			"Axe": { hit: "game:block/chop", break: "game:block/planks" }
+		}
+	},
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.6875, z2: 1 },
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.6875, z2: 1 }
+}

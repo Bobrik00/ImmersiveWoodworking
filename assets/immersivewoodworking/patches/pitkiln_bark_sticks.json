@@ -1,0 +1,39 @@
+[
+	// ============================================================================================================
+	// BARK IN THE PIT-KILN STICK LAYER (BarkPlan/E06, T06.02). A sink for surplus ORDINARY bark: a pit kiln's two
+	// stick layers (Sticklayer1/2) each want 4 sticks, and gathering sticks in bulk is genuinely tedious, so bark
+	// becomes an alternative kindling for that layer — a real problem the surplus bark solves. Grass is NOT touched
+	// (dry grass is already trivially abundant); the choice to use the STICK layer, not the grass layer, is by design.
+	//
+	// Appends to game:pitkiln attributes/buildMats/sticks — the list of stacks accepted for the "sticks" mat code.
+	// BlockPitkiln.OnLoaded reads buildMats as Dictionary<string, JsonItemStackBuildStage[]> and resolves EVERY entry
+	// in the list into that layer's material set (BlockPitkiln.cs:83-94), so a second stack here simply becomes a
+	// second acceptable kindling. Patches apply at asset load, before OnLoaded runs, so the bark entry is present.
+	//
+	// MATCHED BY CODE `bark-generic`, NOT the tag `bark` — deliberately, the one place in E06 that must exclude
+	// special bark. Birch bark is the sole tar feedstock and dries 96 h, so "oops, I burned 40 birch bark building a
+	// kiln" is guaranteed grief; the tannin/fiber/medicinal kinds are likewise too valuable to feed a fire. Only
+	// ordinary bark (bark-generic), which has no such second use, is offered (DoD "спец-кора в слой не принимается").
+	//
+	// RENDERING is safe (DoD "модель слоя не ломается"): the "sticks" mat code carries NO eleCode/textureCodeReplace
+	// — only the "fuel" mat code varies geometry ({eleCode}1..4) and swaps textures per fuel. The Sticklayer1/2
+	// element geometry is FIXED in the pitkiln shape and material-agnostic, so a bark-built stick layer renders
+	// with the same stick-layer mesh/texture as a stick-built one (there is no bark-specific look, and that is fine —
+	// the requirement is "doesn't break", not "shows bark"). Kiln CREATION is unaffected: the first build stage is
+	// grass, and TryCreateKiln only checks buildStages[0].Materials[0] (grass) to start the kiln (BlockPitkiln.cs:237).
+	//
+	// QUANTITY 6 (sticks are 4) is DRAFT (finalised at T06.04): bark is bulkier and worse kindling than clean sticks,
+	// so it costs a little more per layer while still being the easy-to-mass-produce option. Hardcoded pending E08.
+	//
+	// eleCode "Bark" (T06.05): drives the bark LOOK. When bark is the material actually used for a stick stage, the
+	// tokenised buildStage "{eleCode}Sticklayer1*" (see pitkiln_bark_model.json) resolves to "BarkSticklayer1*" and the
+	// grafted bark geometry (pitkiln_bark_geometry.json) renders instead of sticks. Sticks (index 0) carry eleCode ""
+	// so they keep the plain stick geometry. All three modelConfigs (default/anvil/vessel) are wired for the bark look.
+	// ============================================================================================================
+	{
+		"file": "game:blocktypes/wood/pitkiln.json",
+		"op": "add",
+		"path": "/attributes/buildMats/sticks/-",
+		"value": { "type": "item", "code": "immersivewoodworking:bark-generic", "quantity": 6, "eleCode": "Bark" }
+	}
+]

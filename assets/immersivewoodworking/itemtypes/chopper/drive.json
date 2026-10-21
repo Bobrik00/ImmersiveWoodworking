@@ -1,0 +1,53 @@
+{
+	code: "chopperdrive",
+	// PLACEHOLDER chopper part (T02.02) — the DRIVE (cam shaft). A plain Item on purpose: no `class`/`tool`/
+	// `behaviors`, so it loads on the base Item class (no registration) and shows in creative. Behaviour arrives in
+	// E03/T03.07, where it is RMB-installed into the placed `chopper-frame` via TryAddPart (pulverizer-style).
+	// Mandatory part — converts the axle's rotation into the arm's lift (the analogue of sawmillcrankshaft; it also
+	// carries the machine's mech-power link). Install order is free except the head needs the arm first. T03.06 wired
+	// the authored held mesh (dropmaul-drive) in place of the placeholder cube; poses/scale calibrate in-game at T07.06.
+	shape: { base: "immersivewoodworking:item/chopper/drive" },
+	// Two-handed carry in third person, like the frame (blocktypes/chopper/frame.json) and the sawmill's bulky parts
+	// (crankshaft/sash) — these machine assemblies are hauled with both hands (user decision 2026-07-05: ALL chopper parts
+	// held two-handed). ONLY the idle hold pose is copied: the frame's ready/place anims (heldblockready/twohandplaceblock)
+	// are block-placement-only and don't apply to an installed item. Hand/ground transforms calibrate later (item-scale).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// "game:" prefix REQUIRED (unqualified → this mod's empty texture folder = magenta, memory vs-mod-asset-path-domain).
+	// Keys match the authored shape (oak wood + iron metal); a stray Blender "#0" slot is pinned to oak in the shape file.
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (shared part key; mirrors sawmillcarriage). The engine's auto
+	// "item-handbooktext-<code>" path can't be used for a MOD-domain item, so extraSections is the working equivalent.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:chopperpart-handbook-title", text: "immersivewoodworking:chopperpart-handbook-text" }
+			]
+		}
+	},
+	// Hand / ground / GUI transforms — calibrated in-game via .tfedit (2026-07-05, T07.06 held-item pass); tp is against
+	// the two-handed holdbothhandslarge pose set above. `rotate: false` is kept on gui so the inventory icon does not
+	// slow-spin: a plain Item defaults its unspecified ModelTransform.Rotate to TRUE (no merge with ItemDefaultGui).
+	// Rotation is explicit because a plain Item's ItemDefaultGui is flat (0,0,0) — see memory vs-partial-guitransform-no-merge.
+	tpHandTransform: {
+		translation: { x: -1.55, y: -1, z: -0.6 },
+		rotation: { x: 36, y: 2, z: -71 },
+		scale: 0.49
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.275, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 2.79
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 3, y: -2, z: 0 },
+		rotation: { x: -22.6, y: 148, z: 180 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.25
+	}
+}

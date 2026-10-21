@@ -1,0 +1,96 @@
+﻿{
+	// Splitting-maul HEAD `maulhead-{metal}` (E06/T06.02) — the forged toolhead that becomes a maul once hafted (head +
+	// stick → maul-{metal}, recipes/grid/tool/maul.json). Authored as an ordinary vanilla toolhead, 1:1 with
+	// pitsawblade.json / barkspudhead.json, so it rides the whole stock pipeline for free: forged on an anvil
+	// (recipes/smithing/maulhead.json), Quenchable, GroundStorable, handbook-grouped, Toolsmith-tinkerable.
+	//
+	// The code contains "head" so Toolsmith's toolhead regex classifies it as a HEAD, and the assembled `maul` (which
+	// contains neither "head" nor "blade") is registered as a tinkerable TOOL via
+	// config/toolsmith/regex/tinkerabletools/tinkerabletools-immersivewoodworking.json — the same two-part setup as the
+	// pit saw / bark spud (memory vs-toolsmith-compat).
+	//
+	// METALS = the FULL vanilla tool set (copper…steel, incl. soft gold/silver), identical to the maul itemtype and the
+	// vanilla toolheads.
+	code: "maulhead",
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	],
+	// Iron/meteoric/steel come off the anvil hot and can be quenched (mirrors vanilla hammerhead / pitsawblade /
+	// barkspudhead). NB (memory vs-quenchable-toolhead-no-stack): a quenched head stores per-instance forge data, so
+	// iron/meteoric/steel heads do NOT stack regardless of maxstacksize — expected. GroundStorable lays the head FLAT
+	// (Quadrants, up to 4). iw-toolsmithbenchmesh swaps to the floor-origined item/maul-head-toolsmith shape ONLY while
+	// the head sits in a Toolsmith workbench slot; inert without Toolsmith. behaviorsByType matches ONE key, so the shim
+	// must be in BOTH lists.
+	behaviorsByType: {
+		"@(.*-steel|.*-meteoriciron|.*-iron)": [
+			{ name: "GroundStorable", properties: { layout: 'Quadrants', collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "Quenchable" },
+			{ name: "iw-toolsmithbenchmesh" }
+		],
+		"*": [
+			{ name: "GroundStorable", properties: { layout: 'Quadrants', collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "iw-toolsmithbenchmesh" }
+		]
+	},
+	heldTpUseAnimation: "interactstatic",
+	maxstacksize: 4,
+	// Blender-authored maul head (source art/shapes/splittingmaul-head.json, deployed to
+	// shapes/item/maul-head.json). Its whole body is metal; the shape's lone key "material" is overridden per-variant
+	// below. "immersivewoodworking:" = the model lives in THIS mod's domain.
+	shape: { base: "immersivewoodworking:item/maul-head" },
+	// Per-variant ingot colour, like every vanilla toolhead. "game:" required — an unqualified path resolves to this
+	// mod's domain, where the vanilla ingot textures don't exist (memory vs-mod-asset-path-domain).
+	textures: {
+		"material": { base: "game:block/metal/ingot/{metal}" }
+	},
+	attributes: {
+		// Re-heatable in a forge (so iron/steel can be re-quenched) and grouped by metal in the handbook — same as vanilla
+		// toolheads / pitsawblade. Framing transforms seeded from pitsawblade and tuned in-game with .tfedit.
+		forgable: true,
+		handbook: {
+			groupBy: ["maulhead-*"]
+		},
+		groundStorageTransform: {
+			translation: { x: 0, y: -0.46, z: 0 },
+			rotation: { x: -4, y: -17, z: -6 },
+			scale: 0.72
+		},
+		// Both onTong and onMetalTong keys must physically EXIST or .tfedit can never tune the metal grip apart from the
+		// wooden one (a missing onMetalTongTransform falls back to onTongTransform for both read AND write). Seeded from
+		// pitsawblade; re-tune for the maul head.
+		inForgeTransform: {
+			translation: { x: 0, y: -0.42, z: 0.02 },
+			rotation: { x: 0, y: 53, z: 13 },
+			scale: 0.79
+		},
+		onTongTransform: {
+			translation: { x: -0.8, y: -0.6, z: -0.4 },
+			rotation: { x: 12, y: -12, z: -112 },
+			scale: 1.15
+		},
+		onMetalTongTransform: {
+			translation: { x: -1.1, y: -0.69, z: -0.5 },
+			rotation: { x: 4, y: -10, z: -97 },
+			scale: 0.89
+		}
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Display transforms SEEDED from pitsawblade; fine-tune in-game with .tfedit once the maul-head shape is loaded.
+	guiTransform: {
+		translation: { x: -4, y: 2, z: 0 },
+		rotation: { x: 78, y: 48, z: -165 },
+		origin: { x: 0.53, y: 0.48, z: 0.4 },
+		scale: 2.26
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.03, z: 0 },
+		rotation: { x: -7, y: -11, z: -2 },
+		origin: { x: 0.5, y: 0.5, z: 0.45 },
+		scale: 3.54
+	},
+	tpHandTransform: {
+		translation: { x: -0.7, y: -0.5, z: -0.52 },
+		rotation: { x: 39, y: -85, z: -129 },
+		scale: 0.94
+	}
+}

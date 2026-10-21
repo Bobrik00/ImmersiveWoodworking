@@ -1,0 +1,157 @@
+﻿{
+	// Bark spud (skobel) — the TIER-3 debarking tool, the fastest of the three (~1s, the BarkSeconds reference;
+	// see BlockEntitySawhorse.Debarking.cs BarkSpeedFor). Assembled the ordinary vanilla way — a forged head
+	// `barkspudhead-{metal}` (T02.01/T02.02) hafted onto a stick (recipes/grid/barkspud.json), mirroring the
+	// vanilla saw (game:itemtypes/tool/saw.json) 1:1 on the FULL tool-metal set (copper…steel, incl. soft
+	// gold/silver) — a spud is craftable from the same metals as any ordinary tool (user decision 2026-06-28,
+	// reversing the earlier "bronze-up gate"). The metal was ORIGINALLY a durability tier only — speed flat across metals,
+	// by tool TYPE (T01.03) — but E02/T02.03 added the per-metal WOOD mining speed below, so the spud's metal now ALSO
+	// scales debark speed (steel = the ~1s BarkSeconds reference, lesser metals proportionally slower), matching the saw/axe.
+	//
+	// NO `tool` field on purpose (a deviation from the task's "tool/opt-in-code" wording — see PLAN "Отклонения").
+	// The debark gates recognise the spud PURELY by code (IsBarkSpud => FirstCodePart()=="barkspud", like IsPitSaw),
+	// so it needs no EnumTool — and must NOT carry one, since EnumTool.Saw/Axe/Hammer/Knife would leak it into the
+	// rip gate (IsSawTool) or the tier-2 halves (IsAxe/IsHammer/IsKnife). A spud rips nothing and is no axe; it only
+	// strips bark, entirely via mod code. Durability still works without a tool type (durabilitybytype below); the
+	// strip charges it directly (DamageActiveDebarkTools). It also contains neither "head" nor "blade", so Toolsmith
+	// never mis-detects the assembled tool as a part (mis-detect guard = T02.05; memory vs-toolsmith-compat).
+	// T02.04: "barkspud" IS registered as a Toolsmith tinkerable tool (config/toolsmith/regex/tinkerabletools/
+	// tinkerabletools-immersivewoodworking.json) so the workbench assembles barkspudhead+handle → barkspud. That
+	// also makes Toolsmith attach its TinkeredTools wear + ModularPartRendering behaviors to the spud when Toolsmith
+	// is installed; grid-crafted spuds still render via our own shape fallback (no part tree). Per-handle render
+	// polish + head-return-on-wear verification are DEFERRED (T02.04 "Отложено"). Without Toolsmith the file is inert.
+	code: "barkspud",
+	attributes: {
+		// Tool racks accept an item iff GetTool(slot)!=null OR attributes.rackable==true (BEToolrack PutInSlot).
+		// The spud carries NO EnumTool on purpose (see header), so the tool-branch is null and it would be rejected;
+		// the `toolrackTransform` below only POSES it once racked, it is never consulted by the placement gate. So we
+		// opt in explicitly with rackable:true — exactly how the vanilla tool-less oar (game:itemtypes/tool/oar.json)
+		// is rackable. This is a plain bool, not a tool type, so it can't leak into the saw/axe/hammer/knife gates;
+		// it also lists the spud in the rack's interaction-help + the handbook "Tool rack" placement section.
+		rackable: true,
+		attachableToEntity: { categoryCode: "toolholding" },
+		handbook: {
+			// Grouped by metal in the handbook like every vanilla tool (the woodworking-guide back-link below is T05.02).
+			groupBy: ["barkspud-*"],
+			// Handbook back-link to the Woodworking overview, mirroring the pit saw's section (pitsaw.json). extraSections,
+			// not the auto item-handbooktext-<code> lang path, which can't resolve for a mod-domain item.
+			extraSections: [
+				{ title: "immersivewoodworking:barkspud-handbook-title", text: "immersivewoodworking:barkspud-handbook-text" }
+			]
+		},
+		toolrackTransform: {
+			translation: { x: -0.7, y: 0.05, z: 0 },
+			rotation: { x: 0, y: 1, z: -1 },
+			scale: 1.35
+		},
+		groundStorageTransform: {
+			translation: { x: 0.03, y: 0.4, z: 0.29 },
+			rotation: { x: 26, y: 90, z: -90 },
+			scale: 0.88
+		}
+	},
+	behaviors: [
+		{
+			name: "GroundStorable",
+			properties: {
+				layout: 'WallHalves',
+				// Lean against a wall that is TWO blocks tall, not one — exactly like the vanilla shovel and wooden
+				// tongs (game:itemtypes/tool/{shovel,tongs}.json both use wallOffY:2). The spud is a long tool: on a
+				// 1-block-high wall its top end juts out into the air. Was 1; raised to 2 on user request 2026-07-09.
+				wallOffY: 2,
+				ctrlKey: true,
+				selectionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.1, z2: 1 },
+				collisionBox: { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 },
+			}
+		},
+		// Buffable so the quench buffs carried by an iron/steel head flow onto the assembled spud, exactly like the
+		// vanilla saw (the grid recipe sets recipeAttributes.applyquenchablebuffs — recipes/grid/barkspud.json).
+		{ name: "Buffable" }
+	],
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver",
+															"iron", "meteoriciron", "steel"
+		  ] },
+	],
+	damagedby: ["blockbreaking", "attacking"],
+	// Custom assembled model authored in Blender (source art/shapes/barkspud.json),
+	// keyed metal (head) / wood (handle) / string (lashing). "immersivewoodworking:" = this mod's domain.
+	shape: { base: "immersivewoodworking:item/barkspud" },
+	// "metal" is per-variant so each metal spud shows its ingot colour (like the vanilla saw); wood + string are
+	// fixed. "game:" required — an unqualified path resolves to THIS mod's domain, where the vanilla textures don't
+	// exist (memory vs-mod-asset-path-domain). The shape's own embedded copper/oak/linen defaults are bare fallbacks.
+	texturesByType: {
+		"*": {
+			"metal": { base: "game:block/metal/ingot/{metal}" },
+			"wood": { base: "game:block/wood/debarked/oak" },
+			"string": { base: "game:block/linen" }
+		}
+	},
+	// E02/T02.03: per-metal WOOD mining speed, copied 1:1 from the vanilla saw (game:itemtypes/tool/saw.json — copper 4
+	// … steel 6). THIS is what gives the spud a metal SPEED tier: the debark gate reads it via the tool's own
+	// MiningSpeed[Wood] (ImmersiveWoodworkingModSystem.ToolTierSpeedFactor) and scales the strip speed by it — the steel
+	// spud = the BarkSeconds reference (1.0), lesser metals proportionally slower. WOOD only: the debark mechanic reads
+	// only Wood, so leaves is deliberately omitted. Intended side effect, exactly like any saw: a held spud now also
+	// breaks wood blocks a little faster — it still carries NO EnumTool, so nothing leaks into the debark/rip/axe gates.
+	miningspeedbytype: {
+		"barkspud-copper": { "wood": 4 },
+		"barkspud-bismuthbronze": { "wood": 4.4 },
+		"barkspud-tinbronze": { "wood": 4.6 },
+		"barkspud-silver": { "wood": 4.6 },
+		"barkspud-gold": { "wood": 4.6 },
+		"barkspud-blackbronze": { "wood": 4.7 },
+		"barkspud-iron": { "wood": 5 },
+		"barkspud-meteoriciron": { "wood": 5.5 },
+		"barkspud-steel": { "wood": 6 }
+	},
+	// Vanilla saw durability 1:1 (a plain single-blade hand tool — NOT the two-man pit saw's ×2). The metal is the
+	// PRIMARY durability tier (the wood-speed tier above is a lighter, proportional effect). DurabilityPerDebark
+	// (default 1) is charged per full strip, so even a gold spud lasts dozens of logs.
+	durabilitybytype: {
+		"barkspud-gold": 70,
+		"barkspud-silver": 90,
+		"barkspud-copper": 250,
+		"barkspud-tinbronze": 400,
+		"barkspud-bismuthbronze": 450,
+		"barkspud-blackbronze": 500,
+		"barkspud-iron": 900,
+		"barkspud-meteoriciron": 1200,
+		"barkspud-steel": 2250
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
+	// Held BODY pose copied 1:1 from the vanilla shovel (game:itemtypes/tool/shovel.json) so the spud is carried and
+	// posed exactly like a shovel (user decision 2026-06-28). NOTE: tpHandTransform alone does NOT do this — it only
+	// sets the rigid item offset relative to the hand bone. The "rest on the shoulder" carry and the "two-handed
+	// right-mouse hold" are HELD ANIMATIONS, so we mirror the shovel's three idle/ready/use anims here:
+	//   - heldTpIdleAnimation "shovelidle"        → shoulder-carry idle (without it the spud just hangs in the hand).
+	//   - heldRightReadyAnimation "shovelready"   → ready stance between actions.
+	//   - heldTpUseAnimation "interactStaticLong" → two-handed RMB-hold (the engine default is the one-handed
+	//                                               "interactstatic" — Collectible.cs HeldTpUseAnimation).
+	// We deliberately do NOT copy the shovel's heldTpHitAnimation ("shoveldig"): a spud is no digger, and the actual
+	// debark motion is the code-driven `debarking-barkspud` (T03.02), started only on a real strip — NOT via these
+	// fields. Idle/ready are engine-suppressed while a mouse button is held, so they never fight the debark anim.
+	// heldTpUseAnimation does fire on any RMB-hold (incl. during debark), but the debark anim's huge arm weights
+	// (elementWeight 400, AddAverage) dominate the pose, exactly as they already do over the previous default.
+	heldTpIdleAnimation: "shovelidle",
+	heldRightReadyAnimation: "shovelready",
+	heldTpUseAnimation: "interactStaticLong",
+	// gui/ground stay saw-derived starting values; fine-tune in-game with `.tfedit` (see pitsaw.json / barkspudhead.json).
+	guiTransform: {
+		rotate: false,
+		translation: { x: 17, y: 11, z: 0 },
+		rotation: { x: -75, y: -47, z: -168 },
+		origin: { x: 0.5, y: 0.5, z: 0.38 },
+		scale: 1.37
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.45, z: 0.5 },
+		scale: 3.6
+	},
+	tpHandTransform: {
+		translation: { x: -1.69, y: -0.74, z: -0.6 },
+		rotation: { x: 0, y: 0, z: -10 },
+		scale: 0.8
+	}
+}

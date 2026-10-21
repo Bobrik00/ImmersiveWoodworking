@@ -1,0 +1,35 @@
+{
+	// ACA COMPAT (BarkPlan/E07, T07.01) — let A Culinary Artillery's cork chain run on OUR bark.
+	//
+	// ACA's chain is: bark-oak-dry + water --(simmer on a firepit)--> aculinaryartillery:bark-oak-boiled --(+ knife,
+	// grid)--> cork x16. Before IW, the game's bark came from ACA (IW disabled the vanilla debark grid recipe, which
+	// took ACA's added bark source with it). Now IW drops its OWN bark (T02.04) and ACA's dry oak bark is no longer
+	// produced, so ACA's boil→cork chain would sit without feedstock. This recipe re-feeds it from ordinary IW bark.
+	//
+	// WHY THIS FILE WORKS WITH NO PATCH AND NO dependsOn: ACA's simmering-recipe loader scans recipes/simmering/ across
+	// ALL domains (proven by ExpandedFoods, which ships 52 of its own expandedfoods:recipes/simmering/* referencing
+	// expandedfoods: codes). So this file in the immersivewoodworking domain is picked up exactly like ACA's own.
+	// Without ACA there is no simmering system at all, so the file is simply never read — inert, no warning, no
+	// dependsOn needed. It ADDS a source (does not touch ACA's own bark-oak-dry recipe), so ACA bark a player still
+	// has keeps working and there are no competing sources.
+	//
+	// WHICH IW BARK: bark-generic (user decision, T07.01). Ordinary bark is abundant and, unlike bark-tan, does not
+	// compete with the tanning chain — "ordinary bark -> ordinary cork" is the clean read. It is also stateless (no
+	// green/dry), so a single code matches. Output is ACA's own bark-oak-boiled (full domain required, cross-domain),
+	// so ACA's unchanged cork recipe (aculinaryartillery:bark-*-boiled -> cork) consumes it verbatim.
+	//
+	// Numbers mirror ACA's own boiledbark.json exactly (100 water : 1 bark -> 1 boiled), so IW bark boils at parity
+	// with ACA bark — no balance change to the cork chain, only the feedstock species differs.
+	"Ingredients": [
+		{ "type": "item", "code": "game:waterportion", "quantity": 100 },
+		{ "type": "item", "code": "immersivewoodworking:bark-generic", "quantity": 1, "name": "wood" }
+	],
+	"Simmering": {
+		"meltingPoint": 100,
+		"meltingDuration": 200,
+		"smeltedRatio": 1,
+		"smeltingType": "bake",
+		"smeltedStack": { "type": "item", "code": "aculinaryartillery:bark-oak-boiled" },
+		"requiresContainer": false
+	}
+}

@@ -1,0 +1,38 @@
+{
+	// Grid recipe (frame rework, user 2026-07-10) — the AUTOMATED CHOPPER master frame block `chopper-frame` (the one
+	// block the player places; drive/arm/head + the hand choppingblock as the clamp-bed are RMB-installed into it in
+	// E03/T03.07). A heavy stand of support beams over a plank, banded with metal sheet and put together with a hammer.
+	// The tech gate is the mechanical drive itself — NO bronze cap (T02.01 invariant, unchanged).
+	//   B B B     B = support beam (game:supportbeam-* block, name:"beam")
+	//   B P B     P = plank        (game:plank-* item, name:"wood")
+	//   S H S     S = metal plate  (game:metalplate-* item — лист металла)   H = hammer (tag tool-hammer, returned untouched)
+	// The 3x3 SHAPE is DISTINCT from sawmill_frame's "HMP,BBB,PMP" and from the other chopper parts so they don't
+	// collide on one crafting grid. Vanilla ingredients MUST be game:-prefixed — an unqualified code in a MOD recipe
+	// resolves to THIS mod's domain (immersivewoodworking), where beam/plank/plate don't exist (memory
+	// vs-mod-asset-path-domain). Output is the canonical "-north" variant (the frame's "side" variantgroup means bare
+	// `chopper-frame` no longer resolves; placement re-orients to the player's look via HorizontalOrientable).
+	// Wildcards are by CODE (memory vs-recipe-ingredient-code-vs-tags), not tags; the hammer is matched by TAG with no
+	// code (any hammer, mod-independent) and returns untouched (toolDurabilityCost 0). The `name` keys label which cells
+	// are one material, they do NOT force it: cell binding is the RecipeLoader's per-variant expansion, and this
+	// enabled:false template is registered from C# instead, which never expands (AuditFixPlan T10.02) — five beams of
+	// five species are accepted, by design, since the output bakes no species. What the separate beam/plank names DO
+	// carry is the domain split: the two slots are re-pointed independently, so a mixed-DOMAIN craft (vanilla planks +
+	// a mod's beams) resolves via the plankDomain x beamDomain cross-product in RegisterWoodDomainRecipes. SHAPE + QUANTITIES are a BALANCE
+	// DRAFT (user tunes); the cap invariant (mech-drive gate, no bronze) holds.
+	// enabled:false -> this is a TEMPLATE: the RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterChopperRecipes
+	// re-registers it once per discovered wood DOMAIN, re-pointing the P (plank) / B (beam) slots to {domain}:plank-* /
+	// {domain}:supportbeam-* (matched by Code.Path prefix, not by letter) so a wood mod's own-domain products craft it;
+	// the metal/tool slots are left untouched. The game-domain recipe is registered from this same template (vanilla
+	// crafting works).
+	enabled: false,
+	ingredientPattern: "BBB,BPB,SHS",
+	ingredients: {
+		"B": { type: "block", code: "game:supportbeam-*", name: "beam" },
+		"P": { type: "item",  code: "game:plank-*",       name: "wood" },
+		"S": { type: "item",  code: "game:metalplate-*" },
+		"H": { type: "item",  tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "chopper-frame-north", quantity: 1 }
+}

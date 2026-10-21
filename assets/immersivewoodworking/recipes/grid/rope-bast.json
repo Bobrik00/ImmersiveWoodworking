@@ -1,0 +1,39 @@
+{
+	// BAST -> ROPE (BarkPlan/E05, T05.01). Bast fibre (the inner bark `bark-bast`, a chance drop off any debarked log,
+	// E02) crafts DIRECTLY into vanilla `game:rope` — there is deliberately NO separate "bast rope" item (user decision:
+	// a texture-only twin would only confuse players and buy nothing). Bast joins the EXISTING primitive-plant-fibre rope
+	// tier as the FOREST analogue of cattail and papyrus tops.
+	//
+	// WHY THIS DOES NOT TOUCH FLAX: vanilla rope is NOT made from flax at all — survival/recipes/grid/rope.json offers
+	// only three WATER-plant paths (wildvine-section x3, cattailtops x6, papyrustops x6). `flaxtwine` is a separate
+	// TEXTILE branch (cloth, clothing, sacks, bandages, bowstring, paper pulp) that bast never enters. Bast cannot slip
+	// into any flax recipe because those match flax by CODE (`flax`/`flaxtwine`), while bast is `immersivewoodworking:
+	// bark-bast` carrying only our own tags `bark`/`bark-fiber` — no vanilla recipe references either tag, so substitution
+	// is structurally impossible (DoD: "bast usable in place of flaxtwine nowhere").
+	//
+	// MATCHED BY TAG `bark-fiber`, never a code: bark.json stamps `bark-bast` with ["bark","bark-fiber"]. A pure tags-only
+	// ingredient (no `code`, no `name`) is left unexpanded by GenerateRecipesForAllIngredientCombinations and matches ANY
+	// collectible carrying the tag at craft time (memory vs-recipe-ingredient-code-vs-tags; a tag-only match needs
+	// code==null) — so a foreign mod's fibrous bark drops into the rope chain with one tag line. Same idiom the mod's own
+	// recipes already ship: grid `chopper_head` (hammer by tag) and the barrel tannin recipes (T03.02), and the vanilla
+	// precedent for a CONSUMED tag-only grid ingredient is `survival/recipes/grid/stonecoffinlid.json` (`tags:["flux"]`).
+	//
+	// QUANTITY 6 (2 per cell x 3 cells) = the cattailtops/papyrustops fibre tier exactly (task: "quantity by analogy with
+	// them"), not wildvine's cheaper 3-whole-sections. `name` is omitted because the output is a FIXED code with no
+	// {placeholder} to capture; a tags-only ingredient needs a name only to drive an output variant. Final balance is the
+	// T05.06 healing/forest playtest lever (bast drop chance in barkdrops.json vs this cost).
+	//
+	// PLAIN engine-loaded recipe (no `enabled:false`): it consumes no wood, so the vanilla RecipeLoader loads it straight
+	// in THIS mod's domain and `bark-fiber` resolves against our items — only the OUTPUT is domain-qualified `game:rope`
+	// (a bare `rope` would resolve to immersivewoodworking:rope and 404 — memory vs-mod-asset-path-domain). Output code =
+	// vanilla `rope`, so every route (wildvine/cattail/papyrus/bast) groups under the ONE rope handbook page, the new bast
+	// path simply appearing as another way to make it (DoD: "new path visible in the rope handbook"). The BBB shape (width
+	// 3, height 1) mirrors the vanilla fibre paths and shares no input pattern with them, so there is no grid collision.
+	ingredientPattern: "BBB",
+	ingredients: {
+		"B": { type: "item", tags: ["bark-fiber"], quantity: 2 }
+	},
+	width: 3,
+	height: 1,
+	output: { type: "item", code: "game:rope", quantity: 1 }
+}

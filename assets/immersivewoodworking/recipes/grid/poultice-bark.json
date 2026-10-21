@@ -1,0 +1,95 @@
+[
+	// POULTICE FROM BARKBREW (BarkPlan/E05, T05.05) — craft poultice-{material}-bark-medicinal from a bowl of `barkbrew`
+	// decoction (the T05.03 agent liquid) spread on a bandage MATERIAL. Straight clone of the vanilla honey-sulfur poultice
+	// recipe (survival/recipes/grid/poultice.json): a fired bowl whose liquid content is required via `liquidContainerProps`,
+	// plus the material, output x4. The only difference from honey-sulfur is there is no second solid (sulfur) — the
+	// decoction IS the whole agent — so the shape is just bowl-over-material. NAMING: the liquid is `barkbrew`, the finished
+	// poultice AGENT is `bark-medicinal`.
+	//
+	// One recipe per MATERIAL source, exactly as vanilla does (linen block; reed from cattailtops OR papyrustops -> both
+	// output poultice-REED; here bast -> poultice-bast). Material is matched BY CODE / wildcard like vanilla (user decision,
+	// T05.05) — NOT by tag: cross-mod compatibility for medicinal bark is handled at the DECOCTION cook step (append the
+	// foreign bark's code to barkbrew.json's validStacks, D27/D30), so this grid does not need a tag hook.
+	//
+	// DOMAINS: this file is in the immersivewoodworking domain, so vanilla ingredient codes (bowl, linen, cattailtops,
+	// papyrustops) and the game-domain OUTPUT (poultice-{material}-bark-medicinal is a game item) are game:-qualified, while
+	// the agent liquid immersivewoodworking:barkbrew and our bast material immersivewoodworking:bark-bast are ours.
+	// requiresLitres 0.25 is one SERVING of the barkbrew cook, so one serving = one batch of 4 poultices. The bark cost per
+	// serving, the batch ceiling and the price per poultice live ONLY in recipes/cooking/barkbrew.json (BALANCE block):
+	// this comment used to repeat them and kept quoting the cancelled 8-bark price until AuditFixPlan T08.07, so the
+	// 1.3.9 three-slot rebalance moved the numbers out. Material quantities mirror vanilla (linen 1; cattail/papyrus 2;
+	// bast 2 as a fibre like the tops).
+	// Balance -> BarkPlan T05.06.
+
+	// linen
+	{
+		"ingredientPattern": "B,L",
+		"ingredients": {
+			"B": { "type": "block", "code": "game:bowl-*-fired" },
+			"L": { "type": "block", "code": "game:linen-*" }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "immersivewoodworking:barkbrew" },
+				"requiresLitres": 0.25
+			}
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-linen-bark-medicinal", "quantity": 4 }
+	},
+
+	// reed via cattailtops
+	{
+		"ingredientPattern": "B,C",
+		"ingredients": {
+			"B": { "type": "block", "code": "game:bowl-*-fired" },
+			"C": { "type": "item", "code": "game:cattailtops", "quantity": 2 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "immersivewoodworking:barkbrew" },
+				"requiresLitres": 0.25
+			}
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-reed-bark-medicinal", "quantity": 4 }
+	},
+
+	// reed via papyrustops
+	{
+		"ingredientPattern": "B,P",
+		"ingredients": {
+			"B": { "type": "block", "code": "game:bowl-*-fired" },
+			"P": { "type": "item", "code": "game:papyrustops", "quantity": 2 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "immersivewoodworking:barkbrew" },
+				"requiresLitres": 0.25
+			}
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-reed-bark-medicinal", "quantity": 4 }
+	},
+
+	// bast (forest material) — matched by CODE, like vanilla's coded materials
+	{
+		"ingredientPattern": "B,F",
+		"ingredients": {
+			"B": { "type": "block", "code": "game:bowl-*-fired" },
+			"F": { "type": "item", "code": "immersivewoodworking:bark-bast", "quantity": 2 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "immersivewoodworking:barkbrew" },
+				"requiresLitres": 0.25
+			}
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-bast-bark-medicinal", "quantity": 4 }
+	}
+]

@@ -1,0 +1,115 @@
+[
+	// ============================================================================================================
+	// BAST AS A THIRD POULTICE MATERIAL (BarkPlan/E05, T05.02). Adds `bast` (луб, the inner-bark fibre `bark-bast`, a
+	// chance drop off any debarked log, E02) to vanilla poultice's `material` axis alongside `linen` and `reed`, so the
+	// forest yields a bandage base without a water biome (reed) or a flax farm (linen). Vanilla poultice is
+	// game:itemtypes/utility/poultice.json — variants `poultice-{material}-{agent}`, healing driven by the HealingItem
+	// behavior's propertiesByType keyed `*-{material}-{agent}`. Bast is numerically EQUAL to reed for the two existing
+	// agents (so it never devalues the water biomes); its own advantage is availability, not power. The medicinal-bark
+	// AGENT (`bark-medicinal`, delivered via the `barkbrew` decoction liquid cooked on a firepit — D30) and the
+	// "fully-forest bonus" are a SEPARATE patch (T05.03/T05.04, patches/poultice_bark-medicinal.json).
+	//
+	// WHY shape/textures must be REDIRECTED (engine fact): the vanilla `shape`/`textures` carry a `{material}` placeholder
+	// (`item/medicine/poultice-{material}`, `item/medicine/{material}/{agent}`). A placeholder is filled in the TARGET
+	// file's domain (game — RegistryObject.FillPlaceHolder keeps the asset's domain), so `{material}=bast` would resolve to
+	// game:item/medicine/poultice-bast and game:item/medicine/bast/{agent}, neither of which exists. We cannot add files to
+	// the game domain, so bast's shape+textures are overridden per-variant via shapeByType/texturesByType. Both are
+	// REPLACED (remove + add) rather than left beside the plain fields: byType-vs-plain coexistence for SHAPE is not
+	// proven in vanilla (pemmican shows plain-shape + texturesByType, not shape + shapeByType), so an explicit byType with
+	// a `"*"` fallback that reproduces the original linen/reed paths is the provably-correct form. Vanilla's universal
+	// convention is first-match-in-order with `"*"` LAST as the fallback (every *ByType dict relies on it), so `"*-bast-*"`
+	// is listed before `"*"`; the `"*"` value keeps the exact vanilla `{material}` placeholder for linen/reed. Placeholders
+	// still fill inside byType values (they are filled AFTER the wildcard picks the entry — same as pemmican's texturesByType).
+	//
+	// ART (user decision, final): bast reuses the VANILLA per-material poultice SHAPE (bast -> reed shape, same model as
+	// reed; linen keeps its own shape) and carries AUTHORED agent TEXTURES (user PNGs, item/medicine/bast/{agent}). "On
+	// bast it is the same as on reed, same model, same base healing." So shapeByType stays vanilla (not a placeholder),
+	// and only #agent textures are the mod's. The barkbrew agent (T05.03) likewise reuses the vanilla per-material shape.
+	//
+	// Names live in the mod's lang files under the `game:` prefix (game:item-poultice-bast-{agent}) because the item is a
+	// game-domain item — a bare key would register under immersivewoodworking: and never match the game: item lookup
+	// (TranslationService.KeyWithDomain). Precedent: ACulinaryArtillery localizes patched game items the same way.
+	// ============================================================================================================
+
+	// 1) Add `bast` to the material axis -> generates poultice-bast-honey-sulfur and poultice-bast-horsetail.
+	//    Patches apply to the raw asset BEFORE variant expansion, so the new variants are created (standard mod idiom).
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/variantgroups/0/states/-",
+		"value": "bast"
+	},
+
+	// 2) Shape: bast -> vanilla reed shape (same model as reed, user decision); linen/reed keep their own {material} shape.
+	//    Per-material shape is shared across ALL agents (incl. barkbrew, T05.03), so this needs no barkbrew-specific entry.
+	{ "file": "game:itemtypes/utility/poultice.json", "op": "remove", "path": "/shape" },
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/shapeByType",
+		"value": {
+			"*-bast-*": { "base": "game:item/medicine/poultice-reed" },
+			"*":        { "base": "item/medicine/poultice-{material}" }
+		}
+	},
+
+	// 3) Textures: AUTHORED (user art, PNG 32x32 matching vanilla). This texturesByType is the SINGLE owner of all mod
+	//    texture routing for the poultice — it is FIRST-MATCH-in-order, and any later patch adding an agent-keyed texture
+	//    AFTER a "*" catch-all would be shadowed by "*", so the bark-medicinal agent's linen/reed textures are pre-wired
+	//    HERE (they stay inert until T05.03 adds the `bark-medicinal` agent variant). Order matters: bast (all agents) ->
+	//    bark-medicinal (linen/reed; bast-bark-medicinal already caught by the bast rule) -> "*" fallback (vanilla linen/reed
+	//    x honey-sulfur/horsetail). (The intermediate LIQUID is `barkbrew`; the poultice AGENT is `bark-medicinal`.)
+	//
+	//    BAST OVERRIDES BOTH KEYS (fix 2026-07-28): the poultice-reed shape (which bast borrows, step 2) carries TWO texture
+	//    keys — `#agent` (the medicine pad) and `#material` (the fabric strip/base). Vanilla only overrides `#agent`, so
+	//    `#material` falls back to the shape's built-in default `item/medicine/reed/honey-sulfur` — the REED fabric. For a
+	//    bast poultice that left the base rendering as reed ("основа из рогоза") while only the pad was bast. So bast
+	//    overrides `#material` too, to the SAME authored bast texture as the pad, so every element of a bast poultice is one
+	//    consistent bast material. linen/reed keep the shape's own `#material` fabric default (correct for them), so only
+	//    the bast rule needs both keys.
+	{ "file": "game:itemtypes/utility/poultice.json", "op": "remove", "path": "/textures" },
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/texturesByType",
+		"value": {
+			"*-bast-*":        { "agent": { "base": "immersivewoodworking:item/medicine/bast/{agent}" }, "material": { "base": "immersivewoodworking:item/medicine/bast/{agent}" } },
+			"*-bark-medicinal": { "agent": { "base": "immersivewoodworking:item/medicine/{material}/bark-medicinal" } },
+			"*":               { "agent": { "base": "item/medicine/{material}/{agent}" } }
+		}
+	},
+
+	// 4) Healing numbers for bast x the two existing agents — byte-equal to reed (plan grid T05.02: bast+horsetail 2,
+	//    bast+honey-sulfur 4; all other fields identical to vanilla so ONLY the material availability differs). The
+	//    HealingItem behavior is the single behavior at index 0.
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/behaviors/0/propertiesByType/*-bast-honey-sulfur",
+		"value": {
+			"health": 4,
+			"applicationtimesec": 3,
+			"maxapplicationtimesec": 10,
+			"effectdurationsec": 10,
+			"ticks": 10,
+			"cancelinair": false,
+			"cancelwhileswimming": false,
+			"delaytocancelsec": 0.5
+		}
+	},
+	{
+		"file": "game:itemtypes/utility/poultice.json",
+		"op": "add",
+		"path": "/behaviors/0/propertiesByType/*-bast-horsetail",
+		"value": {
+			"health": 2,
+			"applicationtimesec": 3,
+			"maxapplicationtimesec": 10,
+			"effectdurationsec": 10,
+			"ticks": 10,
+			"cancelinair": false,
+			"cancelwhileswimming": false,
+			"delaytocancelsec": 0.5
+		}
+	}
+]

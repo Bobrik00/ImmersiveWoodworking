@@ -1,0 +1,32 @@
+[
+	{
+		// Pit saw = blade + handle, assembled the ordinary way (WITHOUT Toolsmith) — mirrors the vanilla saw
+		// (game:recipes/grid/tool/saw.json = sawblade-* + stick) as a 1-wide column:
+		//   B   B = blade   (pitsawblade-*, name:metal — drives the {metal} output)
+		//   S   S = stick   (game:stick — the handle)
+		// ONE blade only, because Toolsmith maps exactly one head → one tool (T02.03).
+		// name:"metal" on the B slot binds the blade's metal AND captures {metal} for the output, so copper blade
+		// → copper pit saw with no mixed-metal craft. Same variant-binding trick vanilla uses (plank.json binds
+		// name:"wood").
+		// Vanilla ingredients MUST be game:-prefixed: an unqualified code in a MOD recipe resolves to this mod's
+		// domain (immersivewoodworking), where stick doesn't exist (memory vs-mod-asset-path-domain). The mod's
+		// own blade `pitsawblade-*` and output `pitsaw-*` stay unqualified so they resolve in-domain.
+		// NB (2026-07-08): the earlier rope binding (blade+stick+ROPE) was REMOVED so the ordinary craft matches the
+		// vanilla saw EXACTLY (blade+stick) both with and WITHOUT Toolsmith. Under Toolsmith the workbench makes a
+		// binding OPTIONAL (IsValidBinding(null)=true), so requiring rope in the grid was the ONE thing that made our
+		// tool harder to craft than a vanilla tool and produced the "grid vs workbench" asymmetry. Reverts locked
+		// plan decision #3 (rope-for-workbench-schema). See ToolsmithIntegrationPlan/PLAN.md «Отклонения».
+		ingredientPattern: "B,S",
+		ingredients: {
+			"B": { type: "item", code: "pitsawblade-*", name: "metal" },
+			"S": { type: "item", code: "game:stick" }
+		},
+		width: 1,
+		height: 2,
+		// Mirrors the vanilla saw recipe: the pit saw copies the saw's Buffable behavior, so a freshly-crafted one
+		// carries an iron/steel blade's quench buff the same way (applyquenchablebuffs). The DisablePitSaw config
+		// strip still removes this recipe — it matches by OUTPUT first-part "pitsaw" (IsPitSawRecipe), independent
+		// of the ingredients, so this rope-removal does not affect it.
+		output: { type: "item", code: "pitsaw-{metal}", quantity: 1, recipeAttributes: { "applyquenchablebuffs": true } }
+	}
+]

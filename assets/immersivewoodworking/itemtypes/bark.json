@@ -1,0 +1,469 @@
+﻿{
+	// BARK — the five kinds of bark that a debarked log yields on the sawhorse (BarkPlan/E01, T01.02). Design:
+	// ordinary bark is the BASE (falls off every species, incl. modded), the special kinds are a BONUS by chance.
+	// Recipes downstream never match a bark CODE, they match a TAG (`bark` + a per-kind tag) — proven to work in
+	// both grid AND barrel recipes (memory vs-recipe-ingredient-code-vs-tags), so a foreign mod slots its own bark
+	// into our chains with one tag line.
+	code: "bark",
+	// SINGLE variant axis `kind`, not the plan's kind×state grid. Reason: the ordinary bark is `bark-generic`
+	// (user decision — an explicit "generic", not a bare `bark`), and a second `state` axis would stamp every kind
+	// with a state suffix, yielding the ugly `bark-generic-green`. One enumerated axis gives the exact 7 codes we
+	// want. Only tan and birch carry the green/dry pair (they dry, T01.04); the other three exist in one state.
+	//   -> bark-generic, bark-tan-green, bark-tan-dry, bark-birch-green, bark-birch-dry, bark-bast, bark-medicinal
+	variantgroups: [
+		{ code: "kind", states: ["generic", "tan-green", "tan-dry", "birch-green", "birch-dry", "bast", "medicinal"] }
+	],
+	// TAGS are the foundation of the whole system. `bark` is the IDENTITY marker every kind carries ("this thing is
+	// bark"), plus one specialised tag per chain: tannin, birch(->tar), fiber(->rope/poultice), medicinal(->poultice
+	// agent), compost(->the barrel sink). Green and dry share the specialised tag so a recipe accepts either state
+	// (dry is just the thriftier input).
+	// Tannin tiers are STATE-SPECIFIC (playtest 2026-07-28): green tanning bark -> `bark-tannin` (the raw, slow 72 h
+	// barrel path, also the default any foreign/ACA bark joins); dried tanning bark -> `bark-tannin-dry` (a distinct
+	// faster 48 h path), so drying is rewarded. Ground bark carries its own `bark-tannin-crushed` (barkcrushed.json,
+	// fastest + best yield). Green does NOT carry the dry tag and vice-versa, so each state matches exactly one recipe.
+	//
+	// `bark-compost` IS A SINK TAG AND NOT THE UMBRELLA (AuditFixPlan/T08.01, finding F-L7-01). The compost barrel used
+	// to match `bark` itself, which every kind carries, so its match set CONTAINED the weak-tannin barrel's and ate the
+	// player's tanning bark: 16 tanning bark plus a bucket of water sealed into 2 compost instead of tannin. It bit
+	// twice over. BEBarrel.FindMatchingRecipe takes the FIRST matching recipe in registry (= load) order, and
+	// compost-bark.json loads before weaktannin-bark.json; worse, compost matches ratios tannin CANNOT, because
+	// tannin's bark and water are co-drivers locked to 1:1 (BarrelRecipe.GetOutputSize demands one identical multiplier
+	// from every non-consume ingredient) while compost only needs `waterStack >= consumeLitres * mul`, so at 16 bark
+	// + 10 L only compost matches at all and load order never even comes up. The fix is disjoint match sets: the sink
+	// moved onto its own tag, which the two TANNING states deliberately do not carry. Every other kind keeps
+	// composting, so compost-bark.json's "wasting bark on compost is the player's call" still holds for birch, bast and
+	// medicinal. A foreign mod that wants its bark composted now adds `bark-compost`, exactly as it adds `bark-tannin`
+	// to join the tanning chain; `bark` alone no longer feeds any recipe, it only says what the item is.
+	tagsByType: {
+		"bark-generic":     ["bark", "bark-compost"],
+		"bark-tan-green":   ["bark", "bark-tannin"],
+		"bark-tan-dry":     ["bark", "bark-tannin-dry"],
+		"bark-birch-green": ["bark", "bark-birch", "bark-compost"],
+		"bark-birch-dry":   ["bark", "bark-birch", "bark-compost"],
+		"bark-bast":        ["bark", "bark-fiber", "bark-compost"],
+		"bark-medicinal":   ["bark", "bark-medicinal", "bark-compost"]
+	},
+	// One authored silhouette per kind (Blender, art/shapes/bark). The shapes carry their
+	// OWN full texture paths (rewritten from the Blender export's bare names, which would 404 at load — memory
+	// vs-blender-shape-texture-block-warning), and the textures are FIXED, NOT re-textured per source species
+	// (user decision) — so each shape paints itself and the only texturesByType below is the green/dry TINT.
+	// tan and birch reuse their one shape across green/dry.
+	shapeByType: {
+		"bark-generic":     { base: "immersivewoodworking:item/bark/bark-generic" },
+		"bark-tan-green":   { base: "immersivewoodworking:item/bark/bark-tan" },
+		"bark-tan-dry":     { base: "immersivewoodworking:item/bark/bark-tan" },
+		"bark-birch-green": { base: "immersivewoodworking:item/bark/bark-birch" },
+		"bark-birch-dry":   { base: "immersivewoodworking:item/bark/bark-birch" },
+		"bark-bast":        { base: "immersivewoodworking:item/bark/bark-bast" },
+		"bark-medicinal":   { base: "immersivewoodworking:item/bark/bark-medicinal" }
+	},
+	// WET/DRY TINT (T01.01 DoD «сырая и сухая кора визуально отличаются»). Green tan and green birch get the SAME shape
+	// as their dry twin, so the only thing that can tell the two states apart is colour. The GREEN state multiplies its
+	// textures by one shared flat 32x32 tile `tint-wet.png` (opaque RGB 199,185,166) — ONE file for every kind and every
+	// kind we may add later, never a texture per kind. The DRY state carries no overlay at all: the plain vanilla wood
+	// texture already reads as dry wood, so «vanilla = dry, wet = darker» is the physically right way round and costs
+	// nothing. Overlays are baked into the atlas once at load — no runtime cost, +5 atlas entries.
+	//
+	// WHY `Multiply` AND NOT THE DEFAULT `Normal`. Normal is an alpha lerp towards a flat colour, so it dilutes the
+	// texture: at the strength this tint needs it visibly flattens the grain (measured relative contrast loss up to
+	// -7.8% on oak-dark). Multiply is a pure per-channel gain — `out = base * tint / 255` — so it scales brightness and
+	// leaves the RATIO between light and dark pixels untouched: measured relative contrast -1.0%..+0.5% across all five
+	// textures. It is also the correct physical model for wetting (wet wood absorbs more light, it does not get a layer
+	// of paint on top), and it decouples the two knobs we actually want: the tile's overall level sets how much darker,
+	// the gap between its channels sets how much richer. Here 199/185/166 = -26% brightness with the blue channel pulled
+	// 17% below red, which is what raises saturation.
+	//
+	// MEASURED per texture (exact engine math: ColorBlend.Multiply, `(v*w+128); ((v>>8)+v)>>8` per channel):
+	//   oak       L -26.3%  sat +19.2%      birch-h    L -26.7%  sat +83.1%
+	//   oak-dark  L -26.6%  sat +46.8%      birch-deb  L -26.5%  sat +27.0%
+	//   bark-tan  L -25.4%  sat  +2.4%
+	// Brightness lands on -26% everywhere; SATURATION DELIBERATELY DOES NOT, and cannot. A multiplicative tint scales
+	// chroma, so the relative gain is largest on the textures that start out nearly neutral (birch-h sits at sat 0.166,
+	// so a modest absolute shift to 0.304 reads as +83%) and near zero on ones already at the ceiling (bark-tan starts
+	// at 0.871 and physically cannot gain 20%). A single tile that gives literally +20% on all five does not exist; this
+	// one is tuned so the reference mid-tone bark texture `oak` lands on the requested -26% / +19%.
+	//
+	// WHY THIS BELONGS HERE AND NOT IN THE SHAPE: a shape's `textures` block is Dictionary<string, AssetLocation> — plain
+	// paths, no compositing (Shape.cs:23). Only the COLLECTIBLE's dict is Dictionary<string, CompositeTexture> (Item.cs:43),
+	// and it WINS per texture code: ShapeTextureSource.cs:45 looks in the object's dict first and only falls back to
+	// `shape.Textures` (line 51). So green and dry keep sharing one shape file, and a Blender re-export of that shape
+	// cannot lose the tint. Vanilla precedent: hide.json `hide-oiled-*` overlays the same shape the raw hide uses.
+	// The GROUND PILE inherits this for free — BEContainerDisplay.cs:72 resolves a pile's texture codes from
+	// `item.Textures` -> `Baked.BakedName` (the composited name) before it ever looks at the pile shape, and the pile
+	// shapes use the very same codes. So one block below tints inventory, hand, dropped item AND the heap.
+	//
+	// The keys are the shapes' own texture codes, and ONLY the ones real faces use (verified: tan uses oak / oak-bark_dark
+	// / bark-tan, birch uses birch-h / birch-debarked). The hidden-face codes `0` and `null.001` sit on
+	// `game:block/transparent` and MUST stay untouched — an OPAQUE Multiply overlay over a fully transparent base does
+	// NOT stay transparent: ColorBlend.Multiply with lhsA=0, rhsA=255 returns the overlay colour at alpha 255, i.e. a
+	// solid quad on faces that are supposed to be invisible. All five tinted bases were checked and are fully opaque
+	// (alpha 255 on every pixel), which is the precondition that makes an opaque Multiply tile safe here — re-check it
+	// before pointing this tint at any texture that has an alpha channel.
+	// The domain prefix is MANDATORY on every path: a bare path resolves in the MOD domain (memory vs-mod-asset-path-domain).
+	texturesByType: {
+		"bark-tan-green": {
+			"bark-tan":      { base: "immersivewoodworking:item/bark/bark-tan", blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] },
+			"oak":           { base: "game:block/wood/oak",                     blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] },
+			"oak-bark_dark": { base: "game:block/wood/oak-dark",                blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] }
+		},
+		"bark-birch-green": {
+			"birch-h":        { base: "game:block/wood/bark/birch-h",   blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] },
+			"birch-debarked": { base: "game:block/wood/debarked/birch", blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] }
+		}
+	},
+	// GROUND STORAGE (BarkPlan/E06, T06.06). Shift+ПКМ piles bark on the ground «как палки» — a low, loose,
+	// upSolid:false heap that grows with the stack. NOT a sink (bark is not consumed), just a tidy place to dump the
+	// flood of surplus bark. 1:1 resource->clump (user 2026-07-28): each bark reveals exactly ONE more authored bark clump
+	// `bark-<kind>-pileN` — the root cube TOGETHER WITH its base*/Cube* descendants, which is the hierarchy the shapes were
+	// authored around. The engine draws the FIRST `cuboidsPerModel × ceil(stack/itemsPerModel)` elements of the shape in
+	// depth-first order, counting children as their own elements (BEGroundStorage line 1434 -> quantityElements; see the
+	// cuboidsPerModel block below for the proof), so 1:1 = itemsPerModel 1 + cuboidsPerModel set to the clump's TOTAL
+	// element count. stackingCapacity = the shape's clump count: birch/tan 48, medicinal 36. The transform is a STARTER
+	// tuned in-game at T06.04; the colliders no longer are, they are derived per kind from the art (see the block below).
+	//
+	// behaviorsByType, NOT a plain behaviors list: bark-bast is NOT a ground-storable resource (user decision
+	// 2026-07-28 — it is processed bast FIBRE for rope/poultice, not a loose bark peel), so it gets an EMPTY behavior
+	// list while every other kind gets GroundStorable. Order matters (first wildcard match wins): the exact
+	// "bark-bast" key MUST precede the "*" catch-all. bark-bast also has no pile art, so this doubles as its exclusion.
+	behaviorsByType: {
+		"bark-bast": [],
+		"*": [
+			{
+				name: "GroundStorable",
+				properties: {
+					layout: "Stacking",
+					// MUST carry game: — a bare path resolves in the mod domain and silently plays no place sound.
+					placeRemoveSound: "game:sounds/block/loosestick",
+					upSolid: false,
+					// 1:1 resource->clump (user 2026-07-28): one bark = one WHOLE authored clump `bark-<kind>-pileN` (its
+					// root cube + every descendant, or its 6 flat pieces for generic), so capacity = the shape's clump count.
+					stackingCapacityByType: {
+						"bark-generic": 64, "bark-tan-green": 48, "bark-tan-dry": 48,
+						"bark-birch-green": 48, "bark-birch-dry": 48, "bark-medicinal": 36
+					},
+					// ONE bark per interaction (playtest 2026-07-28). Was 2, which put two clumps down per Shift+RMB and made
+					// the pile jump in twos. Ctrl+Shift+RMB still moves 8 at a time.
+					transferQuantity: 1,
+					bulkTransferQuantity: 8,
+					// COLLIDER + SELECTION, PER KIND (AuditFixPlan/T08.05, F-L7-07). Was one flat pair for all six kinds, and
+					// the four pile shapes are four different heights, so the shared pair fit none of them. The engine derives
+					// the box from a single integer step count (`BEGroundStorage.cs:705-711`):
+					//     colBox.Y2 *= ((int)Math.Ceiling(CbScaleYByLayer * stackSize) * 8) / 8;   selBox = colBox;
+					// `* 8 / 8` is INTEGER arithmetic and cancels out, so the multiplier is a plain `ceil(k x stack)`: the box is
+					// only ever `y2 x 1, 2, 3 ...`, never an intermediate height, it is strictly PROPORTIONAL to the step number
+					// (no constant term is reachable), and the very same box is the white outline AND the surface particles land
+					// on (`BlockGroundStorage.cs:107-115` routes GetParticleCollisionBoxes to it).
+					// The old shared 0.12 / 0.07 put a 0.36 box under the 1.058-high medicinal heap: two thirds of the visible
+					// bark could be neither aimed at nor bumped into, and the top third of the tan heap likewise.
+					// `*ByType` inside behavior properties is the ordinary engine mechanism, object values included — vanilla
+					// `survival/itemtypes/jonas/jonasframes.json:15` ships exactly this `collisionBoxByType`.
+					//
+					// DERIVATION. Heights measured off the shapes with the tesselator's own element matrix
+					// (`T(rotOrigin)·Rx·Ry·Rz·S·T(from-rotOrigin)`, children composed inside the parent's matrix), over the first
+					// `cuboidsPerModel x stack` elements in depth-first order — i.e. exactly what the pile draws at that stack size:
+					//     kind        one clump   full pile   steps   y2      k        box at full
+					//     generic       0.031       0.607      16     0.04    0.25     0.640
+					//     tan           0.039       0.691      16     0.045   0.3333   0.720
+					//     birch         0.110       0.474       5     0.095   0.1      0.475
+					//     medicinal     0.090       1.058      12     0.09    0.3333   1.080
+					// The step COUNT is dictated by the art, not chosen: because the box is proportional to the step number, the
+					// finest usable step is about `fullHeight / oneClumpHeight`. Birch curls stand 0.11 tall on their own, a
+					// quarter of the finished pile, so birch cannot carry more than ~5 steps without the box sinking under its own
+					// first clump; medicinal is laid in even courses of three and takes 12, which is why it now tracks its heap to
+					// within 2 %. Coverage across the WHOLE fill range, not just full: generic 55-128 %, tan 67-134 %, birch
+					// 59-114 %, medicinal 86-102 %. Every pair errs HIGH on the full pile: an invisible centimetre above the bark
+					// costs nothing, a box under the bark is the bug being fixed.
+					// k is written 0.3333 rather than 1/3 on purpose: `ceil` on a float product has a knife edge at exact
+					// integers, and 0.3333 reproduces `ceil(n/3)` for every n below 10000 with no early jump (verified in float32
+					// against the exact rational for all four pairs).
+					// HORIZONTAL EXTENT IS DELIBERATELY LEFT ALONE (x/z stay 0..1): the pile art overhangs its cell sideways, and
+					// that is a separate finding the author declined (F-L7-28). Only y2 and the per-layer factor move here.
+					collisionBoxByType: {
+						"bark-generic":     { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.04,  z2: 1 },
+						"bark-tan-green":   { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.045, z2: 1 },
+						"bark-tan-dry":     { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.045, z2: 1 },
+						"bark-birch-green": { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.095, z2: 1 },
+						"bark-birch-dry":   { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.095, z2: 1 },
+						"bark-medicinal":   { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.09,  z2: 1 }
+					},
+					cbScaleYByLayerByType: {
+						"bark-generic": 0.25, "bark-tan-green": 0.3333, "bark-tan-dry": 0.3333,
+						"bark-birch-green": 0.1, "bark-birch-dry": 0.1, "bark-medicinal": 0.3333
+					},
+					stackingModelByType: {
+						"bark-generic":     "item/bark/bark-generic-pile",
+						"bark-tan-green":   "item/bark/bark-tan-pile",
+						"bark-tan-dry":     "item/bark/bark-tan-pile",
+						"bark-birch-green": "item/bark/bark-birch-pile",
+						"bark-birch-dry":   "item/bark/bark-birch-pile",
+						"bark-medicinal":   "item/bark/bark-medicinal-pile"
+					},
+					// cuboidsPerModel = ELEMENTS PER CLUMP, counted FLAT (root + every descendant), NOT the root count.
+					// ENGINE FACT (proven by vanilla stick-pile.json 2026-07-28): quantityElements walks the element tree
+					// depth-first and counts EVERY element, children included — vanilla `stick-pile` is 21 roots but 84 total
+					// elements (uniformly 4 each: root + 3 descendants) and stick.json sets cuboidsPerModel 4, ItemsPerModel 2,
+					// capacity 42 => 21 steps x 4 = 84 = the whole shape. A parent does NOT drag its children along for free.
+					// So to reveal one WHOLE authored clump per bark, cuboidsPerModel must be that clump's TOTAL element count
+					// and itemsPerModel 1. Our clumps are uniform — 7 (birch), 8 (tan, medicinal) — so the reveal boundary
+					// never drifts: birch 48 x 7 = 336, tan 48 x 8 = 384, medicinal 36 x 8 = 288, each exactly its own shape.
+					//   medicinal was authored NON-uniform (25 clumps of 7 + 11 of 8 = 263, and 263 is PRIME, so NO
+					//   cuboidsPerModel could divide it). Fixed in the SHAPE, not here: every short clump got one extra
+					//   invisible child `bark-medicinal-pileN-pad` (0.001-unit cube at the root's local origin, appended LAST
+					//   so it falls inside its own clump's depth-first run). Padding rather than deleting left all 263
+					//   authored elements byte-identical. WARNING: re-exporting that shape from Blender DROPS the pads and
+					//   silently breaks the 1:1 reveal again — re-pad it, or even the clumps out in Blender.
+					//   generic is the FLAT case and needs no hierarchy at all: its 384 elements are parentless single cubes,
+					//   6 per bark unit (`bark-generic-pileN_001..006`), and what matters is only that a unit's 6 sit
+					//   CONTIGUOUSLY — depth-first order is what the engine counts, and a subtree is merely one way to be
+					//   contiguous. They were INTERLEAVED as authored (16 courses x [6 instances x 4 units], so pile1_001 at
+					//   idx 0 but pile1_002 at idx 4), which made first-N drawing reveal 4 whole units at once. Fixed in the
+					//   SHAPE by REORDERING the elements array into 64 contiguous runs of 6, courses kept bottom->top; a pure
+					//   permutation of parentless absolute-coordinate cubes moves no geometry (verified: identical element
+					//   multiset). 13 elements had lost their names in the Blender export (units 14 and 15 entirely, plus one
+					//   piece of unit 23 — recovered from the course/slot lattice, not guessed) and were renamed to the
+					//   convention. => 64 x 6 = 384, exactly the whole shape. Same re-export WARNING as medicinal applies.
+					cuboidsPerModelByType: {
+						"bark-generic": 6, "bark-tan-green": 8, "bark-tan-dry": 8,
+						"bark-birch-green": 7, "bark-birch-dry": 7, "bark-medicinal": 8
+					},
+					itemsPerModelByType: {
+						"bark-generic": 1, "bark-tan-green": 1, "bark-tan-dry": 1,
+						"bark-birch-green": 1, "bark-birch-dry": 1, "bark-medicinal": 1
+					}
+				}
+			}
+		]
+	},
+	maxstacksize: 64,
+	// TINDER (T01.03). Any bark burns as kindling, UNIFORMLY across kinds — so plain props, not per-type. Bark is a
+	// thin peel — roughly a third of a whole log — so it burns FAST and COOL: 400C/4s, far under firewood's 700C/24s
+	// (even under dry bamboo's ~10s) and nowhere near copper's 1084C melt, so a fire on bark can neither smelt nor
+	// last — a stack of bark is a fleeting fire-starter, not a fuel supply. Burning birch bark instead of cooking it
+	// to tar is the player's waste, not a strategy. materialDensity ~ ACA's bark, for correct physics/weight.
+	materialDensity: 350,
+	combustibleProps: { burnTemperature: 400, burnDuration: 4 },
+	// DRYING (T01.04, retuned at T03.04/D19). ONLY tan and birch dry: green -> dry over 96 in-game hours (4 days, cut
+	// from 120/5 days at the T03.04 balance pass to soften the crushed cold-start), 1:1. The class below decides where
+	// the 96 h holds, see WHERE IT DRIES. Same Dry transition vanilla uses for non-food (bowstave.json). Drying is
+	// never a hard gate — green bark works everywhere, just wastefully — so 96h is safe: the player chooses "dearer
+	// now" vs "cheaper later". The other five kinds carry NO transitionableProps and so never show dry progress.
+	// Merging stacks AVERAGES the progress like food (vanilla transition behaviour, no longer called out in the
+	// handbook — HANDBOOK-STYLE R15). Adding bark to a ground pile does NOT average: BlockEntityGroundStorage.TryPutItem
+	// only grows the pile's stack, so the added pieces take the pile's progress. Also vanilla, and left alone.
+	// The 96 below is the SHIPPED DEFAULT, not the live number: ApplyBarkDryHours
+	// (BarkPlan/E08 T08.02, ImmersiveWoodworkingModSystem) overwrites the Dry transitionHours of both green kinds from
+	// Config.BarkDryHours at AssetsFinalize, and again on the client when the server's config packet lands, so a server
+	// retunes drying without touching this asset. Keep the two literals equal to the BarkDryHours default (96) so an
+	// unconfigured world and the asset agree. (This comment claimed the override was still to come until AuditFixPlan
+	// T08.07.)
+	//
+	// WHERE IT DRIES (1.3.11, author decision 2026-09-26). Vanilla sets the Dry rate by location: 1 in the player's
+	// inventory, 0.25 in EVERY block container, because InWorldContainer answers 0.25 for Dry and Melt. Until 1.3.11 a
+	// chest or a ground pile therefore took 384 h, while this comment promised 96 h "in ANY container". The class
+	// iw-greenbark (ItemIwGreenBark) overrides GetTransitionRateMul for the two green kinds: a ground pile dries at pocket
+	// speed, and near any lit IHeatSource every block container dries up to twice the pocket speed (a firepit in the next
+	// cell reaches it). A chest away from heat keeps the vanilla quarter. Nothing updates a dropped item while it lies,
+	// but the next update charges the whole gap: picked up or merged into a stack it pays at pocket speed, taken by a
+	// hopper into an empty slot it pays at that container's rate. So it is never heated while it lies, yet the time
+	// still counts. The other five kinds keep the plain Item class, they do not dry.
+	// The green handbook texts name the chest's vanilla quarter on purpose, against HANDBOOK-STYLE R15: without that
+	// contrast "a pile dries as fast as your inventory" reads as if every container did.
+	classByType: {
+		"bark-tan-green": "iw-greenbark",
+		"bark-birch-green": "iw-greenbark"
+	},
+	transitionablePropsByType: {
+		"bark-tan-green": [{
+			type: "Dry",
+			freshHours: { avg: 0 },
+			transitionHours: { avg: 96 },
+			transitionedStack: { type: "item", code: "immersivewoodworking:bark-tan-dry" },
+			transitionRatio: 1
+		}],
+		"bark-birch-green": [{
+			type: "Dry",
+			freshHours: { avg: 0 },
+			transitionHours: { avg: 96 },
+			transitionedStack: { type: "item", code: "immersivewoodworking:bark-birch-dry" },
+			transitionRatio: 1
+		}]
+	},
+	// GRINDING (T03.01). Only DRY tanning bark grinds — green tanning bark clumps (this is the point of drying), and the
+	// other kinds have no tannin use, so grindingProps is per-type on the single `bark-tan-dry` key. Green tanning bark
+	// (and every other kind) carries NO grindingProps, so the quern accepts it into the slot but never processes it
+	// (BlockEntityQuern.CanGrind is false without grindingProps) — exactly the "raw bark won't grind" behaviour.
+	// ENGINE FACT: the quern is 1:1 per cycle (BEQuern.grindInput does TakeOut(1) + a GroundStack clone; integer
+	// output, cannot consume several inputs per output), so this yields 1 crushed bark per dry bark. The plan's
+	// "3 raw -> 1 crushed" material ratio is impossible on the quern, so the crushed-vs-raw value gap lives in the
+	// barrel yields (T03.02) instead; see barkcrushed.json for the T03.02 yield re-derivation heads-up (its draft
+	// "5 L" was sized for a 3:1 grind and overshoots under 1:1). groundStack quantity omitted -> defaults to 1.
+	grindingPropsByType: {
+		"bark-tan-dry": { groundStack: { type: "item", code: "immersivewoodworking:barkcrushed" } }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// `groupBy` folds the seven kinds into ONE cycling icon wherever ANOTHER handbook page cites bark (drop lists,
+	// recipe inputs) instead of listing seven near-identical entries. It does NOT merge them into a single page —
+	// every variant is its own CollectibleObject and gets its own page (D6). Per-page prose is attributesByType below.
+	attributes: {
+		handbook: { groupBy: ["bark-*"] },
+		// placeSound IS NOT COSMETIC — it is the pit kiln's «stage accepted» return path (BarkPlan/E06, T06.05, fixed
+		// 2026-07-29). BEPitKiln.OnPlayerInteractStart walks the stage's materials and, once it has moved the stack in
+		// and advanced currentBuildStage, does `if (attributes["placeSound"].Exists != true) continue;` — a material
+		// WITHOUT this attribute never reaches the `return true` two lines below, so the loop runs out and the whole
+		// interaction returns FALSE. An unhandled right-click is re-fired while the button is held, so one click ate
+		// BOTH stick stages at once («всё добавляется одним махом») and, of course, played no sound. Every vanilla kiln
+		// material carries it (drygrass block/plant, stick block/loosestick, firewood/charcoal/peat block/planks|charcoal),
+		// so this is a contract, not an extra. Also used when bark is thrown into a firepit as fuel (BlockFirepit.cs:324).
+		// MUST carry `game:` — AssetLocation.Create defaults the domain to the COLLECTIBLE's (immersivewoodworking),
+		// which would silently resolve to a mod sound that does not exist. Same clip as the bark ground pile.
+		placeSound: "game:sounds/block/loosestick"
+	},
+	// PER-VARIANT HANDBOOK PROSE (T01.05). Each of the seven kinds gets its own page section: which species shed it and
+	// what it is actually for. It HAS to be per-variant — `groupBy` above does not merge the seven into one page, so a
+	// single shared `attributes.handbook.extraSections` would repeat one generic blurb on seven pages instead of telling
+	// the player which bark he is holding. Written now rather than at T01.02 by the D5 rule (the mod does not describe
+	// mechanics that are not in the game yet): the applications only became real once E03-E06 closed.
+	//
+	// extraSections and NOT `itemdesc-bark-*`: itemdesc renders in the held-item TOOLTIP as well as on the handbook page,
+	// and these are paragraphs, not tooltips. The engine's automatic lang path (`item-handbooktext-<code>`) is DEAD for a
+	// non-`game` domain — `Code.ToShortString()` returns `immersivewoodworking:bark-...`, and the inner colon makes the
+	// composed key unresolvable — so the title/text keys are named explicitly here, exactly as barkcrushed and halflog do.
+	//
+	// `placeSound` ABOVE SURVIVES THIS, and that is not an assumption — attributesByType MERGES into `attributes` at the
+	// top level. Below, every one of the seven variants has its own entry, so a REPLACING merge would strip `placeSound`
+	// from all of them and silently bring back the pit-kiln bug of D48 (a material without it never reaches `return true`,
+	// so one right click eats both stick stages). Vanilla settles it in exactly this shape: `itemtypes/wearable/seraph/
+	// hand.json` carries an attributesByType `"*"` entry covering EVERY variant while `clothescategory` and
+	// `wearableAttachment` live only in the shared `attributes` — and gloves are equippable in vanilla, which they could
+	// not be if the byType entry replaced the block. 16 vanilla types have that same shape (swept 2026-07-29); the older
+	// claypot argument (its `*-cooked` entry omits `servingCapacity`, yet BlockCookedContainerBase reads it) says the same.
+	//
+	// `groupBy` IS STILL REPEATED IN EVERY ENTRY, though. The proof above covers the TOP level of `attributes`; what no
+	// vanilla file demonstrates is whether the merge RECURSES into a nested object like `handbook`, i.e. whether an entry
+	// that sets `handbook.extraSections` keeps the shared `handbook.groupBy`. Carrying both keys in each entry costs one
+	// short line apiece and makes that question moot instead of betting a cosmetic key on unverified semantics.
+	//
+	// The two GREEN kinds fold a one-line drying note into their own main section. It names NO hours: the number is
+	// Config.BarkDryHours and the text would go stale the moment a server retuned it (AuditFixPlan T09.01 - the R20
+	// rule that handbook prose carries no config-bound number; the item's own dry-progress bar shows the real time).
+	// The species lists ("falls from oak, acacia, ...") left the same way, and are now composed at runtime from the live
+	// drop table by WoodworkingHandbookInfo.OwnPages, which also stops them naming Wildcraft woods on an install
+	// without Wildcraft.
+	// A separate shared "drying" section used to sit here with a merge-stacks warning; both were removed (user 2026-07-31)
+	// — the warning described vanilla transition behaviour the mod does not add (HANDBOOK-STYLE R15), and the drying line
+	// belongs on the fresh-bark page itself. The dry variants carry no drying line, having no progress left.
+	//
+	// IN-CONTAINER TEXTURE (Food Shelves compat, 1.3.10). The flat fill a container paints for loose contents: the Food
+	// Shelves jars (patches/compat/foodshelves_bark.json) and, in vanilla, the barrel's solid layer and an open crate
+	// (BlockBarrel.getContentTexture, BECrate.LidState). Without it the jar falls back to the item's FIRST texture. The
+	// client fills Item.Textures in order (texturesByType first, then the shape's codes), and for generic, tan-dry,
+	// birch-dry and bast that first entry is the shape's `game:block/transparent`, an invisible fill; medicinal and the
+	// two tinted green kinds would show a real texture. The vanilla barrel draws nothing for any kind (an item with more
+	// than one texture returns null) and the crate forces its lid shut. With it a barrel of bark and no water shows a
+	// bark layer, and an open crate stays open. A barrel with water still shows the water.
+	// Each kind points at the texture that reads as that kind: the outer bark for tan and birch, whose inner side (oak /
+	// debarked birch) is ordinary wood; the reddish inner face for medicinal (it and the lichen-green outer bark split the
+	// shape about evenly, so this one is a visual call); the only texture for bast; the dark outer bark for generic.
+	// Every kind carries one, not only the jar-listed ones, so the barrel and crate look does not depend on the state;
+	// the green kinds get the same Multiply tint as texturesByType above (the atlas bakes blendedOverlays here too:
+	// ContainerTextureSource inserts Baked.BakedName, and LoadCompositeBitmap parses its `++` layers).
+	// Full `domain:` on every path: FS reads it with AsObject<CompositeTexture>() and no domain, so a bare path would
+	// resolve in `game`.
+	attributesByType: {
+		"bark-generic": {
+			inContainerTexture: { base: "game:block/wood/oak-dark" },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-generic-handbook-title", text: "immersivewoodworking:bark-generic-handbook-text" }
+				]
+			}
+		},
+		"bark-tan-green": {
+			inContainerTexture: { base: "immersivewoodworking:item/bark/bark-tan", blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-tan-green-handbook-title", text: "immersivewoodworking:bark-tan-green-handbook-text" }
+				]
+			}
+		},
+		"bark-tan-dry": {
+			inContainerTexture: { base: "immersivewoodworking:item/bark/bark-tan" },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-tan-dry-handbook-title", text: "immersivewoodworking:bark-tan-dry-handbook-text" }
+				]
+			}
+		},
+		"bark-birch-green": {
+			inContainerTexture: { base: "game:block/wood/bark/birch-h", blendedOverlays: [{ base: "immersivewoodworking:item/bark/tint-wet", blendMode: "Multiply" }] },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-birch-green-handbook-title", text: "immersivewoodworking:bark-birch-green-handbook-text" }
+				]
+			}
+		},
+		"bark-birch-dry": {
+			inContainerTexture: { base: "game:block/wood/bark/birch-h" },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-birch-dry-handbook-title", text: "immersivewoodworking:bark-birch-dry-handbook-text" }
+				]
+			}
+		},
+		"bark-bast": {
+			inContainerTexture: { base: "game:block/wood/debarked/larch" },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-bast-handbook-title", text: "immersivewoodworking:bark-bast-handbook-text" }
+				]
+			}
+		},
+		"bark-medicinal": {
+			inContainerTexture: { base: "immersivewoodworking:item/bark/bark-medical_debarked" },
+			handbook: {
+				groupBy: ["bark-*"],
+				extraSections: [
+					{ title: "immersivewoodworking:bark-medicinal-handbook-title", text: "immersivewoodworking:bark-medicinal-handbook-text" }
+				]
+			}
+		}
+	},
+	// GUI transforms calibrated in-game via .tfedit per silhouette (user 2026-07-25) — each kind sits differently, so
+	// they are PER-TYPE, not shared. green/dry reuse their kind's pose (same shape). rotation is explicit because a
+	// plain Item's default GUI transform is flat (0,0,0) with no merge (memory vs-partial-guitransform-no-merge); GUI
+	// icons slow-spin by default (Rotate defaults TRUE) — left spinning, add `rotate: false` per-pose if a static icon
+	// is wanted. ground / fp / tp below stay on the ACA starting values until they get their own calibration pass.
+	guiTransformByType: {
+		"bark-generic":     { translation: { x: 3, y: 4, z: 0 }, rotation: { x: -37, y: -40, z: -168 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.33 },
+		"bark-tan-green":   { translation: { x: 3, y: 3, z: 0 }, rotation: { x: 140, y: 44, z: -9 },    origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.25 },
+		"bark-tan-dry":     { translation: { x: 3, y: 3, z: 0 }, rotation: { x: 140, y: 44, z: -9 },    origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.25 },
+		"bark-birch-green": { translation: { x: 1, y: 5, z: 0 }, rotation: { x: -38, y: -42, z: -180 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.47 },
+		"bark-birch-dry":   { translation: { x: 1, y: 5, z: 0 }, rotation: { x: -38, y: -42, z: -180 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.47 },
+		"bark-bast":        { translation: { x: 3, y: 4, z: 0 }, rotation: { x: -49, y: -44, z: -144 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.58 },
+		"bark-medicinal":   { translation: { x: 2, y: 2, z: 0 }, rotation: { x: -58, y: -49, z: -144 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 2.07 }
+	},
+	fpHandTransform: {
+		translation: { x: 0.05, y: 0.5, z: 0 },
+		rotation: { x: 17, y: -8, z: 14 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.21
+	},
+	tpHandTransform: {
+		translation: { x: -1, y: 0, z: -0.8 },
+		rotation: { x: 0, y: -86, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.57
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5299 },
+		scale: 3.5
+	}
+}

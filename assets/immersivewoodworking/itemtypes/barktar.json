@@ -1,0 +1,81 @@
+{
+	// BIRCH TAR (BarkPlan/E04, T04.02, decisions D8/D10). A HARD, resinous item — deliberately a twin of game:resin. It
+	// REUSES resin's mesh (shape: game:item/resin) with only a darker texture, and MIRRORS resin's properties
+	// (combustibleProps 900/6, materialDensity 700, GroundStorable Messy12, transforms). That parity IS the cheapest form
+	// of the "tar substitutes for resin everywhere" requirement in T04.06 — recipes that take resin can be widened to
+	// accept this item. NOT a liquid portion (D8: the resin-substitution and glue chains need a solid item, and the wet
+	// role is already the glue branch, T04.07).
+	code: "barktar",
+	maxstacksize: 32,
+
+	// RESIN PARITY BY TAG (BarkPlan/E04, T04.06, decision D26). barktar is a solid twin of game:resin, but the engine
+	// cannot widen a game:resin recipe slot to also accept our immersivewoodworking:barktar via allowedVariants — both the
+	// array form and the {named} form keep the recipe FILE's domain (WildcardUtil.Match rejects the domain mismatch;
+	// FillPlaceHolder->CopyWithPath rewrites only the path). The ONLY cross-domain match is a TAG (CraftingRecipeIngredient
+	// .CheckTags matches on the collectible's tags, domain-agnostic). So both barktar AND game:resin carry `pitch`, and the
+	// resin-consuming vanilla grid recipes are converted to match `tags:["pitch"]` (patches/tar_as_resin.json) — one clean
+	// recipe accepts resin OR tar OR any mod's pitch-tagged item, no handbook duplicate. `bowfinish` is the parallel tag for
+	// the bow's coating slot (fat-rendered / beeswax / resin / barktar) — birch tar was a historical waterproofing sealant.
+	tags: ["pitch", "bowfinish"],
+
+	// Same ground-storage as resin (Messy12 loose pile).
+	behaviors: [
+		{ name: "GroundStorable", properties: { layout: "Messy12", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }
+	],
+
+	// Resin's mesh, our texture. The resin shape's single texture key is `resin`; overriding it points the whole mesh at
+	// the dark tar art (tar.png, placed at textures/item/tar/ in T04.01). No custom shape needed.
+	shape: { base: "game:item/resin" },
+	textures: {
+		"resin": { base: "immersivewoodworking:item/tar/tar" }
+	},
+
+	creativeinventory: { general: ["*"], items: ["*"] },
+
+	// Mirror of resin: burns the same, so it is interchangeable as fuel/pitch feedstock.
+	combustibleProps: {
+		burnTemperature: 900,
+		burnDuration: 6
+	},
+	materialDensity: 700,
+
+	attributes: {
+		// The one page the tar has, and the only place its ORIGIN can be written down: barktar is the output of no
+		// recipe (the fired pot hands it over in BehaviorTarPotOpen), so the automatic "Created by" section is empty,
+		// and the mod's own source backfill skips its own domain (WoodworkingHandbookInfo). Without this the page was
+		// a name, an icon and an "Ingredient for" list (AuditFixPlan/T08.04, F-L7-15).
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:barktar-handbook-title", text: "immersivewoodworking:barktar-handbook-text" }
+			]
+		},
+		displaycaseable: true,
+		shelvable: true,
+		displayable: {
+			shelf: {
+				size: { width: 3, height: 3, length: 3 }
+			}
+		},
+		inContainerTexture: { base: "immersivewoodworking:item/tar/tar" }
+	},
+
+	// Transforms mirror resin (T04.01: barktar inherits resin's transforms since it shares resin's mesh).
+	guiTransform: {
+		translation: { x: 1, y: 0, z: 0 },
+		rotation: { x: -31, y: -39, z: -180 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 3.6
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.7
+	},
+	tpHandTransform: {
+		translation: { x: -0.73, y: -0.1, z: -0.67 },
+		rotation: { x: -50, y: 27, z: -28 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 0.75
+	}
+}

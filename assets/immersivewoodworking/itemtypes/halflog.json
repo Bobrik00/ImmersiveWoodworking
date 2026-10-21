@@ -1,0 +1,92 @@
+﻿{
+	// Half-log (E04/T04.01) — a log split lengthwise on the chopping block, the intermediate on the way to firewood:
+	// a log chops into 2 half-logs (T04.02), each of which chops into firewood, so a full log still yields the same
+	// firewood total. It is a carryable ITEM (not a block, not a stand-only state — user decision 2026-07-07), so it
+	// drops, stacks and is laid back on the chopping block like firewood.
+	//
+	// SINGLE data-item, not per-species variants: the wood species is a stack ATTRIBUTE (`wood` + `woodDomain`,
+	// stamped from the source log when the log is chopped) and the model is re-textured per species at runtime — the
+	// exact idiom the chopping block uses, but for an item (ItemHalfLog.OnBeforeRender → per-species MultiTextureMeshRef).
+	// So one code serves every wood, including other wood mods' species, with no per-mod patch.
+	code: "halflog",
+	class: "iw-halflog",
+	// Custom "split log" model (Blender D-section, source art/shapes/halflog.json). The shape
+	// declares three texture keys — `wood` (bark round sides), `wood_corner` (end-grain caps), `debarked_wood` (the bare
+	// split face) — which ItemHalfLog binds to the stored species' real textures via LogTexSource at render. The shape's
+	// own `textures` are game:oak (not the Blender export's bare `birch`/`oak`, which would 404 at load — the itemtype
+	// override doesn't fully suppress it; memory vs-blender-shape-texture-block-warning) and only ever paint a bare,
+	// species-less stack — every real half-log re-textures per species through OnBeforeRender.
+	shape: { base: "immersivewoodworking:item/halflog" },
+	// Carry it two-handed, like a log / wood block (user 2026-07-08): the vanilla log block's third-person idle-hold
+	// animation. The held ITEM model + its tpHandTransform below are unchanged — only the arm pose becomes two-handed.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// Default (bare-oak) textures for a species-less stack; the runtime re-texturer overrides all three per stored
+	// species. "game:" is REQUIRED — an unqualified path resolves to THIS mod's domain, where the vanilla wood
+	// textures don't exist (memory vs-mod-asset-path-domain). Kept in sync with the shape's own defaults.
+	textures: {
+		"wood": { base: "game:block/wood/bark/oak" },
+		"wood_corner": { base: "game:block/wood/treetrunk/oak" },
+		"debarked_wood": { base: "game:block/wood/debarked/oak" }
+	},
+	// A hefty billet: stacks less than firewood (which is 32) since it's twice the wood. Tune freely.
+	maxStackSize: 16,
+	materialDensity: 600,
+	// Half-logs BURN (user decision 2026-07-07), calibrated as a mid-tier fuel so the processing chain is always a fuel
+	// UPGRADE — a raw log burns worst, splitting it is a bit better, and finishing to firewood is best of all:
+	//   vanilla firewood = 700°C / 24s per item;  vanilla log (default) = 800°C / 72s (oak 98s);  1 log -> 8 firewood = 192s.
+	//   half-log = 750°C / 42s  ->  2 half-logs = 84s total, which BEATS a typical raw log (72s) but stays UNDER the
+	//   4-firewood stack you'd get (96s), and well under the full 8-firewood conversion (192s). So there is always a
+	//   reason to keep processing, yet you CAN burn a half-log in a pinch at a loss. FLAT value (one item code, species
+	//   in attributes, so no per-species combustiblePropsByType) — same as vanilla firewood and the mod's own choppingblock.
+	//   NOTE: per-ITEM this reads "hotter+longer than firewood, cooler+shorter than a log" — the reverse of a loose
+	//   "worse than firewood" reading, because in vanilla a whole log already out-burns a single firewood. Tune here.
+	//
+	//   NOT the last word, though: ItemHalfLog.GetCombustibleProperties SUPPRESSES this per stack when the stored
+	//   species is one whose own logs carry no burn at all — Wildcraft Trees' `petrified` (stone, not wood) being the
+	//   shipped case, which that mod strips of combustion in seven of its own assets. A byType table can't express
+	//   that (the species is in stack attributes, nothing to glob), so it lives in code; the placed block does the
+	//   same with `halflogslab-petrified-*: null`. Every ordinary wood still burns exactly at the value above.
+	combustibleProps: { burnTemperature: 750, burnDuration: 42 },
+	// FALLBACK ONLY, and both tabs must match the pair in ItemHalfLog.BuildCreativeStacks. What the player actually
+	// browses is the per-species stack list that method builds; it also CLEARS this field once it succeeds, because
+	// the engine ADDS the two sources rather than letting one override the other (InventoryPlayerCreative
+	// .GatherTabStacks walks CreativeInventoryTabs and CreativeInventoryStacks in two independent branches, with no
+	// dedupe) — leaving both live is what put a thirteenth, species-less "Half-log" next to the twelve named ones
+	// (AuditFixPlan T04.04). This line is reached only when species discovery turned up nothing at all, and then a
+	// bare entry beats no entry. `items` is the tab twenty of the mod's twenty-one itemtypes carry; the half-log was
+	// the only one missing it.
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// One generic handbook page (ItemHalfLog.GetHandBookStacks returns a single bare stack, unconditionally — so the
+	// page survives the cleared tabs above); the per-species look/name still resolves everywhere else. The woodworking
+	// overview deep-links here, and since AuditFixPlan T04.04 this is the ONLY page the half-log has anywhere: the
+	// placed slab is out of both the creative menu and the handbook, so this text is also where "it is also a
+	// building block" gets said.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:halflog-handbook-title", text: "immersivewoodworking:halflog-handbook-text" }
+			]
+		}
+	},
+	// Held/GUI/ground poses dialled in for the real D-section model via `.tfedit` (user 2026-07-08). `rotate: false`
+	// keeps the GUI icon static at the tuned pose (a spinning icon would ignore the tuned y-rotation).
+	guiTransform: {
+		rotate: false,
+		translation: { x: 5, y: -6, z: 0 },
+		rotation: { x: 2, y: 137, z: -21 },
+		origin: { x: 0.5, y: 0.3, z: 0.5 },
+		scale: 1.5
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.15, z: 0 },
+		rotation: { x: 90, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 3.3
+	},
+	tpHandTransform: {
+		translation: { x: -0.5, y: 0.1, z: -0.55 },
+		rotation: { x: -79, y: 1, z: -102 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.6
+	}
+}

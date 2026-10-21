@@ -1,0 +1,30 @@
+{
+	// Grid recipe (T02.05) — the mounted saw BLADE `sawmillblade-{metal}` (pila s krepleniem): a vanilla saw blade in a
+	// mount. Wildcard over metal — the blade's metal flows from the input sawblade to the output, and IS the wear tier
+	// (durabilitybytype + DamageBladeKit; cut RATE comes from the drive RPM). The output is ONE kit item (non-stackable) and installs into the sash as a single piece
+	// (T03.07). The kit is THREE saw blades of one metal in a mount (a full middle row of S cells).
+	//   B H B     B = metal bit (game:metalbit-*, ANY metal — unnamed wildcard, see note below)
+	//   S S S     H = hammer    (tag tool-hammer, NOT consumed — a crafting tool)
+	//   B _ B     S = saw blade (game:sawblade-*, name:metal -> all three blades one metal, drives the {metal} output)
+	// game:-prefix (vs-mod-asset-path-domain); hammer by TAG with no code (vs-recipe-ingredient-code-vs-tags). The
+	// three S cells share name "metal" so the kit is single-metal by construction. B has NO name (T02.03, variant A):
+	// the bit metal never affects the output, the wear tier, or the cut rate, so the four B cells each match any metal
+	// independently (bits need not match one another or the blade). Dropping the name also removes the pointless
+	// combinatorial expansion that GetNameToCodeMappingForBasicWildcard does over a NAMED wildcard: it was
+	// |bit metals| x |blade metals| = 9x9 = 81 registered sub-recipes (more with metal mods), now just 9 -- the
+	// bit metal is not in the output, so it never needed its own name. Tools are returned, not consumed (isTool).
+	ingredientPattern: "BHB,SSS,B_B",
+	ingredients: {
+		"B": { type: "item", code: "game:metalbit-*" },
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true },
+		// allowedVariants closes the wildcard to the nine vanilla metals (E02). RecipeBase.GetNameToCodeMappingForBasicWildcard
+		// expands "game:sawblade-*" over EVERY collectible matching the mask, so metal mods (uraniumsteel, meteoricsteel, ...)
+		// add their own sawblade-* variants; but the output sawmillblade-{metal} exists ONLY for these nine, so the extra
+		// variants resolve to a non-existent output and log a warning+error each. This list MUST stay identical to the
+		// `metal` variantgroup in itemtypes/sawmill/blade.json (that variantgroup is the single source of truth).
+		"S": { type: "item", code: "game:sawblade-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "sawmillblade-{metal}", quantity: 1 }
+}

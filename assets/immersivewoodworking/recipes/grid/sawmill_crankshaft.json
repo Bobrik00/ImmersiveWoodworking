@@ -1,0 +1,26 @@
+{
+	// Grid recipe (T02.05) — the CRANKSHAFT assembly `sawmillcrankshaft` (kolenval + shatun, the "podvizhnaya osnova"):
+	// MainRotor + crankpit, converts the axle's rotation into the sash's vertical stroke (T07.00). Mandatory part.
+	// NO bronze cap — mechanical power (a windmill behind silk, a water wheel behind metal) is itself the tech gate
+	// (decision 2026-06-19), so the part is plain wood + nails.
+	//   P N P     P = plank (game:plank-* item)
+	//   P _ P     N = nails (game:metalnailsandstrips-*)
+	//   P N P
+	// game:-prefix on vanilla ingredients (vs-mod-asset-path-domain); output in-domain; wildcard by CODE
+	// (vs-recipe-ingredient-code-vs-tags). The `name` keys label which cells are one material, they do NOT force it:
+	// cell binding is the RecipeLoader's per-variant expansion, and this enabled:false template is registered from C#
+	// instead, which never expands (AuditFixPlan T10.02) — six planks of six woods and two nail strips of two metals
+	// are accepted, by design, since the output bakes neither. Shape/quantities per user design 2026-06-19.
+	// enabled:false → now a TEMPLATE: RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterSawmillRecipes
+	// re-registers it once per discovered wood DOMAIN, re-pointing the P (plank) slot to {domain}:plank-* so a wood
+	// mod's own-domain planks craft it. The game-domain recipe is registered from this same template (vanilla unchanged).
+	enabled: false,
+	ingredientPattern: "PNP,P_P,PNP",
+	ingredients: {
+		"P": { type: "item", code: "game:plank-*",               name: "wood" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*", name: "metal" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "sawmillcrankshaft", quantity: 1 }
+}

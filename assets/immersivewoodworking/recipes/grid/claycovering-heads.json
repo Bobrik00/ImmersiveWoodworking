@@ -1,0 +1,43 @@
+{
+	// Fire-clay covering for THIS mod's forgeable tool heads — an own-domain mirror of the vanilla
+	// game:recipes/grid/tool/claycovering.json. Coating a head in fire clay flips the reward of the NEXT quench
+	// (heat to quench temp + cool) from attack-power/mining-speed onto a max-durability "hardened" buff:
+	// CollectibleBehaviorQuenchable.applyQuenchedStats reads the stack attribute `clayCovered` (VSEssentials.dll) and
+	// branches on it, with NO check of the head's code — so any Quenchable head carrying the attribute hardens. Our
+	// heads are already Quenchable on iron/meteoriciron/steel and the assembled pitsaw/barkspud/maul already carry
+	// the buff off the head via applyquenchablebuffs; the ONLY missing link was this first step, the clay coat.
+	//
+	// WHY a separate file and NOT a JSON patch adding our 9 variants to the vanilla recipe's allowedVariants: the
+	// vanilla ingredient is `code:"*"` in the game domain (= game:*), and WildcardUtil.Match drops a DOMAIN barrier
+	// (VintagestoryAPI WildcardUtil.cs: `wildCard.Domain != "*" && !wildCard.Domain.Equals(inCode.Domain)` → false)
+	// BEFORE allowedVariants is ever consulted. So game:* can never match an immersivewoodworking: item, and no
+	// allowedVariants entry can smuggle a cross-domain variant in (memory vs-recipe-crossdomain-needs-tags). Here the
+	// file's own domain is immersivewoodworking, so `code:"*"` resolves to immersivewoodworking:* and matches ONLY
+	// this mod's items (RecipeLoader passes the file domain as the default). No vanilla file is forked.
+	//
+	//   T C     T = tool head (immersivewoodworking:*, allowedVariants below, name:tool drives {tool})
+	//           C = fire clay (game:clay-fire — MUST be game:-prefixed; an unqualified `clay-fire` would resolve to
+	//               this mod's domain and 404, same grabli as game:stick in pitsaw.json / vs-mod-asset-path-domain)
+	//
+	// allowedVariants = 3 heads x {iron, meteoriciron, steel} = the 9 heads that actually carry Quenchable. Copper/
+	// bronze/gold/silver heads are NOT Quenchable, so covering them would be inert clutter; they are omitted on
+	// purpose. The named wildcard {tool} in the output REQUIRES allowedVariants on the ingredient, or the {tool}+name
+	// pair would expand across every item in the domain (recipe-conventions.md).
+	ingredientPattern: "TC",
+	ingredients: {
+		"T": { type: "item", code: "*", name: "tool", allowedVariants: [
+			"pitsawblade-iron", "pitsawblade-meteoriciron", "pitsawblade-steel",
+			"barkspudhead-iron", "barkspudhead-meteoriciron", "barkspudhead-steel",
+			"maulhead-iron", "maulhead-meteoriciron", "maulhead-steel"
+		] },
+		"C": { type: "item", code: "game:clay-fire" }
+	},
+	name: "claycovering",
+	shapeless: true,
+	// copyAttributesFrom carries the head's existing stack attributes onto the output, then clayCovered:true is added
+	// — identical to vanilla, so the covered head keeps its identity and only gains the flag the next quench consumes.
+	copyAttributesFrom: "T",
+	width: 2,
+	height: 1,
+	output: { type: "item", code: "{tool}", attributes: { clayCovered: true } }
+}

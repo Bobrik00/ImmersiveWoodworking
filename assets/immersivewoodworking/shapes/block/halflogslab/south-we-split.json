@@ -1,0 +1,45 @@
+{
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textures": {
+		"wood": "game:block/wood/bark/oak",
+		"debarked_wood": "game:block/wood/debarked/oak",
+		"wood_corner": "game:block/wood/treetrunk/oak"
+	},
+	"elements": [
+		{
+			"name": "halflogslab",
+			"from": [0.0, 0.0, 8.0],
+			"to": [16.0, 16.0, 16.0],
+			"faces": {
+				"north": {
+					"texture": "#debarked_wood",
+					"uv": [0.0, 0.0, 16.0, 16.0]
+				},
+				"east": {
+					"texture": "#wood_corner",
+					"uv": [0.0, 0.0, 8.0, 16.0]
+				},
+				"south": {
+					"texture": "#wood",
+					"uv": [0.0, 0.0, 16.0, 16.0],
+					"rotation": 90
+				},
+				"west": {
+					"texture": "#wood_corner",
+					"uv": [8.0, 0.0, 16.0, 16.0]
+				},
+				"up": {
+					"texture": "#wood",
+					"uv": [0.0, 0.0, 8.0, 16.0],
+					"rotation": 90
+				},
+				"down": {
+					"texture": "#wood",
+					"uv": [8.0, 0.0, 16.0, 16.0],
+					"rotation": 90
+				}
+			}
+		}
+	]
+}

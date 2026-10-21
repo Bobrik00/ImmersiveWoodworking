@@ -1,0 +1,72 @@
+[
+	// ============================================================================================================
+	// PIT-KILN BARK LOOK — model wiring (BarkPlan/E06, T06.05). Makes a pit kiln clad in bark RENDER as bark instead
+	// of sticks, for ALL THREE modelConfigs: "*" (default: pots/crucibles/etc.), "toolmold-*-raw-anvil" (casting
+	// molds) and "storagevessel-*-raw" (storage vessels). Pairs with:
+	//   - shapes/block/pitkiln/{default,vessel,anvil}.json — the AUTHORED kiln shapes this patch redirects to, built
+	//     from the Blender exports by tools/build-pitkiln-shapes.py (re-run it after any re-export);
+	//   - pitkiln_bark_sticks.json — accepts bark-generic into the "sticks" build material (+ its eleCode "Bark").
+	//
+	// SHAPE REDIRECT, NOT AN ELEMENT GRAFT (changed 2026-07-29, user decision «просто используй целиком мою модель»).
+	// The first attempt bolted the bark groups onto the VANILLA shapes with `op:add /elements/-`. That grafts elements
+	// whose UVs are authored in the export's 64-unit space into a shape that declares 16 (vsapi Shape.cs:43-52 —
+	// textureWidth/textureSizes define the UV SPACE, not the texture's pixel size), so every bark UV came out 4x too
+	// large and the bark sampled a smeared 4x patch of the atlas. Shipping the whole authored shape keeps geometry and
+	// UV space together, which is the only way the two can't drift apart. Cost of the swap, accepted: the shipped
+	// copies no longer track vanilla shape edits, and the stick layer of ORDINARY kilns now uses the authored sticks
+	// (verified 2026-07-29: the exports differ from vanilla only inside Sticklayer1/2 — a few sticks nudged/rotated —
+	// Grass/Logs/Coal are identical bar equivalent Blender face-rotation spellings).
+	//   `shapeInventory` is deliberately NOT redirected: the creative/handbook icon full-renders the shape with no
+	//   stage selection, so pointing it at our shape would draw the bark and the sticks on top of each other. It stays
+	//   on the vanilla shape and the icon shows a plain stick kiln.
+	//
+	// HOW THE STAGE SELECTION WORKS (verified against BEPitKiln.updateSelectiveElements + decompiled
+	// ShapeTesselator.SelectiveMatch):
+	//   * Each stick build stage is tokenised: "Sticklayer1/*" -> "{eleCode}Sticklayer1*". At build time BEPitKiln
+	//     substitutes {eleCode} with the EleCode of the material the player actually used for that stage
+	//     (currentlyUsedMaterialOfStage). Sticks carry eleCode "" -> "Sticklayer1*"; bark carries eleCode "Bark" ->
+	//     "BarkSticklayer1*". So the SAME stage renders sticks or bark depending on what it was clad with.
+	//   * BARE-STAR ("Sticklayer1*", no slash) is deliberate: it PREFIX-matches. "Sticklayer1*" hits the element named
+	//     exactly "Sticklayer1" (and its children); "BarkSticklayer1*" hits the flat "BarkSticklayer1_NNN" elements.
+	//     The slash form "Sticklayer1/*" would require an element named EXACTLY "BarkSticklayer1" (a parent) — the
+	//     authored bark is flat, so slash would match nothing and draw an EMPTY bark layer. The two prefixes are
+	//     disjoint ("BarkSticklayer1" does not start with "Sticklayer1"), so sticks and bark never cross-match.
+	//   * Every OTHER stage ("Grass1", "{eleCode}1" -> "Logs1"/"Coal1") is an EXACT name match, which is why
+	//     build-pitkiln-shapes.py strips Blender's ".00N" suffixes off the top-level element names.
+	//
+	// TEXTURES: the bark carries TWO codes of its own, neither of which the vanilla pitkiln block defines, so both are
+	// added here. They must be BLOCK textures: BEPitKiln tesselates with tesselator.GetTextureSource(Block), so codes
+	// resolve against the BLOCK's dict, not the shape's own textures block.
+	//   The values are the ones the bark ITEM resolves (shapes/item/bark/bark-generic.json) — the kiln bark and the
+	//   item bark came out of the same Blender project against the same two images: oak -> block/wood/oak,
+	//   oak-bark_dark -> block/wood/oak-dark. Both are VERTICAL-grain, which is what a leaning bark strip needs.
+	//   block/wood/firewood/bark (the first guess) and the block's own `oak` (block/wood/debarked/oak) are both
+	//   HORIZONTAL-grain and laid the texture across the strips instead of along them — the bark read as 90° rotated.
+	//   The bark's #oak is renamed to #oak-bark_light in the shipped shape (build-pitkiln-shapes.py) precisely because
+	//   the block's `oak` is already taken by the vanilla stick layer and must keep pointing at debarked/oak.
+	// ============================================================================================================
+
+	// Redirect all three modelConfigs at the authored shapes.
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/*/shape/base", "value": "immersivewoodworking:block/pitkiln/default" },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/toolmold-*-raw-anvil/shape/base", "value": "immersivewoodworking:block/pitkiln/anvil" },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/storagevessel-*-raw/shape/base", "value": "immersivewoodworking:block/pitkiln/vessel" },
+
+	// Stick material (index 0 of buildMats/sticks) -> eleCode "" so {eleCode}Sticklayer1* resolves to Sticklayer1*.
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "add", "path": "/attributes/buildMats/sticks/0/eleCode", "value": "" },
+
+	// Tokenise the two stick stages of the DEFAULT modelConfig ("*").
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/*/buildStages/5", "value": "{eleCode}Sticklayer1*" },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/*/buildStages/6", "value": "{eleCode}Sticklayer2*" },
+
+	// Tokenise the two stick stages of the ANVIL (toolmold) modelConfig.
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/toolmold-*-raw-anvil/buildStages/5", "value": "{eleCode}Sticklayer1*" },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/toolmold-*-raw-anvil/buildStages/6", "value": "{eleCode}Sticklayer2*" },
+
+	// Tokenise the two stick stages of the STORAGE-VESSEL modelConfig.
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/storagevessel-*-raw/buildStages/5", "value": "{eleCode}Sticklayer1*" },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "replace", "path": "/attributes/modelConfigs/storagevessel-*-raw/buildStages/6", "value": "{eleCode}Sticklayer2*" },
+
+	// Define the two bark texture codes the authored bark geometry references (same images as the bark item).
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "add", "path": "/textures/oak-bark_dark", "value": { "base": "block/wood/oak-dark" } },
+	{ "file": "game:blocktypes/wood/pitkiln.json", "op": "add", "path": "/textures/oak-bark_light", "value": { "base": "block/wood/oak" } }
+]

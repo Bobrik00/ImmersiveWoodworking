@@ -1,0 +1,55 @@
+{
+	// E04 / T04.01 — the ONE special ghost-filler that is also the chopper's mechanical-power connector (the cell where
+	// the model's input shaft / cam disc sits). It is a plain `chopper-ghost` in every way (invisible, solid, routes
+	// click/break/pick/collision to the master via BEMultiblockChopper.Principal — all inherited from BlockChopperGhost)
+	// PLUS an IMechanicalPowerBlock, and its BE carries the consumer node via the `iw-choppermp` entityBehavior below.
+	// The master places exactly one of these, oriented to its feed facing, at the exposed input cell
+	// (BlockEntityChopper.InputCellLocal) — the master cell itself is interior to the footprint and so can never be the
+	// connector (memory vs-mp-consumer-interior-master). NEVER hand-placed (no creativeinventory); the frame SetBlocks
+	// it in E03/T03.03.
+	code: "chopper-ghostpower",
+	class: "iw-chopper-ghostpower",
+	entityClass: "iw-chopper-multiblock",
+	// `side` variantgroup = the machine's feed/strike facing, stamped at placement by the master, so BlockChopperGhostPower
+	// / BEBehaviorChopperMP can derive the connector face + spin axis parametrically (final face/sign land with the
+	// model at T07.06). NO HorizontalOrientable behavior — the master picks the variant explicitly, not player look
+	// (adding it here would break that stamping, memory vs-horizontal-orientable-variant).
+	variantgroups: [
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// The mechanical-power consumer node. The network LOAD is computed live in BEBehaviorChopperMP.GetResistance
+	// (Config.ChopperResistance, floored to IncompleteResistance until IsComplete; the flywheel that used to ease it
+	// was cut 2026-07-04) — there is no JSON resistance placeholder to tune here, the override never reads
+	// base.Resistance.
+	//
+	// mechPartShape: null — the vanilla quern/grindingwheel convention (survival/blocktypes/stone/quern.json), and the
+	// ONLY way to render nothing here. MechNetworkRenderer.AddDevice bails on `device.Shape == null`, so no instanced
+	// renderer is ever built for this node. An EMPTY shape is not the same thing and was the T07.08 / F-L8-19 defect:
+	// the engine happily builds a GenericMechBlockRenderer for it (a ~800 KB instance-matrix buffer) and then, every
+	// frame, recomputes this device's transform, re-uploads the buffer and issues a draw call for a mesh with zero
+	// triangles. The visible input disc is drawn by the master's own renderer (ChopperRenderer); this avoids a double
+	// gear (memory vs-sawmill-procedural-anim). Since nothing is drawn from this node, it also keeps no spin axis —
+	// BEBehaviorChopperMP does not maintain AxisSign (only mech renderers ever read it).
+	entityBehaviors: [
+		{ name: "iw-choppermp", properties: { mechPartShape: null } }
+	],
+	// `game:` prefix REQUIRED (memory vs-mod-asset-path-domain). `block/basic/nothing` = engine empty shape → invisible.
+	shape: { base: "game:block/basic/nothing" },
+	blockmaterial: "Wood",
+	drops: [],
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	rainPermeable: true,
+	resistance: 3.5,
+	lightAbsorption: 0,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	// Full-cube collision/selection FALLBACK only — live boxes are the master's per-cell footprint slices routed
+	// through the master BE (E03/T03.02), same as the plain ghost.
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

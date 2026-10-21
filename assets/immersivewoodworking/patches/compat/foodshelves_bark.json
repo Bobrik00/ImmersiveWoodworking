@@ -1,0 +1,68 @@
+[
+	// FOOD SHELVES COMPAT: let IW bark into the Food Shelves jars. One gate covers them all: the small Jar, the Large Jar
+	// and the Ceiling Rack that holds a Large Jar (3.x), and the old Ceiling Jar of 2.3.3 and of its 1.22 port
+	// `foodshelves2compat22`. Players file these jars under Expanded Foods because FS bills itself as EF's companion.
+	//
+	// HOW FS DECIDES. A jar slot takes only a collectible whose attributes carry `fsLiquidyStuff`. FS's SERVER stamps that
+	// attribute at AssetsFinalize on every collectible whose CODE wildcard-matches `CollectibleCodes` in the file below
+	// (tags are never read) and the client gets it inside the item packet, so the patch adds codes and is server-only.
+	// This is exactly how FS wires other mods itself (foodshelves:patches/longtermfood.json, maltiezfirearms.json).
+	// Verified against the FS source at 3.0.5 (2026-09-25); not played in-game.
+	//
+	// WHICH CODES. Explicit codes, never `bark-*`, which would also catch the two green kinds and bast.
+	// - Green tan and green birch stay out on purpose: a jar in a cellar would be the fastest place to dry them, with no
+	//   fire. The Dry rate in a jar is the pocket's x0.25 (vanilla InWorldContainer, every block container) times FS's
+	//   own factor, DryingMultiplier 4.5 on Jar / Large Jar / Ceiling Rack, which BEBaseFSContainer doubles in a closed
+	//   room and halves outside one: ~2.25x the pocket in a room (96 h -> ~43 h at the default BarkDryHours), ~0.56x
+	//   outside. 2.25x beats drying by a fire (1.3.11, up to 2x the pocket), so the jar would undercut that mechanic.
+	//   Vanilla BEShelf multiplies by 4 to cancel the 0.25; FS does not, and its own lang advertises "2.5x faster".
+	// - bast is processed fibre for rope and poultice, not a loose peel, and has no ground pile for the same reason.
+	// - crushed bark and bark tar are the powder and resin kind of thing FS jars already hold (resin, salt, grain).
+	//
+	// RENDERING. A jar draws its fill from fsTextureOverride -> inPieProperties.texture -> inContainerTexture -> the item's
+	// first texture. For plain bark, dried tan and dried birch that first texture is `game:block/transparent` from the
+	// shape, so without an inContainerTexture their fill would be invisible (medicinal and crushed bark would show their
+	// first texture anyway). Every code listed here carries one in its itemtype (bark.json, barkcrushed.json, barktar.json).
+	//
+	// `dependsOn` keeps the patch silent on installs without FS, where the target file does not exist.
+	//
+	// TWO ENTRIES, ONE PER MODID. The 1.22 port of 2.3.3 (ModDB "Food Shelves 2.3.4 for 1.22 compatibility", OrekiWoof)
+	// ships under its own modid `foodshelves2compat22` (the release's modidstr on ModDB), so `dependsOn: foodshelves`
+	// would skip it, and that port is the one that still has the "Ceiling Jar" by name. 2.3.3 keeps the same file at the
+	// same path with the same `CollectibleCodes` key and the same `fsLiquidyStuff` gate (BECeilingJar), and the port
+	// keeps the `foodshelves` asset domain so that old worlds keep their blocks (inferred, the zip itself was not opened).
+	// Both mods cannot run together, and even if they did a code listed twice is harmless.
+	// Deliberately NOT covered: `horfoodshelves` ("HoR FoodShelves 1.22 Compat", one release for 1.22.0 made for a single
+	// server two weeks before FS 3.0.0 shipped 1.22 support). Its asset domain is unknown, and a guessed `file` that does
+	// not exist would log a "not found" error on every start.
+	{
+		"file": "foodshelves:config/restrictions/general/liquidystuff.json",
+		"op": "addmerge",
+		"path": "/CollectibleCodes",
+		"side": "server",
+		"value": [
+			"immersivewoodworking:bark-generic",
+			"immersivewoodworking:bark-tan-dry",
+			"immersivewoodworking:bark-birch-dry",
+			"immersivewoodworking:bark-medicinal",
+			"immersivewoodworking:barkcrushed",
+			"immersivewoodworking:barktar"
+		],
+		"dependsOn": [{ "modid": "foodshelves" }]
+	},
+	{
+		"file": "foodshelves:config/restrictions/general/liquidystuff.json",
+		"op": "addmerge",
+		"path": "/CollectibleCodes",
+		"side": "server",
+		"value": [
+			"immersivewoodworking:bark-generic",
+			"immersivewoodworking:bark-tan-dry",
+			"immersivewoodworking:bark-birch-dry",
+			"immersivewoodworking:bark-medicinal",
+			"immersivewoodworking:barkcrushed",
+			"immersivewoodworking:barktar"
+		],
+		"dependsOn": [{ "modid": "foodshelves2compat22" }]
+	}
+]

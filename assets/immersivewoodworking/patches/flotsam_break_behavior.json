@@ -1,0 +1,10 @@
+[
+    // E07: bolt the hand-break behavior onto ALL four vanilla driftwood blocks at once. flotsam.json has a FLAT
+    // "behaviors" array (not behaviorsByType) shared by every model variant (flotsam-driftwood-1..4), so a single
+    // append covers them all — no per-variant targeting. Runs AFTER the block's existing {name:"Unstable"} (op:add
+    // "/behaviors/-" appends), which it composes with. The "iw-flotsambreak" name resolves to the class registered by
+    // RegisterBlockBehaviorClass in ImmersiveWoodworkingModSystem.Start. Mirrors patches/sawhorse_build_behavior.json
+    // (which bolts iw-sawhorsebuild onto game:stick) — attaching an iw- behavior to a foreign vanilla collectible via
+    // an asset patch, no Harmony.
+    { "file": "game:blocktypes/aquatic/flotsam.json", "op": "Add", "path": "/behaviors/-", "value": { "name": "iw-flotsambreak" } }
+]

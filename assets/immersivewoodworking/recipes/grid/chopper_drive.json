@@ -1,0 +1,35 @@
+{
+	// Grid recipe (drive rework, user 2026-07-10) — the DRIVE (cam shaft) `chopperdrive`: converts the axle's rotation
+	// into the arm's lift and carries the machine's mech-power link (analogue of sawmillcrankshaft). Mandatory part.
+	// NO bronze cap — the mechanical drive is itself the tech gate (T02.01). A plank cam block shaped with a chisel,
+	// banded with a metal sheet and nails, put together with a hammer:
+	//   H P P     H = hammer (tag tool-hammer, returned untouched)   P = plank (game:plank-* item, name:"wood")
+	//   C P P     C = chisel (tag tool-chisel, isTool + toolDurabilityCost 0 -> returned untouched, mod-independent)
+	//   S N _     S = metal plate (game:metalplate-* — лист металла)   N = nails (game:metalnailsandstrips-*)
+	// The gear that the old draft used purely as mech-hookup flavour is dropped: the mech-power link is handled by the
+	// block entity, not the recipe. 3x3 SHAPE, DISTINCT from sawmill_crankshaft and the other chopper parts so they
+	// don't collide on one grid. game:-prefix on vanilla ingredients (memory vs-mod-asset-path-domain); wildcard by CODE
+	// (vs-recipe-ingredient-code-vs-tags); hammer and chisel by TAG with no code (any hammer/chisel, mod-independent) —
+	// both are pure "must own" gates returned untouched (toolDurabilityCost 0), matching the mod's hammer convention;
+	// raise the chisel's cost if it should wear. The `name` keys label which cells are one material, they do NOT force
+	// it: cell binding is the RecipeLoader's per-variant expansion, and this enabled:false template is registered from
+	// C# instead, which never expands (AuditFixPlan T10.02) — four planks of four woods are accepted, by design, since
+	// the output bakes no species. SHAPE + QUANTITIES
+	// are a BALANCE DRAFT (user tunes); cap invariant (mech-drive gate, no bronze) holds.
+	// enabled:false -> TEMPLATE (RecipeLoader skips it). RegisterChopperRecipes re-registers it once per discovered wood
+	// DOMAIN, re-pointing the P (plank) slot (matched by Code.Path prefix, not by letter) to {domain}:plank-* so a wood
+	// mod's own-domain planks craft it; the metal/tool slots are left untouched. The game-domain recipe is registered
+	// from this same template (vanilla unchanged).
+	enabled: false,
+	ingredientPattern: "HPP,CPP,SN_",
+	ingredients: {
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 },
+		"C": { type: "item", tags: ["tool-chisel"], isTool: true, toolDurabilityCost: 0 },
+		"P": { type: "item", code: "game:plank-*",               name: "wood" },
+		"S": { type: "item", code: "game:metalplate-*" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*", name: "metal" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "chopperdrive", quantity: 1 }
+}

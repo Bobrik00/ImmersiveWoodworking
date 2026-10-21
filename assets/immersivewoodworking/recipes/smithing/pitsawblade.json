@@ -1,0 +1,45 @@
+{
+	// Anvil smithing recipe for the pit saw BLADE `pitsawblade-{metal}` (T01.03). Mirrors the vanilla single-blade
+	// toolheads (game:recipes/smithing/saw.json · axe.json) and this mod's barkspudhead.json: one hot ingot hammered
+	// into a flat blade silhouette. Auto-loaded from this mod's domain with no code registration — recipes/smithing/*
+	// is scanned across every domain, exactly like the mod's recipes/grid/*.
+	//
+	// METALS = the FULL vanilla tool set (copper…steel, incl. soft gold/silver), 1:1 with the vanilla saw, this
+	// mod's pitsaw, and barkspudhead. name:"metal" binds the ingot's metal to the {metal} output, so a copper ingot
+	// yields pitsawblade-copper, steel yields pitsawblade-steel; a single ingot, one metal, no mixing. The 9
+	// allowedVariants match the pitsawblade itemtype 1:1 (T01.01).
+	//
+	// Voxel silhouette (ONE layer, like every vanilla toolhead — outer array length 1): a LONG, DEEP two-man rip-saw
+	// blade — three solid body rows (the reinforced steel band of a pit saw), the back corners clipped, with a row of
+	// 7 TEETH notched along the bottom cutting edge. 53 voxels → ceil(53 / ItemIngot.VoxelCount 42) = 2 INGOTS.
+	// This is the WHOLE POINT of the recipe and is deliberate BALANCE, not decoration: a single ingot lays exactly 42
+	// metal voxels on the anvil (ItemIngot.CreateVoxelsFromIngot), so ANY recipe over 42 filled voxels physically
+	// cannot be matched from one ingot — MatchesRecipe (BEAnvil.cs) demands a metal voxel in every recipe cell, which
+	// forces a second ingot to be welded on (AddVoxelsFromIngot); the anvil dialog reports the same count via
+	// ceil(voxels / VoxelCountForHandbook). The pit saw is x2 vanilla-saw durability and x1.5 rip speed
+	// (itemtypes/tool/pitsaw.json), so it must cost x2 the metal of a plain saw (vanilla saw = 22 voxels = 1 ingot).
+	// A thin 2-row saw band tops out around 40 voxels (2 rows x 16 + teeth), so needing 2 ingots NECESSARILY means a
+	// deeper blade — which is exactly the profile of a real two-man pit saw. Vanilla 2-ingot references that forge
+	// the same way (one flat layer, > 42 voxels): scale 63, helvehammer 78, plate 81. Each tooth in the bottom row
+	// hangs off a filled body voxel above it, so the whole silhouette is reachable/supported and forges flat like the
+	// vanilla metal plate.
+	// `game:` is REQUIRED on the ingot — exactly like barkspudhead.json and the grid recipe's `game:stick`. An
+	// unqualified `ingot-*` resolves to THIS mod's domain (immersivewoodworking:ingot-*), which matches NO
+	// collectible, so the recipe expands to ZERO sub-recipes (RecipeBase.GetNameToCodeMappingForBasicWildcard →
+	// empty set) and silently never registers — the blade then never shows up in the anvil's forge list (memory
+	// vs-mod-asset-path-domain). Vanilla axe.json / saw.json get away with a bare `ingot-*` only because they
+	// themselves live in the game domain.
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"_##############_",
+		"################",
+		"################",
+		"_#_#_#_#_#_#_#__"
+	]],
+	// `name` is an identifier (parsed to an AssetLocation), NOT a display label: the anvil recipe selector lists
+	// recipes by their OUTPUT item (pitsawblade-{metal}, named via lang in T01.04), so no recipe-name lang entry is
+	// needed. RecipeLoader defaults a null Name to the asset path; vanilla still sets a short one, so we mirror.
+	name: "pitsawblade",
+	code: "pitsawblade-{metal}",
+	output: { type: "item", code: "pitsawblade-{metal}" }
+}

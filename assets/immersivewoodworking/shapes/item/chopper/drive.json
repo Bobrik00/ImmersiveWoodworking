@@ -1,0 +1,9732 @@
+{
+ "textureWidth": 64,
+ "textureHeight": 64,
+ "textures": {
+  "0": "game:block/wood/debarked/oak",
+  "metal": "game:block/metal/plate/iron",
+  "oak": "game:block/wood/debarked/oak"
+ },
+ "elements": [
+  {
+   "name": "dropmaul-gear-active_001.001",
+   "from": [
+    9.814941078026994,
+    1.402836799621582,
+    7.338924884796143
+   ],
+   "to": [
+    10.808272689978377,
+    10.402836799621582,
+    16.338924884796143
+   ],
+   "rotationOrigin": [
+    10.311606884002686,
+    5.902836799621582,
+    11.838924884796143
+   ],
+   "rotationX": 118.17273649102906,
+   "rotationY": 65.9626543622357,
+   "rotationZ": -85.7810151447288,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_002.001",
+   "from": [
+    9.810387611534516,
+    1.402837336063385,
+    7.338925421237946
+   ],
+   "to": [
+    10.812826156470855,
+    10.402836263179779,
+    16.33892434835434
+   ],
+   "rotationOrigin": [
+    10.311606884002686,
+    5.902836799621582,
+    11.838924884796143
+   ],
+   "rotationX": 106.05826218660921,
+   "rotationY": 83.77958530280748,
+   "rotationZ": -73.94073878453912,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_003.001",
+   "from": [
+    9.81160694360733,
+    1.402836799621582,
+    7.338924884796143
+   ],
+   "to": [
+    10.81160682439804,
+    10.402836799621582,
+    16.338924884796143
+   ],
+   "rotationOrigin": [
+    10.311606884002686,
+    5.902836799621582,
+    11.838924884796143
+   ],
+   "rotationX": -49.959732872760085,
+   "rotationY": 77.85923880194295,
+   "rotationZ": 81.80669882142763,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_004.001",
+   "from": [
+    9.812825798843043,
+    1.402836799621582,
+    7.338924884796143
+   ],
+   "to": [
+    10.810387969162328,
+    10.402836799621582,
+    16.338924884796143
+   ],
+   "rotationOrigin": [
+    10.311606884002686,
+    5.902836799621582,
+    11.838924884796143
+   ],
+   "rotationX": -55.002803046439006,
+   "rotationY": 59.93497826875359,
+   "rotationZ": 86.57002493727033,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_005.001",
+   "from": [
+    9.80412501185917,
+    1.4028370678424835,
+    7.338925153017044
+   ],
+   "to": [
+    10.8190887561462,
+    10.40283653140068,
+    16.33892461657524
+   ],
+   "rotationOrigin": [
+    10.311606884002686,
+    5.902836799621582,
+    11.838924884796143
+   ],
+   "rotationX": -56.427389262006905,
+   "rotationY": 41.95635284486551,
+   "rotationZ": 87.6901144894499,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_006.001",
+   "from": [
+    9.695049911339982,
+    -0.7175335884094238,
+    10.728563785552979
+   ],
+   "to": [
+    10.688381523291365,
+    8.282466411590576,
+    19.72856378555298
+   ],
+   "rotationOrigin": [
+    10.191715717315674,
+    3.782466411590576,
+    15.228563785552979
+   ],
+   "rotationX": 118.17273649102906,
+   "rotationY": 65.9626543622357,
+   "rotationZ": -85.7810151447288,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_007.001",
+   "from": [
+    9.690496444847504,
+    -0.7175330519676208,
+    10.728564321994781
+   ],
+   "to": [
+    10.692934989783843,
+    8.282465875148773,
+    19.728563249111176
+   ],
+   "rotationOrigin": [
+    10.191715717315674,
+    3.782466411590576,
+    15.228563785552979
+   ],
+   "rotationX": 106.05826218660921,
+   "rotationY": 83.77958530280748,
+   "rotationZ": -73.94073878453912,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_008.001",
+   "from": [
+    9.691715776920319,
+    -0.7175335884094238,
+    10.728563785552979
+   ],
+   "to": [
+    10.691715657711029,
+    8.282466411590576,
+    19.72856378555298
+   ],
+   "rotationOrigin": [
+    10.191715717315674,
+    3.782466411590576,
+    15.228563785552979
+   ],
+   "rotationX": -49.959732872760085,
+   "rotationY": 77.85923880194295,
+   "rotationZ": 81.80669882142763,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_009.001",
+   "from": [
+    9.692934632156032,
+    -0.7175335884094238,
+    10.728563785552979
+   ],
+   "to": [
+    10.690496802475316,
+    8.282466411590576,
+    19.72856378555298
+   ],
+   "rotationOrigin": [
+    10.191715717315674,
+    3.782466411590576,
+    15.228563785552979
+   ],
+   "rotationX": -55.002803046439006,
+   "rotationY": 59.93497826875359,
+   "rotationZ": 86.57002493727033,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_010.001",
+   "from": [
+    9.684233845172159,
+    -0.7175333201885223,
+    10.72856405377388
+   ],
+   "to": [
+    10.699197589459189,
+    8.282466143369675,
+    19.728563517332077
+   ],
+   "rotationOrigin": [
+    10.191715717315674,
+    3.782466411590576,
+    15.228563785552979
+   ],
+   "rotationX": -56.427389262006905,
+   "rotationY": 41.95635284486551,
+   "rotationZ": 87.6901144894499,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_011.001",
+   "from": [
+    4.246662616729736,
+    3.842644691467285,
+    11.533740758895874
+   ],
+   "to": [
+    18.256662845611572,
+    5.842644691467285,
+    15.533741474151611
+   ],
+   "rotationOrigin": [
+    10.251662731170654,
+    4.842644691467285,
+    13.533740997314453
+   ],
+   "rotationX": 106.05843977152763,
+   "rotationY": 83.7795784726183,
+   "rotationZ": -73.94091636945755,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -1.3255618810653687,
+      8.0,
+      64.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      16.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      65.3255615234375,
+      12.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      16.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      48.0,
+      65.3255615234375,
+      64.00000047683716
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      24.0,
+      -1.3255622386932373,
+      8.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_012.001",
+   "from": [
+    4.25666356086731,
+    2.842646598815918,
+    12.533740758895874
+   ],
+   "to": [
+    18.246663331985474,
+    6.842646598815918,
+    14.533741354942322
+   ],
+   "rotationOrigin": [
+    10.251663446426392,
+    4.842646598815918,
+    13.533740997314453
+   ],
+   "rotationX": 106.05870614890527,
+   "rotationY": 83.77959213299664,
+   "rotationZ": -73.94118274683518,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -1.0075061321258545,
+      4.0,
+      62.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      7.999999046325684,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      63.00750732421875,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      63.00750732421875,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      62.0,
+      8.0,
+      -1.0075072050094604,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_013.001",
+   "from": [
+    13.636898040771484,
+    2.849686659236493,
+    12.125904663520927
+   ],
+   "to": [
+    17.636898040771484,
+    4.22886022379252,
+    13.505078228076954
+   ],
+   "rotationOrigin": [
+    15.636898040771484,
+    3.4954161643981934,
+    12.881463050842285
+   ],
+   "rotationX": -64.36381636056242,
+   "rotationY": -74.9245728929661,
+   "rotationZ": -96.61743128184501,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_014.001",
+   "from": [
+    12.91368579864502,
+    1.5114612156187839,
+    11.263205062496027
+   ],
+   "to": [
+    16.91368579864502,
+    2.890634948762159,
+    12.642378795639402
+   ],
+   "rotationOrigin": [
+    14.91368579864502,
+    2.1571907997131348,
+    12.018763542175293
+   ],
+   "rotationX": -60.61680873283928,
+   "rotationY": -56.98090437725015,
+   "rotationZ": -93.15313884424704,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_015.001",
+   "from": [
+    11.734120845794678,
+    0.4361171693917498,
+    10.548807916673638
+   ],
+   "to": [
+    15.734120845794678,
+    1.8152908182414507,
+    11.92798156552334
+   ],
+   "rotationOrigin": [
+    13.734120845794678,
+    1.0818467140197754,
+    11.30436635017395
+   ],
+   "rotationX": -59.36355098241199,
+   "rotationY": -38.9997210475179,
+   "rotationZ": -92.21035417273184,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_016.001",
+   "from": [
+    10.21367359161377,
+    -0.27109616313403606,
+    10.052636011558647
+   ],
+   "to": [
+    14.21367359161377,
+    1.1080774014219905,
+    11.431809576114674
+   ],
+   "rotationOrigin": [
+    12.21367359161377,
+    0.3746333420276642,
+    10.808194398880005
+   ],
+   "rotationX": -58.632071873249465,
+   "rotationY": -21.01065738703075,
+   "rotationZ": -91.83993935366371,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_017.001",
+   "from": [
+    8.501163959503174,
+    -0.5409545628908887,
+    9.823256788286187
+   ],
+   "to": [
+    12.501163959503174,
+    0.8382190859588121,
+    11.202430437135888
+   ],
+   "rotationOrigin": [
+    10.501163959503174,
+    0.10477498173713684,
+    10.578815221786499
+   ],
+   "rotationX": -58.06279609649641,
+   "rotationY": -3.0192146862783207,
+   "rotationZ": -91.71998074127077,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_018.001",
+   "from": [
+    6.764238715171814,
+    -0.3470334342522001,
+    9.883128269630546
+   ],
+   "to": [
+    10.764238715171814,
+    1.0321401303038265,
+    11.262301834186573
+   ],
+   "rotationOrigin": [
+    8.764238715171814,
+    0.2986960709095001,
+    10.638686656951904
+   ],
+   "rotationX": -57.5127131513111,
+   "rotationY": 14.972560132422501,
+   "rotationZ": -91.77796221713501,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_019.001",
+   "from": [
+    5.1729079484939575,
+    0.29167846526676655,
+    10.22638617368328
+   ],
+   "to": [
+    9.172907948493958,
+    1.6708520298227931,
+    11.605559738239307
+   ],
+   "rotationOrigin": [
+    7.1729079484939575,
+    0.9374079704284668,
+    10.981944561004639
+   ],
+   "rotationX": -56.85796097218992,
+   "rotationY": 32.962755896764584,
+   "rotationZ": -92.04725608554111,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_020.001",
+   "from": [
+    3.882948875427246,
+    1.3126716190611667,
+    10.819437514888605
+   ],
+   "to": [
+    7.882948875427246,
+    2.691845352204542,
+    12.19861124803198
+   ],
+   "rotationOrigin": [
+    5.882948875427246,
+    1.9584012031555176,
+    11.574995994567871
+   ],
+   "rotationX": -55.853991466089745,
+   "rotationY": 50.947709490918676,
+   "rotationZ": -92.72680526644402,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_021.001",
+   "from": [
+    3.020627498626709,
+    2.615988251697658,
+    11.604220924409844
+   ],
+   "to": [
+    7.020627498626709,
+    3.995161900547359,
+    12.983394573259545
+   ],
+   "rotationOrigin": [
+    5.020627498626709,
+    3.2617177963256836,
+    12.359779357910156
+   ],
+   "rotationX": -53.51222354311044,
+   "rotationY": 68.91260623457502,
+   "rotationZ": -94.77862141387253,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_022.001",
+   "from": [
+    2.670360565185547,
+    4.07405892776989,
+    12.503920043172542
+   ],
+   "to": [
+    6.670360565185547,
+    5.45323274520694,
+    13.883093860609591
+   ],
+   "rotationOrigin": [
+    4.670360565185547,
+    4.719788551330566,
+    13.259478569030762
+   ],
+   "rotationX": -28.37468901992982,
+   "rotationY": 86.5257106699353,
+   "rotationZ": -119.64294837025264,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_023.001",
+   "from": [
+    2.8664302825927734,
+    5.544160323742563,
+    13.43047000085052
+   ],
+   "to": [
+    6.866430282592773,
+    6.923334056885938,
+    14.809643733993894
+   ],
+   "rotationOrigin": [
+    4.866430282592773,
+    6.189889907836914,
+    14.186028480529785
+   ],
+   "rotationX": -64.36372756810322,
+   "rotationY": 105.07543211599022,
+   "rotationZ": -83.38254640635463,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_024.001",
+   "from": [
+    3.5896449089050293,
+    6.882379052173732,
+    14.293165264162042
+   ],
+   "to": [
+    7.589644908905029,
+    8.261552701023433,
+    15.672338913011743
+   ],
+   "rotationOrigin": [
+    5.589644908905029,
+    7.528108596801758,
+    15.048723697662354
+   ],
+   "rotationX": 119.3832509176304,
+   "rotationY": 56.98091803762849,
+   "rotationZ": 93.15302273103116,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_025.001",
+   "from": [
+    4.7692097425460815,
+    7.957723137867092,
+    15.007562694581964
+   ],
+   "to": [
+    8.769209742546082,
+    9.336896786716792,
+    16.386736343431664
+   ],
+   "rotationOrigin": [
+    6.7692097425460815,
+    8.603452682495117,
+    15.763121128082275
+   ],
+   "rotationX": 120.63644036616601,
+   "rotationY": 38.99969031166664,
+   "rotationZ": 92.21026538027263,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_026.001",
+   "from": [
+    6.2896648645401,
+    8.66493566491986,
+    15.503734261396659
+   ],
+   "to": [
+    10.2896648645401,
+    10.044109145182212,
+    16.88290774165901
+   ],
+   "rotationOrigin": [
+    8.2896648645401,
+    9.310665130615234,
+    16.259292602539062
+   ],
+   "rotationX": 121.36795362627437,
+   "rotationY": 21.01067104740909,
+   "rotationZ": 91.83990520271786,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_027.001",
+   "from": [
+    8.002163410186768,
+    8.934791006322136,
+    15.733111823262874
+   ],
+   "to": [
+    12.002163410186768,
+    10.313964823759186,
+    17.112285640699923
+   ],
+   "rotationOrigin": [
+    10.002163410186768,
+    9.580520629882812,
+    16.488670349121094
+   ],
+   "rotationX": 121.93722257283827,
+   "rotationY": 3.0192104174100893,
+   "rotationZ": 91.71991926956825,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_028.001",
+   "from": [
+    9.739099502563477,
+    8.740865267177167,
+    15.673237427192802
+   ],
+   "to": [
+    13.739099502563477,
+    10.120038831733194,
+    17.05241099174883
+   ],
+   "rotationOrigin": [
+    11.739099502563477,
+    9.386594772338867,
+    16.42879581451416
+   ],
+   "rotationX": 122.48732600859108,
+   "rotationY": -14.97257208525355,
+   "rotationZ": 91.77794855675667,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_029.001",
+   "from": [
+    4.666280508041382,
+    11.26394271850586,
+    -0.32999753952026367
+   ],
+   "to": [
+    6.676280736923218,
+    13.26394271850586,
+    3.6700026988983154
+   ],
+   "rotationOrigin": [
+    10.6712806224823,
+    12.26394271850586,
+    1.6700029373168945
+   ],
+   "rotationX": 103.04373770585657,
+   "rotationY": 84.73333242794054,
+   "rotationZ": -70.94123388977135,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      54.6278076171875,
+      8.000007629394531,
+      64.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      6.675719305349048e-06,
+      12.0,
+      15.999999046325684,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      9.372191429138184,
+      12.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      16.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      48.0,
+      9.37218952178955,
+      64.00000076522377
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      24.0,
+      54.6278076171875,
+      8.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_030.001",
+   "from": [
+    4.676280736923218,
+    10.263941764831543,
+    0.6700034141540527
+   ],
+   "to": [
+    6.666280508041382,
+    14.263941764831543,
+    2.670003652572632
+   ],
+   "rotationOrigin": [
+    10.6712806224823,
+    12.263941764831543,
+    1.670003890991211
+   ],
+   "rotationX": 103.04373770585657,
+   "rotationY": 84.73333242794054,
+   "rotationZ": -70.94123388977135,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      53.037532806396484,
+      4.0,
+      62.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      5.245207375992322e-06,
+      0.0,
+      7.999998569488525,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      8.962467193603516,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      8.962468147277832,
+      32.00000190734863
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      62.0,
+      8.0,
+      53.03752899169922,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_031.001",
+   "from": [
+    10.221991300582886,
+    2.0163826942443848,
+    0.189103364944458
+   ],
+   "to": [
+    11.221991300582886,
+    10.016382694244385,
+    8.189103364944458
+   ],
+   "rotationOrigin": [
+    10.721991300582886,
+    6.016382694244385,
+    4.189103364944458
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      4.0,
+      32.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_032.001",
+   "from": [
+    10.223735809326172,
+    1.916400432586613,
+    0.1891036033630087
+   ],
+   "to": [
+    11.223735809326172,
+    9.916398525238094,
+    8.189102172851591
+   ],
+   "rotationOrigin": [
+    10.723735570907593,
+    5.9163994789123535,
+    4.1891028881073
+   ],
+   "rotationX": 0.9998936974346749,
+   "rotationY": -44.99126202519605,
+   "rotationZ": 91.41404973815673,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      6.0,
+      18.0,
+      28.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      30.0,
+      24.0,
+      62.0,
+      56.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      4.0,
+      38.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      26.0,
+      32.0,
+      58.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      4.0,
+      38.0,
+      0.0,
+      16.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_033.001",
+   "from": [
+    4.2425758838653564,
+    2.630693197250366,
+    3.482001304626465
+   ],
+   "to": [
+    8.242575883865356,
+    4.044906377792358,
+    4.896214485168457
+   ],
+   "rotationOrigin": [
+    6.2425758838653564,
+    3.3377997875213623,
+    4.189107894897461
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_034.001",
+   "from": [
+    8.767369270324707,
+    2.7096738815307617,
+    8.007482469081879
+   ],
+   "to": [
+    12.767369270324707,
+    4.123887062072754,
+    9.42169564962387
+   ],
+   "rotationOrigin": [
+    10.767369270324707,
+    3.416780471801758,
+    8.714589059352875
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_035.001",
+   "from": [
+    13.292160511016846,
+    2.7886557579040527,
+    3.481999158859253
+   ],
+   "to": [
+    17.292160511016846,
+    4.202868938446045,
+    4.896212339401245
+   ],
+   "rotationOrigin": [
+    15.292160511016846,
+    3.495762348175049,
+    4.189105749130249
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_036.001",
+   "from": [
+    5.566111087799072,
+    2.960916042327881,
+    6.889104604721069
+   ],
+   "to": [
+    9.566111087799072,
+    3.960916042327881,
+    7.889104604721069
+   ],
+   "rotationOrigin": [
+    7.566111087799072,
+    3.4609155654907227,
+    7.389104604721069
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_037.001",
+   "from": [
+    11.965137004852295,
+    3.072612762451172,
+    6.889103591442108
+   ],
+   "to": [
+    15.965137004852295,
+    4.072612762451172,
+    7.889103591442108
+   ],
+   "rotationOrigin": [
+    13.965137004852295,
+    3.5726122856140137,
+    7.38910311460495
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_038.001",
+   "from": [
+    8.767367124557495,
+    2.7096750736236572,
+    -1.0434818267822266
+   ],
+   "to": [
+    12.767367124557495,
+    4.123888254165649,
+    0.3707313537597656
+   ],
+   "rotationOrigin": [
+    10.767367124557495,
+    3.4167816638946533,
+    -0.33637523651123047
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_039.001",
+   "from": [
+    5.566109538078308,
+    2.96091628074646,
+    0.489102840423584
+   ],
+   "to": [
+    9.566109538078308,
+    3.96091628074646,
+    1.489102840423584
+   ],
+   "rotationOrigin": [
+    7.566109538078308,
+    3.46091628074646,
+    0.989102840423584
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_040.001",
+   "from": [
+    11.965135097503662,
+    3.072613000869751,
+    0.4891018867492676
+   ],
+   "to": [
+    15.965135097503662,
+    4.072613000869751,
+    1.4891018867492676
+   ],
+   "rotationOrigin": [
+    13.965135097503662,
+    3.572613000869751,
+    0.9891014099121094
+   ],
+   "rotationX": -90.00087676869192,
+   "rotationY": -91.00000367067057,
+   "rotationZ": -0.0012461024385832036,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_041.001",
+   "from": [
+    14.986424922943115,
+    5.905268760395657,
+    10.602877411603139
+   ],
+   "to": [
+    16.986424922943115,
+    7.284442752216243,
+    11.982051635935107
+   ],
+   "rotationOrigin": [
+    15.986424922943115,
+    6.594855785369873,
+    11.2924644947052
+   ],
+   "rotationX": -28.374461916139918,
+   "rotationY": -93.47430116921021,
+   "rotationZ": -60.35700199719034,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_042.001",
+   "from": [
+    14.806589126586914,
+    2.7247134167677274,
+    15.6873373735406
+   ],
+   "to": [
+    16.806589126586914,
+    4.103887408588314,
+    17.066511656000415
+   ],
+   "rotationOrigin": [
+    15.806589126586914,
+    3.4143004417419434,
+    16.376924514770508
+   ],
+   "rotationX": -28.374461916139918,
+   "rotationY": -93.47430116921021,
+   "rotationZ": -60.35700199719034,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_043.001",
+   "from": [
+    15.669975340366364,
+    6.789916648764425,
+    10.590407334829202
+   ],
+   "to": [
+    17.669975221157074,
+    8.169090556291327,
+    11.969581221986374
+   ],
+   "rotationOrigin": [
+    16.66997528076172,
+    7.479503631591797,
+    11.279994249343872
+   ],
+   "rotationX": -2.360775485665806,
+   "rotationY": -33.13475713553843,
+   "rotationZ": 37.02305747152704,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-active_044.001",
+   "from": [
+    15.460167944431305,
+    3.079267635245138,
+    16.52227660324656
+   ],
+   "to": [
+    17.460167825222015,
+    4.458441542772039,
+    17.901450490403732
+   ],
+   "rotationOrigin": [
+    16.46016788482666,
+    3.7688546180725098,
+    17.21186351776123
+   ],
+   "rotationX": -2.360775485665806,
+   "rotationY": -33.13475713553843,
+   "rotationZ": 37.02305747152704,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_001.001",
+   "from": [
+    2.8589345510799724,
+    2.085343360900879,
+    3.9649274945259094
+   ],
+   "to": [
+    3.8522661630313557,
+    11.085343360900879,
+    12.96492749452591
+   ],
+   "rotationOrigin": [
+    3.355600357055664,
+    6.585343360900879,
+    8.46492749452591
+   ],
+   "rotationX": 14.76695948557407,
+   "rotationY": 12.09125678388367,
+   "rotationZ": 38.472963198348175,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_002.001",
+   "from": [
+    2.8543810845874944,
+    2.085343897342682,
+    3.9649280309677124
+   ],
+   "to": [
+    3.8568196295238337,
+    11.085342824459076,
+    12.964926958084106
+   ],
+   "rotationOrigin": [
+    3.355600357055664,
+    6.585343360900879,
+    8.46492749452591
+   ],
+   "rotationX": 0.7655970780054928,
+   "rotationY": 0.6434137982946917,
+   "rotationZ": 40.04124976386397,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_003.001",
+   "from": [
+    2.855600416660309,
+    2.085343360900879,
+    3.9649274945259094
+   ],
+   "to": [
+    3.8556002974510193,
+    11.085343360900879,
+    12.96492749452591
+   ],
+   "rotationOrigin": [
+    3.355600357055664,
+    6.585343360900879,
+    8.46492749452591
+   ],
+   "rotationX": -13.17275320593172,
+   "rotationY": -10.842547085669953,
+   "rotationZ": 38.7899454475393,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_004.001",
+   "from": [
+    2.856819271896022,
+    2.085343897342682,
+    3.9649280309677124
+   ],
+   "to": [
+    3.854381442215306,
+    11.085342824459076,
+    12.964926958084106
+   ],
+   "rotationOrigin": [
+    3.355600357055664,
+    6.585343360900879,
+    8.46492749452591
+   ],
+   "rotationX": -28.192707167231294,
+   "rotationY": -21.656226376812846,
+   "rotationZ": 34.545887878441405,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_005.001",
+   "from": [
+    2.848118484912149,
+    2.085343360900879,
+    3.9649274945259094
+   ],
+   "to": [
+    3.863082229199179,
+    11.085343360900879,
+    12.96492749452591
+   ],
+   "rotationOrigin": [
+    3.355600357055664,
+    6.585343360900879,
+    8.46492749452591
+   ],
+   "rotationX": -45.451749963943726,
+   "rotationY": -30.919887297148787,
+   "rotationZ": 26.830285918394267,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_006.001",
+   "from": [
+    -0.2031992379825276,
+    -0.48824214935302734,
+    3.964927613735199
+   ],
+   "to": [
+    0.7901323739688557,
+    8.511757850646973,
+    12.964927613735199
+   ],
+   "rotationOrigin": [
+    0.29346656799316406,
+    4.011757850646973,
+    8.464927613735199
+   ],
+   "rotationX": 14.76695948557407,
+   "rotationY": 12.09125678388367,
+   "rotationZ": 38.472963198348175,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_007.001",
+   "from": [
+    -0.2077527044750056,
+    -0.48824161291122437,
+    3.964928150177002
+   ],
+   "to": [
+    0.7946858404613337,
+    8.51175731420517,
+    12.964927077293396
+   ],
+   "rotationOrigin": [
+    0.29346656799316406,
+    4.011757850646973,
+    8.464927613735199
+   ],
+   "rotationX": 0.7655970780054928,
+   "rotationY": 0.6434137982946917,
+   "rotationZ": 40.04124976386397,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_008.001",
+   "from": [
+    -0.20653337240219116,
+    -0.48824214935302734,
+    3.964927613735199
+   ],
+   "to": [
+    0.7934665083885193,
+    8.511757850646973,
+    12.964927613735199
+   ],
+   "rotationOrigin": [
+    0.29346656799316406,
+    4.011757850646973,
+    8.464927613735199
+   ],
+   "rotationX": -13.17275320593172,
+   "rotationY": -10.842547085669953,
+   "rotationZ": 38.7899454475393,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_009.001",
+   "from": [
+    -0.20531451716647808,
+    -0.48824161291122437,
+    3.964928150177002
+   ],
+   "to": [
+    0.7922476531528062,
+    8.51175731420517,
+    12.964927077293396
+   ],
+   "rotationOrigin": [
+    0.29346656799316406,
+    4.011757850646973,
+    8.464927613735199
+   ],
+   "rotationX": -28.192707167231294,
+   "rotationY": -21.656226376812846,
+   "rotationZ": 34.545887878441405,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_010.001",
+   "from": [
+    -0.21401530415035097,
+    -0.48824214935302734,
+    3.964927613735199
+   ],
+   "to": [
+    0.8009484401366791,
+    8.511757850646973,
+    12.964927613735199
+   ],
+   "rotationOrigin": [
+    0.29346656799316406,
+    4.011757850646973,
+    8.464927613735199
+   ],
+   "rotationX": -45.451749963943726,
+   "rotationY": -30.919887297148787,
+   "rotationZ": 26.830285918394267,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      16.0,
+      20.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      50.0,
+      52.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      14.0,
+      20.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      50.0,
+      16.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_011.001",
+   "from": [
+    -4.180466651916504,
+    4.298550605773926,
+    6.46492725610733
+   ],
+   "to": [
+    9.829533576965332,
+    6.298550605773926,
+    10.464927971363068
+   ],
+   "rotationOrigin": [
+    1.824533462524414,
+    5.298550605773926,
+    8.46492749452591
+   ],
+   "rotationX": 0.7655889137950006,
+   "rotationY": 0.6433681214046173,
+   "rotationZ": 40.04123268839105,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -1.3255618810653687,
+      8.0,
+      64.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      16.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      65.3255615234375,
+      12.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      16.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      48.0,
+      65.3255615234375,
+      64.00000047683716
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      24.0,
+      -1.3255622386932373,
+      8.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_012.001",
+   "from": [
+    -4.170465469360352,
+    3.298551082611084,
+    7.46492725610733
+   ],
+   "to": [
+    9.819534301757812,
+    7.298551082611084,
+    9.464927852153778
+   ],
+   "rotationOrigin": [
+    1.8245344161987305,
+    5.298551082611084,
+    8.46492749452591
+   ],
+   "rotationX": 0.7655635140290246,
+   "rotationY": 0.6433577693991565,
+   "rotationZ": 40.04121219782354,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -1.0075061321258545,
+      4.0,
+      62.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      7.999999046325684,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      63.00750732421875,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      63.00750732421875,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      62.0,
+      8.0,
+      -1.0075072050094604,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_013.001",
+   "from": [
+    0.47748279571533203,
+    3.8759227165179873,
+    13.20585213513958
+   ],
+   "to": [
+    4.477482795715332,
+    5.255096281074014,
+    14.585025699695606
+   ],
+   "rotationOrigin": [
+    2.477482795715332,
+    4.5216522216796875,
+    13.961410522460938
+   ],
+   "rotationX": 7.687589646713621,
+   "rotationY": -173.58521428388542,
+   "rotationZ": -39.61400777090134,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_014.001",
+   "from": [
+    1.5383391380310059,
+    2.6136824661528415,
+    12.623231422054133
+   ],
+   "to": [
+    5.538339138031006,
+    3.9928561992962166,
+    14.002405155197508
+   ],
+   "rotationOrigin": [
+    3.538339138031006,
+    3.2594120502471924,
+    13.378789901733398
+   ],
+   "rotationX": 22.148346629154144,
+   "rotationY": -162.4188521985334,
+   "rotationZ": -36.57833019428917,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_015.001",
+   "from": [
+    2.4314346313476562,
+    1.5510490306811953,
+    11.559606178718681
+   ],
+   "to": [
+    6.431434631347656,
+    2.930222595237222,
+    12.938779743274708
+   ],
+   "rotationOrigin": [
+    4.431434631347656,
+    2.1967785358428955,
+    12.315164566040039
+   ],
+   "rotationX": 38.40497549534987,
+   "rotationY": -152.43071140538692,
+   "rotationZ": -30.27765826987083,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_016.001",
+   "from": [
+    3.069347381591797,
+    0.7920396694141054,
+    10.119098051506157
+   ],
+   "to": [
+    7.069347381591797,
+    2.171213233970132,
+    11.498271616062183
+   ],
+   "rotationOrigin": [
+    5.069347381591797,
+    1.4377691745758057,
+    10.874656438827515
+   ],
+   "rotationX": 57.49813752762229,
+   "rotationY": -144.6702777911751,
+   "rotationZ": -20.225361509850412,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_017.001",
+   "from": [
+    3.389641761779785,
+    0.41094330634647847,
+    8.442698820549126
+   ],
+   "to": [
+    7.389641761779785,
+    1.790116870902505,
+    9.821872385105152
+   ],
+   "rotationOrigin": [
+    5.389641761779785,
+    1.0566728115081787,
+    9.198257207870483
+   ],
+   "rotationX": 79.597112134361,
+   "rotationY": -140.42147665569863,
+   "rotationZ": -6.671515337856892,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_018.001",
+   "from": [
+    3.360952854156494,
+    0.4450786479907656,
+    6.6945280274926375
+   ],
+   "to": [
+    7.360952854156494,
+    1.8242522125467922,
+    8.073701592048664
+   ],
+   "rotationOrigin": [
+    5.360952854156494,
+    1.0908081531524658,
+    7.450086414813995
+   ],
+   "rotationX": 102.97080494589918,
+   "rotationY": -140.68217131593968,
+   "rotationZ": 8.303320955106516,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_019.001",
+   "from": [
+    2.986095428466797,
+    0.8910954364734316,
+    5.045688017326469
+   ],
+   "to": [
+    6.986095428466797,
+    2.270269001029458,
+    6.424861581882496
+   ],
+   "rotationOrigin": [
+    4.986095428466797,
+    1.5368249416351318,
+    5.801246404647827
+   ],
+   "rotationX": -55.21767738263302,
+   "rotationY": -34.61680914768823,
+   "rotationZ": -158.46732821649255,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_020.001",
+   "from": [
+    2.301764965057373,
+    1.705332475308115,
+    3.6575920692556707
+   ],
+   "to": [
+    6.301764965057373,
+    3.08450620845149,
+    5.036765802399046
+   ],
+   "rotationOrigin": [
+    4.301764965057373,
+    2.351062059402466,
+    4.4131505489349365
+   ],
+   "rotationX": -36.474282507567786,
+   "rotationY": -26.547557067890757,
+   "rotationZ": -148.84397416653812,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_021.001",
+   "from": [
+    1.3749442100524902,
+    2.8080933065530047,
+    2.6661086654987116
+   ],
+   "to": [
+    5.37494421005249,
+    4.1872669554027055,
+    4.0452823143484125
+   ],
+   "rotationOrigin": [
+    3.3749442100524902,
+    3.4538228511810303,
+    3.4216670989990234
+   ],
+   "rotationX": -20.474361178685104,
+   "rotationY": -16.38237777145754,
+   "rotationZ": -142.93271864745887,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_022.001",
+   "from": [
+    0.2963600158691406,
+    4.091426807049448,
+    2.1682963482015936
+   ],
+   "to": [
+    4.296360015869141,
+    5.470600540192823,
+    3.5474700813449687
+   ],
+   "rotationOrigin": [
+    2.2963600158691406,
+    4.737156391143799,
+    2.9238548278808594
+   ],
+   "rotationX": -6.140705052075235,
+   "rotationY": -5.137291779505595,
+   "rotationZ": -140.2301767174249,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_023.001",
+   "from": [
+    -0.8284101486206055,
+    5.42971372319424,
+    2.2128825760211726
+   ],
+   "to": [
+    3.1715898513793945,
+    6.808887372043941,
+    3.5920562248708734
+   ],
+   "rotationOrigin": [
+    1.1715898513793945,
+    6.075443267822266,
+    2.9684410095214844
+   ],
+   "rotationX": 7.687593061808206,
+   "rotationY": 6.4147885906368,
+   "rotationZ": -140.3859733323929,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_024.001",
+   "from": [
+    -1.8892669677734375,
+    6.691954133045314,
+    2.795501289400079
+   ],
+   "to": [
+    2.1107330322265625,
+    8.071127781895015,
+    4.17467493824978
+   ],
+   "rotationOrigin": [
+    0.1107330322265625,
+    7.33768367767334,
+    3.5510597229003906
+   ],
+   "rotationX": 22.148309063113707,
+   "rotationY": 17.581188668916084,
+   "rotationZ": -143.4217328712751,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_025.001",
+   "from": [
+    -2.782362937927246,
+    7.754587647449611,
+    3.8591225719775935
+   ],
+   "to": [
+    1.217637062072754,
+    9.133761296299312,
+    5.238296220827294
+   ],
+   "rotationOrigin": [
+    -0.7823629379272461,
+    8.400317192077637,
+    4.614681005477905
+   ],
+   "rotationX": 38.40498915572821,
+   "rotationY": 27.569285065832965,
+   "rotationZ": -149.72237747493676,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_026.001",
+   "from": [
+    -3.4202804565429688,
+    8.513603763369566,
+    5.299636275175345
+   ],
+   "to": [
+    0.5797195434570312,
+    9.892777243631919,
+    6.6788097554376975
+   ],
+   "rotationOrigin": [
+    -1.4202804565429688,
+    9.159333229064941,
+    6.055194616317749
+   ],
+   "rotationX": 57.49814435781146,
+   "rotationY": 35.3297579536325,
+   "rotationZ": -159.77464008401134,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_027.001",
+   "from": [
+    -3.740572929382324,
+    8.894697623852426,
+    6.976027797805628
+   ],
+   "to": [
+    0.2594270706176758,
+    10.273871356995802,
+    8.355201530949003
+   ],
+   "rotationOrigin": [
+    -1.7405729293823242,
+    9.540427207946777,
+    7.731586277484894
+   ],
+   "rotationX": -100.40286555383865,
+   "rotationY": 140.42147665569863,
+   "rotationZ": 6.671502104365375,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_028.001",
+   "from": [
+    -3.711886405944824,
+    8.860563791652265,
+    8.724208219963188
+   ],
+   "to": [
+    0.2881135940551758,
+    10.239737356208291,
+    10.103381784519215
+   ],
+   "rotationOrigin": [
+    -1.7118864059448242,
+    9.506293296813965,
+    9.479766607284546
+   ],
+   "rotationX": -77.0291659121113,
+   "rotationY": 140.68217131593968,
+   "rotationZ": -8.303317540011932,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_029.001",
+   "from": [
+    2.6154613494873047,
+    7.140817256641995,
+    13.37564042544286
+   ],
+   "to": [
+    4.615461349487305,
+    8.519991248462581,
+    14.75481464977483
+   ],
+   "rotationOrigin": [
+    3.6154613494873047,
+    7.830404281616211,
+    14.065227508544922
+   ],
+   "rotationX": -6.140729384624154,
+   "rotationY": 174.86263724359623,
+   "rotationZ": -39.76981463115308,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_030.001",
+   "from": [
+    -1.9777393341064453,
+    3.280439706516873,
+    13.375640367315015
+   ],
+   "to": [
+    0.022260665893554688,
+    4.659613698337459,
+    14.75481464977483
+   ],
+   "rotationOrigin": [
+    -0.9777393341064453,
+    3.970026731491089,
+    14.065227508544922
+   ],
+   "rotationX": -6.140729384624154,
+   "rotationY": 174.86263724359623,
+   "rotationZ": -39.76981463115308,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_031.001",
+   "from": [
+    2.4843854904174805,
+    8.073901828850722,
+    13.977454864049783
+   ],
+   "to": [
+    4.4843854904174805,
+    9.453075652083939,
+    15.356628751206955
+   ],
+   "rotationOrigin": [
+    3.4843854904174805,
+    8.76348876953125,
+    14.667041778564453
+   ],
+   "rotationX": -12.884643873909535,
+   "rotationY": -125.40179504819221,
+   "rotationZ": 27.50269584406722,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-gear-passive_032.001",
+   "from": [
+    -2.874344825744629,
+    3.570125755394912,
+    13.977451049352517
+   ],
+   "to": [
+    -0.8743448257446289,
+    4.949299578628128,
+    15.35662493650969
+   ],
+   "rotationOrigin": [
+    -1.874344825744629,
+    4.2597126960754395,
+    14.667037963867188
+   ],
+   "rotationX": -12.884643873909535,
+   "rotationY": -125.40179504819221,
+   "rotationZ": 27.50269584406722,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      1.6689300537109375e-06,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_001.001",
+   "from": [
+    0.5410652446746766,
+    2.6068136990070343,
+    1.7271458581090187
+   ],
+   "to": [
+    1.5310649585723937,
+    3.6068136394023895,
+    3.9771456047892855
+   ],
+   "rotationOrigin": [
+    1.0360651016235352,
+    3.106813669204712,
+    2.8521461486816406
+   ],
+   "rotationX": -57.73424350685129,
+   "rotationY": 138.71360151411528,
+   "rotationZ": 46.26381506002864,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      48.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      8.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      9.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      11.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_002.001",
+   "from": [
+    4.648888321518907,
+    1.755747139453888,
+    -2.145235478877993
+   ],
+   "to": [
+    5.638888625502577,
+    2.7557470202445984,
+    2.8547636866570087
+   ],
+   "rotationOrigin": [
+    5.143888473510742,
+    2.255747079849243,
+    0.354764461517334
+   ],
+   "rotationX": 18.748549960341304,
+   "rotationY": 122.70139779755763,
+   "rotationZ": -15.940727494440761,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      37.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      20.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999997615814209,
+      -2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.000002861022949,
+      0.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_003.001",
+   "from": [
+    7.851390628814691,
+    3.4320316910743713,
+    -3.592220306396456
+   ],
+   "to": [
+    8.841390342712408,
+    4.432031571865082,
+    0.4077788591385598
+   ],
+   "rotationOrigin": [
+    8.34639048576355,
+    3.9320316314697266,
+    -1.5922203063964844
+   ],
+   "rotationX": 58.23837293930076,
+   "rotationY": -40.88696720198954,
+   "rotationZ": 46.595086064963425,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      42.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_004.001",
+   "from": [
+    4.643716307282457,
+    1.3216268122196198,
+    -0.015596315191203303
+   ],
+   "to": [
+    5.633716434240341,
+    2.321626752614975,
+    2.4856360405683873
+   ],
+   "rotationOrigin": [
+    5.138716459274292,
+    1.8216267824172974,
+    1.2356367111206055
+   ],
+   "rotationY": 31.297801663925593,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.000009536743164,
+      10.0,
+      28.000015258789062,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      41.99999809265137,
+      28.000003814697266,
+      52.00492763519287
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      5.995063781738281,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999998092651367,
+      2.0000038146972656,
+      7.999999046325684,
+      12.004924774169922
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.000000953674316,
+      14.004920959472656,
+      6.000002861022949,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_005.001",
+   "from": [
+    -0.0031549817322442664,
+    3.2973575294017827,
+    0.15693971068924384
+   ],
+   "to": [
+    0.9868459117412698,
+    4.29735758900642,
+    3.709075212759153
+   ],
+   "rotationOrigin": [
+    0.49184608459472656,
+    3.7973575592041016,
+    3.1830077171325684
+   ],
+   "rotationY": 31.297801663925593,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      23.99998664855957,
+      10.000003814697266,
+      27.999980926513672,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      54.000000953674316,
+      28.000003814697266,
+      67.50447297096252
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.000003814697266,
+      -9.504470825195312,
+      28.0,
+      3.9999923706054688
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      14.000007629394531,
+      8.000004768371582,
+      27.504470825195312
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      9.999994277954102,
+      29.504470825195312,
+      6.0,
+      16.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_006.001",
+   "from": [
+    1.8993111251945862,
+    1.6573622226715088,
+    1.0235668420791626
+   ],
+   "to": [
+    2.898607194507562,
+    2.657362222671509,
+    3.023566722869873
+   ],
+   "rotationOrigin": [
+    2.398959159851074,
+    2.157362222671509,
+    2.0235671997070312
+   ],
+   "rotationX": -39.48597245981487,
+   "rotationY": 128.2286737418771,
+   "rotationZ": 32.9122090818119,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      50.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      10.000003814697266,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      12.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_007.001",
+   "from": [
+    8.57882931709289,
+    1.398147851228714,
+    -1.8657687231898095
+   ],
+   "to": [
+    9.568829030990607,
+    2.398147791624069,
+    0.38423102349045735
+   ],
+   "rotationOrigin": [
+    9.073829174041748,
+    1.8981478214263916,
+    -0.7407684326171875
+   ],
+   "rotationX": 67.35707163223965,
+   "rotationY": -46.492322453806,
+   "rotationZ": 60.09491397835861,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      48.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      8.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      9.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      11.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_008.001",
+   "from": [
+    4.063480110764512,
+    0.5470812916755676,
+    -1.590691506862612
+   ],
+   "to": [
+    5.053480414748183,
+    1.547081172466278,
+    3.4093076586723896
+   ],
+   "rotationOrigin": [
+    4.558480262756348,
+    1.0470812320709229,
+    0.9093084335327148
+   ],
+   "rotationX": -27.190446915970917,
+   "rotationY": -67.66531806948232,
+   "rotationZ": -25.41610549602688,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      37.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      20.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999997615814209,
+      -2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.000002861022949,
+      0.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_009.001",
+   "from": [
+    0.5432653713226259,
+    2.223365843296051,
+    0.19572830200198155
+   ],
+   "to": [
+    1.5332650852203429,
+    3.2233657240867615,
+    4.195727467536997
+   ],
+   "rotationOrigin": [
+    1.0382652282714844,
+    2.7233657836914062,
+    2.195728302001953
+   ],
+   "rotationX": -67.75284694369603,
+   "rotationY": 133.9862363442527,
+   "rotationZ": 60.38083252720451,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      42.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_010.001",
+   "from": [
+    4.7548569488525345,
+    0.11296486854553223,
+    0.20516550540924072
+   ],
+   "to": [
+    5.744857666492464,
+    1.1129648685455322,
+    2.7063984870910645
+   ],
+   "rotationOrigin": [
+    5.249857425689697,
+    0.6129648685455322,
+    1.4551658630371094
+   ],
+   "rotationY": -159.92576484958704,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.000009536743164,
+      10.0,
+      28.000015258789062,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      41.995065689086914,
+      28.000001907348633,
+      51.99999809265137
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      6.0,
+      28.000001907348633,
+      16.004928588867188
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      1.9950714111328125,
+      7.999999523162842,
+      11.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.000000953674316,
+      13.999996185302734,
+      6.000001907348633,
+      3.9950714111328125
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_011.001",
+   "from": [
+    9.177040340304394,
+    2.0886916816234624,
+    -1.485445756484097
+   ],
+   "to": [
+    10.16704028964044,
+    3.0886917412281,
+    2.066689965078524
+   ],
+   "rotationOrigin": [
+    9.672040462493896,
+    2.5886917114257812,
+    -0.9593772888183594
+   ],
+   "rotationY": -159.92576484958704,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      23.999996185302734,
+      44.495527267456055,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0000057220459,
+      13.50445556640625
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.000001430511475,
+      4.49554443359375,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      5.999998092651367,
+      6.495536804199219
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-l_012.001",
+   "from": [
+    7.070836126720465,
+    0.4486963152885437,
+    -1.207654356956482
+   ],
+   "to": [
+    8.070132196033441,
+    1.4486963152885437,
+    0.7923455238342285
+   ],
+   "rotationOrigin": [
+    7.570484161376953,
+    0.9486963152885437,
+    -0.20765399932861328
+   ],
+   "rotationX": 51.27317825015354,
+   "rotationY": -59.70949323368396,
+   "rotationZ": 47.116799819431094,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      50.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      10.000003814697266,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      12.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_001.001",
+   "from": [
+    7.863910286426538,
+    5.072963744401932,
+    -1.9903901144861962
+   ],
+   "to": [
+    8.853910000324255,
+    6.072963684797287,
+    0.2596096321940706
+   ],
+   "rotationOrigin": [
+    8.358910143375397,
+    5.572963714599609,
+    -0.8653898239135742
+   ],
+   "rotationX": 72.7977066269375,
+   "rotationY": -31.807712851507482,
+   "rotationZ": 63.93441602782207,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      48.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      8.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      9.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      11.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_002.001",
+   "from": [
+    3.7921533304452986,
+    3.016182005405426,
+    -1.6258844733237936
+   ],
+   "to": [
+    4.782153634428969,
+    4.0161818861961365,
+    3.374114692211208
+   ],
+   "rotationOrigin": [
+    4.287153482437134,
+    3.5161819458007812,
+    0.8741154670715332
+   ],
+   "rotationX": 12.796052905279884,
+   "rotationY": -67.32462823368209,
+   "rotationZ": 14.392011128444343,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      37.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      20.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999997615814209,
+      -2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.000002861022949,
+      0.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_003.001",
+   "from": [
+    0.022082357406610242,
+    3.671541750431061,
+    0.36199140548708897
+   ],
+   "to": [
+    1.0120820713043273,
+    4.671541631221771,
+    4.361990571022105
+   ],
+   "rotationOrigin": [
+    0.5170822143554688,
+    4.171541690826416,
+    2.3619914054870605
+   ],
+   "rotationX": -52.85325030708219,
+   "rotationY": 122.1136873402347,
+   "rotationZ": 45.377789260516245,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      42.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_004.001",
+   "from": [
+    4.034759940505026,
+    2.6824634075164795,
+    -1.2682957649230957
+   ],
+   "to": [
+    5.024760127067566,
+    3.6824634075164795,
+    1.232937216758728
+   ],
+   "rotationOrigin": [
+    4.529760122299194,
+    3.1824634075164795,
+    -0.01706218719482422
+   ],
+   "rotationX": -2.7453682833470032,
+   "rotationY": -158.07378637689476,
+   "rotationZ": -15.928721729427172,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.000009536743164,
+      10.0,
+      28.000015258789062,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      41.99999809265137,
+      28.000001907348633,
+      52.004929542541504
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      5.995063781738281,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999998092651367,
+      2.0000038146972656,
+      8.0,
+      12.004928588867188
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.000000953674316,
+      14.004920959472656,
+      6.000002861022949,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_005.001",
+   "from": [
+    8.256251167655115,
+    5.903258770704273,
+    -4.0893824443095355
+   ],
+   "to": [
+    9.24625206112863,
+    6.903258830308911,
+    -0.5372469422396264
+   ],
+   "rotationOrigin": [
+    8.751252233982086,
+    6.403258800506592,
+    -1.063314437866211
+   ],
+   "rotationX": -2.7453682833470032,
+   "rotationY": -158.07378637689476,
+   "rotationZ": -15.928721729427172,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      23.99998664855957,
+      10.000003814697266,
+      27.999980926513672,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      54.000000953674316,
+      28.000003814697266,
+      67.50447297096252
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.000003814697266,
+      -9.504470825195312,
+      28.0,
+      3.9999923706054688
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      14.000007629394531,
+      8.000004768371582,
+      27.504470825195312
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      9.999994277954102,
+      29.504470825195312,
+      6.0,
+      16.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_006.001",
+   "from": [
+    6.678166031753577,
+    3.7465553283691406,
+    -1.325818419456482
+   ],
+   "to": [
+    7.677462101066553,
+    4.746555328369141,
+    0.6741814613342285
+   ],
+   "rotationOrigin": [
+    7.177814066410065,
+    4.246555328369141,
+    -0.3258180618286133
+   ],
+   "rotationX": 62.57712083595713,
+   "rotationY": -46.04679262934065,
+   "rotationZ": 57.45230695829151,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      50.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      10.000003814697266,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      12.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_007.001",
+   "from": [
+    -1.1296004962921202,
+    2.111919194459915,
+    -0.38460903614757314
+   ],
+   "to": [
+    -0.1396007823944032,
+    3.1119191348552704,
+    1.8653907105326937
+   ],
+   "rotationOrigin": [
+    -0.6346006393432617,
+    2.6119191646575928,
+    0.7403912544250488
+   ],
+   "rotationX": 65.12270501886421,
+   "rotationY": 68.65619410294359,
+   "rotationZ": -123.6075180136082,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      48.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      8.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      9.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      11.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_008.001",
+   "from": [
+    3.558408947587022,
+    1.8365455269813538,
+    -3.0945824980735495
+   ],
+   "to": [
+    4.548409251570693,
+    2.836545407772064,
+    1.905416667461452
+   ],
+   "rotationOrigin": [
+    4.053409099578857,
+    2.336545467376709,
+    -0.5945825576782227
+   ],
+   "rotationX": 15.114622944516888,
+   "rotationY": 123.29442214205481,
+   "rotationZ": -68.4700782782499,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      37.99999809265137,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.000001907348633,
+      20.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999997615814209,
+      -2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.000002861022949,
+      0.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_009.001",
+   "from": [
+    6.376209883689874,
+    2.9635608792304993,
+    -5.359822273254366
+   ],
+   "to": [
+    7.366209597587591,
+    3.9635607600212097,
+    -1.3598231077193503
+   ],
+   "rotationOrigin": [
+    6.871209740638733,
+    3.4635608196258545,
+    -3.3598222732543945
+   ],
+   "rotationX": 27.102535551163683,
+   "rotationY": -27.940722705729307,
+   "rotationZ": 76.8184135950814,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      42.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      16.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      2.0,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_010.001",
+   "from": [
+    3.1413334906101227,
+    0.9536265432834625,
+    -1.7400639504194046
+   ],
+   "to": [
+    4.131333676576602,
+    1.9536264836788177,
+    0.7611686437587508
+   ],
+   "rotationOrigin": [
+    3.636333465576172,
+    1.4536265134811401,
+    -0.4900636672973633
+   ],
+   "rotationX": -56.634951880694416,
+   "rotationY": 11.621959608653972,
+   "rotationZ": 21.42133104861423,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.000009536743164,
+      10.0,
+      28.000015258789062,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.000001907348633,
+      41.995065689086914,
+      28.000001907348633,
+      51.99999809265137
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      6.0,
+      28.0,
+      16.004932403564453
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      3.999998092651367,
+      1.9950714111328125,
+      7.999999523162842,
+      11.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.000000953674316,
+      13.999996185302734,
+      6.000003814697266,
+      3.995067596435547
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_011.001",
+   "from": [
+    -1.9573862534761233,
+    2.479726999998096,
+    -0.03465773539645056
+   ],
+   "to": [
+    -0.9673863041400779,
+    3.479727059602734,
+    3.5174779861661705
+   ],
+   "rotationOrigin": [
+    -1.462386131286621,
+    2.979727029800415,
+    0.4914107322692871
+   ],
+   "rotationX": -56.634951880694416,
+   "rotationY": 11.621959608653972,
+   "rotationZ": 21.42133104861423,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      23.999996185302734,
+      44.495527267456055,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0000057220459,
+      13.50445556640625
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.000001430511475,
+      4.49554443359375,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      5.999998092651367,
+      6.495536804199219
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-leveler-r_012.001",
+   "from": [
+    0.6628537773247132,
+    1.650526523590088,
+    -0.20263946056365967
+   ],
+   "to": [
+    1.6621498466376892,
+    2.650526523590088,
+    1.7973604202270508
+   ],
+   "rotationOrigin": [
+    1.1625018119812012,
+    2.150526523590088,
+    0.797360897064209
+   ],
+   "rotationX": -65.2610300099353,
+   "rotationY": 101.75123368845838,
+   "rotationZ": 8.44785373435951,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      10.0,
+      28.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      50.0,
+      28.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      44.0,
+      28.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      24.0,
+      0.0,
+      28.0,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      4.0,
+      10.000003814697266,
+      8.0,
+      18.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      10.0,
+      20.0,
+      6.0,
+      12.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_001.001",
+   "from": [
+    0.49167394638061523,
+    10.840521812438965,
+    1.6977081298828125
+   ],
+   "to": [
+    9.85834264755249,
+    12.840521812438965,
+    5.69770872592926
+   ],
+   "rotationOrigin": [
+    10.853342533111572,
+    11.840521812438965,
+    3.697709083557129
+   ],
+   "rotationX": 1.3660381596913497e-05,
+   "rotationY": 5.75741935176563e-13,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      20.0,
+      8.0,
+      64.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.768371127283899e-06,
+      12.0,
+      15.999999046325684,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      4.0,
+      42.0,
+      12.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      15.99999713897705,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      48.0,
+      42.0,
+      64.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      24.0,
+      20.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_002.001",
+   "from": [
+    0.48396825790405273,
+    9.840520858764648,
+    2.6977081298828125
+   ],
+   "to": [
+    9.848342418670654,
+    13.840520858764648,
+    4.697708785533905
+   ],
+   "rotationOrigin": [
+    10.853342533111572,
+    11.840520858764648,
+    3.697709083557129
+   ],
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      4.0,
+      64.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.291533514333423e-06,
+      0.0,
+      7.999998569488525,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      42.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      7.999997138977051,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      42.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      8.0,
+      22.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_003.001",
+   "from": [
+    10.214732646942139,
+    -3.2881810665130615,
+    0.6317481994628906
+   ],
+   "to": [
+    11.214732646942139,
+    4.71181845664978,
+    8.631747722625732
+   ],
+   "rotationOrigin": [
+    10.714732646942139,
+    0.7118186950683594,
+    4.6317479610443115
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      4.0,
+      32.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_004.001",
+   "from": [
+    10.214732885360718,
+    -3.1881823539733887,
+    0.6317493915557861
+   ],
+   "to": [
+    11.214732885360718,
+    4.811816692352295,
+    8.63174843788147
+   ],
+   "rotationOrigin": [
+    10.714732646942139,
+    0.8118171691894531,
+    4.631748914718628
+   ],
+   "rotationX": -1.7457614992454598e-05,
+   "rotationY": 112.49995702682081,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      6.0,
+      18.0,
+      28.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      30.0,
+      24.0,
+      62.0,
+      56.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      16.0,
+      4.0,
+      38.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      26.0,
+      32.0,
+      58.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      4.0,
+      38.0,
+      0.0,
+      16.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_005.001",
+   "from": [
+    10.446564674377441,
+    2.604710621065294,
+    -0.25635953503211795
+   ],
+   "to": [
+    14.446564674377441,
+    4.018923717313612,
+    1.1578535612162
+   ],
+   "rotationOrigin": [
+    12.446564674377441,
+    3.311817169189453,
+    0.450747013092041
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_006.001",
+   "from": [
+    12.89573621749878,
+    2.604710621065294,
+    5.656467122263109
+   ],
+   "to": [
+    16.89573621749878,
+    4.018923717313612,
+    7.070680218511427
+   ],
+   "rotationOrigin": [
+    14.89573621749878,
+    3.311817169189453,
+    6.363573670387268
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_007.001",
+   "from": [
+    6.98290878534317,
+    2.604710621065294,
+    8.105638307756578
+   ],
+   "to": [
+    10.98290878534317,
+    4.018923717313612,
+    9.519851404004896
+   ],
+   "rotationOrigin": [
+    8.98290878534317,
+    3.311817169189453,
+    8.812744855880737
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_008.001",
+   "from": [
+    12.895737171173096,
+    2.7118192017078115,
+    2.3999219238758087
+   ],
+   "to": [
+    16.895737171173096,
+    3.7118191421031668,
+    3.399921864271164
+   ],
+   "rotationOrigin": [
+    14.895737171173096,
+    3.2118186950683594,
+    2.8999218940734863
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_009.001",
+   "from": [
+    10.446558952331543,
+    2.7118192017078115,
+    8.31274810433385
+   ],
+   "to": [
+    14.446558952331543,
+    3.7118191421031668,
+    9.312748044729204
+   ],
+   "rotationOrigin": [
+    12.446558952331543,
+    3.2118186950683594,
+    8.812747597694397
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_010.001",
+   "from": [
+    4.5337371826171875,
+    2.604710621065294,
+    2.1928115312520617
+   ],
+   "to": [
+    8.533737182617188,
+    4.018923717313612,
+    3.6070246275003797
+   ],
+   "rotationOrigin": [
+    6.5337371826171875,
+    3.311817169189453,
+    2.8999180793762207
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#0",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_011.001",
+   "from": [
+    6.982906937599182,
+    2.7118187248706818,
+    -0.04925772547721863
+   ],
+   "to": [
+    10.982906937599182,
+    3.711818665266037,
+    0.9507422149181366
+   ],
+   "rotationOrigin": [
+    8.982906937599182,
+    3.2118186950683594,
+    0.450742244720459
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-maingear-active_012.001",
+   "from": [
+    4.533728718757629,
+    2.7118187248706818,
+    5.863572150468798
+   ],
+   "to": [
+    8.53372871875763,
+    3.711818665266037,
+    6.863572090864153
+   ],
+   "rotationOrigin": [
+    6.533728718757629,
+    3.2118186950683594,
+    6.363571643829346
+   ],
+   "rotationX": 1.1536097572717248e-05,
+   "rotationY": 157.499982184722,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drive-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      4.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      16.0,
+      4.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      0.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  }
+ ],
+ "groups": []
+}

@@ -1,0 +1,74 @@
+{
+	code: "chopperhead",
+	// The axe/maul HEAD `chopperhead-{metal}` — the chopper's WEAR-tier consumable, the analogue of the sawmill's
+	// blade kit `sawmillblade-{metal}`. One non-stackable item per metal, RMB-installed into the arm at assembly
+	// (E03/T03.07) and removed with Ctrl+RMB (the only removable part). The metal is the WEAR tier (native
+	// durability), NOT a speed tier — the chop pace is set by the drive RPM × ChopperStepsPerLog; the metal only
+	// sets how many logs the head lasts (memory: T02.01).
+	maxstacksize: 1,
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	// Native VS durability = the SINGLE source of truth for the head's resource (T01.02 — NO C# mirror table). The
+	// engine draws the slot bar (once damaged) and the "Durability: X / Y" tooltip/handbook line for free
+	// (GetMaxDurability > 1). NO `tool` tag on purpose: the bar needs only `durability`, and a tool tag would make
+	// the head interchangeable with an axe in code/tag-pinned recipe slots and captured by tinkering mods (memory
+	// vs-recipe-ingredient-code-vs-tags). Values = the VANILLA felling-axe table 1:1 (survival axe-metal.json),
+	// user decision 2026-07-02: the head IS an axe head, so it wears like one. At ChopperHeadWearMultiplier=1 the
+	// number IS logs-per-head. One whole log chopped = 1 point spent (BlockEntityChopper.DamageHead, E06/T06.05).
+	// This JSON is the ONLY place to retune per-metal life — raise a value to make that tier last longer.
+	durabilitybytype: {
+		"chopperhead-gold": 125,
+		"chopperhead-silver": 125,
+		"chopperhead-copper": 250,
+		"chopperhead-tinbronze": 400,
+		"chopperhead-bismuthbronze": 500,
+		"chopperhead-blackbronze": 600,
+		"chopperhead-iron": 900,
+		"chopperhead-meteoriciron": 1200,
+		"chopperhead-steel": 1800
+	},
+	shape: { base: "immersivewoodworking:item/chopper/head" },
+	// Two-handed carry in third person, like the frame and the other chopper parts (user decision 2026-07-05: ALL chopper
+	// parts held two-handed). This DIVERGES from the sawmill's head analogue (sawmillblade is one-handed on purpose — a
+	// compact kit): the chopper head is carried two-handed for consistency with the rest of the chopper set. ONLY the idle
+	// hold pose (no block-placement anims). Hand/ground transforms calibrate later (item-scale).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// Per-metal texture keyed "metal" so the render (E07/T07.01 ITexPositionSource["metal"]) shows the tier; "game:"
+	// required. {metal} follows the variant.
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (shared part key; mirrors sawmillblade).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:chopperpart-handbook-title", text: "immersivewoodworking:chopperpart-handbook-text" }
+			]
+		}
+	},
+	// Hand / ground / GUI transforms — calibrated in-game via .tfedit (2026-07-05, T07.06 held-item pass); tp is against
+	// the two-handed holdbothhandslarge pose set above. Shared across all 9 metal variants (transforms are not
+	// per-variant). `rotate: false` is kept on gui so the inventory icon does not slow-spin: a plain Item defaults its
+	// unspecified ModelTransform.Rotate to TRUE (no merge with ItemDefaultGui). Rotation is explicit because a plain
+	// Item's ItemDefaultGui is flat (0,0,0) — see memory vs-partial-guitransform-no-merge.
+	tpHandTransform: {
+		translation: { x: -0.8, y: -0.65, z: -0.275 },
+		rotation: { x: -40, y: 21, z: -92 },
+		scale: 0.89
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.1, z: 0 },
+		rotation: { x: 91, y: 0, z: 46 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 3.39
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 3, y: -16, z: 0 },
+		rotation: { x: -22.6, y: -24, z: -180 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 2.75
+	}
+}

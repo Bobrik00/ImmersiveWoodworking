@@ -1,0 +1,12 @@
+{
+	"_comment": "IW registers 4 abilities into the xSkills `forestry` skill. Base xLib/xSkills GUI reads Ability.DisplayName (which IW sets from immersivewoodworking:ability-*), but the xSkills Gilded GUI resolves ability labels via the xskills-domain key `xskills:ability-<name>` instead. VS merges lang files per DOMAIN across mods, so shipping these xskills-domain keys from IW makes the Gilded GUI show real names/descriptions for IW's abilities instead of raw keys. Kept identical to the immersivewoodworking-domain copies; {0}/{1}/{2} = ability values (start/perLevel/cap), formatted by xLib.",
+
+	"ability-sawyer": "Sawyer",
+	"abilitydesc-sawyer": "Increases the yield of planks and beams from sawing logs by {0}% and additional {1}% for each level at the forestry skill. Maxed out at {2}%.",
+	"ability-carefulsawyer": "Careful Sawyer",
+	"abilitydesc-carefulsawyer": "Sawing or debarking a log has a chance of {0}% and additional {1}% for each level at the forestry skill to not reduce the durability of your saw or bark tool. The chance is capped at {2}%.",
+	"ability-splitter": "Splitter",
+	"abilitydesc-splitter": "Increases the yield of firewood from splitting logs by {0}% and additional {1}% for each level at the forestry skill. Maxed out at {2}%.",
+	"ability-swifthands": "Swift Hands",
+	"abilitydesc-swifthands": "Speeds up your rip-sawing on the sawhorses and your axe chopping by {0}% plus an additional {1}% for each forestry level, up to {2}%."
+}

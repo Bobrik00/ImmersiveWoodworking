@@ -1,0 +1,36 @@
+{
+	code: "sawmill-ghost",
+	class: "iw-sawmill-ghost",
+	entityClass: "iw-sawmill-multiblock",
+	// Invisible ghost-filler for the non-master cells of the sawmill's footprint (currently 18 fillers around the
+	// master) — the mod's analogue of
+	// vanilla `mppulverizertop` (class BlockMPMultiblockPulverizer). It is NEVER hand-placed: the placed
+	// `sawmill-frame` captures its footprint and SetBlocks these fillers (stamping each one's Principal) in T03.03,
+	// so there is deliberately no `creativeinventory` entry. Its only jobs are to occupy space (collision below) and
+	// route every player click/break to the master via BEMultiblockSawmill.Principal (see BlockSawmillGhost).
+	//
+	// `game:` prefixes are REQUIRED on every vanilla ref (shape + sounds): an unqualified path resolves to THIS
+	// mod's domain and would 404 (memory vs-mod-asset-path-domain). `block/basic/nothing` is the engine's empty
+	// shape → the block is invisible; with no texture of its own, BlockSawmillGhost overrides GetRandomColor /
+	// GetParticleBreakBox to borrow the master's so break particles aren't black.
+	shape: { base: "game:block/basic/nothing" },
+	blockmaterial: "Wood",
+	drops: [],
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	rainPermeable: true,
+	resistance: 3.5,
+	lightAbsorption: 0,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	// Full-cube collision/selection FALLBACK. As of T03.02 the live boxes are the per-cell-clamped footprint slices
+	// routed through the master BE (BlockSawmillGhost.GetCollisionBoxes → BEMultiblockSawmill.Principal → master), so
+	// the multiblock is solid from every side without tunnelling; these JSON cubes apply only when the master BE is
+	// unreachable (orphaned filler, or before T03.03 stamps Principal) — still solid, so never a hole either way.
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

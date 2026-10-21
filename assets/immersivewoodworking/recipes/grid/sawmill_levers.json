@@ -1,0 +1,26 @@
+{
+	// Grid recipe (T02.05) — the feed LEVERS `sawmilllevers` (rychagi): the ratchet linkage that advances the carriage
+	// (REPLACES the retired sawmillfeed). Mandatory part. NO bronze cap (mechanical power is the gate, decision
+	// 2026-06-19).
+	//   P N P     P = plank (game:plank-*)
+	//   _ N _     N = nails (game:metalnailsandstrips-*)
+	//   _ L _     L = metal plate (game:metalplate-*) — bottom-CENTRE (interpretation of the user's "Plate" row)
+	// game:-prefix (vs-mod-asset-path-domain); wildcard by CODE (vs-recipe-ingredient-code-vs-tags). The `name` keys only
+	// label which cells are one material, they force nothing: cell binding is the RecipeLoader's per-variant expansion,
+	// and this enabled:false template is registered from C# instead, which never expands (AuditFixPlan T10.02). So the
+	// two nail cells may be different metals just as the nails and the plate may, and the two planks may be different
+	// woods — accepted by design, since the output bakes neither species nor metal.
+	// enabled:false → now a TEMPLATE: RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterSawmillRecipes
+	// re-registers it once per discovered wood DOMAIN, re-pointing the P (plank) slot to {domain}:plank-* so a wood
+	// mod's own-domain planks craft it. The game-domain recipe is registered from this same template (vanilla unchanged).
+	enabled: false,
+	ingredientPattern: "PNP,_N_,_L_",
+	ingredients: {
+		"P": { type: "item", code: "game:plank-*",               name: "wood" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*", name: "metal" },
+		"L": { type: "item", code: "game:metalplate-*",          name: "plate" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "sawmilllevers", quantity: 1 }
+}

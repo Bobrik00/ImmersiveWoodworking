@@ -1,0 +1,58 @@
+{
+	// BARKBREW DECOCTION (BarkPlan/E05, T05.03) — the medicinal-bark AGENT for poultices, delivered as a boiled LIQUID
+	// (user decision D30: "a decoction cooked on a firepit", not raw bark in the grid). Medicinal bark + water simmer in a
+	// clay pot on a firepit into this portion (recipes/cooking/barkbrew.json), then a bowl of it is spread on a bandage
+	// material as the third poultice AGENT `bark-medicinal` (poultice-{material}-bark-medicinal, T05.05) — exactly the way
+	// vanilla honey (honeyportion) is the honey-sulfur agent. NAMING (user): the intermediate LIQUID is `barkbrew`, the
+	// finished poultice AGENT is `bark-medicinal`.
+	//
+	// Straight clone of the vanilla liquid-portion idiom (glueportion / weaktanninportion / oilportion): class
+	// ItemLiquidPortion + matterState liquid + waterTightContainerProps, so it pours into bowls/buckets and is consumed by
+	// a grid recipe's liquidContainerProps like any vanilla liquid. It does NOT harden (unlike glueportion) — a decoction
+	// is a stable brew — so there is no transitionableProps.
+	//
+	// TEXTURE (user decision: "vanilla brown liquid, like tannin but a touch more reddish/saturated — no separate texture
+	// needed"): the more-saturated vanilla game:block/liquid/strongtannin, reused by reference (zero new files). game:
+	// assets are domain-qualified (this file is in the immersivewoodworking domain — memory vs-mod-asset-path-domain); our
+	// own barkbrew stays bare.
+	code: "barkbrew",
+	class: "ItemLiquidPortion",
+	matterState: "liquid",
+	attributes: {
+		// ignoreCreativeInvStacks so the page is the PORTION, not the bucket its creative stack ships in. extraSections
+		// added in AuditFixPlan/T08.04 (F-L7-15): the page carried no prose at all, so nothing told the player the
+		// decoction is simmered rather than found.
+		handbook: {
+			ignoreCreativeInvStacks: true,
+			extraSections: [
+				{ title: "immersivewoodworking:barkbrew-handbook-title", text: "immersivewoodworking:barkbrew-handbook-text" }
+			]
+		},
+		waterTightContainerProps: {
+			containable: true,
+			itemsPerLitre: 100,
+			texture: { base: "game:block/liquid/strongtannin" },
+			allowSpill: true,
+			whenSpilled: {
+				action: "DropContents",
+				stack: { type: "item", code: "barkbrew" }
+			}
+		}
+	},
+	shape: { base: "game:item/liquid" },
+	texture: { base: "game:block/liquid/strongtannin" },
+	creativeinventoryStacks: [
+		{ tabs: ["general", "liquids"], stacks: [ { type: "block", code: "game:woodbucket", attributes: { ucontents: [ { type: "item", code: "immersivewoodworking:barkbrew", makefull: true } ] } } ] }
+	],
+	maxstacksize: 5000,
+	materialDensity: 200,
+	guiTransform: {
+		translation: { x: 0, y: 1, z: 0 },
+		rotation: { x: 123, y: -33, z: -13 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 1.4
+	},
+	tpHandTransform: {
+		translation: { x: -1.5, y: -1, z: -1.4 }
+	}
+}

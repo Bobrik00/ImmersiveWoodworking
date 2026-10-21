@@ -1,0 +1,37 @@
+[
+	// ============================================================================================================
+	// TAR GLUE (BarkPlan/E04, T04.07, decision D27) — let birch tar stand in for resin in the vanilla glue recipe:
+	// 2 barktar + 2 powder-charcoal cook into the SAME vanilla glueportion-pitch-hot, which hardens to -cold as usual.
+	// This is the mesolithic hafting glue (birch tar + charcoal filler) and the ONE resin recipe with no fat/wax
+	// alternative, so it is the most valuable piece of the resin substitution.
+	//
+	// WHY A validStacks-ADD, NOT the `pitch` TAG used by grid recipes (engine-verified against vssurvivalmod source):
+	//   Cooking recipes CANNOT match by tag. CookingRecipeStack extends JsonItemStack and has NO Tags field
+	//   (CookingRecipeIngredient.cs:15); CookingRecipeIngredient.GetMatchingStack (CookingRecipeIngredient.cs:228)
+	//   matches ONLY by (a) wildcard Code path, (b) exact ItemStack.Equals against the resolved stack, or (c) CookedStack.
+	//   There is no tag branch anywhere in the cooking match path. So the T04.06 tag approach (patches/tar_as_resin.json)
+	//   is impossible here — barktar must be matched by CODE. Unlike allowedVariants/wildcards (the D26 domain trap),
+	//   an EXACT code match is domain-correct: ItemStack.Equals compares the resolved collectible, and both the input
+	//   and the resolved validStack are immersivewoodworking:barktar. We therefore WIDEN the resin ingredient's
+	//   validStacks with barktar rather than duplicating the whole recipe (chosen over a separate glue-tar.json to
+	//   avoid a second "how to cook glue" handbook entry — the same no-duplicate principle as T04.06/D26).
+	//
+	// WHY FULLY-QUALIFIED `immersivewoodworking:barktar`:
+	//   A JSONPatch value is injected into the TARGET file (game:recipes/cooking/glue.json) and then deserialized with
+	//   the TARGET file's domain by RecipeRegistrySystem.loadRecipe (RecipeRegistrySystem.cs:202; ToObject(loc.Domain)
+	//   at :204, loc.Domain = "game"). An unqualified "barktar" would resolve to game:barktar (nonexistent). So it must be
+	//   spelled out. (resin, powder-charcoal, glueportion-pitch-* stay unqualified in the vanilla file — they ARE game.)
+	//
+	// NON-CLOBBERING APPEND: `/-` adds barktar AFTER the existing resin stack, so resin still works (DoD) and any future
+	// vanilla/other-mod validStack on this ingredient survives. Array-index pinning: path /0 = glueportion-pitch-hot
+	// (the FIRST of glue.json's two recipes; index 1 is the cold->hot remelt, untouched), /ingredients/0 = the resin
+	// slot (index 1 is powder-charcoal, untouched). Verified against 1.20 survival assets; re-verify if a game update
+	// reorders glue.json.
+	// ============================================================================================================
+	{
+		"file": "game:recipes/cooking/glue.json",
+		"op": "add",
+		"path": "/0/ingredients/0/validStacks/-",
+		"value": { "type": "item", "code": "immersivewoodworking:barktar" }
+	}
+]

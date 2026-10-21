@@ -1,0 +1,12 @@
+{
+	"_comment": "See en.json in this folder. These xskills-domain keys make the xSkills Gilded GUI display IW's forestry abilities with real names/descriptions (Gilded resolves xskills:ability-<name> rather than Ability.DisplayName). Identical to the immersivewoodworking-domain copies.",
+
+	"ability-sawyer": "Пильщик",
+	"abilitydesc-sawyer": "Увеличивает выход досок и балок при распиле брёвен на {0}%, плюс ещё на {1}% за каждый уровень навыка лесничества. Максимальное значение: {2}%.",
+	"ability-carefulsawyer": "Аккуратный пильщик",
+	"abilitydesc-carefulsawyer": "Распил или обдирка бревна с шансом {0}% (плюс ещё {1}% за каждый уровень навыка лесничества) не уменьшит прочность пилы или скобеля. Максимальное значение: {2}%.",
+	"ability-splitter": "Дровокол",
+	"abilitydesc-splitter": "Увеличивает выход дров при колке брёвен на {0}%, плюс ещё на {1}% за каждый уровень навыка лесничества. Максимальное значение: {2}%.",
+	"ability-swifthands": "Проворные руки",
+	"abilitydesc-swifthands": "Ускоряет распил на козлах и рубку топором на {0}%, плюс ещё {1}% за каждый уровень лесничества, максимум {2}%."
+}

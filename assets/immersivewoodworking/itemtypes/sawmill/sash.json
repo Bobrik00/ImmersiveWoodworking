@@ -1,0 +1,46 @@
+{
+	code: "sawmillsash",
+	// PLACEHOLDER sawmill part (T02.05) — the saw SASH (pilna obojma). Plain Item: no class/tool/behaviors. Mandatory
+	// part; RMB-installed into `sawmill-frame` (E03/T03.07). The vertical moving frame that the blade kit (a single
+	// sawmillblade-{metal} item) is inserted into at assembly — the kit can ONLY be installed
+	// after this sash is in. WOOD + NAILS part (recipe sawmill_sash); tension via sash + nails, no rope part. No
+	// bronze cap (mechanical power is the gate, 2026-06-19).
+	shape: { base: "immersivewoodworking:item/sawmill/sash" },
+	// Two-handed carry in third person, mirroring the frame (blocktypes/sawmill/frame.json): these bulky machine
+	// assemblies are hauled with both hands. ONLY the idle hold pose is copied — the frame's ready/place anims
+	// (heldblockready/twohandplaceblock) are block-placement-only and don't apply to an installed item. The blade kit is
+	// left one-handed on purpose. The tp-hand + ground transforms in the block below are user-tuned in-game via .tfedit
+	// (2026-07-04) — item-scale, NOT the frame's block-scale numbers.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// One transform per .tfedit tab so the editor opens EVERY tab without the engine's null-transform crash (a missing
+	// transform → NRE in GuiDialogTransformEditor.OnGuiOpened on tab switch). tp (3rd-person hand) + ground are CALIBRATED
+	// (2026-07-04); fp (1st-person) + tpOffHand (off-hand) stay at the frame-derived starting stubs — not yet calibrated.
+	fpHandTransform:    { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	tpHandTransform:    { translation: { x: -1.7, y: -0.8, z: -0.6 }, rotation: { x: -80, y: -180, z: 100 }, scale: 0.46 },
+	tpOffHandTransform: { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	groundTransform:    { translation: { x: 0, y: 0, z: 0 }, rotation: { x: 0, y: -122, z: 0 }, origin: { x: 0.5, y: 0, z: 0.5 }, scale: 3.38 },
+	// Authored Blender mesh (sawmill_sash_parts) — keys oak (wood frame) + metal (blade-mount hardware). Placeholder
+	// game: textures (vs-mod-asset-path-domain: "game:" REQUIRED, else magenta); user repaints at final art. Every
+	// key the shape uses MUST be defined here or that face falls back to the shape's editor texture (→ magenta).
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (mod-domain items can't use the auto item-handbooktext-<code> lang
+	// path — see carriage.json — so use JSON extraSections; shared lang key).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmillpart-handbook-title", text: "immersivewoodworking:sawmillpart-handbook-text" }
+			]
+		}
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 4, y: 0, z: 0 },
+		rotation: { x: 91, y: -43, z: -8 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.16
+	}
+}

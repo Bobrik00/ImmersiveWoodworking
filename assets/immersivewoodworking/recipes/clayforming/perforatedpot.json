@@ -1,0 +1,70 @@
+{
+	// PERFORATED POT clayforming recipe (BarkPlan/E04, T04.02). A copy of vanilla claypot's 7x7x6 layer pattern
+	// (survival/recipes/clayforming/claypot.json) with ONE change: the bottom layer (index 0 — the solid floor) is
+	// PERFORATED into a grid of holes, so the formed pot has the drainage bottom the tar rig needs. Perforating only
+	// removes floor voxels (49 -> 40), so it is never costlier than a plain pot; the walls/neck are untouched.
+	//
+	// Domain notes: `game:clay-*` is EXPLICIT because an unqualified `clay-*` in this immersivewoodworking-domain file
+	// would resolve to immersivewoodworking:clay-* and fail (memory vs-mod-asset-path-domain). The pot NOW carries a
+	// colour axis (playtest 2026-07-28), so the clay's colour rides into the output via {color} — blue/fire/red clay ->
+	// perforatedpot-blue/fire/red-raw, exactly like vanilla claypot. The recipe auto-loads (RecipeLoader scans every domain).
+	ingredient: { type: "item", code: "game:clay-*", name: "color", allowedVariants: ["blue", "fire", "red"] },
+	// Layer 0 (built first, the floor) is perforated: a 9-hole grid (# = clay, _ = hole). Layers 1-4 are the claypot
+	// wall ring; layer 5 is the neck — both identical to claypot.
+	pattern: [[
+		"#######",
+		"#_#_#_#",
+		"#######",
+		"#_#_#_#",
+		"#######",
+		"#_#_#_#",
+		"#######",
+	],
+	[
+		"#######",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#######",
+	],
+	[
+		"#######",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#######",
+	],
+	[
+		"#######",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#######",
+	],
+	[
+		"#######",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#_____#",
+		"#######",
+	],
+	[
+		"_______",
+		"_#####_",
+		"_#___#_",
+		"_#___#_",
+		"_#___#_",
+		"_#####_",
+		"_______",
+	]],
+	name: "perforatedpot",
+	output: { type: "block", code: "immersivewoodworking:perforatedpot-{color}-raw" }
+}

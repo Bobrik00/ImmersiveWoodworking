@@ -1,0 +1,56 @@
+{
+	code: "sawmill-ghostpower",
+	class: "iw-sawmill-ghostpower",
+	entityClass: "iw-sawmill-multiblock",
+	// E04 / T04.01 — the ONE special ghost-filler that is also the sawmill's mechanical-power connector. It is a
+	// plain `sawmill-ghost` in every way (invisible, solid, routes click/break/pick/collision to the master via
+	// BEMultiblockSawmill.Principal — all inherited from BlockSawmillGhost) PLUS an IMechanicalPowerBlock, and its
+	// BE carries the consumer node via the `sawmillmp` entityBehavior below. The master places exactly one of these,
+	// oriented to its feed facing, at the exposed -X gear-tower cell (BlockEntitySawmill.InputCellLocal, where the
+	// authored model's `rotor_default` disc sits) — the master cell itself is interior to the footprint and so can
+	// never be the connector. NEVER hand-placed (no creativeinventory): the frame SetBlocks it in T03.03.
+	//
+	// `side` variantgroup = the machine's feed facing, stamped at placement, so BlockSawmillGhostPower /
+	// BEBehaviorSawmillMP can derive the connector face + spin axis parametrically (final face/sign land with the
+	// model at T07.06). No HorizontalOrientable behavior — the master picks the variant explicitly, not player look.
+	variantgroups: [
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// The mechanical-power consumer node. The network LOAD is computed live in BEBehaviorSawmillMP.GetResistance
+	// (Config.SawmillResistance, eased by the flywheel, floored to IncompleteResistance until IsComplete) — there is
+	// no JSON resistance placeholder to tune here, the override never reads base.Resistance.
+	//
+	// mechPartShape: null — the vanilla quern/grindingwheel convention (survival/blocktypes/stone/quern.json), and the
+	// ONLY way to render nothing here. MechNetworkRenderer.AddDevice bails on `device.Shape == null`, so no instanced
+	// renderer is ever built for this node. An EMPTY shape is not the same thing and was the T07.08 / F-L8-19 defect:
+	// the engine happily builds a GenericMechBlockRenderer for it (a ~800 KB instance-matrix buffer) and then, every
+	// frame, recomputes this device's transform, re-uploads the buffer and issues a draw call for a mesh with zero
+	// triangles. The visible rotor_default disc is drawn by the master's E07 renderer (BlockEntitySawmill.Render);
+	// this avoids a double gear (memory vs-sawmill-procedural-anim). Since nothing is drawn from this node, it also
+	// keeps no spin axis — BEBehaviorSawmillMP does not maintain AxisSign (only mech renderers ever read it).
+	// NB the disc is gated on the crankshaft install (PartVisible, 2026-07-05), so a bare/half-built frame shows no
+	// connection gear — by IsComplete the crankshaft is always in, so a power-usable machine always shows it.
+	entityBehaviors: [
+		{ name: "iw-sawmillmp", properties: { mechPartShape: null } }
+	],
+	// `game:` prefixes REQUIRED on every vanilla ref (memory vs-mod-asset-path-domain). `block/basic/nothing` =
+	// engine empty shape → invisible, like the plain ghost.
+	shape: { base: "game:block/basic/nothing" },
+	blockmaterial: "Wood",
+	drops: [],
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	rainPermeable: true,
+	resistance: 3.5,
+	lightAbsorption: 0,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	// Full-cube collision/selection FALLBACK only — live boxes are the master's per-cell footprint slices routed
+	// through Principal (BlockSawmillGhost.GetCollisionBoxes), same as the plain ghost.
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

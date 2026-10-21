@@ -1,0 +1,89 @@
+{
+	code: "chopperheadhalf",
+	// Forged HALF of the axe/maul head `chopperheadhalf-{metal}` — a crafting INTERMEDIATE, not an installed part.
+	// The head redesign (user 2026-07-10): the assembled head `chopperhead-{metal}` is no longer forged whole on the
+	// anvil; instead the player forges TWO identical halves of the SAME metal (recipes/smithing/chopperheadhalf.json)
+	// and joins them with a hammer on the crafting grid (recipes/grid/chopper_head.json) into the head. This item is
+	// only that intermediate: it is never installed into the frame and carries NO durability (unlike chopperhead-{metal},
+	// which is the wear-tier consumable) — like the plain arm/drive parts, it is a simple mesh item. The metal is the
+	// TIER: two copper halves make a copper head, two steel halves a steel head — the smithing recipe's name:"metal"
+	// binding and the grid recipe's name:"metal" binding carry the {metal} through both steps.
+	// Stacks to 2 (user 2026-07-10): a head takes exactly two halves, so one full stack is one head's worth — the pair
+	// forged for a single head rides in one inventory slot. (Unlike the head, the wear-tier consumable at maxstacksize 1; the plain arm/drive keep the default 64.)
+	maxstacksize: 2,
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	// Half-head mesh (shapes/item/chopper/headhalf.json — the authored dropmaul-head-recipe model, ONE half of the
+	// 8-element dropmaul-head). Shipped shape carries the fully-qualified game:block/metal/ingot/iron texture path so
+	// it loads without a 404 (memory vs-blender-shape-texture-block-warning); the itemtype textures override below
+	// swaps in the per-metal ingot texture at bake so all 9 variants tint correctly.
+	shape: { base: "immersivewoodworking:item/chopper/headhalf" },
+	// Held two-handed in third person, like the head and the rest of the chopper set (user decision 2026-07-05).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// Per-metal texture keyed "metal" (shows the tier). "game:" required (memory vs-mod-asset-path-domain). {metal}
+	// follows the variant — the raw forged-metal look of the head, echoing chopperhead-{metal}'s ingot texture.
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook: its own short note (forge two, join into a head) rather than the shared "install into the frame" part
+	// text — this piece is never installed. The engine's "Created by / Used to create" links (the anvil smithing
+	// recipe → this half → the head grid recipe) are drawn automatically.
+	attributes: {
+		// Re-heatable in a forge (user 2026-07-10): BEForge.cs accepts a stack whose FirstCodePart is
+		// ingot/metalplate/workitem OR whose attributes.forgable == true. chopperheadhalf is none of those code
+		// parts, so without this flag it cannot go back into a firepit/forge — unlike the mod's toolheads
+		// (barkspudhead/pitsawblade), which set it. With it, a hot-forged half can be reheated like any toolhead.
+		forgable: true,
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:chopperheadhalf-handbook-title", text: "immersivewoodworking:chopperheadhalf-handbook-text" }
+			]
+		},
+		// Framing while the half sits in a firepit/forge for reheating — tuned in-game with .tfedit (user 2026-07-10).
+		inForgeTransform: {
+			translation: { x: 0, y: -0.45, z: 0 },
+			rotation: { x: -76, y: -7, z: 23 }
+		},
+		// Framing while gripped in tongs — tuned in-game with .tfedit (user 2026-07-10). Per ItemTongs.cs the WOODEN
+		// tongs (game:tongs) read onTongTransform and the METAL tongs (game:tongsmetal) read onMetalTongTransform, so the
+		// two grips are stored separately. onMetalTongTransform must physically EXIST here — otherwise metal tongs fall
+		// back to onTongTransform for BOTH read AND write, and a later wooden-tong tune (this one) would clobber the metal
+		// pose. The metal value below was tuned first (previously the lone onTongTransform via that fallback); it moved to
+		// its own key so this wooden re-tune leaves it intact.
+		onTongTransform: {           // wooden tongs (game:tongs)
+			translation: { x: -0.7, y: 0, z: -0.8 },
+			rotation: { x: -180, y: -8, z: -61 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.7
+		},
+		onMetalTongTransform: {      // metal tongs (game:tongsmetal)
+			translation: { x: -1.3, y: -0.12, z: -0.3 },
+			rotation: { x: -94, y: -10, z: -6 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.7
+		}
+	},
+	// Hand / ground / GUI transforms — calibrated in-game via .tfedit (user 2026-07-10). `rotate: false` on gui keeps the
+	// inventory icon from slow-spinning past the posed angle (a plain Item's ItemDefaultGui is flat and does NOT merge —
+	// memory vs-partial-guitransform-no-merge), and origin stays the {0.5,0.5,0.5} centre the rotation was tuned against.
+	tpHandTransform: {
+		translation: { x: -0.55, y: -0.55, z: -0.35 },
+		rotation: { x: -79, y: 10, z: -103 },
+		scale: 0.89
+	},
+	groundTransform: {
+		translation: { x: 0, y: -0.01, z: 0 },
+		rotation: { x: 86, y: 0, z: -2 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 3.39
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 3, y: 2, z: 0 },
+		rotation: { x: -18, y: -47, z: -180 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 3.02
+	}
+}

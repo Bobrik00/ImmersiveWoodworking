@@ -1,0 +1,1463 @@
+{
+  "textureWidth": 64,
+  "textureHeight": 64,
+  "textures": {
+    "metal": "game:block/metal/ingot/copper"
+  },
+  "textureSizes": {
+    "metal": [
+      64,
+      64
+    ]
+  },
+  "elements": [
+    {
+      "name": "origin.003",
+      "from": [
+        9.0,
+        0.6026182174682617,
+        8.0
+      ],
+      "to": [
+        9.0,
+        0.6026182174682617,
+        8.0
+      ],
+      "rotationOrigin": [
+        -7.0,
+        0.10261821746826172,
+        8.0
+      ],
+      "rotationX": -1.0999185031929386e-16,
+      "rotationY": 4.754561865991652e-19,
+      "rotationZ": -0.49536544597069854,
+      "group": "barkspud-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#metal",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#metal",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#metal",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#metal",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#metal",
+          "uv": [
+            -0.0,
+            2.0,
+            2.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "down": {
+          "texture": "#metal",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "autoUv": false
+        }
+      },
+      "children": [
+        {
+          "name": "holder.011",
+          "from": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.6000000238418579
+          ],
+          "to": [
+            -3.0000009536743164,
+            1.1000000536441803,
+            -0.02499997615814209
+          ],
+          "rotationOrigin": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                14.0,
+                36.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                8.0,
+                10.0,
+                10.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                32.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                10.0,
+                26.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                44.0,
+                16.0,
+                46.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                16.0,
+                16.0,
+                14.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": [
+            {
+              "name": "Bla.001",
+              "from": [
+                7.9430952072143555,
+                0.6063448190689087,
+                -0.9016402959823608
+              ],
+              "to": [
+                11.443095207214355,
+                1.1063448190689087,
+                2.598359704017639
+              ],
+              "rotationOrigin": [
+                7.4430952072143555,
+                0.6063448190689087,
+                0.6483596563339233
+              ],
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    4.0,
+                    22.0,
+                    18.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    32.0,
+                    22.0,
+                    46.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    32.0,
+                    16.0,
+                    46.0,
+                    18.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    2.0,
+                    26.0,
+                    16.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    24.0,
+                    0.0,
+                    38.0,
+                    14.0
+                  ],
+                  "autoUv": false
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    26.0,
+                    38.0,
+                    12.0,
+                    24.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": [
+                {
+                  "name": "Bla.004",
+                  "from": [
+                    -0.5000005066394806,
+                    1.4454892135709607e-05,
+                    0.5
+                  ],
+                  "to": [
+                    -5.066394805908203e-07,
+                    0.49657864356902337,
+                    3.4999998211860657
+                  ],
+                  "rotationOrigin": [
+                    -5.066394805908203e-07,
+                    0.0021000243723392487,
+                    0.5
+                  ],
+                  "rotationX": -2.9297832114925895e-08,
+                  "rotationY": -117.08623097899844,
+                  "rotationZ": -1.7923421143662214e-08,
+                  "group": "barkspud-head-toolsmith",
+                  "faces": {
+                    "north": {
+                      "texture": "#metal",
+                      "uv": [
+                        4.0,
+                        22.0,
+                        6.0,
+                        24.0
+                      ],
+                      "autoUv": false
+                    },
+                    "east": {
+                      "texture": "#metal",
+                      "uv": [
+                        32.0,
+                        16.0,
+                        44.0,
+                        18.0
+                      ],
+                      "autoUv": false
+                    },
+                    "south": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        30.0,
+                        10.0,
+                        32.0
+                      ],
+                      "autoUv": false
+                    },
+                    "west": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        26.0,
+                        20.0,
+                        28.0
+                      ],
+                      "autoUv": false
+                    },
+                    "up": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        40.0,
+                        20.0,
+                        42.0
+                      ],
+                      "autoUv": false,
+                      "rotation": 90
+                    },
+                    "down": {
+                      "texture": "#metal",
+                      "uv": [
+                        14.0,
+                        26.0,
+                        12.0,
+                        14.0
+                      ],
+                      "autoUv": false,
+                      "rotation": 180
+                    }
+                  },
+                  "children": []
+                },
+                {
+                  "name": "Blade28.002",
+                  "from": [
+                    -0.8127297461032867,
+                    0.0015061348676681519,
+                    -2.0763634592294693
+                  ],
+                  "to": [
+                    -0.31272974610328674,
+                    0.4984939247369766,
+                    1.423636332154274
+                  ],
+                  "rotationOrigin": [
+                    -0.5627297461032867,
+                    0.2500000298023224,
+                    -0.32636356353759766
+                  ],
+                  "rotationX": -7.899569106788389e-08,
+                  "rotationY": -109.73956339451684,
+                  "rotationZ": -5.558135714158837e-08,
+                  "group": "barkspud-head-toolsmith",
+                  "faces": {
+                    "north": {
+                      "texture": "#metal",
+                      "uv": [
+                        4.0,
+                        22.0,
+                        6.0,
+                        24.0
+                      ],
+                      "autoUv": false
+                    },
+                    "east": {
+                      "texture": "#metal",
+                      "uv": [
+                        30.0,
+                        16.0,
+                        44.0,
+                        18.0
+                      ],
+                      "autoUv": false
+                    },
+                    "south": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        30.0,
+                        10.0,
+                        32.0
+                      ],
+                      "autoUv": false
+                    },
+                    "west": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        26.0,
+                        22.0,
+                        28.0
+                      ],
+                      "autoUv": false
+                    },
+                    "up": {
+                      "texture": "#metal",
+                      "uv": [
+                        8.0,
+                        40.0,
+                        22.0,
+                        42.0
+                      ],
+                      "autoUv": false,
+                      "rotation": 90
+                    },
+                    "down": {
+                      "texture": "#metal",
+                      "uv": [
+                        14.0,
+                        28.0,
+                        12.0,
+                        14.0
+                      ],
+                      "autoUv": false,
+                      "rotation": 180
+                    }
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Blade12.008",
+              "from": [
+                6.4430952072143555,
+                0.6002040505409241,
+                -0.40164029598236084
+              ],
+              "to": [
+                7.9430952072143555,
+                1.1124855875968933,
+                1.0983597040176392
+              ],
+              "rotationOrigin": [
+                6.6930952072143555,
+                0.8563448190689087,
+                0.34835970401763916
+              ],
+              "rotationX": 3.0263129311571993e-24,
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    22.0,
+                    14.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    40.0,
+                    22.0,
+                    46.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    36.0,
+                    16.0,
+                    42.0,
+                    18.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    2.0,
+                    26.0,
+                    8.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    28.0,
+                    0.0,
+                    34.0,
+                    6.0
+                  ],
+                  "autoUv": false
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    22.0,
+                    30.0,
+                    16.0,
+                    24.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            },
+            {
+              "name": "Blade12.009",
+              "from": [
+                5.812549114227295,
+                0.5983461737632751,
+                0.4266010522842407
+              ],
+              "to": [
+                8.312549114227295,
+                1.1143434643745422,
+                1.9266010522842407
+              ],
+              "rotationOrigin": [
+                7.062549114227295,
+                0.8563448190689087,
+                1.6766010522842407
+              ],
+              "rotationX": -1.508591154847731e-08,
+              "rotationY": -34.99999642050428,
+              "rotationZ": -4.784640400344849e-08,
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    22.0,
+                    18.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    38.0,
+                    22.0,
+                    44.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    32.0,
+                    16.0,
+                    42.0,
+                    18.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    4.0,
+                    26.0,
+                    10.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    24.0,
+                    2.0,
+                    34.0,
+                    8.0
+                  ],
+                  "autoUv": false
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    26.0,
+                    32.0,
+                    16.0,
+                    26.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            },
+            {
+              "name": "Blade12.010",
+              "from": [
+                5.812549114227295,
+                0.5983461737632751,
+                0.4266010522842407
+              ],
+              "to": [
+                8.312549114227295,
+                1.1143434643745422,
+                1.9266010522842407
+              ],
+              "rotationOrigin": [
+                7.062549114227295,
+                0.8563448190689087,
+                1.6766010522842407
+              ],
+              "rotationX": -1.508591154847731e-08,
+              "rotationY": -34.99999642050428,
+              "rotationZ": -4.784640400344849e-08,
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    22.0,
+                    18.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    38.0,
+                    22.0,
+                    44.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    32.0,
+                    16.0,
+                    42.0,
+                    18.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    4.0,
+                    26.0,
+                    10.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    24.0,
+                    2.0,
+                    34.0,
+                    8.0
+                  ],
+                  "autoUv": false
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    26.0,
+                    32.0,
+                    16.0,
+                    26.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            },
+            {
+              "name": "Blade12.011",
+              "from": [
+                5.481347560882568,
+                0.5951651632785797,
+                0.4853704571723938
+              ],
+              "to": [
+                6.981347560882568,
+                1.1175245940685272,
+                1.4853705167770386
+              ],
+              "rotationOrigin": [
+                5.981347560882568,
+                0.8563448786735535,
+                0.4853705167770386
+              ],
+              "rotationX": 7.998364768525881e-08,
+              "rotationY": 62.50000800022769,
+              "rotationZ": -1.0172992062553269e-07,
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    10.0,
+                    22.0,
+                    16.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    42.0,
+                    22.0,
+                    46.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    34.0,
+                    16.0,
+                    40.0,
+                    18.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    2.0,
+                    26.0,
+                    6.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    26.0,
+                    0.0,
+                    32.0,
+                    4.0
+                  ],
+                  "autoUv": false
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    24.0,
+                    28.0,
+                    18.0,
+                    24.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            },
+            {
+              "name": "Object.003",
+              "from": [
+                -4.0,
+                1.125,
+                0.34999990463256836
+              ],
+              "to": [
+                0.0,
+                1.7000000476837158,
+                1.3499999046325684
+              ],
+              "rotationOrigin": [
+                -2.5,
+                0.0,
+                3.1999998092651367
+              ],
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    4.0,
+                    22.0,
+                    20.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    22.0,
+                    12.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    30.0,
+                    24.0,
+                    32.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    26.0,
+                    12.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    16.0,
+                    40.0,
+                    20.0,
+                    56.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 90
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    28.0,
+                    16.0,
+                    12.0,
+                    12.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            },
+            {
+              "name": "Object.004",
+              "from": [
+                -4.000000476837158,
+                0.0,
+                0.34999990463256836
+              ],
+              "to": [
+                -4.76837158203125e-07,
+                0.5750000476837158,
+                1.3499999046325684
+              ],
+              "rotationOrigin": [
+                -2.500000476837158,
+                -1.125,
+                3.1999998092651367
+              ],
+              "group": "barkspud-head-toolsmith",
+              "faces": {
+                "north": {
+                  "texture": "#metal",
+                  "uv": [
+                    4.0,
+                    22.0,
+                    20.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    22.0,
+                    12.0,
+                    24.0
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    30.0,
+                    24.0,
+                    32.0
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#metal",
+                  "uv": [
+                    8.0,
+                    26.0,
+                    12.0,
+                    28.0
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#metal",
+                  "uv": [
+                    16.0,
+                    40.0,
+                    20.0,
+                    56.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 90
+                },
+                "down": {
+                  "texture": "#metal",
+                  "uv": [
+                    28.0,
+                    16.0,
+                    12.0,
+                    12.0
+                  ],
+                  "autoUv": false,
+                  "rotation": 180
+                }
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "holder.012",
+          "from": [
+            -3.0,
+            -0.37633899599313736,
+            -0.37633901834487915
+          ],
+          "to": [
+            -1.0,
+            0.8763391003012657,
+            0.8763390779495239
+          ],
+          "rotationOrigin": [
+            -3.0,
+            -0.6000000014901161,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                24.0,
+                34.0,
+                28.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                4.0,
+                18.0,
+                10.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                26.0,
+                30.0,
+                30.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                30.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                44.0,
+                24.0,
+                50.0,
+                32.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                28.0,
+                16.0,
+                22.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "holder.013",
+          "from": [
+            -1.0000009536743164,
+            -0.12633899599313736,
+            -0.12633901834487915
+          ],
+          "to": [
+            0.9999990463256836,
+            0.6263391003012657,
+            0.6263390779495239
+          ],
+          "rotationOrigin": [
+            -1.0000009536743164,
+            -0.6000000014901161,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                24.0,
+                34.0,
+                26.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                20.0,
+                8.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                26.0,
+                30.0,
+                28.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                26.0,
+                20.0,
+                28.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                46.0,
+                24.0,
+                48.0,
+                30.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                26.0,
+                18.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "holder.014",
+          "from": [
+            0.5,
+            -0.056071723571424315,
+            -0.07116969417353047
+          ],
+          "to": [
+            1.5,
+            0.5584018370051993,
+            0.5711697799913509
+          ],
+          "rotationOrigin": [
+            0.5,
+            0.2511650323867798,
+            0.25000011920928955
+          ],
+          "rotationX": -2.4749093945545737e-24,
+          "rotationY": 2.7116753340019496e-26,
+          "rotationZ": -1.6340632418927963e-08,
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                24.0,
+                30.0,
+                26.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                20.0,
+                8.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                26.0,
+                26.0,
+                30.0,
+                28.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                26.0,
+                20.0,
+                28.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                46.0,
+                24.0,
+                48.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                20.0,
+                26.0,
+                18.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "holder.015",
+          "from": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            0.5249999761581421
+          ],
+          "to": [
+            -3.0000009536743164,
+            1.1000000536441803,
+            1.100000023841858
+          ],
+          "rotationOrigin": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                14.0,
+                36.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                4.0,
+                10.0,
+                6.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                32.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                10.0,
+                30.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                48.0,
+                16.0,
+                50.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                20.0,
+                16.0,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "holder.016",
+          "from": [
+            -5.000000953674316,
+            0.5250000059604645,
+            -0.02499997615814209
+          ],
+          "to": [
+            -3.0000009536743164,
+            1.1000000536441803,
+            0.5249999761581421
+          ],
+          "rotationOrigin": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                14.0,
+                36.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                10.0,
+                8.0,
+                12.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                32.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                26.0,
+                10.0,
+                28.0,
+                12.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                46.0,
+                16.0,
+                48.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                16.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "holder.017",
+          "from": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.02499997615814209
+          ],
+          "to": [
+            -3.0000009536743164,
+            -0.024999946355819702,
+            0.5249999761581421
+          ],
+          "rotationOrigin": [
+            -5.000000953674316,
+            -0.5999999940395355,
+            -0.6000000238418579
+          ],
+          "group": "barkspud-head-toolsmith",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                28.0,
+                18.0,
+                36.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                14.0,
+                8.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                22.0,
+                32.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                26.0,
+                14.0,
+                28.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                46.0,
+                16.0,
+                48.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                16.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "groups": []
+}

@@ -1,0 +1,8 @@
+[
+    {
+        "file": "game:itemtypes/resource/stick",
+        "op": "Add",
+        "path": "/behaviors/-",
+        "value": { "name": "iw-sawhorsebuild" }
+    }
+]

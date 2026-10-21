@@ -1,0 +1,59 @@
+[
+	// ============================================================================================================
+	// COMPOST FROM BARK (BarkPlan/E06, T06.01). The MAIN sink for surplus ordinary bark: compost demand is
+	// effectively unbounded (it feeds soil-compost -> terra preta, consumed by the bucket), so this is where a
+	// player sitting on a hundred bark actually burns it off. Modelled on vanilla survival/recipes/barrel/compost.json
+	// (rot 64 L -> compost x16, seal 480 h) but deliberately WORSE than rot: rot is pure waste (spoilage that would
+	// otherwise vanish) while bark has real alternative uses (tinder, tannin, tar, rope, dye), and bark-mulch
+	// composts slowly in reality too, so the higher cost is honest, not a nerf for its own sake.
+	//
+	// MATCHED BY TAG `bark-compost` (never a code): every kind of bark carries it EXCEPT the two tanning states
+	// (bark.json tagsByType), so ordinary, birch, bast, medicinal AND any foreign mod's bark all compost with this one
+	// line. Still UNLIKE the pit-kiln sink (T06.02, which matches by code to keep precious birch out of the fire):
+	// composting any of these is a fine player choice, exactly the same logic as bark burning as tinder (bark.json)
+	// — cooking birch into tar is the smarter use, but wasting it on compost is the player's call, not a trap that
+	// eats it by accident.
+	//
+	// TANNING BARK IS THE ONE EXCLUSION (AuditFixPlan/T08.01, finding F-L7-01). This recipe used to match the umbrella
+	// `bark`, so its match set CONTAINED weaktannin-bark.json's and stole from it: 16 tanning bark plus a bucket of
+	// water sealed into 2 compost, never tannin. Load order alone does not explain it and renaming this file would not
+	// have fixed it. Tannin's bark and water are CO-DRIVERS locked to 1:1 (BarrelRecipe.GetOutputSize demands one
+	// identical multiplier from every non-consume ingredient), whereas the consume-water below only asks
+	// `waterStack >= consumeLitres * mul` — so this recipe matches bark:water ratios tannin cannot reach and wins
+	// outright, before BEBarrel.FindMatchingRecipe's first-match rule is even consulted. Two disjoint tags are the only
+	// clean separation. The alternatives on the table (a `quantity` coprime with the tannin working amounts 5 and 7, or
+	// making water a co-driver here too) either leave the sets overlapping or force the player to measure water to the
+	// litre.
+	//
+	// ENGINE SHAPE — bark is the QUANTITY driver, water is a consumed liquid. Exact precedent: leather.json
+	// (strongtanninportion litres+consumeLitres + hide quantity -> leather stackSize):
+	//   * Output game:compost is a NON-LIQUID stack (no waterTightContainerProps), so it lands in the item slot and
+	//     the liquid ingredient MUST use consumeLitres — BarrelRecipeIngredient documents consumeLitres as "should
+	//     only be used by recipes with a non-liquid output". (Contrast the mod's tannin recipes, whose LIQUID output
+	//     forbids consumeLitres; that concern is the mirror image and does not apply here.)
+	//   * Bark, a plain item, is measured by `quantity` (ResolveLiquidProperties only converts litres->quantity for
+	//     items with liquid props). It is the SOLE co-driver, so output = compost.stackSize * (barkStack /
+	//     bark.quantity) (BarrelRecipe.GetOutputSize). Water is not a driver, it only has to satisfy
+	//     waterStack >= consumeLitres*ItemsPerLitre * mul; leftover water stays in the liquid slot (TryCraftNow).
+	//   * Vanilla codes are game:-qualified because this file lives in the immersivewoodworking domain
+	//     (memory vs-mod-asset-path-domain): bare `compost`/`waterportion` would resolve to immersivewoodworking:.
+	//
+	// NUMBERS are DRAFT (finalised by the T06.04 live check): 8 bark + 2 L water -> 1 compost, seal 480 h. That is
+	// ~2x rot's input per unit of compost (rot yields ~1 compost per 4 rot) PLUS a water requirement rot does not
+	// have, keeping rot clearly the better composter (DoD "гниль остаётся выгоднее коры"). Seal is kept EQUAL to
+	// rot's 480 h so bark is punished on input, not doubly on time. Hardcoded pending the E08 config pass.
+	//
+	// `code` reuses the vanilla "compost" (a pure grouping string, BarrelRecipe.Code) so the bark route groups under
+	// the ONE vanilla compost handbook entry the player cycles through, and the output item is the vanilla compost —
+	// indistinguishable from a rot-made one (DoD "неотличим от ванильного").
+	// ============================================================================================================
+	{
+		code: "compost",
+		sealHours: 480,
+		ingredients: [
+			{ type: "item", tags: ["bark-compost"], quantity: 8 },
+			{ type: "item", code: "game:waterportion", litres: 2, consumeLitres: 2 }
+		],
+		output: { type: "item", code: "game:compost", stackSize: 1 }
+	}
+]

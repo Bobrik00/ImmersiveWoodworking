@@ -1,0 +1,67 @@
+{
+	code: "sawmillblade",
+	// sawmill part — the assembled saw BLADE KIT `sawmillblade-{metal}` (ONE item = a gang of saw blades in a mount).
+	// One non-stackable item per metal: it IS the kit, so the player installs a SINGLE item into the sash at assembly
+	// (NOT N loose blades), and its metal is the wear tier (durabilitybytype + DamageBladeKit; cut RATE from drive RPM). maxstacksize:1 — a kit is a finished
+	// assembly, never stacked (decision 2026-06-19: the old "stack N sawmillblade items" model was dropped). Crafted
+	// from vanilla game:sawblade-{metal} + metal bits + a hammer (recipe sawmill_blade; the blade COUNT there is a
+	// balance value, not an install requirement). The "metal" texture follows the variant ({metal}) so the world
+	// render (T07.01 ITexPositionSource["metal"]) shows the tier.
+	maxstacksize: 1,
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	// Native VS durability (T06.06): the kit wears like a tool — the engine draws the slot bar (once damaged) and the
+	// "Durability: X / Y" tooltip/handbook line for free (Collectible.GetHeldItemInfo at GetMaxDurability>1). NO `tool`
+	// tag on purpose: the bar needs only `durability`, and a tool tag would make the kit interchangeable with a saw in
+	// recipes/slots (vs-recipe-ingredient-code-vs-tags). One whole log sawn = 1 point spent (BlockEntitySawmill.Sawing
+	// DamageBladeKit, gated by config SawmillBladeWearMultiplier; 0 = no wear). Per-metal max = the VANILLA saw table
+	// 1:1 (game:itemtypes/tool/saw.json — NOT the pit-saw's ×2): the kit IS a gang of vanilla saw blades, so it wears
+	// at parity with a single saw of the same metal; the harder the metal the longer the kit lasts — that wear
+	// tier is the metal's whole role (the cut rate is paced by the drive RPM, never the metal).
+	durabilitybytype: {
+		"sawmillblade-gold": 70,
+		"sawmillblade-silver": 90,
+		"sawmillblade-copper": 250,
+		"sawmillblade-tinbronze": 400,
+		"sawmillblade-bismuthbronze": 450,
+		"sawmillblade-blackbronze": 500,
+		"sawmillblade-iron": 900,
+		"sawmillblade-meteoriciron": 1200,
+		"sawmillblade-steel": 2250
+	},
+	shape: { base: "immersivewoodworking:item/sawmill/blade" },
+	// Placeholder per-metal texture, keyed "metal" so the BE's ITexPositionSource (T07.01) finds it; "game:" required.
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (mod-domain items can't use the auto item-handbooktext-<code> lang
+	// path — see carriage.json — so use JSON extraSections; shared lang key).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmillpart-handbook-title", text: "immersivewoodworking:sawmillpart-handbook-text" }
+			]
+		}
+	},
+	// Hand/ground/GUI transforms, user-tuned in-game via .tfedit (2026-07-04). The blade kit is the ONE sawmill part kept
+	// ONE-handed (no heldTpIdleAnimation) — it's a compact gang of blades, not a bulky assembly, so it isn't hauled two-handed.
+	tpHandTransform: {
+		translation: { x: -2.3, y: -1.6, z: -1.75 },
+		rotation: { x: 0, y: -4, z: 9 },
+		scale: 0.31
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 90, y: 0, z: 0 },
+		scale: 1.5
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 0, y: 5, z: 0 },
+		rotation: { x: -22.6, y: -45, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1
+	}
+}

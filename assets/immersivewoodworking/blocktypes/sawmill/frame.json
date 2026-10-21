@@ -1,0 +1,149 @@
+{
+	// CODE NOTE (2026-06-16 crash fix): base code is "sawmill" with `type:[frame]` as a variant group, so the
+	// generated codes stay sawmill-frame-{side} (unchanged everywhere) BUT `frame` is now a real variant part.
+	// Required by HorizontalOrientable: BlockBehaviorHorizontalOrientable.GetLookAwareBlockVariant rebuilds the
+	// placed code via Block.CodeWithVariant = FirstCodePart() + each variant. With the old code "sawmill-frame",
+	// FirstCodePart()="sawmill" and `frame` (not a variant) was DROPPED → it looked for "sawmill-east" and crashed
+	// ("...have a dash in your block code"). Making `frame` a variant keeps it in the rebuilt code. Idiomatic VS
+	// (vanilla chest/displaycase are firstword-{type}-{side}).
+	code: "sawmill",
+	// Master block of the automated sawmill — the mech-powered upgrade tier over the hand sawhorses. It is the ONLY
+	// placed block; the rest of the machine is crafted item-parts RMB-installed into it (T03.07). As of T03.01 it
+	// carries the skeleton BlockSawmill master + its BlockEntitySawmill state container (class/entityClass below,
+	// matching the RegisterBlock(Entity)Class keys in ImmersiveWoodworkingModSystem.Start). E03/T03.03 gives it the
+	// multi-cell footprint (currently 19 cells: a solid base + the center saw tower and -X gear tower, fitted to the
+	// authored model — see BlockEntitySawmill.FootprintLocal), captured from THIS one placed block with the non-master cells filled
+	// by invisible ghost-fillers (sawmill-ghost / BlockSawmillGhost, pulverizer-style). E04 wires the mechanical
+	// power + installed blade kit; E05 the input/output inventory; E03/T03.07 the RMB part install (TryAddPart).
+	class: "iw-sawmill",
+	entityClass: "iw-sawmill",
+	//
+	// REVISION 2026-06-14 (pulverizer-style, see PLAN.md "Ключевые решения"): this is now the ONLY placed block.
+	// The former sibling component blocks `sawmill-base` (treetrunk/oak) and `sawmill-end` (bark/oak) are GONE —
+	// the rest of the machine is crafted ITEM-PARTS (sawmillcarriage/sash/crankshaft/levers + opt. flywheel)
+	// installed into this frame by RMB, not blocks placed in adjacent cells.
+	// ── Orientation along the feed axis (T03.04), the exact pulverizerframe pattern ──────────────────────────────
+	// The "side" variantgroup gives the frame 4 horizontal codes (sawmill-frame-{north|east|south|west}); the vanilla
+	// HorizontalOrientable behavior picks the look-derived variant at placement and runs CanPlaceBlock/DoPlaceBlock on
+	// THAT oriented block (base Block.TryPlaceBlock skips its own default path once a behavior PreventDefaults), so our
+	// footprint gate (BlockSawmill.CanPlaceBlock) + ghost placement (OnBlockPlaced) execute for the correct
+	// facing — the BE reads it back as Facing in Initialize and GetCells/collision rotate off it. Feed axis lies along
+	// the placed Facing (FootprintLocal +Z → Facing.Normali; SOUTH is the code identity). NOTE: the original "3-in-a-row
+	// base with the power axle entering at a base end" was superseded once the authored model landed — the footprint is
+	// now the model-fitted table (FootprintLocal, currently 19 cells) and the E04 power input is the model's
+	// rotor_default (top-left, X axis), NOT a base-row end (see AutomatedSawmillPlan T07.00 / T04.01).
+	// The behavior also normalizes drops + middle-click pick to the canonical "-north", so the held item is one stack.
+	behaviors: [ { name: "HorizontalOrientable" } ],
+	variantgroups: [
+		// `type:[frame]` (single state) keeps `frame` in the code as a variant — see CODE NOTE above. Declared
+		// BEFORE `side` so the generated order is sawmill-{type}-{side} = sawmill-frame-north (unchanged).
+		{ code: "type", states: [ "frame" ] },
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// Per-facing render rotation, pulverizerframe-style. PLACEHOLDER NOTE: the shape is a symmetric unit cube with one
+	// all-faces texture, so rotateY is a visual NO-OP right now — these values only wire the mechanism. When the
+	// authored Blender frame lands (T03.06) it is drawn in the code's local frame (feed = +Z, which RotateToFacing
+	// maps so SOUTH renders un-rotated = the identity); confirm the rotateY zero-point and the east/west sign against
+	// that asymmetric model then (a cube can't reveal it). Same base shape, rotated per side.
+	// T03.06 (2026-06-18, re-synced authored model): the BE draws the full-machine monolith `sawmill.json` (one file, 528
+	// root / 720 total named elements: Frame/carriage/rotor/MainRotor/leveler/sash/saw_*/spring/log). As of T07.01/T07.06
+	// this NOW respects pulverizer-style conditional rendering (a part's elements appear only after TryAddPart, via
+	// PartVisible) AND animation (SawmillAnim); the element-name map that drives the split lives in T07.00. rotateY
+	// zero-point/east-west sign + the model scale/fit against the 19-cell footprint (FootprintLocal) to be confirmed
+	// against the asymmetric model in-game (T08.04 smoke) — the raw shape from/to can't reveal it (local rotations unapplied).
+	// This `shape` is ONLY the held/inventory icon + the rotateY source OnTesselation reads — it is NOT the placed
+	// world mesh. The BE overrides OnTesselation (returns true) and draws the assembled machine from the monolith
+	// `sawmill.json` (static parts → chunk mesh, movers → renderer), gated per installed part (T07.01 conditional
+	// build-up). So the icon shows just the FRAME (sawmill_frame_parts, authored), while the world shows the frame +
+	// whatever parts are installed. Same base per facing, rotated per side.
+	shapeByType: {
+		"*-north": { base: "immersivewoodworking:block/sawmill/sawmill_frame", rotateY: 180 },
+		"*-east":  { base: "immersivewoodworking:block/sawmill/sawmill_frame", rotateY: 90 },
+		"*-south": { base: "immersivewoodworking:block/sawmill/sawmill_frame", rotateY: 0 },
+		"*-west":  { base: "immersivewoodworking:block/sawmill/sawmill_frame", rotateY: 270 }
+	},
+	// Texture remap of the shape's editor placeholder keys to real game: paths ("game:" REQUIRED — an unqualified
+	// path resolves to THIS mod's empty texture folder = magenta missing texture, memory vs-mod-asset-path-domain).
+	// Keys MUST cover every face code the shape uses, or that face falls back to the shape's own editor texture (a
+	// mod-relative path → magenta). T03.06 (2026-06-18) re-synced the authored sawmill.json: the shape now uses
+	// oak/metal/wood/wood_corner/debarked_wood/rope (+14 stray #0 faces). Changes vs the old preview remap:
+	//   - DROPPED wood.001/wood.002 (generic placeholder keys the new export removed) and "null" (0 faces now).
+	//   - ADDED "debarked_wood" (300 faces — the log/carriage surfaces): species-dependent at runtime, routed
+	//     through ITexPositionSource/LogTexSource in T07.01; static debarked-oak here for the preview.
+	//   - "0" = 14 faces the Blender model leaves WITHOUT a material slot (on MainRotor.008-015 / rotor_default_* /
+	//     rotor_metal_* — despite the metal-sounding element names these are WOOD faces per the model author) —
+	//     mapped to game: OAK. This is the STABLE fix, not a stopgap: repeated Blender re-exports (2026-06-18/19)
+	//     keep re-emitting #0, so the remap (not a per-export cleanup) owns these faces. "wood"/"wood_corner" are
+	//     the plank faces (also species-routed in T07.01); static oak/plank here.
+	textures: {
+		"metal":         { base: "game:block/metal/plate/iron" },
+		"oak":           { base: "game:block/wood/debarked/oak" },
+		"wood":          { base: "game:block/wood/planks/oak1" },
+		"wood_corner":   { base: "game:block/wood/debarked/oak" },
+		"debarked_wood": { base: "game:block/wood/debarked/oak" },
+		"rope":          { base: "game:item/resource/rope" },
+		"0":             { base: "game:block/wood/debarked/oak" }
+	},
+	// E08/T08.02 — handbook page: the assemble + operate how-to, shown ONLY on the handbook page (the held-item tooltip
+	// uses blockdesc-sawmill-frame-* above).
+	//
+	// NO `include` key here, deliberately (fixed 2026-08-01). The page comes from the creative entry below, which
+	// `creativeinventory: { "general": ["*-north"] }` grants to "-north" ALONE — the other three facings land in no
+	// tab, and Collectible.GetHandBookStacks (vsapi/Common/Collectible/Collectible.cs:2480-2485) returns null for
+	// anything with neither a creative tab nor creativeinventoryStacks. `include` is the ONLY thing that overrides
+	// that null, so the unconditional `include: true` that stood here until 2026-08-01 kept east/south/west alive
+	// too: each got a bare stack and its own page, and the frame printed FOUR near-identical handbook entries. The
+	// old comment ("keeps one regardless", "mirrors the sawhorse") was wrong on both counts. Vanilla
+	// pulverizerframe.json carries no `include` at all — that is exactly why its page count is one, and this is now
+	// the same (vanilla) path. Should this block ever leave the creative inventory, bring the key back as
+	// `includeByType: { "*-north": true }`, never bare. The sawhorse's bare `include: true` is a DIFFERENT case and
+	// stays: it has no variantgroups and no creative entry, so there the key is the only page source.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmill-handbook-title", text: "immersivewoodworking:sawmill-handbook-text" }
+			]
+		}
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	lightAbsorption: 0,
+	// Only the canonical "-north" variant in creative (placement re-orients to player look); the other 3 are dropped
+	// and picked as -north too, so the player never sees four near-identical frames. Mirrors pulverizerframe. This
+	// line is ALSO the block's sole handbook-page source now that `handbook.include` is gone — narrowing or dropping
+	// it silently takes the handbook page with it (see attributes.handbook above).
+	creativeinventory: { "general": ["*-north"] },
+	blockmaterial: "Wood",
+	// Two-handed carry in third person, exactly like vanilla pulverizerframe (survival-assets blocktypes/mechanics/
+	// pulverizerframe.json): the frame is a big assembled machine, so the player holds it with both hands.
+	//   holdbothhandslarge = the two-hand idle pose · heldblockready = the raised "ready to place" pose ·
+	//   twohandplaceblock = the placing swing.
+	// (These are vanilla seraph animations, available on the player entity.)
+	heldTpIdleAnimation: "holdbothhandslarge",
+	heldRightReadyAnimation: "heldblockready",
+	heldTpUseAnimation: "twohandplaceblock",
+	// In-hand + on-ground placement of the authored sawmill_frame icon during the two-hand hold. Model-specific numbers,
+	// user-tuned in-game via .tfedit (tpHandTransform re-tuned 2026-07-04; groundTransform added the same day). guiTransform
+	// stays default; calibrate only if it looks off.
+	tpHandTransform: {
+		translation: { x: -0.8, y: -0.8, z: -0.6 },
+		rotation: { x: 6, y: 16, z: -77 },
+		scale: 0.53
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: -122, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3
+	},
+	maxStackSize: 1,
+	resistance: 3.5,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

@@ -1,0 +1,47 @@
+{
+	code: "sawmillcrankshaft",
+	// PLACEHOLDER sawmill part (T02.05) — the CRANKSHAFT assembly (kolenval + shatun, the "podvizhnaya osnova"). Plain
+	// Item: no class/tool/behaviors. Mandatory part; RMB-installed into `sawmill-frame` (E03/T03.07). Converts the
+	// axle's rotation into the sash's vertical reciprocating stroke (render group MainRotor + crankpit, T07.00). WOOD +
+	// NAILS part (recipe sawmill_crankshaft) — NO bronze cap: mechanical power is itself the tech gate over the hand
+	// sawhorses (decision 2026-06-19, see PLAN.md). The optional flywheel can only be installed AFTER this part.
+	shape: { base: "immersivewoodworking:item/sawmill/crankshaft" },
+	// Two-handed carry in third person, mirroring the frame (blocktypes/sawmill/frame.json): these bulky machine
+	// assemblies are hauled with both hands. ONLY the idle hold pose is copied — the frame's ready/place anims
+	// (heldblockready/twohandplaceblock) are block-placement-only and don't apply to an installed item. The blade kit is
+	// left one-handed on purpose. The tp-hand + ground transforms in the block below are user-tuned in-game via .tfedit
+	// (2026-07-04) — item-scale, NOT the frame's block-scale numbers.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// One transform per .tfedit tab so the editor opens EVERY tab without the engine's null-transform crash (a missing
+	// transform → NRE in GuiDialogTransformEditor.OnGuiOpened on tab switch). tp (3rd-person hand) + ground are CALIBRATED
+	// (2026-07-04); fp (1st-person) + tpOffHand (off-hand) stay at the frame-derived starting stubs — not yet calibrated.
+	fpHandTransform:    { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	tpHandTransform:    { translation: { x: -1.5, y: -0.8, z: -0.5 }, rotation: { x: 42, y: 6, z: -76 }, scale: 0.48 },
+	tpOffHandTransform: { translation: { x: -0.8, y: -0.8, z: -0.6 }, rotation: { x: 6, y: 16, z: -77 }, scale: 0.53 },
+	groundTransform:    { translation: { x: 0, y: 0.3, z: 0 }, rotation: { x: 0, y: 2, z: 0 }, origin: { x: 0.5, y: 0.5, z: 0.5299 }, scale: 2.91 },
+	// Authored Blender mesh (sawmill_crankshaft_parts) — keys oak (wood) + metal (the crank/rod hardware). Placeholder
+	// game: textures ("game:" required, vs-mod-asset-path-domain); user repaints at final art.
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" },
+		// "0" = Blender faces left without a material slot (the model keeps re-emitting these on re-export, so the
+		// remap owns them, NOT a per-export cleanup — same decision as frame.json). They are WOOD per the author → oak.
+		"0":     { base: "game:block/wood/debarked/oak" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine (mod-domain items can't use the auto item-handbooktext-<code> lang
+	// path — see carriage.json — so use JSON extraSections; shared lang key).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:sawmillpart-handbook-title", text: "immersivewoodworking:sawmillpart-handbook-text" }
+			]
+		}
+	},
+	guiTransform: {
+		rotate: false,
+		rotation: { x: 21, y: 70, z: 54 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.08
+	}
+}

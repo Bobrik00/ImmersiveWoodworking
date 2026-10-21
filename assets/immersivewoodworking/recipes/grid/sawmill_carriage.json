@@ -1,0 +1,27 @@
+{
+	// Grid recipe (T02.05) — the CARRIAGE assembly `sawmillcarriage` (telezhka + pruzhina): the cart that carries the
+	// log forward through the saw. Mandatory part. NO bronze cap (mechanical power is the gate, decision 2026-06-19).
+	//   P W P     P = plank (game:plank-*)              R = rope (game:rope — spring/tension cordage; consumed, centre)
+	//   P R P     W = saw   (tag tool-saw, NOT consumed — a crafting tool, like vanilla)
+	//   P G P     G = gear  (game:gear-rusty — the running gear / mech-hookup flavour; exact code, no temporal gear)
+	// The saw is matched by TAG with no code (vs-recipe-ingredient-code-vs-tags: a tag-only match needs code==null) so
+	// any mod's saw works (mirrors the mod's choppingblock recipe + the mod-independence invariant). game:-prefix on
+	// the rest (vs-mod-asset-path-domain). Tools are returned, not consumed (isTool). The `name` key on P labels which
+	// cells are one material, it does NOT force it: cell binding is the RecipeLoader's per-variant expansion, and this
+	// enabled:false template is registered from C# instead, which never expands (AuditFixPlan T10.02) — six planks of
+	// six woods are accepted, by design, since the output bakes no species.
+	// enabled:false → now a TEMPLATE: RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterSawmillRecipes
+	// re-registers it once per discovered wood DOMAIN, re-pointing the P (plank) slot to {domain}:plank-* so a wood
+	// mod's own-domain planks craft it. The game-domain recipe is registered from this same template (vanilla unchanged).
+	enabled: false,
+	ingredientPattern: "PWP,PRP,PGP",
+	ingredients: {
+		"P": { type: "item", code: "game:plank-*", name: "wood" },
+		"W": { type: "item", tags: ["tool-saw"], isTool: true },
+		"R": { type: "item", code: "game:rope" },
+		"G": { type: "item", code: "game:gear-rusty" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "sawmillcarriage", quantity: 1 }
+}

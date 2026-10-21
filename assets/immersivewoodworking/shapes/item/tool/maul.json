@@ -1,0 +1,2233 @@
+{
+  "textureWidth": 64,
+  "textureHeight": 64,
+  "textures": {
+    "material": "game:block/metal/ingot/iron",
+    "handle": "game:block/wood/debarked/oak"
+  },
+  "textureSizes": {
+    "material": [
+      64,
+      64
+    ],
+    "handle": [
+      64,
+      64
+    ]
+  },
+  "elements": [
+    {
+      "name": "axe head 2",
+      "from": [
+        14.617144584655762,
+        1.1106851696968079,
+        1.971491813659668
+      ],
+      "to": [
+        18.61714458465576,
+        1.6106851696968079,
+        3.0410404205322266
+      ],
+      "rotationOrigin": [
+        16.61714458465576,
+        1.610685110092163,
+        6.541040420532227
+      ],
+      "rotationX": -7.50000106248016,
+      "rotationY": -1.0048161016304252e-06,
+      "rotationZ": -6.585896973372277e-08,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            54.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.001",
+      "from": [
+        14.617144584655762,
+        -0.11058795681026368,
+        1.9088587760925293
+      ],
+      "to": [
+        18.61714458465576,
+        0.3894120454788208,
+        3.043264865875244
+      ],
+      "rotationOrigin": [
+        16.61714458465576,
+        -0.11058801412582397,
+        6.543264865875244
+      ],
+      "rotationX": 7.50000106248016,
+      "rotationY": 1.0048161016304252e-06,
+      "rotationZ": -6.585896973372277e-08,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            54.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.002",
+      "from": [
+        16.873558945953846,
+        0.8275190591812134,
+        3.332137703895569
+      ],
+      "to": [
+        18.256179809570312,
+        1.5775190889835358,
+        6.348601579666138
+      ],
+      "rotationOrigin": [
+        16.756179809570312,
+        1.3275190591812134,
+        4.840369701385498
+      ],
+      "rotationX": -16.667546707042035,
+      "rotationY": -9.640047886059603,
+      "rotationZ": -2.8702008760429756,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            40.0,
+            56.0,
+            46.0,
+            60.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            40.0,
+            42.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            20.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            4.0,
+            28.0,
+            16.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            0.0,
+            30.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            12.0,
+            18.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.004",
+      "from": [
+        15.795174598693848,
+        1.2213048338890076,
+        2.5615458488464355
+      ],
+      "to": [
+        17.795174598693848,
+        1.7213048338890076,
+        3.578009605407715
+      ],
+      "rotationOrigin": [
+        15.795174598693848,
+        1.7213047742843628,
+        7.078009605407715
+      ],
+      "rotationX": -7.633672133405541,
+      "rotationY": -10.706912335358194,
+      "rotationZ": -0.8579275752057253,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            46.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.005",
+      "from": [
+        15.794122695922852,
+        -0.1716693066599646,
+        2.4523072242736816
+      ],
+      "to": [
+        17.79412269592285,
+        0.3283306956291199,
+        3.5867133140563965
+      ],
+      "rotationOrigin": [
+        15.794122695922852,
+        -0.1716693639755249,
+        7.0867133140563965
+      ],
+      "rotationX": 7.633672987179187,
+      "rotationY": -10.70691318913184,
+      "rotationZ": -0.5736205241171214,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            46.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.006",
+      "from": [
+        15.243820190429688,
+        0.8275190591812134,
+        3.332137703895569
+      ],
+      "to": [
+        17.243820190429688,
+        1.5775190889835358,
+        6.348601579666138
+      ],
+      "rotationOrigin": [
+        16.743820190429688,
+        1.3275190591812134,
+        4.840369701385498
+      ],
+      "rotationX": -16.667544999494744,
+      "rotationY": 9.640047032285956,
+      "rotationZ": 2.8702015163732106,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            48.0,
+            56.0,
+            40.0,
+            60.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            26.0,
+            42.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            20.0,
+            28.0,
+            12.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            4.0,
+            28.0,
+            16.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            0.0,
+            22.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            12.0,
+            26.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.007",
+      "from": [
+        15.704825401306152,
+        1.2213048338890076,
+        2.5615458488464355
+      ],
+      "to": [
+        17.704825401306152,
+        1.7213048338890076,
+        3.578009605407715
+      ],
+      "rotationOrigin": [
+        17.704825401306152,
+        1.7213047742843628,
+        7.078009605407715
+      ],
+      "rotationX": -7.633672133405541,
+      "rotationY": 10.706914042905487,
+      "rotationZ": 0.8579278953708426,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            38.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            26.0,
+            40.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            28.0,
+            14.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            2.0,
+            24.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            6.0,
+            24.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.008",
+      "from": [
+        15.705877304077148,
+        -0.1716693066599646,
+        2.4523072242736816
+      ],
+      "to": [
+        17.70587730407715,
+        0.3283306956291199,
+        3.5867133140563965
+      ],
+      "rotationOrigin": [
+        17.70587730407715,
+        -0.1716693639755249,
+        7.0867133140563965
+      ],
+      "rotationX": 7.633672133405541,
+      "rotationY": 10.706912335358194,
+      "rotationZ": 0.5736208976430915,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            38.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            26.0,
+            40.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            28.0,
+            14.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            2.0,
+            24.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            6.0,
+            24.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.009",
+      "from": [
+        16.756179809570312,
+        -0.07751908898353577,
+        3.332137703895569
+      ],
+      "to": [
+        18.256179809570312,
+        0.6724809408187866,
+        6.348601579666138
+      ],
+      "rotationOrigin": [
+        16.756179809570312,
+        0.17248094081878662,
+        4.840369701385498
+      ],
+      "rotationX": 16.667546707042035,
+      "rotationY": -9.640047032285956,
+      "rotationZ": 2.870201302929799,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            40.0,
+            60.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            40.0,
+            30.0,
+            42.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            20.0,
+            28.0,
+            14.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            28.0,
+            4.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            0.0,
+            30.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            12.0,
+            18.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.010",
+      "from": [
+        15.243820190429688,
+        -0.07751908898353577,
+        3.332137703895569
+      ],
+      "to": [
+        17.243820190429688,
+        0.6724809408187866,
+        6.348601579666138
+      ],
+      "rotationOrigin": [
+        16.743820190429688,
+        0.17248094081878662,
+        4.840369701385498
+      ],
+      "rotationX": 16.667546707042035,
+      "rotationY": 9.640047032285956,
+      "rotationZ": -2.870201729816622,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            40.0,
+            56.0,
+            48.0,
+            60.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            26.0,
+            30.0,
+            28.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            12.0,
+            28.0,
+            20.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            28.0,
+            4.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            0.0,
+            22.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            12.0,
+            26.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.002",
+      "from": [
+        2.5,
+        0.0,
+        7.199999988079071
+      ],
+      "to": [
+        18.5,
+        1.5,
+        8.699999988079071
+      ],
+      "rotationOrigin": [
+        10.5,
+        0.800000011920929,
+        7.699999988079071
+      ],
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            22.0,
+            64.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            42.0,
+            64.0,
+            48.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            40.0,
+            62.0,
+            46.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            18.0,
+            64.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            64.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.003",
+      "from": [
+        17.422175407409668,
+        1.432519406080246,
+        7.199999988079071
+      ],
+      "to": [
+        18.422175407409668,
+        1.5432179868221283,
+        8.699999988079071
+      ],
+      "rotationOrigin": [
+        17.922175407409668,
+        1.6825194358825684,
+        7.949999988079071
+      ],
+      "rotationZ": 10.200306959334592,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            23.557205200195312,
+            4.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            3.5572052001953125,
+            8.0,
+            4.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            59.999996185302734,
+            43.55720520019531,
+            64.0,
+            44.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            41.55720520019531,
+            62.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            60.0,
+            18.0,
+            64.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            4.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.004",
+      "from": [
+        17.422175407409668,
+        0.00565001368522644,
+        7.199999988079071
+      ],
+      "to": [
+        18.422175407409668,
+        0.11634859442710876,
+        8.699999988079071
+      ],
+      "rotationOrigin": [
+        17.922175407409668,
+        0.25565004348754883,
+        7.949999988079071
+      ],
+      "rotationZ": -13.55098346895764,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            23.557205200195312,
+            4.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            3.5572052001953125,
+            8.0,
+            4.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            59.999996185302734,
+            43.55720520019531,
+            64.0,
+            44.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            41.55720520019531,
+            62.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            60.0,
+            18.0,
+            64.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            4.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.005",
+      "from": [
+        17.535017013549805,
+        0.8053934276103973,
+        7.212911427021027
+      ],
+      "to": [
+        18.535017013549805,
+        0.9160920083522797,
+        8.687088549137115
+      ],
+      "rotationOrigin": [
+        18.035017013549805,
+        1.0553934574127197,
+        7.949999988079071
+      ],
+      "rotationZ": 10.200306959334592,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            23.557205200195312,
+            4.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            3.5572052001953125,
+            8.0,
+            4.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            59.999996185302734,
+            43.55720520019531,
+            64.0,
+            44.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            41.55720520019531,
+            62.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            60.0,
+            18.0,
+            64.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            4.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.006",
+      "from": [
+        17.655364990234375,
+        0.5630031526088715,
+        7.212911427021027
+      ],
+      "to": [
+        18.655364990234375,
+        0.6737017333507538,
+        8.687088549137115
+      ],
+      "rotationOrigin": [
+        18.155364990234375,
+        0.8130031824111938,
+        7.949999988079071
+      ],
+      "rotationZ": -5.9403418796597345,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            23.557205200195312,
+            4.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            3.5572052001953125,
+            8.0,
+            4.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            59.999996185302734,
+            43.55720520019531,
+            64.0,
+            44.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            41.55720520019531,
+            62.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            60.0,
+            18.0,
+            64.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            4.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 11",
+      "from": [
+        -1.403996467590332,
+        -0.00282856822013855,
+        7.418140888214111
+      ],
+      "to": [
+        2.596003532409668,
+        1.5028285682201385,
+        8.918140888214111
+      ],
+      "rotationOrigin": [
+        0.596003532409668,
+        0.75,
+        8.168140888214111
+      ],
+      "rotationY": 6.396301402987691,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            42.0,
+            16.0,
+            48.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            40.0,
+            62.0,
+            46.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            0.0,
+            18.0,
+            16.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            16.0,
+            26.0,
+            0.0,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS",
+      "from": [
+        15.5,
+        -0.5,
+        6.200000047683716
+      ],
+      "to": [
+        18.0,
+        2.0,
+        10.450000047683716
+      ],
+      "rotationOrigin": [
+        15.5,
+        -0.25,
+        8.450000047683716
+      ],
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            12.0,
+            38.0,
+            22.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            0.3076919913291931,
+            8.0,
+            16.0,
+            18.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            24.0,
+            44.0,
+            34.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            8.0,
+            31.692306518554688,
+            18.000003814697266
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            24.0,
+            12.0,
+            39.69230842590332
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            19.692310333251953,
+            32.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.002",
+      "from": [
+        15.758819460868835,
+        1.5,
+        10.450000029136135
+      ],
+      "to": [
+        17.74118137359619,
+        2.000000037981536,
+        11.450000166893005
+      ],
+      "rotationOrigin": [
+        16.75,
+        2.0,
+        10.450000047683716
+      ],
+      "rotationX": 15.00000212496032,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035274505615234,
+            10.0,
+            36.964717864990234,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.0352783203125,
+            24.0,
+            42.96472930908203,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352783203125,
+            26.0,
+            10.964723587036133,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964717864990234,
+            8.000003814697266,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.004",
+      "from": [
+        17.008819103240967,
+        0.25,
+        10.450000023378776
+      ],
+      "to": [
+        18.991180539131165,
+        0.7500000454245814,
+        11.450000166893005
+      ],
+      "rotationOrigin": [
+        18.0,
+        0.75,
+        10.450000047683716
+      ],
+      "rotationY": -15.000003832507613,
+      "rotationZ": -90.00000933466734,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.0352783203125,
+            10.0,
+            36.964725494384766,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.03527069091797,
+            24.0,
+            42.9647216796875,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.035275936126709,
+            26.0,
+            10.964725494384766,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.96472930908203,
+            8.000003814697266,
+            33.0352783203125,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.005",
+      "from": [
+        15.758818626403809,
+        -1.0,
+        10.450000047683716
+      ],
+      "to": [
+        17.741181433200836,
+        -0.5000000000000036,
+        11.450000166893005
+      ],
+      "rotationOrigin": [
+        16.75,
+        -0.5,
+        10.450000047683716
+      ],
+      "rotationX": -15.00000212496032,
+      "rotationY": 1.2964135277147425e-06,
+      "rotationZ": 179.99997768819966,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035274505615234,
+            10.0,
+            36.964725494384766,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.035274505615234,
+            24.0,
+            42.964725494384766,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.035274028778076,
+            26.0,
+            10.964725494384766,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964725494384766,
+            7.999996185302734,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.006",
+      "from": [
+        14.508819460868835,
+        0.24999994039535522,
+        10.450000043291537
+      ],
+      "to": [
+        16.491180896759033,
+        0.7500000620738163,
+        11.450000166893005
+      ],
+      "rotationOrigin": [
+        15.5,
+        0.75,
+        10.450000047683716
+      ],
+      "rotationX": 2.0568456800632425e-06,
+      "rotationY": 15.00000212496032,
+      "rotationZ": 89.99998201391065,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035276412963867,
+            10.0,
+            36.9647216796875,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.035274505615234,
+            24.0,
+            42.96472930908203,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352771282196045,
+            26.0,
+            10.96472454071045,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.96472930908203,
+            8.0,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.007",
+      "from": [
+        15.758819460868835,
+        -0.24118061363697052,
+        10.450000047683716
+      ],
+      "to": [
+        17.74118137359619,
+        1.7411808967590332,
+        11.415925979614258
+      ],
+      "rotationOrigin": [
+        15.5,
+        -0.25,
+        9.950000047683716
+      ],
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.0352725982666,
+            11.0352783203125,
+            36.9647216796875,
+            18.9647216796875
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            0.1362963169813156,
+            7.035274505615234,
+            4.0,
+            14.9647216796875
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.0352783203125,
+            25.0352783203125,
+            42.96472930908203,
+            32.9647216796875
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            25.999998092651367,
+            7.0352783203125,
+            29.86370849609375,
+            14.9647216796875
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352783203125,
+            34.0,
+            10.964725494384766,
+            37.863704681396484
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964717864990234,
+            15.863704681396484,
+            33.035274505615234,
+            12.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.009",
+      "from": [
+        15.401915073394775,
+        0.25,
+        4.199910402297974
+      ],
+      "to": [
+        17.901915073394775,
+        1.25,
+        5.699910402297974
+      ],
+      "rotationOrigin": [
+        15.401915073394775,
+        -0.25,
+        6.449910402297974
+      ],
+      "rotationY": -11.204856177740572,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            16.0,
+            38.0,
+            20.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            20.0,
+            28.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            28.0,
+            44.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            12.0,
+            22.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            24.0,
+            12.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            10.0,
+            32.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.010",
+      "from": [
+        15.64797067642212,
+        0.25,
+        4.685258150100708
+      ],
+      "to": [
+        18.14797067642212,
+        1.25,
+        6.185258150100708
+      ],
+      "rotationOrigin": [
+        15.64797067642212,
+        -0.25,
+        6.935258150100708
+      ],
+      "rotationY": 11.378798044012347,
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            16.0,
+            38.0,
+            20.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            10.0,
+            12.0,
+            16.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            28.0,
+            44.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            12.0,
+            22.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            24.0,
+            12.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            10.0,
+            32.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.011",
+      "from": [
+        16.18965721130371,
+        0.6290680766105652,
+        6.950000047683716
+      ],
+      "to": [
+        18.68965721130371,
+        0.8709319233894348,
+        8.950000047683716
+      ],
+      "rotationOrigin": [
+        17.43965721130371,
+        0.75,
+        7.950000047683716
+      ],
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            16.0,
+            38.0,
+            18.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            4.0,
+            12.0,
+            12.0,
+            14.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            28.0,
+            44.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            12.0,
+            26.0,
+            14.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            26.0,
+            12.0,
+            34.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            14.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "handle 2.007",
+      "from": [
+        15.27187442779541,
+        -0.12368698304425152,
+        7.108099520206451
+      ],
+      "to": [
+        16.112915992736816,
+        1.6082261067079457,
+        8.840012609958649
+      ],
+      "rotationOrigin": [
+        10.5,
+        0.800000011920929,
+        7.685403883457184
+      ],
+      "group": "splittingmaul-body",
+      "faces": {
+        "north": {
+          "texture": "#handle",
+          "uv": [
+            9.548336029052734,
+            22.0,
+            12.91250228881836,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#handle",
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#handle",
+          "uv": [
+            51.08749771118164,
+            42.0,
+            54.451663970947266,
+            48.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#handle",
+          "uv": [
+            56.0,
+            40.0,
+            62.0,
+            46.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#handle",
+          "uv": [
+            51.08749771118164,
+            18.0,
+            54.451663970947266,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#handle",
+          "uv": [
+            12.91250228881836,
+            26.0,
+            9.548336029052734,
+            20.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    }
+  ],
+  "groups": []
+}

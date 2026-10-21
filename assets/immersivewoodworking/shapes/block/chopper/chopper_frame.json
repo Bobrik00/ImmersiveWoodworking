@@ -1,0 +1,11334 @@
+{
+ "textureWidth": 64,
+ "textureHeight": 64,
+ "textures": {
+  "metal": "game:block/metal/plate/iron",
+  "oak": "game:block/wood/debarked/oak"
+ },
+ "elements": [
+  {
+   "name": "dropmaul-frame_001.001",
+   "from": [
+    23.91391748189926,
+    -7.949308395385742,
+    11.750002145767212
+   ],
+   "to": [
+    27.913917541503906,
+    8.050692081451416,
+    16.75000238418579
+   ],
+   "rotationOrigin": [
+    24.663917541503906,
+    3.050691604614258,
+    13.750002384185791
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      14.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_002.001",
+   "from": [
+    21.413917541503906,
+    -7.949308395385742,
+    0.2500033378601074
+   ],
+   "to": [
+    25.41391748189926,
+    8.050692081451416,
+    5.2500035762786865
+   ],
+   "rotationOrigin": [
+    24.663917541503906,
+    3.050691604614258,
+    2.2500033378601074
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      20.0,
+      64.0,
+      35.99999809265137
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      64.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      21.428569793701172,
+      64.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      9.999999046325684,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_003.001",
+   "from": [
+    -5.086081564426422,
+    -4.949308395385742,
+    11.750002145767212
+   ],
+   "to": [
+    -1.0860815048217773,
+    11.050691604614258,
+    16.75000238418579
+   ],
+   "rotationOrigin": [
+    -4.336081504821777,
+    3.050691604614258,
+    13.750002384185791
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      14.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_004.001",
+   "from": [
+    10.913918435573578,
+    -4.949308395385742,
+    11.750002145767212
+   ],
+   "to": [
+    14.913918495178223,
+    11.050692558288574,
+    16.75000238418579
+   ],
+   "rotationOrigin": [
+    11.663918495178223,
+    3.050691604614258,
+    13.750002384185791
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      14.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_005.001",
+   "from": [
+    -7.586081504821777,
+    -4.949308395385742,
+    0.2500033378601074
+   ],
+   "to": [
+    -3.586081564426422,
+    11.050691604614258,
+    5.2500035762786865
+   ],
+   "rotationOrigin": [
+    -4.336081504821777,
+    3.050691604614258,
+    2.2500033378601074
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      20.0,
+      64.0,
+      35.99999809265137
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      22.0,
+      64.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      23.999996185302734,
+      64.0,
+      40.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_006.001",
+   "from": [
+    8.413918495178223,
+    -4.949308395385742,
+    0.2500033378601074
+   ],
+   "to": [
+    12.413918435573578,
+    11.050692558288574,
+    5.2500035762786865
+   ],
+   "rotationOrigin": [
+    11.663918495178223,
+    3.050691604614258,
+    2.2500033378601074
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      20.0,
+      64.0,
+      35.99999809265137
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      22.0,
+      64.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      21.428569793701172,
+      64.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      64.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_007.001",
+   "from": [
+    27.663921356201172,
+    0.050693511962890625,
+    7.004366786986303
+   ],
+   "to": [
+    37.66392135620117,
+    4.050689697265625,
+    10.986905123737387
+   ],
+   "rotationOrigin": [
+    32.66392135620117,
+    3.050691604614258,
+    8.000001875601697
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      12.0,
+      52.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      34.0,
+      40.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      12.000000953674316,
+      28.0,
+      52.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0,
+      12.0,
+      56.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      11.999996185302734,
+      20.0,
+      52.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      52.0,
+      20.0,
+      12.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_008.001",
+   "from": [
+    1.1822109818458557,
+    2.0685272216796875,
+    -5.525421142578125
+   ],
+   "to": [
+    3.1822118759155273,
+    8.068527221679688,
+    10.474578857421875
+   ],
+   "rotationOrigin": [
+    0.43221187591552734,
+    9.568527221679688,
+    7.474578857421875
+   ],
+   "rotationY": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      12.0,
+      32.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      12.0,
+      34.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      18.0,
+      64.0,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      30.0,
+      0.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_009.001",
+   "from": [
+    -21.086078703403473,
+    -4.949310302734375,
+    11.750002145767212
+   ],
+   "to": [
+    -17.086078643798828,
+    3.050689697265625,
+    16.75000238418579
+   ],
+   "rotationOrigin": [
+    -20.336078643798828,
+    3.050689697265625,
+    13.750002384185791
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      32.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      32.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      14.0,
+      32.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      32.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_010.001",
+   "from": [
+    -23.586078643798828,
+    -4.949310302734375,
+    0.2500033378601074
+   ],
+   "to": [
+    -19.586078703403473,
+    3.050689697265625,
+    5.2500035762786865
+   ],
+   "rotationOrigin": [
+    -20.336078643798828,
+    3.050689697265625,
+    2.2500033378601074
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 1.1952831047522314e-05,
+   "rotationZ": 90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      20.0,
+      32.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      22.0,
+      32.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      32.0,
+      40.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      32.0,
+      30.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_011.001",
+   "from": [
+    -2.317789077758789,
+    2.0685272216796875,
+    -4.246269226074219
+   ],
+   "to": [
+    -0.31778818368911743,
+    8.068527221679688,
+    11.75373101234436
+   ],
+   "rotationOrigin": [
+    0.43221187591552734,
+    9.568527221679688,
+    8.753730773925781
+   ],
+   "rotationY": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      12.0,
+      34.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      12.0,
+      16.0,
+      36.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      19.500003814697266,
+      64.0,
+      29.5
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      28.5,
+      0.0,
+      18.500003814697266
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_012.001",
+   "from": [
+    -8.066166937351227,
+    -2.6260337829589844,
+    -0.6838991641998291
+   ],
+   "to": [
+    -4.066166877746582,
+    13.373966693878174,
+    4.31610107421875
+   ],
+   "rotationOrigin": [
+    -7.316166877746582,
+    8.373966217041016,
+    1.31610107421875
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      30.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      36.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_013.001",
+   "from": [
+    -11.16092586517334,
+    -2.6260337829589844,
+    10.800710201263428
+   ],
+   "to": [
+    -7.160925924777985,
+    13.373966693878174,
+    15.800710439682007
+   ],
+   "rotationOrigin": [
+    -7.91092586517334,
+    8.373966217041016,
+    12.800710201263428
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      40.0,
+      64.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      9.999999046325684,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_014.001",
+   "from": [
+    20.895021378993988,
+    0.3739662170410156,
+    0.8159215450286865
+   ],
+   "to": [
+    24.895021438598633,
+    16.373966217041016,
+    5.815921783447266
+   ],
+   "rotationOrigin": [
+    21.645021438598633,
+    8.373966217041016,
+    2.8159217834472656
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      30.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      36.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_015.001",
+   "from": [
+    4.916434228420258,
+    0.3739662170410156,
+    -0.011564970016479492
+   ],
+   "to": [
+    8.916434288024902,
+    16.373967170715332,
+    4.9884352684021
+   ],
+   "rotationOrigin": [
+    5.666434288024902,
+    8.373966217041016,
+    1.9884352684020996
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      64.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      30.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      36.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_016.001",
+   "from": [
+    17.800264358520508,
+    0.3739662170410156,
+    12.300530910491943
+   ],
+   "to": [
+    21.800264298915863,
+    16.373966217041016,
+    17.300531148910522
+   ],
+   "rotationOrigin": [
+    21.050264358520508,
+    8.373966217041016,
+    14.300530910491943
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      40.0,
+      64.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_017.001",
+   "from": [
+    1.8216772079467773,
+    0.3739662170410156,
+    11.473044395446777
+   ],
+   "to": [
+    5.821677148342133,
+    16.373967170715332,
+    16.473044633865356
+   ],
+   "rotationOrigin": [
+    5.071677207946777,
+    8.373966217041016,
+    13.473044395446777
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      40.0,
+      64.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_018.001",
+   "from": [
+    36.87361139059067,
+    0.3739662170410156,
+    1.6434075832366943
+   ],
+   "to": [
+    40.87361145019531,
+    8.373966217041016,
+    6.643407821655273
+   ],
+   "rotationOrigin": [
+    37.62361145019531,
+    8.373966217041016,
+    3.6434078216552734
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      7.999996185302734,
+      32.0,
+      24.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      30.0,
+      32.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      36.0,
+      32.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      32.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      12.0,
+      22.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      22.0,
+      34.0,
+      6.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_019.001",
+   "from": [
+    33.77885437011719,
+    0.3739662170410156,
+    13.12801742553711
+   ],
+   "to": [
+    37.77885431051254,
+    8.373966217041016,
+    18.12801766395569
+   ],
+   "rotationOrigin": [
+    37.02885437011719,
+    8.373966217041016,
+    15.12801742553711
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      32.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      40.0,
+      32.0,
+      60.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      32.0,
+      58.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      32.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      12.0,
+      22.571428298950195,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      34.0,
+      5.428570747375488,
+      14.000003814697266
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_020.001",
+   "from": [
+    -20.602840423583984,
+    5.373964309692383,
+    5.649028006858849
+   ],
+   "to": [
+    -10.602840423583984,
+    9.373960494995117,
+    9.631566343609933
+   ],
+   "rotationOrigin": [
+    -15.602840423583984,
+    8.37396240234375,
+    6.644663095474243
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": 8.402370426828854e-06,
+   "rotationZ": -87.03548183863919,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      12.0,
+      52.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      34.0,
+      40.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      12.000000953674316,
+      28.0,
+      52.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0,
+      12.0,
+      56.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      11.999996185302734,
+      20.0,
+      52.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      52.0,
+      20.0,
+      12.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_021.001",
+   "from": [
+    17.182210326194763,
+    2.0685272216796875,
+    -1.525421142578125
+   ],
+   "to": [
+    19.18221092224121,
+    8.068527221679688,
+    10.474578857421875
+   ],
+   "rotationOrigin": [
+    16.43221092224121,
+    9.568527221679688,
+    7.474578857421875
+   ],
+   "rotationY": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      12.000007629394531,
+      32.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.000001907348633,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      12.0,
+      34.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      48.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.000001907348633,
+      18.0,
+      64.0,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      30.0,
+      16.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_022.001",
+   "from": [
+    13.682210206985474,
+    2.0685272216796875,
+    -0.24627304077148438
+   ],
+   "to": [
+    15.682210862636566,
+    8.068527221679688,
+    11.753727197647095
+   ],
+   "rotationOrigin": [
+    16.43221092224121,
+    9.568527221679688,
+    8.753726959228516
+   ],
+   "rotationY": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      26.0,
+      12.000007629394531,
+      34.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.000001907348633,
+      12.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      12.0,
+      16.0,
+      36.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      48.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      16.000001907348633,
+      19.500003814697266,
+      64.0,
+      29.5
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      28.5,
+      16.0,
+      18.500003814697266
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_023.001",
+   "from": [
+    -11.994609832763672,
+    8.970160484313965,
+    -8.882160605898548
+   ],
+   "to": [
+    -9.994609832763672,
+    11.9701566696167,
+    7.1003782025665885
+   ],
+   "rotationOrigin": [
+    -6.994610786437988,
+    10.970158576965332,
+    3.1134748458862305
+   ],
+   "rotationX": -1.3684782201763184e-05,
+   "rotationY": -96.84420039247861,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.000003814697266,
+      16.00000762939453,
+      20.000003814697266,
+      27.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      64.0,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.0,
+      0.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_024.001",
+   "from": [
+    -4.953193664550781,
+    15.269308090209961,
+    4.414426748367305
+   ],
+   "to": [
+    -2.9531936645507812,
+    18.269304275512695,
+    20.39696508207703
+   ],
+   "rotationOrigin": [
+    -3.9531936645507812,
+    16.769306182861328,
+    12.405695915222168
+   ],
+   "rotationY": -96.84421405285696,
+   "rotationZ": 89.99989322145144,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.000003814697266,
+      16.00000762939453,
+      20.000003814697266,
+      27.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      64.0,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.0,
+      0.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_025.001",
+   "from": [
+    3.891368865966797,
+    8.97016429901123,
+    -6.975416125765491
+   ],
+   "to": [
+    5.891368865966797,
+    11.970160484313965,
+    9.007122682699645
+   ],
+   "rotationOrigin": [
+    8.89136791229248,
+    10.970162391662598,
+    5.020219326019287
+   ],
+   "rotationX": -1.3684782201763184e-05,
+   "rotationY": -96.84420039247861,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.000003814697266,
+      16.00000762939453,
+      20.000003814697266,
+      27.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      64.0,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.0,
+      0.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_026.001",
+   "from": [
+    10.932785987854004,
+    15.269304275512695,
+    6.321167413803096
+   ],
+   "to": [
+    12.932785987854004,
+    18.26930046081543,
+    22.303705747512822
+   ],
+   "rotationOrigin": [
+    11.932785987854004,
+    16.769302368164062,
+    14.312436580657959
+   ],
+   "rotationY": -96.84421405285696,
+   "rotationZ": 89.99989322145144,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      12.000003814697266,
+      16.00000762939453,
+      20.000003814697266,
+      27.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      64.0,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.0,
+      0.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_027.001",
+   "from": [
+    19.777348518371582,
+    8.97016429901123,
+    4.931324675606163
+   ],
+   "to": [
+    21.777348518371582,
+    11.970160484313965,
+    10.913863348135436
+   ],
+   "rotationOrigin": [
+    24.777347564697266,
+    10.970162391662598,
+    6.926959991455078
+   ],
+   "rotationX": -1.3684782201763184e-05,
+   "rotationY": -96.84420039247861,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      11.999983787536621,
+      16.000019073486328,
+      20.000003814697266,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      23.956295013427734,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0437126159668,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      40.043704986572266,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.00000762939453,
+      40.043697357177734,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_028.001",
+   "from": [
+    21.85439109802246,
+    15.269308090209961,
+    12.63205458112428
+   ],
+   "to": [
+    23.85439109802246,
+    18.269304275512695,
+    18.614593253653553
+   ],
+   "rotationOrigin": [
+    22.85439109802246,
+    16.769306182861328,
+    15.623323917388916
+   ],
+   "rotationY": -96.84421405285696,
+   "rotationZ": 89.99989322145144,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      11.999983787536621,
+      16.000019073486328,
+      20.000003814697266,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      22.0,
+      23.956295013427734,
+      34.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      44.0,
+      32.0000057220459,
+      51.999996185302734,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0437126159668,
+      38.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      40.043704986572266,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      18.00000762939453,
+      40.043697357177734,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_029.001",
+   "from": [
+    -14.349818229675293,
+    9.970160484313965,
+    -7.104834758621223
+   ],
+   "to": [
+    -12.849818229675293,
+    18.9701566696167,
+    -3.1222958284258766
+   ],
+   "rotationOrigin": [
+    -8.84981918334961,
+    11.970158576965332,
+    2.8908004760742188
+   ],
+   "rotationX": -1.3684782201763184e-05,
+   "rotationY": -96.84420039247861,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -2.0265579223632812e-06,
+      26.0,
+      36.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      32.0,
+      10.0,
+      68.00000762939453,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      25.999998092651367,
+      44.0,
+      62.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      24.0,
+      38.25000762939453,
+      39.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.00874137878418,
+      46.00000190734863,
+      23.956295013427734,
+      51.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      23.95628547668457,
+      14.0,
+      8.00874137878418,
+      8.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_030.001",
+   "from": [
+    -19.33107852935791,
+    0.5456905364990234,
+    7.0000012044943105
+   ],
+   "to": [
+    -7.341078758239746,
+    4.545690536499023,
+    9.000001681331469
+   ],
+   "rotationOrigin": [
+    -13.336078643798828,
+    2.5456905364990234,
+    8.00000144291289
+   ],
+   "rotationX": -90.00000250447816,
+   "rotationY": -3.415093770784377e-06,
+   "rotationZ": 90.0000161648565,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      10.0,
+      4.0,
+      62.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      54.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      54.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      62.0,
+      8.0,
+      10.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_031.001",
+   "from": [
+    18.280652046203613,
+    8.269309043884277,
+    5.235276020187371
+   ],
+   "to": [
+    19.780652046203613,
+    17.26930522918701,
+    9.217814950382717
+   ],
+   "rotationOrigin": [
+    23.780651092529297,
+    10.269307136535645,
+    15.230911254882812
+   ],
+   "rotationX": -1.5158247183486646e-05,
+   "rotationY": 83.15571582401851,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -2.0265579223632812e-06,
+      26.0,
+      36.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      32.0,
+      10.0,
+      68.00000762939453,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      25.999998092651367,
+      44.0,
+      62.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      24.0,
+      38.25000762939453,
+      39.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.00874137878418,
+      46.00000190734863,
+      23.956295013427734,
+      51.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      23.95628547668457,
+      14.0,
+      8.00874137878418,
+      8.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_032.001",
+   "from": [
+    -0.44958949089050293,
+    9.97016429901123,
+    -5.436433040481575
+   ],
+   "to": [
+    1.050410509109497,
+    18.970160484313965,
+    -1.4538941102862282
+   ],
+   "rotationOrigin": [
+    5.050409555435181,
+    11.970162391662598,
+    4.559202194213867
+   ],
+   "rotationX": -1.3684782201763184e-05,
+   "rotationY": -96.84420039247861,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -2.0265579223632812e-06,
+      26.0,
+      36.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      32.0,
+      10.0,
+      68.00000762939453,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      25.999998092651367,
+      44.0,
+      62.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      24.0,
+      38.25000762939453,
+      39.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.00874137878418,
+      46.00000190734863,
+      23.956295013427734,
+      51.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      23.95628547668457,
+      14.0,
+      8.00874137878418,
+      8.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_033.001",
+   "from": [
+    4.38042140007019,
+    8.269309043884277,
+    3.5668743020477223
+   ],
+   "to": [
+    5.88042140007019,
+    17.26930522918701,
+    7.549413232243069
+   ],
+   "rotationOrigin": [
+    9.880420446395874,
+    10.269307136535645,
+    13.562509536743164
+   ],
+   "rotationX": -1.5158247183486646e-05,
+   "rotationY": 83.15571582401851,
+   "rotationZ": -90.00000250447816,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      -2.0265579223632812e-06,
+      26.0,
+      36.0,
+      32.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      32.0,
+      10.0,
+      68.00000762939453,
+      26.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      25.999998092651367,
+      44.0,
+      62.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      24.0,
+      38.25000762939453,
+      39.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.00874137878418,
+      46.00000190734863,
+      23.956295013427734,
+      51.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      23.95628547668457,
+      14.0,
+      8.00874137878418,
+      8.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_034.001",
+   "from": [
+    -20.225344019628892,
+    6.373963356018066,
+    -2.567274332046509
+   ],
+   "to": [
+    -14.975343837726996,
+    10.373966217041016,
+    1.6827304363250732
+   ],
+   "rotationOrigin": [
+    -17.100345611572266,
+    7.373964309692383,
+    -0.44227027893066406
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_035.001",
+   "from": [
+    -20.94939644882811,
+    6.373963356018066,
+    11.413987874984741
+   ],
+   "to": [
+    -15.699396266926215,
+    10.373966217041016,
+    15.663992643356323
+   ],
+   "rotationOrigin": [
+    -17.824398040771484,
+    7.373964309692383,
+    13.538991928100586
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_036.001",
+   "from": [
+    -17.51795893907547,
+    6.112408339977264,
+    -2.6650718450546265
+   ],
+   "to": [
+    -16.787743270397186,
+    6.842624008655548,
+    -2.136987328529358
+   ],
+   "rotationOrigin": [
+    -16.549297332763672,
+    6.373966217041016,
+    -1.4150724411010742
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_037.001",
+   "from": [
+    -17.51795893907547,
+    8.362408339977264,
+    -2.6650718450546265
+   ],
+   "to": [
+    -16.787743270397186,
+    9.092624008655548,
+    -2.136987328529358
+   ],
+   "rotationOrigin": [
+    -16.549297332763672,
+    8.623966217041016,
+    -1.4150724411010742
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_038.001",
+   "from": [
+    -17.492102921009064,
+    9.112404525279999,
+    -3.1644052267074585
+   ],
+   "to": [
+    -16.76188725233078,
+    9.842620193958282,
+    -2.63632071018219
+   ],
+   "rotationOrigin": [
+    -16.523441314697266,
+    9.37396240234375,
+    -1.9144058227539062
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_039.001",
+   "from": [
+    -17.60846644639969,
+    9.112404525279999,
+    -0.917415976524353
+   ],
+   "to": [
+    -16.878250777721405,
+    9.842620193958282,
+    -0.3893314599990845
+   ],
+   "rotationOrigin": [
+    -16.63980484008789,
+    9.37396240234375,
+    0.3325834274291992
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_040.001",
+   "from": [
+    -18.447432816028595,
+    6.112408339977264,
+    15.282789826393127
+   ],
+   "to": [
+    -17.71721714735031,
+    6.842624008655548,
+    15.810874342918396
+   ],
+   "rotationOrigin": [
+    -17.478771209716797,
+    6.373966217041016,
+    16.53278923034668
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_041.001",
+   "from": [
+    -18.447432816028595,
+    8.362408339977264,
+    15.282789826393127
+   ],
+   "to": [
+    -17.71721714735031,
+    9.092624008655548,
+    15.810874342918396
+   ],
+   "rotationOrigin": [
+    -17.478771209716797,
+    8.623966217041016,
+    16.53278923034668
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_042.001",
+   "from": [
+    -18.216155350208282,
+    9.112404525279999,
+    10.816858410835266
+   ],
+   "to": [
+    -17.48593968153,
+    9.842620193958282,
+    11.344942927360535
+   ],
+   "rotationOrigin": [
+    -17.247493743896484,
+    9.37396240234375,
+    12.066857814788818
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_043.001",
+   "from": [
+    -18.332518875598907,
+    9.112404525279999,
+    13.06384813785553
+   ],
+   "to": [
+    -17.602303206920624,
+    9.842620193958282,
+    13.591932654380798
+   ],
+   "rotationOrigin": [
+    -17.36385726928711,
+    9.37396240234375,
+    14.313847541809082
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_044.001",
+   "from": [
+    33.05728405714035,
+    3.7891356348991394,
+    -1.2499994039535522
+   ],
+   "to": [
+    33.787499725818634,
+    4.519351303577423,
+    -0.7219148874282837
+   ],
+   "rotationOrigin": [
+    34.02594566345215,
+    4.050693511962891,
+    0.0
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_045.001",
+   "from": [
+    33.05728214979172,
+    1.5391375422477722,
+    -1.2499984502792358
+   ],
+   "to": [
+    33.78749781847,
+    2.269353210926056,
+    -0.7219139337539673
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.8006954193115234,
+    9.5367431640625e-07
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_046.001",
+   "from": [
+    33.05728214979172,
+    0.7891413569450378,
+    -1.7499994039535522
+   ],
+   "to": [
+    33.78749781847,
+    1.5193570256233215,
+    -1.2219148874282837
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.050699234008789,
+    -0.5
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_047.001",
+   "from": [
+    33.05728214979172,
+    0.7891413569450378,
+    0.500001072883606
+   ],
+   "to": [
+    33.78749781847,
+    1.5193570256233215,
+    1.0280855894088745
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.050699234008789,
+    1.7500004768371582
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_048.001",
+   "from": [
+    33.05728405714035,
+    3.789139449596405,
+    16.72191298007965
+   ],
+   "to": [
+    33.787499725818634,
+    4.519355118274689,
+    17.24999749660492
+   ],
+   "rotationOrigin": [
+    34.02594566345215,
+    4.050697326660156,
+    17.971912384033203
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_049.001",
+   "from": [
+    33.05728214979172,
+    1.5391375422477722,
+    16.721914887428284
+   ],
+   "to": [
+    33.78749781847,
+    2.269353210926056,
+    17.249999403953552
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.8006954193115234,
+    17.971914291381836
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_050.001",
+   "from": [
+    33.05728214979172,
+    0.7891413569450378,
+    12.249999165534973
+   ],
+   "to": [
+    33.78749781847,
+    1.5193570256233215,
+    12.778083682060242
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.050699234008789,
+    13.499998569488525
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_051.001",
+   "from": [
+    33.05728214979172,
+    0.7891413569450378,
+    14.50000011920929
+   ],
+   "to": [
+    33.78749781847,
+    1.5193570256233215,
+    15.028084635734558
+   ],
+   "rotationOrigin": [
+    34.025943756103516,
+    1.050699234008789,
+    15.749999523162842
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_052.001",
+   "from": [
+    31.40094534804689,
+    2.05069637298584,
+    -1.1250035762786865
+   ],
+   "to": [
+    36.650945529948785,
+    6.050699234008789,
+    3.1250011920928955
+   ],
+   "rotationOrigin": [
+    34.525943756103516,
+    3.0506973266601562,
+    1.0000004768371582
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_053.001",
+   "from": [
+    31.40094534804689,
+    2.05069637298584,
+    12.874995470046997
+   ],
+   "to": [
+    36.650945529948785,
+    6.050699234008789,
+    17.12500023841858
+   ],
+   "rotationOrigin": [
+    34.525943756103516,
+    3.0506973266601562,
+    14.999999523162842
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_054.001",
+   "from": [
+    27.211084050439467,
+    6.373965263366699,
+    -0.11067414283752441
+   ],
+   "to": [
+    32.46108423234136,
+    10.373968124389648,
+    4.139330625534058
+   ],
+   "rotationOrigin": [
+    30.336082458496094,
+    7.373966217041016,
+    2.0143299102783203
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_055.001",
+   "from": [
+    26.48703162124025,
+    6.373965263366699,
+    13.870589017868042
+   ],
+   "to": [
+    31.737031803142145,
+    10.373968124389648,
+    18.120593786239624
+   ],
+   "rotationOrigin": [
+    29.612030029296875,
+    7.373966217041016,
+    15.995593070983887
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_056.001",
+   "from": [
+    29.91846913099289,
+    6.112408339977264,
+    -0.20847022533416748
+   ],
+   "to": [
+    30.648684799671173,
+    6.842624008655548,
+    0.3196142911911011
+   ],
+   "rotationOrigin": [
+    30.887130737304688,
+    6.373966217041016,
+    1.0415291786193848
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_057.001",
+   "from": [
+    29.91846913099289,
+    8.36241215467453,
+    -0.20847022533416748
+   ],
+   "to": [
+    30.648684799671173,
+    9.092627823352814,
+    0.3196142911911011
+   ],
+   "rotationOrigin": [
+    30.887130737304688,
+    8.623970031738281,
+    1.0415291786193848
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_058.001",
+   "from": [
+    29.94432896375656,
+    9.112408339977264,
+    -0.7078031301498413
+   ],
+   "to": [
+    30.674544632434845,
+    9.842624008655548,
+    -0.17971861362457275
+   ],
+   "rotationOrigin": [
+    30.91299057006836,
+    9.373966217041016,
+    0.5421962738037109
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_059.001",
+   "from": [
+    29.82796162366867,
+    9.112408339977264,
+    1.5391851663589478
+   ],
+   "to": [
+    30.558177292346954,
+    9.842624008655548,
+    2.0672696828842163
+   ],
+   "rotationOrigin": [
+    30.79662322998047,
+    9.373966217041016,
+    2.7891845703125
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_060.001",
+   "from": [
+    29.937863051891327,
+    4.140492141246796,
+    -0.5829700231552124
+   ],
+   "to": [
+    30.66807872056961,
+    4.870707809925079,
+    -0.05488550662994385
+   ],
+   "rotationOrigin": [
+    30.906524658203125,
+    4.402050018310547,
+    0.6670293807983398
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_061.001",
+   "from": [
+    29.821499526500702,
+    4.140492141246796,
+    1.6640177965164185
+   ],
+   "to": [
+    30.551715195178986,
+    4.870707809925079,
+    2.192102313041687
+   ],
+   "rotationOrigin": [
+    30.7901611328125,
+    4.402050018310547,
+    2.9140172004699707
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_062.001",
+   "from": [
+    28.98899906873703,
+    6.112408339977264,
+    17.739391922950745
+   ],
+   "to": [
+    29.719214737415314,
+    6.842624008655548,
+    18.267476439476013
+   ],
+   "rotationOrigin": [
+    29.957660675048828,
+    6.373966217041016,
+    18.989391326904297
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_063.001",
+   "from": [
+    28.98899906873703,
+    8.36241215467453,
+    17.739391922950745
+   ],
+   "to": [
+    29.719214737415314,
+    9.092627823352814,
+    18.267476439476013
+   ],
+   "rotationOrigin": [
+    29.957660675048828,
+    8.623970031738281,
+    18.989391326904297
+   ],
+   "rotationX": -2.2240105859445745e-05,
+   "rotationY": -2.9645810703244466,
+   "rotationZ": -135.00000034162267,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_064.001",
+   "from": [
+    29.220276534557343,
+    9.112408339977264,
+    13.273459076881409
+   ],
+   "to": [
+    29.950492203235626,
+    9.842624008655548,
+    13.801543593406677
+   ],
+   "rotationOrigin": [
+    30.18893814086914,
+    9.373966217041016,
+    14.523458480834961
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_065.001",
+   "from": [
+    29.103909194469452,
+    9.112408339977264,
+    15.52044928073883
+   ],
+   "to": [
+    29.834124863147736,
+    9.842624008655548,
+    16.0485337972641
+   ],
+   "rotationOrigin": [
+    30.07257080078125,
+    9.373966217041016,
+    16.770448684692383
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_066.001",
+   "from": [
+    -14.442717850208282,
+    3.7891337275505066,
+    -1.2499994039535522
+   ],
+   "to": [
+    -13.712502181529999,
+    4.51934939622879,
+    -0.7219148874282837
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    4.050691604614258,
+    0.0
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_067.001",
+   "from": [
+    -14.442717850208282,
+    1.5391337275505066,
+    -1.2499984502792358
+   ],
+   "to": [
+    -13.712502181529999,
+    2.2693493962287903,
+    -0.7219139337539673
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.8006916046142578,
+    9.5367431640625e-07
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_068.001",
+   "from": [
+    -14.442717850208282,
+    0.7891375422477722,
+    -1.7499994039535522
+   ],
+   "to": [
+    -13.712502181529999,
+    1.519353210926056,
+    -1.2219148874282837
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.0506954193115234,
+    -0.5
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_069.001",
+   "from": [
+    -14.442717850208282,
+    0.7891375422477722,
+    0.500001072883606
+   ],
+   "to": [
+    -13.712502181529999,
+    1.519353210926056,
+    1.0280855894088745
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.0506954193115234,
+    1.7500004768371582
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_070.001",
+   "from": [
+    -14.442717850208282,
+    3.789137542247772,
+    16.72191298007965
+   ],
+   "to": [
+    -13.712502181529999,
+    4.519353210926056,
+    17.24999749660492
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    4.050695419311523,
+    17.971912384033203
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_071.001",
+   "from": [
+    -14.442717850208282,
+    1.5391337275505066,
+    16.721914887428284
+   ],
+   "to": [
+    -13.712502181529999,
+    2.2693493962287903,
+    17.249999403953552
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.8006916046142578,
+    17.971914291381836
+   ],
+   "rotationX": 1.7302846046544337e-05,
+   "rotationY": 3.733866731355767e-05,
+   "rotationZ": 45.00000466733367,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_072.001",
+   "from": [
+    -14.442717850208282,
+    0.7891375422477722,
+    12.249999165534973
+   ],
+   "to": [
+    -13.712502181529999,
+    1.519353210926056,
+    12.778083682060242
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.0506954193115234,
+    13.499998569488525
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_073.001",
+   "from": [
+    -14.442717850208282,
+    0.7891375422477722,
+    14.50000011920929
+   ],
+   "to": [
+    -13.712502181529999,
+    1.519353210926056,
+    15.028084635734558
+   ],
+   "rotationOrigin": [
+    -13.474056243896484,
+    1.0506954193115234,
+    15.749999523162842
+   ],
+   "rotationX": -89.99996152334315,
+   "rotationY": 8.092836606118329e-06,
+   "rotationZ": 45.00000808242825,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_074.001",
+   "from": [
+    -16.09905465195311,
+    2.050694465637207,
+    -1.1250035762786865
+   ],
+   "to": [
+    -10.849054470051215,
+    6.050697326660156,
+    3.1250011920928955
+   ],
+   "rotationOrigin": [
+    -12.974056243896484,
+    3.0506954193115234,
+    1.0000004768371582
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_075.001",
+   "from": [
+    -16.09905465195311,
+    2.050694465637207,
+    12.874995470046997
+   ],
+   "to": [
+    -10.849054470051215,
+    6.050697326660156,
+    17.12500023841858
+   ],
+   "rotationOrigin": [
+    -12.974056243896484,
+    3.0506954193115234,
+    14.999999523162842
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99828338623047,
+      8.000015258789062,
+      23.161155700683594,
+      24.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      28.000011444091797
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      29.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      23.999984741210938
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.208303451538086
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_076.001",
+   "from": [
+    10.638159453868866,
+    18.055515944957733,
+    3.227937340736389
+   ],
+   "to": [
+    11.36837512254715,
+    18.785731613636017,
+    3.7560218572616577
+   ],
+   "rotationOrigin": [
+    11.606821060180664,
+    18.317073822021484,
+    4.477936744689941
+   ],
+   "rotationX": -90.00000933466734,
+   "rotationY": -3.034568911094988e-05,
+   "rotationZ": 128.15567268002798,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_077.001",
+   "from": [
+    12.87212485074997,
+    18.055515944957733,
+    3.4960724115371704
+   ],
+   "to": [
+    13.602340519428253,
+    18.785731613636017,
+    4.024156928062439
+   ],
+   "rotationOrigin": [
+    13.840786457061768,
+    18.317073822021484,
+    4.746071815490723
+   ],
+   "rotationX": -90.00000933466734,
+   "rotationY": -3.034568911094988e-05,
+   "rotationZ": 128.15567268002798,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_078.001",
+   "from": [
+    -3.2620728611946106,
+    18.055515944957733,
+    1.5595356225967407
+   ],
+   "to": [
+    -2.531857192516327,
+    18.785731613636017,
+    2.0876201391220093
+   ],
+   "rotationOrigin": [
+    -2.2934112548828125,
+    18.317073822021484,
+    2.809535026550293
+   ],
+   "rotationX": -90.00000933466734,
+   "rotationY": -3.034568911094988e-05,
+   "rotationZ": 128.15567268002798,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_079.001",
+   "from": [
+    -1.0281069874763489,
+    18.055515944957733,
+    1.827670693397522
+   ],
+   "to": [
+    -0.2978913187980652,
+    18.785731613636017,
+    2.3557552099227905
+   ],
+   "rotationOrigin": [
+    -0.05944538116455078,
+    18.317073822021484,
+    3.077670097351074
+   ],
+   "rotationX": -90.00000933466734,
+   "rotationY": -3.034568911094988e-05,
+   "rotationZ": 128.15567268002798,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_080.001",
+   "from": [
+    13.276958167552948,
+    13.16083687543869,
+    13.704663395881653
+   ],
+   "to": [
+    14.007173836231232,
+    13.891052544116974,
+    14.232747912406921
+   ],
+   "rotationOrigin": [
+    14.245619773864746,
+    13.422394752502441,
+    14.954662799835205
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": -1.782012779593857e-05,
+   "rotationZ": 141.8442870220823,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_081.001",
+   "from": [
+    15.51092404127121,
+    13.16083687543869,
+    13.972798943519592
+   ],
+   "to": [
+    16.241139709949493,
+    13.891052544116974,
+    14.50088346004486
+   ],
+   "rotationOrigin": [
+    16.479585647583008,
+    13.422394752502441,
+    15.222798347473145
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": -1.782012779593857e-05,
+   "rotationZ": 141.8442870220823,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_082.001",
+   "from": [
+    -0.6232736706733704,
+    13.16083687543869,
+    12.036261677742004
+   ],
+   "to": [
+    0.10694199800491333,
+    13.891052544116974,
+    12.564346194267273
+   ],
+   "rotationOrigin": [
+    0.34538793563842773,
+    13.422394752502441,
+    13.286261081695557
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": -1.782012779593857e-05,
+   "rotationZ": 141.8442870220823,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_083.001",
+   "from": [
+    1.6106922030448914,
+    13.16083687543869,
+    12.304397225379944
+   ],
+   "to": [
+    2.340907871723175,
+    13.891052544116974,
+    12.832481741905212
+   ],
+   "rotationOrigin": [
+    2.5793538093566895,
+    13.422394752502441,
+    13.554396629333496
+   ],
+   "rotationX": 89.999995674289,
+   "rotationY": -1.782012779593857e-05,
+   "rotationZ": 141.8442870220823,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_084.001",
+   "from": [
+    18.171411198876967,
+    6.373965263366699,
+    0.42252659797668457
+   ],
+   "to": [
+    23.421411380778864,
+    7.873968124389648,
+    4.67253041267395
+   ],
+   "rotationOrigin": [
+    21.296409606933594,
+    7.373966217041016,
+    2.547529697418213
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_085.001",
+   "from": [
+    17.550795239709487,
+    6.373965263366699,
+    12.406466722488403
+   ],
+   "to": [
+    22.800795421611383,
+    7.873968124389648,
+    16.65647053718567
+   ],
+   "rotationOrigin": [
+    20.675793647766113,
+    7.373966217041016,
+    14.531469821929932
+   ],
+   "rotationX": -2.2234587062740218e-05,
+   "rotationY": -2.964580429994212,
+   "rotationZ": -89.999995674289,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_086.001",
+   "from": [
+    -7.099053698278794,
+    2.050694465637207,
+    -0.12500262260437012
+   ],
+   "to": [
+    -1.8490535163768982,
+    3.5506973266601562,
+    4.1250011920928955
+   ],
+   "rotationOrigin": [
+    -3.974055290222168,
+    3.0506954193115234,
+    2.000000476837158
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_087.001",
+   "from": [
+    -7.099053698278794,
+    2.050694465637207,
+    11.874996423721313
+   ],
+   "to": [
+    -1.8490535163768982,
+    3.5506973266601562,
+    16.12500023841858
+   ],
+   "rotationOrigin": [
+    -3.974055290222168,
+    3.0506954193115234,
+    13.999999523162842
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_088.001",
+   "from": [
+    19.656328856945038,
+    9.112408339977264,
+    -0.2392510175704956
+   ],
+   "to": [
+    20.38654452562332,
+    9.842624008655548,
+    0.28883349895477295
+   ],
+   "rotationOrigin": [
+    20.624990463256836,
+    9.373966217041016,
+    1.0107483863830566
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_089.001",
+   "from": [
+    19.53996342420578,
+    9.112408339977264,
+    2.007738709449768
+   ],
+   "to": [
+    20.270179092884064,
+    9.842624008655548,
+    2.5358232259750366
+   ],
+   "rotationOrigin": [
+    20.508625030517578,
+    9.373966217041016,
+    3.2577381134033203
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_090.001",
+   "from": [
+    19.035712897777557,
+    9.112408339977264,
+    11.744689106941223
+   ],
+   "to": [
+    19.76592856645584,
+    9.842624008655548,
+    12.272773623466492
+   ],
+   "rotationOrigin": [
+    20.004374504089355,
+    9.373966217041016,
+    12.994688510894775
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_091.001",
+   "from": [
+    18.9193474650383,
+    9.112408339977264,
+    13.991678833961487
+   ],
+   "to": [
+    19.649563133716583,
+    9.842624008655548,
+    14.519763350486755
+   ],
+   "rotationOrigin": [
+    19.888009071350098,
+    9.373966217041016,
+    15.241678237915039
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_092.001",
+   "from": [
+    -7.099053698278794,
+    2.050694465637207,
+    -0.12500262260437012
+   ],
+   "to": [
+    -1.8490535163768982,
+    3.5506973266601562,
+    4.1250011920928955
+   ],
+   "rotationOrigin": [
+    -3.974055290222168,
+    3.0506954193115234,
+    2.000000476837158
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_093.001",
+   "from": [
+    -7.099053698278794,
+    2.050694465637207,
+    11.874996423721313
+   ],
+   "to": [
+    -1.8490535163768982,
+    3.5506973266601562,
+    16.12500023841858
+   ],
+   "rotationOrigin": [
+    -3.974055290222168,
+    3.0506954193115234,
+    13.999999523162842
+   ],
+   "rotationX": 1.7302847674988336e-05,
+   "rotationY": 3.733867382733366e-05,
+   "rotationZ": 90.00000933466734,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      44.99827575683594,
+      8.000015258789062,
+      23.161155700683594,
+      13.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      32.20832824707031,
+      12.0,
+      13.791666030883789,
+      18.00000762939453
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      40.838836669921875,
+      13.999977111816406,
+      19.001741409301758,
+      19.99999237060547
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      22.208335876464844,
+      8.000011444091797,
+      3.791665554046631,
+      13.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      40.83884048461914,
+      13.791698455810547,
+      19.001720428466797,
+      32.20829963684082
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      23.161157608032227,
+      32.20836067199707,
+      44.99827575683594,
+      13.791645050048828
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_094.001",
+   "from": [
+    -4.192716896533966,
+    0.789139449596405,
+    -0.7499998807907104
+   ],
+   "to": [
+    -3.4625012278556824,
+    1.5193551182746887,
+    -0.2219153642654419
+   ],
+   "rotationOrigin": [
+    -3.224055290222168,
+    1.0506973266601562,
+    0.4999995231628418
+   ],
+   "rotationX": -89.99996835353231,
+   "rotationY": 1.0323852920982007e-05,
+   "rotationZ": 45.00001149752284,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_095.001",
+   "from": [
+    -4.192716896533966,
+    0.789139449596405,
+    1.500001072883606
+   ],
+   "to": [
+    -3.4625012278556824,
+    1.5193551182746887,
+    2.0280855894088745
+   ],
+   "rotationOrigin": [
+    -3.224055290222168,
+    1.0506973266601562,
+    2.750000476837158
+   ],
+   "rotationX": -89.99996835353231,
+   "rotationY": 1.0323852920982007e-05,
+   "rotationZ": 45.00001149752284,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_096.001",
+   "from": [
+    -4.192716896533966,
+    0.789139449596405,
+    11.249999165534973
+   ],
+   "to": [
+    -3.4625012278556824,
+    1.5193551182746887,
+    11.778083682060242
+   ],
+   "rotationOrigin": [
+    -3.224055290222168,
+    1.0506973266601562,
+    12.499998569488525
+   ],
+   "rotationX": -89.99996835353231,
+   "rotationY": 1.0323852920982007e-05,
+   "rotationZ": 45.00001149752284,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_097.001",
+   "from": [
+    -4.192716896533966,
+    0.789139449596405,
+    13.50000011920929
+   ],
+   "to": [
+    -3.4625012278556824,
+    1.5193551182746887,
+    14.028084635734558
+   ],
+   "rotationOrigin": [
+    -3.224055290222168,
+    1.0506973266601562,
+    14.749999523162842
+   ],
+   "rotationX": -89.99996835353231,
+   "rotationY": 1.0323852920982007e-05,
+   "rotationZ": 45.00001149752284,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_098.001",
+   "from": [
+    -17.498565018177032,
+    4.140490233898163,
+    -3.0395721197128296
+   ],
+   "to": [
+    -16.76834934949875,
+    4.8707059025764465,
+    -2.511487603187561
+   ],
+   "rotationOrigin": [
+    -16.529903411865234,
+    4.402048110961914,
+    -1.7895727157592773
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_099.001",
+   "from": [
+    -17.614928543567657,
+    4.140490233898163,
+    -0.7925828695297241
+   ],
+   "to": [
+    -16.884712874889374,
+    4.8707059025764465,
+    -0.26449835300445557
+   ],
+   "rotationOrigin": [
+    -16.64626693725586,
+    4.402048110961914,
+    0.4574165344238281
+   ],
+   "rotationX": 89.99998201391065,
+   "rotationY": 9.798776624396567e-06,
+   "rotationZ": -132.03546601540535,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      14.0,
+      30.0,
+      18.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      46.0,
+      38.0,
+      44.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      34.0,
+      18.0,
+      38.0,
+      22.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      44.0,
+      30.0,
+      42.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      22.0,
+      32.0,
+      16.0,
+      34.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      40.0,
+      32.0,
+      46.0,
+      30.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_100.001",
+   "from": [
+    6.330454111099243,
+    3.3941354751586914,
+    7.175175905227661
+   ],
+   "to": [
+    7.830453872680664,
+    19.394136428833008,
+    9.175176858901978
+   ],
+   "rotationOrigin": [
+    7.080453991889954,
+    11.394135475158691,
+    8.175176858901978
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_101.001",
+   "from": [
+    20.76323902606964,
+    4.394135475158691,
+    3.0892553329467773
+   ],
+   "to": [
+    22.263238787651062,
+    13.394135475158691,
+    5.089256286621094
+   ],
+   "rotationOrigin": [
+    21.51323890686035,
+    11.394135475158691,
+    4.089256286621094
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      4.0,
+      40.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.0,
+      40.0,
+      53.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      42.0,
+      40.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.000003814697266,
+      7.999992370605469
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_102.001",
+   "from": [
+    16.64944076538086,
+    6.771252632141113,
+    4.253875017166138
+   ],
+   "to": [
+    18.14944076538086,
+    18.77125310897827,
+    6.253875017166138
+   ],
+   "rotationOrigin": [
+    17.39944076538086,
+    13.771252632141113,
+    5.253875017166138
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      64.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      44.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_103.001",
+   "from": [
+    15.4236661195755,
+    6.771252632141113,
+    -0.07596015930175781
+   ],
+   "to": [
+    16.923665821552277,
+    18.77125310897827,
+    1.9240398406982422
+   ],
+   "rotationOrigin": [
+    16.17366600036621,
+    13.771252632141113,
+    0.9240398406982422
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      6.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_104.001",
+   "from": [
+    5.104678630828857,
+    3.3941354751586914,
+    2.8453407287597656
+   ],
+   "to": [
+    6.604678630828857,
+    19.394136428833008,
+    4.845341682434082
+   ],
+   "rotationOrigin": [
+    5.854679107666016,
+    11.394135475158691,
+    3.845341682434082
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      64.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      44.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_105.001",
+   "from": [
+    19.53746461868286,
+    4.394135475158691,
+    -1.2405767440795898
+   ],
+   "to": [
+    21.03746461868286,
+    13.394135475158691,
+    0.7594242095947266
+   ],
+   "rotationOrigin": [
+    20.28746509552002,
+    11.394135475158691,
+    -0.24057579040527344
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      4.0,
+      40.0,
+      9.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.0,
+      40.0,
+      53.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      44.0,
+      40.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_106.001",
+   "from": [
+    -10.291757583618164,
+    6.771252632141113,
+    11.880919456481934
+   ],
+   "to": [
+    -8.791757583618164,
+    15.771252632141113,
+    13.880919456481934
+   ],
+   "rotationOrigin": [
+    -9.541757583618164,
+    13.771252632141113,
+    12.880919456481934
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      4.0,
+      40.0,
+      9.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.00000190734863,
+      39.999996185302734,
+      54.000000953674316
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      44.0,
+      40.0,
+      49.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.000003814697266,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_107.001",
+   "from": [
+    4.141026973724365,
+    5.771252632141113,
+    7.7950029373168945
+   ],
+   "to": [
+    5.641026973724365,
+    21.77125358581543,
+    9.795002937316895
+   ],
+   "rotationOrigin": [
+    4.891026973724365,
+    13.771252632141113,
+    8.795002937316895
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      64.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      44.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_108.001",
+   "from": [
+    -6.1779574155807495,
+    4.394135475158691,
+    10.716302871704102
+   ],
+   "to": [
+    -4.677957653999329,
+    16.39413595199585,
+    12.716303825378418
+   ],
+   "rotationOrigin": [
+    -5.427957534790039,
+    11.394135475158691,
+    11.716303825378418
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      42.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_109.001",
+   "from": [
+    -11.517532229423523,
+    6.771252632141113,
+    7.551084518432617
+   ],
+   "to": [
+    -10.017532527446747,
+    15.771252632141113,
+    9.551084518432617
+   ],
+   "rotationOrigin": [
+    -10.767532348632812,
+    13.771252632141113,
+    8.551084518432617
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      6.0,
+      40.0,
+      11.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.00000190734863,
+      39.999996185302734,
+      54.000000953674316
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      42.0,
+      40.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.000003814697266,
+      7.999996185302734
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_110.001",
+   "from": [
+    -7.403732776641846,
+    4.394135475158691,
+    6.386467695236206
+   ],
+   "to": [
+    -5.903732776641846,
+    16.39413595199585,
+    8.386468648910522
+   ],
+   "rotationOrigin": [
+    -6.6537322998046875,
+    11.394135475158691,
+    7.3864686489105225
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      64.0,
+      10.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      44.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      8.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      6.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_111.001",
+   "from": [
+    2.915251851081848,
+    5.771252632141113,
+    3.46516752243042
+   ],
+   "to": [
+    4.415251553058624,
+    21.77125358581543,
+    5.46516752243042
+   ],
+   "rotationOrigin": [
+    3.6652517318725586,
+    13.771252632141113,
+    4.46516752243042
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      6.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      2.0,
+      6.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      12.0,
+      16.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_112.001",
+   "from": [
+    -5.950351595878601,
+    5.144135475158691,
+    10.504117488861084
+   ],
+   "to": [
+    -5.45035183429718,
+    17.14413595199585,
+    11.0041184425354
+   ],
+   "rotationOrigin": [
+    -5.700351715087891,
+    12.144135475158691,
+    10.7541184425354
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      2.0,
+      64.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      52.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      50.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      2.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      12.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_113.001",
+   "from": [
+    20.990845799446106,
+    5.144135475158691,
+    2.877073287963867
+   ],
+   "to": [
+    21.490845561027527,
+    14.144135475158691,
+    3.3770742416381836
+   ],
+   "rotationOrigin": [
+    21.240845680236816,
+    12.144135475158691,
+    3.1270742416381836
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      2.0,
+      39.999996185302734,
+      4.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      52.000000953674316,
+      40.0,
+      54.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      50.0,
+      40.0,
+      51.999999046325684
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      2.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      12.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_114.001",
+   "from": [
+    6.5580596923828125,
+    4.144135475158691,
+    6.962990343570709
+   ],
+   "to": [
+    7.058059453964233,
+    20.144136428833008,
+    7.462991297245026
+   ],
+   "rotationOrigin": [
+    6.808059573173523,
+    12.144135475158691,
+    7.212991297245026
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      52.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      50.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      2.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      16.0,
+      12.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_115.001",
+   "from": [
+    5.877073168754578,
+    4.144135475158691,
+    4.557526111602783
+   ],
+   "to": [
+    6.3770729303359985,
+    20.144136428833008,
+    5.0575270652771
+   ],
+   "rotationOrigin": [
+    6.127073407173157,
+    12.144135475158691,
+    4.8075270652771
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      52.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      64.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      12.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      16.0,
+      4.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_116.001",
+   "from": [
+    20.309859037399292,
+    5.144135475158691,
+    0.47160911560058594
+   ],
+   "to": [
+    20.809858798980713,
+    14.144135475158691,
+    0.9716100692749023
+   ],
+   "rotationOrigin": [
+    20.55985927581787,
+    12.144135475158691,
+    0.7216100692749023
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      10.0,
+      39.999996185302734,
+      12.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      52.000000953674316,
+      40.0,
+      54.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      42.0,
+      39.999996185302734,
+      44.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      0.0,
+      40.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      12.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      16.0,
+      4.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_117.001",
+   "from": [
+    -6.631338357925415,
+    5.144135475158691,
+    8.098653316497803
+   ],
+   "to": [
+    -6.131338596343994,
+    17.14413595199585,
+    8.59865427017212
+   ],
+   "rotationOrigin": [
+    -6.381338119506836,
+    12.144135475158691,
+    8.34865427017212
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      10.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      52.0,
+      64.0,
+      54.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      42.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      0.0,
+      64.0,
+      2.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      12.0,
+      10.0,
+      14.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      16.0,
+      4.0,
+      14.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_118.001",
+   "from": [
+    16.19606041908264,
+    6.021252632141113,
+    1.6362252235412598
+   ],
+   "to": [
+    16.696060180664062,
+    18.02125310897827,
+    2.1362252235412598
+   ],
+   "rotationOrigin": [
+    16.446060180664062,
+    13.021252632141113,
+    1.8862252235412598
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      2.0,
+      64.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      50.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      64.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      6.0,
+      2.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      10.0,
+      12.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_119.001",
+   "from": [
+    -10.745137929916382,
+    6.021252632141113,
+    9.263269901275635
+   ],
+   "to": [
+    -10.245138168334961,
+    15.021252632141113,
+    9.763269901275635
+   ],
+   "rotationOrigin": [
+    -10.495138168334961,
+    13.021252632141113,
+    9.513269901275635
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      2.0,
+      39.999996185302734,
+      4.000007629394531
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.0,
+      40.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      50.0,
+      40.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      4.0,
+      40.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      6.0,
+      2.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      10.0,
+      12.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_120.001",
+   "from": [
+    3.6876466274261475,
+    5.021252632141113,
+    5.177353382110596
+   ],
+   "to": [
+    4.187646389007568,
+    21.02125358581543,
+    5.677353382110596
+   ],
+   "rotationOrigin": [
+    3.9376463890075684,
+    13.021252632141113,
+    5.427353382110596
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      2.0,
+      64.0,
+      4.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      50.0,
+      64.0,
+      52.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      64.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      6.0,
+      2.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      14.0,
+      10.0,
+      12.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_121.001",
+   "from": [
+    4.368632793426514,
+    5.021252632141113,
+    7.582817435264587
+   ],
+   "to": [
+    4.868632555007935,
+    21.02125358581543,
+    8.082817435264587
+   ],
+   "rotationOrigin": [
+    4.6186323165893555,
+    13.021252632141113,
+    7.832817435264587
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      10.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      46.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      42.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      4.0,
+      64.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      6.0,
+      10.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      10.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_122.001",
+   "from": [
+    -10.064151287078857,
+    6.021252632141113,
+    11.668734073638916
+   ],
+   "to": [
+    -9.564151525497437,
+    15.021252632141113,
+    12.168734073638916
+   ],
+   "rotationOrigin": [
+    -9.814151763916016,
+    13.021252632141113,
+    11.918734073638916
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      10.0,
+      39.999996185302734,
+      12.000003814697266
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      46.0,
+      40.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      42.0,
+      39.999996185302734,
+      44.00000190734863
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      4.000000953674316,
+      4.0,
+      40.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      6.0,
+      10.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      10.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_123.001",
+   "from": [
+    16.877047061920166,
+    6.021252632141113,
+    4.041689395904541
+   ],
+   "to": [
+    17.377046823501587,
+    18.02125310897827,
+    4.541689395904541
+   ],
+   "rotationOrigin": [
+    17.127046585083008,
+    13.021252632141113,
+    4.291689395904541
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      10.0,
+      64.0,
+      12.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      46.0,
+      64.0,
+      48.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      42.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      16.0,
+      4.0,
+      64.0,
+      6.0
+     ],
+     "autoUv": false,
+     "rotation": 270
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      8.0,
+      6.0,
+      10.0,
+      8.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      6.0,
+      10.0,
+      4.0,
+      8.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_124.001",
+   "from": [
+    -21.738328456878662,
+    8.394135475158691,
+    8.730544567108154
+   ],
+   "to": [
+    -5.73832893371582,
+    12.394131660461426,
+    12.730546355247498
+   ],
+   "rotationOrigin": [
+    -13.73832893371582,
+    11.394135475158691,
+    11.730545997619629
+   ],
+   "rotationX": 90.00000933466734,
+   "rotationY": 8.691431449610236e-06,
+   "rotationZ": -105.80684292326104,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      26.0,
+      40.0,
+      42.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0,
+      20.0,
+      56.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      -0.0,
+      28.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      28.0,
+      0.0,
+      12.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_125.001",
+   "from": [
+    16.48404312133789,
+    10.771252632141113,
+    -0.09020030498504639
+   ],
+   "to": [
+    32.48404312133789,
+    14.771248817443848,
+    3.9098010063171387
+   ],
+   "rotationOrigin": [
+    24.48404312133789,
+    13.77125072479248,
+    0.9098005294799805
+   ],
+   "rotationX": 90.00000250447816,
+   "rotationY": 6.765311146953885e-06,
+   "rotationZ": 74.1932030668303,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      12.0,
+      64.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      24.0,
+      34.0,
+      40.0,
+      50.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      28.0,
+      64.0,
+      44.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      40.0,
+      12.0,
+      56.0,
+      28.0
+     ],
+     "autoUv": false,
+     "rotation": 90
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      20.0,
+      64.0,
+      36.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      64.0,
+      20.0,
+      0.0,
+      4.0
+     ],
+     "autoUv": false
+    }
+   },
+   "children": []
+  },
+  {
+   "name": "dropmaul-frame_030.002",
+   "from": [
+    24.340598106384277,
+    5.381763458251953,
+    8.023685216903687
+   ],
+   "to": [
+    36.33059787750244,
+    9.381763458251953,
+    10.023685693740845
+   ],
+   "rotationOrigin": [
+    30.33559799194336,
+    7.381763458251953,
+    9.023685455322266
+   ],
+   "rotationX": -89.99998884409983,
+   "rotationY": -3.6789709071535555e-06,
+   "rotationZ": -92.96451634012797,
+   "group": "dropmaul-drame-parts",
+   "faces": {
+    "north": {
+     "texture": "#oak",
+     "uv": [
+      10.0,
+      4.0,
+      62.0,
+      20.0
+     ],
+     "autoUv": false
+    },
+    "east": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "south": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      8.0,
+      54.0,
+      24.0
+     ],
+     "autoUv": false
+    },
+    "west": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      0.0,
+      8.0,
+      16.0
+     ],
+     "autoUv": false
+    },
+    "up": {
+     "texture": "#oak",
+     "uv": [
+      0.0,
+      24.0,
+      54.0,
+      32.0
+     ],
+     "autoUv": false
+    },
+    "down": {
+     "texture": "#oak",
+     "uv": [
+      62.0,
+      8.0,
+      10.0,
+      0.0
+     ],
+     "autoUv": false,
+     "rotation": 180
+    }
+   },
+   "children": []
+  }
+ ],
+ "groups": []
+}

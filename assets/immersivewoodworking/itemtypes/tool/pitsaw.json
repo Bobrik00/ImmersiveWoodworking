@@ -1,0 +1,161 @@
+﻿{
+	// Pit saw — a two-man rip saw. A faithful clone of the vanilla saw (game:itemtypes/tool/saw.json) so it
+	// drops into every "tool-saw" recipe (see the "tool-saw" tag below and T02.03), with exactly two
+	// differences from the saw of the same metal:
+	//   • durabilitybytype = vanilla ×2   (it's a heavier, sturdier tool)
+	//   • miningspeedbytype wood+leaves = vanilla ×1.5   (rips wood 50% faster)
+	// Everything else (tooltier, transforms, behaviors, shape, animation) mirrors the vanilla saw 1:1.
+	// shape/textures are "game:"-prefixed on purpose: an unqualified path in a mod asset resolves to THIS
+	// mod's domain (immersivewoodworking), where the vanilla saw model + ingot textures don't exist.
+	code: "pitsaw",
+	tool: "saw",
+	tags: ["tool", "tool-saw"],
+	attributes: {
+		attachableToEntity: { categoryCode: "toolholding" },
+		handbook: {
+			groupBy: ["pitsaw-*"],
+			// Handbook back-link to its station (mirrors the sawmill parts → frame). extraSections, not the auto
+			// item-handbooktext-<code> lang path, which can't resolve for a mod-domain item (see sawmill/carriage.json).
+			extraSections: [
+				{ title: "immersivewoodworking:pitsaw-handbook-title", text: "immersivewoodworking:pitsaw-handbook-text" }
+			]
+		},
+		toolrackTransform: {
+			translation: { x: -0.3, y: 0.05, z: 0 },
+			rotation: { x: 0, y: 1, z: -1 },
+			scale: 1.35
+		},
+		groundStorageTransform: {
+			translation: { x: 0.03, y: -0.1, z: 0.29 },
+			rotation: { x: 26, y: 90, z: -90 },
+			scale: 0.88
+		}
+	},
+	behaviors: [
+		{
+			name: "GroundStorable",
+			properties: {
+				layout: 'WallHalves',
+				wallOffY: 1,
+				ctrlKey: true,
+				selectionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.1, z2: 1 },
+				collisionBox: { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 },
+			}
+		},
+		{ name: "EntityDeconstructTool" },
+		{ name: "Buffable" },
+		// Cut-mode tool mode (F): planks / beams / auto, shown only when aimed at a sawhorse. See CollectibleBehaviorSawMode.
+		{ name: "iw-sawmode" }
+	],
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver",
+															"iron", "meteoriciron", "steel"
+		  ] },
+	],
+	damagedby: ["blockbreaking", "attacking"],
+	// Custom rip-saw model authored in Blender (source: art/shapes/PitSaw.json).
+	// "immersivewoodworking:" prefix = this mod's domain (the model lives here, not in game).
+	shape: { base: "immersivewoodworking:item/tool/pitsaw" },
+	heldTpHitAnimation: "breaktool",
+	// The shape paints faces with keys metal/wood/brown/linen/null; we override each with a real vanilla
+	// texture (the shape's own embedded "iron"/"oak"/"plain" defaults are bare placeholders that don't
+	// resolve). "metal" is per-variant so each metal pit saw shows its ingot colour, like the vanilla saw.
+	// The model's blank PitSaw.png is a Blender editor export only — not shipped.
+	texturesByType: {
+		"*": {
+			"metal": { base: "game:block/metal/ingot/{metal}" },
+			"wood": { base: "game:block/wood/debarked/oak" },
+			"linen": { base: "game:block/linen" },
+			"brown": { base: "game:item/bag/backpack/leather" },
+			"null": { base: "game:block/wood/debarked/oak" }
+		}
+	},
+	tooltierbytype: {
+		"pitsaw-copper": 2,
+		"pitsaw-gold": 2,
+		"pitsaw-silver": 2,
+		"pitsaw-bismuthbronze": 3,
+		"pitsaw-tinbronze": 3,
+		"pitsaw-blackbronze": 3,
+		"pitsaw-iron": 4,
+		"pitsaw-meteoriciron": 4,
+		"pitsaw-steel": 5
+	},
+	// Vanilla saw wood/leaves speeds × 1.5 (the "*-stone" row carries over from vanilla as a harmless
+	// fallback; there is no stone pit saw variant, so it never matches).
+	miningspeedbytype: {
+		"*-stone": {
+			"wood": 4.5,
+			"leaves": 2.4
+		},
+		"*-copper": {
+			"wood": 6,
+			"leaves": 3.6
+		},
+		"*-bismuthbronze": {
+			"wood": 6.6,
+			"leaves": 3.9
+		},
+		"*-tinbronze": {
+			"wood": 6.9,
+			"leaves": 4.5
+		},
+		"*-silver": {
+			"wood": 6.9,
+			"leaves": 4.5
+		},
+		"*-gold": {
+			"wood": 6.9,
+			"leaves": 4.5
+		},
+		"*-blackbronze": {
+			"wood": 7.05,
+			"leaves": 4.65
+		},
+		"*-iron": {
+			"wood": 7.5,
+			"leaves": 4.8
+		},
+		"*-meteoriciron": {
+			"wood": 8.25,
+			"leaves": 5.4
+		},
+		"*-steel": {
+			"wood": 9,
+			"leaves": 6
+		}
+	},
+	// Vanilla saw durability × 2.
+	durabilitybytype: {
+		"pitsaw-gold": 140,
+		"pitsaw-silver": 180,
+		"pitsaw-copper": 500,
+		"pitsaw-tinbronze": 800,
+		"pitsaw-bismuthbronze": 900,
+		"pitsaw-blackbronze": 1000,
+		"pitsaw-iron": 1800,
+		"pitsaw-meteoriciron": 2400,
+		"pitsaw-steel": 4500
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
+	guiTransform: {
+		rotate: false,
+		translation: { x: 1, y: 0, z: 0 },
+		rotation: { x: -77, y: 47, z: -151 },
+		origin: { x: 0.5, y: 0.5, z: 0.38 },
+		scale: 1.9
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.45, z: 0.5 },
+		scale: 3.6
+	},
+	tpHandTransform: {
+		// Tuned in-game with `.tfedit` -> "Main Hand" after the pit-saw model was re-centred (+5.5px on VS X),
+		// so the saw sits right in hand against the centred geometry.
+		translation: { x: -1, y: -0.6, z: -0.45 },
+		rotation: { x: 90, y: -174, z: -6 },
+		scale: 1
+	}
+}

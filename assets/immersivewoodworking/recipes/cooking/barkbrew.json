@@ -1,0 +1,81 @@
+[
+	// BARKBREW DECOCTION COOKING (BarkPlan/E05, T05.03) — boil medicinal bark in water in a clay pot on a firepit into
+	// `barkbrew` (the poultice agent). Straight clone of the vanilla oil/linseed cooking recipe (water + solid ->
+	// a liquid portion via cooksInto): survival/recipes/cooking/oil.json.
+	//
+	// ENGINE: mod cooking recipes AUTO-LOAD — RecipeRegistrySystem does GetMany("recipes/cooking") across ALL domains
+	// (RecipeRegistrySystem.cs:181), so this file needs no C# registration. It resolves in THIS file's domain
+	// (immersivewoodworking), so vanilla codes are game:-qualified (waterportion, rot, the in-pot meal shape) while our
+	// own codes are spelled out immersivewoodworking: for clarity.
+	//
+	// COOKING CANNOT MATCH TAGS (D27, verified): CookingRecipeStack has no Tags field and GetMatchingStack matches only
+	// wildcard code / exact Equals / CookedStack. So medicinal bark is taken by CODE, not by the `bark-medicinal` tag.
+	// A foreign mod's medicinal bark joins by appending its code to validStacks (the tar_glue.json idiom), NOT by tag —
+	// this is where the plan's "match bark-medicinal by tag" (originally T05.05) actually lives now that the agent is a
+	// decoction: the tag-driven cross-mod hook moves to the poultice grid recipe's MATERIAL/agent, and the bark itself
+	// enters here by code.
+	//
+	// BALANCE (1.3.9): one serving = 1 L water + 2 medicinal bark in EACH of three cooking slots (6 bark) -> 25 units
+	// (0.25 L) barkbrew = one poultice batch (poultice-bark.json: 0.25 L -> 4 poultices), so 1.5 bark per poultice, the
+	// price set at the 2026-07-28 playtest. The slot layout copies vanilla linseed oil (water + flax flour in 3 slots).
+	// A cook scales by servings: N servings = N L water + 2N bark in every bark slot -> 25N units. The ceiling is the slot
+	// cap, 6 bark / 2 = 3 servings = 18 bark + 3 L -> 0.75 L -> 12 poultices per cook. Before 1.3.9 the recipe was one
+	// slot of 6 bark, a single fixed serving of 4 poultices per cook; the author asked for bigger batches (2026-09-26).
+	// xSkills Canteen Cook raises the slot cap to 8/10/12 items, i.e. 4/5/6 servings; the price per poultice stays the same.
+	//
+	// ENGINE LIMITS (verified 2026-09-26: CookingRecipe.Matches, BlockCookingContainer, InventorySmelting):
+	//  - Servings do NOT add up across slots. Every slot must yield the SAME portion count (StackSize / validStack
+	//    stackSize, integer division), that count IS the serving number, and the water slot must hold exactly N litres.
+	//    Unequal slots or the wrong amount of water show "The item ratios are wrong" and nothing cooks.
+	//  - A fired clay pot has 4 cooking slots, 6 items and 6 L of liquid per slot, MaxServingSize 6. Water (1 slot) +
+	//    bark (3 slots) fills all four. Raising the slot cap was rejected: it is a global vanilla claypot attribute and
+	//    would let every meal over-stuff.
+	//  - minQuantity = maxQuantity = 3 on the bark is deliberate. With minQuantity 1 a single slot of 2 bark would match
+	//    and cut the price to 0.5 bark per poultice. The old habit of 6 bark in one slot now gets "No matching recipe
+	//    found". The handbook needs no extra text for it: the recipe row on the barkbrew page draws the ingredient
+	//    minQuantity times, i.e. water + three "bark 2" icons, the same way vanilla linseed oil shows its three slots.
+	//  - Integer division eats odd bark: 3/3/3 + 1 L matches as 1 serving and DoSmelt clears every cooking slot, so up to
+	//    one bark per slot burns with no warning. Only stackSize 1 avoids it, and that halves the price; the author picked
+	//    this layout knowing it (2026-09-26).
+	//  - Cook time does not grow with the batch: water adds 20 per litre, bark adds 0, duration = max(40, sum / 3) = 40.
+	{
+		"code": "barkbrew",
+		// isFood keeps the cooking pot CLEAN after brewing. ENGINE (BlockCookingContainer.DoSmelt, verified): a
+		// `cooksInto` recipe with `!IsFood` swaps the output block to `dirtiedBlockCode` (a game:dirtyclaypot) — that
+		// is exactly why vanilla oil (linseed) and glue leave a dirty pot. Vanilla `rendered fat` avoids it with
+		// `isFood: "true"`, so we mirror that. Where the brew ends up (verified 2026-09-26): DoSmelt writes the 25N units
+		// into the firepit's FIRST COOKING SLOT and puts an EMPTY claypot-{color}-cooked into the input slot, which reverts
+		// on the spot to the clean claypot-{color}-fired (BlockCookedContainer.UpdateAndGetTransitionStates ->
+		// emptiedBlockCode). The player takes the brew out of that slot with a bowl or bucket in the firepit GUI. Taking
+		// the pot out first discards the cooking slots (InventorySmelting.discardCookingSlots) and the spilled portion
+		// dies on the ground, so the whole batch is lost; vanilla oil behaves the same. IsFood has only ONE other effect
+		// (GetMatchingCookingRecipe): a medicinal brew can no longer be cooked in an already-dirty pot — intended, a
+		// healing decoction wants a clean vessel. No nutrition/perish side effects (the "nonfood-portions" info text is
+		// driven by CooksInto, not IsFood).
+		"isFood": true,
+		"perishableProps": {
+			"type": "None",
+			"freshHours": { "avg": 6 },
+			"transitionHours": { "avg": 0.01 },
+			"transitionRatio": 1,
+			"transitionedStack": { "type": "item", "code": "game:rot" }
+		},
+		"shape": { "base": "game:block/food/meal/liquid" },
+		"ingredients": [
+			{
+				"code": "water",
+				"validStacks": [ { "type": "item", "code": "game:waterportion", "shapeElement": "bowl/water" } ],
+				"minQuantity": 1,
+				"maxQuantity": 1,
+				"portionSizeLitres": 1
+			},
+			{
+				"code": "medicinalbark",
+				"validStacks": [ { "type": "item", "code": "immersivewoodworking:bark-medicinal", "stackSize": 2 } ],
+				"minQuantity": 3,
+				"maxQuantity": 3
+			}
+		],
+		"cooksInto": { "type": "Item", "code": "immersivewoodworking:barkbrew", "quantity": 25 }
+	}
+]

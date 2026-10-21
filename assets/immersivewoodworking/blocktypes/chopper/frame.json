@@ -1,0 +1,118 @@
+{
+	// Master frame of the AUTOMATED CHOPPER (`chopper`) — the mech-powered upgrade tier over the hand chopping
+	// block. It is the ONLY placed block; the rest of the machine is RMB-installed into it (E03/T03.07): chopperdrive
+	// (cam) + chopperarm (lever) + the hand `choppingblock` as the clamp-bed (user decision 2026-07-04) + chopperhead-
+	// {metal}. (The optional flywheel was cut 2026-07-04.) Mirrors blocktypes/sawmill/frame.json.
+	//
+	// T03.01: `class`/`entityClass` below are wired to the now-registered BlockChopper master + BlockEntityChopper
+	// state (the skeleton). The block already carries its BE and routes interactions to the master from here; the
+	// footprint capture + ghost-fillers (T03.03), per-cell collision (T03.02) and the mechanical power (E04) grow
+	// those classes further in their owner tasks.
+	code: "chopper",
+	class: "iw-chopper",
+	entityClass: "iw-chopper",
+	// `type:[frame]` (single state) keeps `frame` in the generated code as a variant so HorizontalOrientable's
+	// CodeWithVariant rebuild doesn't drop it (memory vs-horizontal-orientable-variant — the exact reason the
+	// sawmill frame carries a type variant). Declared BEFORE `side` so the order is chopper-{type}-{side} =
+	// chopper-frame-north. `side` gives the 4 horizontal facings (feed/strike axis), picked at placement by look.
+	behaviors: [ { name: "HorizontalOrientable" } ],
+	variantgroups: [
+		{ code: "type", states: [ "frame" ] },
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// T03.06 — `frame.shape` is ONLY the frame ICON (inventory / handbook + the per-facing rotateY source): the
+	// authored `chopper_frame.json` (dropmaul-frame — just the static frame). The full assembled MONOLITH
+	// `chopper.json` (frame + drive + arm + head in neutral pose) is NOT drawn statically here — it is reserved for the
+	// master BE's OnTesselation so E07/T07.01 can split it into a chunk-baked static part + procedurally-animated movers
+	// (drive/arm/head) driven from AngleRad. Until E07 lands, a placed frame shows just this icon. Per-facing render
+	// rotation, pulverizerframe-style; rotateY zero-point + east/west sign + scale/fit are PLACEHOLDER (sawmill values)
+	// and calibrate in-game against this asymmetric model at T07.06.
+	shapeByType: {
+		"*-north": { base: "immersivewoodworking:block/chopper/chopper_frame", rotateY: 180 },
+		"*-east":  { base: "immersivewoodworking:block/chopper/chopper_frame", rotateY: 90 },
+		"*-south": { base: "immersivewoodworking:block/chopper/chopper_frame", rotateY: 0 },
+		"*-west":  { base: "immersivewoodworking:block/chopper/chopper_frame", rotateY: 270 }
+	},
+	// Texture remap of the shape's Blender keys to real game: paths ("game:" REQUIRED — an unqualified path resolves
+	// to THIS mod's empty texture folder = magenta, memory vs-mod-asset-path-domain). The chopper_frame.json icon uses
+	// exactly two keys — oak (wood) + metal (hardware). The shape file itself was also re-pinned to game: paths, so
+	// this block-level override is belt-and-suspenders (overrides by key).
+	//
+	// T07.01: the master BE ALSO tesselates the full MONOLITH `chopper.json` here (OnTesselation static frame + the
+	// mover renderer, all via `GetTextureSource(Block)` = this map), and that model uses a THIRD face code `#0` — 122
+	// faces the Blender export leaves without a material slot, on the movers (gear-active 36 / gear-passive 36 /
+	// MainRotor 16 / Rotor 34). Those movers paint from THIS map (not the head's this["metal"]), so the code MUST be declared
+	// here or they fall back to unknown.png = magenta. Mapped to game: OAK, matching the monolith's own `textures["0"]`
+	// value and exactly how the sawmill frame declares its own stray "0" faces (blocktypes/sawmill/frame.json).
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" },
+		"0":     { base: "game:block/wood/debarked/oak" }
+	},
+	// Handbook page: the assemble + operate how-to. Full text is polished in E08/T08.02; T02.04 seeds neutral
+	// placeholder strings for these keys so the page never shows a raw key.
+	//
+	// NO `include` key here, deliberately (fixed 2026-08-01). The page comes from the creative entry below, which
+	// `creativeinventory: { "general": ["*-north"] }` grants to "-north" ALONE — the other three facings land in no
+	// tab, and Collectible.GetHandBookStacks (vsapi/Common/Collectible/Collectible.cs:2480-2485) returns null for
+	// anything with neither a creative tab nor creativeinventoryStacks. `include` is the ONLY thing that overrides
+	// that null, so the unconditional `include: true` that stood here until 2026-08-01 kept east/south/west alive
+	// too: each got a bare stack and its own page, and the frame printed FOUR near-identical handbook entries. The
+	// old comment here claimed the opposite. Vanilla pulverizerframe.json carries no `include` at all — that is
+	// exactly why its page count is one, and this is now the same (vanilla) path. Should this block ever leave the
+	// creative inventory, bring the key back as `includeByType: { "*-north": true }`, never bare. NOT the same case
+	// as blocktypes/sawhorse.json, whose bare `include: true` is correct: it has no variantgroups and no creative
+	// entry, so the key is the only thing giving it a page at all.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:chopper-handbook-title", text: "immersivewoodworking:chopper-handbook-text" }
+			]
+		}
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	lightAbsorption: 0,
+	// Only the canonical "-north" in creative (placement re-orients to look; the other 3 drop/pick as -north), so
+	// the player never sees four near-identical frames. Mirrors pulverizerframe / the sawmill frame. This line is
+	// ALSO the block's sole handbook-page source now that `handbook.include` is gone — narrowing or dropping it
+	// silently takes the handbook page with it (see attributes.handbook above).
+	creativeinventory: { "general": ["*-north"] },
+	blockmaterial: "Wood",
+	// Two-handed carry like the sawmill frame / vanilla pulverizerframe (it's a big assembled machine).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	heldRightReadyAnimation: "heldblockready",
+	heldTpUseAnimation: "twohandplaceblock",
+	// In-hand / ground / GUI transforms — calibrated in-game via .tfedit (2026-07-05, T07.06 held-item pass). The
+	// guiTransform BAKES the block-default isometric rotation (-22.6, -45.3) explicitly: a partial guiTransform does NOT
+	// merge with ModelTransform.BlockDefaultGui() — CollectibleType.GuiTransform is a ModelTransform whose
+	// [OnDeserialized] zeroes any rotation/translation left unspecified, so a scale-only guiTransform would flatten the
+	// inventory icon face-on instead of scaling the default isometric view. tp/ground each carry their own rotation, so
+	// they are safe as authored.
+	tpHandTransform: {
+		translation: { x: -1.6, y: -1, z: -0.6 },
+		rotation: { x: -81, y: 11, z: -101 },
+		scale: 0.45
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: -45, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.52
+	},
+	guiTransform: {
+		rotation: { x: -22.6, y: -45.3, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 0.76
+	},
+	maxStackSize: 1,
+	resistance: 3.5,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

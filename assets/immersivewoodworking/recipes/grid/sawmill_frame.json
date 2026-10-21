@@ -1,0 +1,37 @@
+{
+	// Grid recipe (T02.03; revised — metal plates → resin, + non-consumed hammer) — the sawmill MASTER frame block
+	// `sawmill-frame` (the one block the player places; the item-parts are RMB-installed into it in E03). Built from
+	// what you ripped by hand — planks + support beams (sawhorse products) — bound with resin and assembled with a hammer.
+	//   H M P     H = hammer (tag tool-hammer, isTool + toolDurabilityCost 0 → returned with NO wear), top-left corner
+	//   B B B     M = resin  (game:resin — the binder/glue; REPLACES the old metal plates)
+	//   P M P     P = plank   (game:plank-* item, sawhorse product)    B = support beam (game:supportbeam-* block)
+	// Vanilla ingredients MUST be game:-prefixed: an unqualified code in a MOD recipe resolves to THIS mod's domain
+	// (immersivewoodworking), where plank/supportbeam/resin don't exist (memory vs-mod-asset-path-domain). The output
+	// is the canonical "-north" variant: the frame carries a "side" variantgroup (T03.04), so its code is
+	// sawmill-frame-{north|east|south|west} and bare `sawmill-frame` no longer resolves. Placement re-orients to the
+	// player's look (HorizontalOrientable), so crafting the -north variant is correct. Wildcards are by CODE (memory
+	// vs-recipe-ingredient-code-vs-tags), not tags; the hammer is matched by TAG with no code (any hammer, mod-independent)
+	// and isTool+toolDurabilityCost:0 returns it untouched. The `name` keys label which cells are one material, they do
+	// NOT force it: cell binding is the RecipeLoader's per-variant expansion, and this enabled:false template is
+	// registered from C# instead, which never expands (AuditFixPlan T10.02) — planks and beams of assorted species are
+	// accepted, by design, since the output bakes no species. What the separate plank/beam names DO carry is the domain
+	// split (see the registration note below).
+	// SHAPE + QUANTITIES ARE TBD (balance — "determine in practice"); the structure is valid and loads. No blades here
+	// (vanilla sawblade-{metal}, installed into the sash at assembly, E03). No rope (tension via sash+nails).
+	// enabled:false → now a TEMPLATE: RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterSawmillRecipes
+	// re-registers it once per discovered wood DOMAIN, re-pointing the P (plank) / B (support beam) slots to
+	// {domain}:plank-* / {domain}:supportbeam-* so a wood mod's own-domain products (what the sawhorses make from a
+	// modded log) craft it — the game:-pinned wildcards below never match wildcrafttree:plank-*. The game-domain recipe
+	// is registered from this same template, so vanilla crafting is unchanged.
+	enabled: false,
+	ingredientPattern: "HMP,BBB,PMP",
+	ingredients: {
+		"H": { type: "item",  tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 },
+		"M": { type: "item",  code: "game:resin" },
+		"P": { type: "item",  code: "game:plank-*",       name: "wood" },
+		"B": { type: "block", code: "game:supportbeam-*", name: "beam" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "sawmill-frame-north", quantity: 1 }
+}

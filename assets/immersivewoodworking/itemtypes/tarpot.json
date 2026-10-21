@@ -1,0 +1,265 @@
+{
+	// TAR POT (BarkPlan/E04, T04.02/T04.09, decisions D7/D10/D11/D14 + colour B). The sealed two-vessel birch-tar
+	// assembly, as a carriable PRODUCT: a claypot receiver + a birch-packed perforated pot on top, sealed with a clay
+	// lid+daub. The player seals the in-world rig (T04.09) into this item, ground-stores a stack of them, builds a pit
+	// kiln, fires them, then opens each fired pot (T04.05) for hard tar + a dirty claypot + the perforated pot back.
+	//
+	// Why an ITEM (plan said itemtypes/tarpot.json) even though it is fired in a kiln: the pit kiln fires whatever is
+	// GROUND-STORED, and GroundStorable is a COLLECTIBLE behaviour (BEPitKiln.KillFire reads
+	// CollectibleBehaviorGroundStorable) — 182 vanilla itemtypes use it. Vanilla claypot is only a block for save-compat
+	// (its own JSON says "should be an item"); a fresh mod product is correctly an item with GroundStorable.
+	//
+	// COLOUR AXES (decision B, 2026-07-26; receiver axis widened back to ten 2026-07-29; perforated-pot axis added
+	// 2026-07-29). BOTH vessels have a colour, and the player expects "my pots, my pots back". But the pit kiln clones the
+	// JSON SmeltedStack and DROPS item attributes (BEPitKiln.OnFired transfers only stacksize, D11), so a colour stored as
+	// an attribute would not survive firing. So BOTH colours ride the CODE: tarpot-{color}-{perfcolor}-sealed fires to
+	// tarpot-{color}-{perfcolor}-fired (a code->code map the kiln preserves), and opening (T04.05) hands back
+	// dirtyclaypot-{color} + perforatedpot-{perfcolor}-fired. Sealing builds the code from the rig's two cached colours
+	// (BlockTarPot.SealRig).
+	//
+	// STATE axis (D10 collapsed green/dry — a pot sealed with wet vs dry birch looks and fires identically; the wet
+	// penalty is expressed by needing twice the birch when packing, T04.09). The unfired code is `-sealed` (not a bare
+	// `tarpot`): it leaves the bare `tarpot` name free for the assembled-construction BLOCK (T04.03), and a block and an
+	// item live in separate registries so there is no clash.
+	code: "tarpot",
+
+	// Mesh override (2026-07-29). Without a class this item drew the plain JSON mesh of pot-combined — and since the
+	// D41 model merge that shape carries the four cumulative birch groups, so a SEALED pot rendered wrapped in bark
+	// instead of shut under its lid (D41 flagged this as its one unverified visual; the playtest confirmed the break
+	// appears exactly at sealing, while the unsealed rig renders correctly). ItemTarPot draws the shell + lid + daub
+	// with the birch hidden (TarRig.PotMesh stage 0, withLid) for held/GUI/dropped AND for the ground-storage quadrant
+	// the pot is sealed into. The string MUST match RegisterItemClass("iw-tarpot-item") in the ModSystem.
+	class: "iw-tarpot-item",
+
+	// `color` = the RECEIVER's colour, and the receiver is a VANILLA claypot, which comes in all TEN colours
+	// (survival/blocktypes/clay/fired/pot.json: blue, fire, black, brown, cream, earthyorange, gray, orange, red, tan).
+	// So this axis MUST mirror vanilla's ten, exactly like game:dirtyclaypot does.
+	//
+	// This reverts the 2026-07-28 cut to blue/fire/red, which was a category error: that restriction is CORRECT for the
+	// perforated pot (the player CLAY-FORMS it, and clay only exists as blue/fire/red, so wider axes were unobtainable
+	// clutter) but WRONG here, because a sealed pot's colour is inherited from a receiver the player legitimately owns in
+	// ten colours. The playtest hit it immediately: sealing onto a brown or black pot found no `tarpot-{color}-sealed`,
+	// silently fell back to blue, and the pot came out the wrong colour. Colour has to ride the CODE (not attributes)
+	// because the pit kiln clones the JSON SmeltedStack and drops item attributes when firing (D11/D23).
+	//
+	// `perfcolor` = the PERFORATED pot's own colour, added 2026-07-29 (user request). Until then the perforated pot's
+	// colour was simply forgotten at sealing — the sealed pot was monochrome in the receiver's colour and opening handed
+	// back a perforated pot in the RECEIVER's colour, i.e. usually not the pot you put in (the D39 "sacrifice", which
+	// became the routine outcome once the receiver axis went back to ten). It cannot ride attributes for the same kiln
+	// reason as `color`, so it gets its own code axis. Its states MUST stay in lockstep with blocktypes/perforatedpot.json's
+	// colour axis (blue/fire/red = the three real clays); widening that one means widening this one.
+	//
+	// 10 x 3 x 2 = 60 codes. That is deliberate and cheap (vanilla routinely carries far more per type, e.g. toolmold):
+	// codes are the ONLY channel that survives the kiln. They never crowd creative or the handbook — `creativeinventory`
+	// below lists three representatives, and everything else exists purely so every real pot pairing round-trips.
+	variantgroups: [
+		{ code: "color", states: ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
+		{ code: "perfcolor", states: ["blue", "fire", "red"] },
+		{ code: "state", states: ["sealed", "fired"] }
+	],
+
+	// Ground-storable so a stack can be laid down and pit-kiln fired (Quadrants, mirroring vanilla pottery). Both states
+	// carry it: after OnFired the fired pots sit in the same ground-storage pile to be picked up. The FIRED variant ALSO
+	// carries iw-tarpotopen (T04.05): a plain-RMB on a fired pot in hand INSTANTLY pops it open into barktar x8 + a dirty
+	// receiver + the perforated pot (Shift+RMB stays the GroundStorable place gesture, so the two never collide). The
+	// SEALED variant has only GroundStorable — you can't open an unfired pot.
+	//
+	// `placeRemoveSound` MUST carry the `game:` domain. GroundStorable deserializes its properties with
+	// `properties.AsObject<GroundStorageProperties>(null, collObj.Code.Domain)` (BehaviorGroundStorable.cs:115), which
+	// installs an AssetLocationJsonParser stamping THIS MOD's domain onto any unqualified path (JsonObject.cs:107-117).
+	// So the bare "sounds/player/build" resolved to `immersivewoodworking:sounds/player/build` — a file the mod does not
+	// ship — and laying a sealed/fired pot down or picking it back up was SILENT (playtest «при установке Fired tar pot
+	// нет звука», D44). Nothing rescued it: the Quadrants sites play the location VERBATIM (BEGroundStorage.cs:1041/1052/
+	// 1071, all inside `putOrGetItemSingle`), and so does the Stacking TAKE site (:1003, inside `TryTakeItem`) — only the
+	// Stacking PUT sites (:899/:938, `TryPutItem`) call `.WithPathPrefixOnce("sounds/")`. I.e. a bare path is repaired on
+	// exactly one of vanilla's five paths, so the `sounds/` prefix AND the domain both have to live in the JSON. The
+	// perforated pot and the rig block OMIT this key and are audible precisely because the C# default
+	// `new AssetLocation("sounds/player/build")` (BehaviorGroundStorable.cs:45) resolves in the `game` domain — that
+	// asymmetry between our own vessels was the "sometimes no sound".
+	//
+	// `iw-sneaktoplace` ON THE SEALED VARIANT ONLY (D50). A plain right click with a sealed pot in hand did nothing
+	// whatsoever — GroundStorable is a Shift gesture and this variant carries no other behaviour — while a vanilla FIRED
+	// clay pot answers the same click with "Hold down [Shift] to place this block". This is an ITEM, so it never enters the
+	// block-placement path at all (the engine gates that on `Itemstack.Class == EnumItemClass.Block`) and there is no
+	// TryPlaceBlock to override; a collectible behaviour is the only seam, and it works identically on our pot BLOCKS.
+	// The `-fired` variant MUST NOT get it: a plain right click there already opens the pot (`iw-tarpotopen`), and the two
+	// would talk over each other. That split is exactly why this rides `behaviorsByType` and not a class override —
+	// ItemTarPot is shared by both states, so a code gate could be got wrong; a JSON key cannot.
+	behaviorsByType: {
+		"tarpot-*-fired": [
+			{ name: "GroundStorable", properties: { layout: "Quadrants", placeRemoveSound: "game:sounds/player/build", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.35, z2: 1 } } },
+			{ name: "iw-tarpotopen" }
+		],
+		"tarpot-*-sealed": [
+			{ name: "GroundStorable", properties: { layout: "Quadrants", placeRemoveSound: "game:sounds/player/build", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.35, z2: 1 } } },
+			{ name: "iw-sneaktoplace" }
+		]
+	},
+
+	// HELD POSE — carried like a vanilla clay pot (2026-07-29, user request). This item declared NO held animation at
+	// all, so the seraph fell back to no idle anim (a generic one-handed carry) while its hand transform had been
+	// hand-copied from the RAW pot. `heldTpIdleAnimation` is a COLLECTIBLE property, not a block one
+	// (Collectible.cs:953, read in EntityPlayer.cs:822), so it works on an ITEM exactly as on vanilla's pot BLOCK —
+	// 57 vanilla itemtypes use it. The reference is the FIRED clay pot (`fired/pot.json` = "holdbothhandslarge"), the
+	// pot the player actually carries; the raw pot's "holdbothhands" is the small-object carry, and a sealed tar pot is
+	// two vessels stacked, so the large two-handed idle is also the honest one for its bulk. The hand transform below
+	// MUST follow this choice: vanilla tunes a different `tpHandTransform` per animation, because the two animations put
+	// the hands in different places.
+	heldTpIdleAnimation: "holdbothhandslarge",
+
+	// The place animation goes to the SEALED variant ONLY — the same split, for the same reason, as `iw-sneaktoplace`
+	// above (D50). The engine plays the held-USE animation on ANY right-mouse hold: the gate is literally
+	// `HandUse == BlockInteract || HeldItemInteract || (RightMouseDown && !LeftMouseDown)` (EntityPlayer.cs:814), with
+	// no way to scope it to a gesture. On a SEALED pot that is harmless and correct — its only right-click gesture is
+	// the Shift+RMB ground place, exactly like a vanilla pot. On a FIRED pot the plain right click is the INSTANT open
+	// (D40), so "twohandplaceblock" would fire the place motion every single time a pot is opened; the fired variant
+	// therefore keeps the engine default `interactstatic` (Collectible.cs:247), which reads as prying at something and
+	// suits opening. An unmatched byType leaves the property at its default — the same mechanism `combustiblePropsByType`
+	// below relies on to give the fired pot no combustibleProps at all.
+	heldTpUseAnimationByType: {
+		"tarpot-*-sealed": "twohandplaceblock"
+	},
+
+	// Assembled two-vessel shell shape (T04.01/D20, re-materialled 2026-07-28 with separate top/bot/lid/daub keys). The
+	// sealed/fired PRODUCT is TWO-TONE, exactly like the unsealed rig it was folded from: the upper (perforated) body and
+	// its lid take {perfcolor}, the lower (receiver) body takes {color}. That is what makes the preserved perforated-pot
+	// colour VISIBLE — before this the pot went monochrome at sealing and the player had no way to tell which pot was
+	// inside. The daub (`clay` key) is the unfired clay smear used to seal, so it takes a raw fire-clay texture. Plain
+	// textures with placeholders is the vanilla claypot idiom (every variant has both colours). The birch is not shown on
+	// the sealed item (packed under the lid); the visible packing stages live on the in-world stations (T04.09 render).
+	// NOTE: the item is class-driven (ItemTarPot builds the real mesh via TarRig.PotMesh with the same two textures);
+	// these declarations keep the JSON self-consistent and feed the item atlas.
+	//
+	// SOOT ON THE LOWER BODY (2026-07-29). The receiver may be a clean `game:claypot-{color}-fired` OR an already-sooty
+	// `game:dirtyclaypot-{color}-empty` — both are accepted receivers (BlockPerforatedPot.IsEmptyFiredClayPot) and the
+	// unsealed rig renders that difference. It is expressed here per STATE, because the two states know different amounts:
+	//   • `-sealed`  — the lid is merely on; nothing has been distilled yet, so the pot is exactly as clean or as sooty as
+	//     the receiver you built it on. That is per-INSTANCE and cannot ride a code, so the class reads a `recvDirty` stack
+	//     attribute (ItemTarPot.ReceiverTex); these declarations are the clean-receiver fallback, the common case.
+	//   • `-fired`   — the pot has been through dry distillation with tar inside. There is no such thing as a clean fired
+	//     tar pot: opening one hands back `dirtyclaypot` unconditionally (BehaviorTarPotOpen.cs:166, D8). So the soot is
+	//     baked into the declaration and needs no data channel — which is what makes it survive the pit kiln, unlike an
+	//     attribute (BEPitKiln.OnFired clones the JSON SmeltedStack and copies only StackSize, D11/D23).
+	// The `dirty{color}` textures exist for all ten vanilla colours (game:block/clay/pot/dirty*.png) and are already
+	// atlas-resident via vanilla dirtypot.json, so this costs nothing.
+	shape: { base: "immersivewoodworking:block/pot-combined" },
+	texturesByType: {
+		"tarpot-*-fired": {
+			"pot-combined-empty-top": { base: "game:block/clay/pot/{perfcolor}" },
+			"pot-combined-empty-bot": { base: "game:block/clay/pot/dirty{color}" },
+			"pot-combined-lid":       { base: "game:block/clay/pot/{perfcolor}" },
+			"clay":                   { base: "game:block/clay/fireclay" }
+		},
+		"tarpot-*-sealed": {
+			"pot-combined-empty-top": { base: "game:block/clay/pot/{perfcolor}" },
+			"pot-combined-empty-bot": { base: "game:block/clay/pot/{color}" },
+			"pot-combined-lid":       { base: "game:block/clay/pot/{perfcolor}" },
+			"clay":                   { base: "game:block/clay/fireclay" }
+		}
+	},
+
+	maxstacksize: 4,
+
+	// Kiln firing sealed -> fired, mirroring vanilla raw-pottery combustibleProps, per COLOUR PAIR. The `*-sealed` wildcard
+	// matches every pairing's sealed variant (`*` spans dashes — WildcardUtil compiles it to `(.*)`); `{color}` and
+	// `{perfcolor}` in the SmeltedStack code resolve per-variant (the vanilla toolmold idiom: byType values carry variant
+	// placeholders, e.g. shapebytype "*-axe" -> "block/clay/mold/{tooltype}"), so tarpot-brown-red-sealed fires to
+	// tarpot-brown-red-fired and BOTH colours cross the kiln intact.
+	// The fired variants carry NO combustibleProps (they must not re-fire). smeltedRatio 1: one sealed pot yields one
+	// fired pot (the "4 tar per pot" batch is the OPENING yield in T04.05, not the firing ratio — the pit kiln clones
+	// the JSON SmeltedStack and drops attributes, so a fixed 1->1 fired code is the clean path, D11).
+	combustiblePropsByType: {
+		"tarpot-*-sealed": {
+			meltingPoint: 600,
+			meltingDuration: 30,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			requiresContainer: false,
+			smeltedStack: { type: "item", code: "immersivewoodworking:tarpot-{color}-{perfcolor}-fired" }
+		}
+	},
+
+	// Show three representative codes in creative rather than all sixty: the matching-colour sealed pots (the product the
+	// player places and fires). Listing the full 10x3 grid would be pure clutter — a sealed pot is not something you pick
+	// from creative to use, you build it. Every other pairing still EXISTS as a code so any receiver+pot combination
+	// seals, fires and opens correctly; it is just not offered here. Sealed only: the fired pot is transient (opened at
+	// once, T04.05) and takes its handbook page below WITHOUT a creative entry.
+	creativeinventory: {
+		general: ["tarpot-blue-blue-sealed", "tarpot-fire-fire-sealed", "tarpot-red-red-sealed"],
+		items:   ["tarpot-blue-blue-sealed", "tarpot-fire-fire-sealed", "tarpot-red-red-sealed"]
+	},
+
+	// ONE HANDBOOK PAGE PER STATE (AuditFixPlan/T08.04, F-L7-02 + F-L7-15). Sixty codes exist for the pit kiln, not for
+	// the reader: `-sealed` and `-fired` are the only difference a player can name (neither item NAME mentions colour),
+	// so the book keeps one page each and `ItemTarPot.HandbookPageCodeForStack` sends all sixty codes to those two.
+	//
+	// What it replaces. Pages are minted from the creative list (`Collectible.GetHandBookStacks` returns null to anything
+	// with no tab and no `include`), so the three creative codes had three near-identical SEALED pages while all thirty
+	// FIRED codes had none: H over a fired pot opened nothing, and the "Fires into" arrow on a sealed page pointed at a
+	// page that does not exist — silently, since `OpenDetailPageFor` just returns false. `groupBy` was never going to
+	// cover that: it folds icon REFERENCES within an already existing set of pages and creates none (D6).
+	//
+	// Hence `include` on the one fired representative (a page, still no creative entry) and `exclude` on the catch-all.
+	// The catch-all MUST stay LAST — `solveByType` takes the FIRST matching key and breaks. Every entry repeats
+	// `groupBy` for the same reason bark.json does: the merge of `attributesByType` INTO `attributes` is verified at the
+	// top level, the nested one is not, and repeating one short line settles the question.
+	attributes: {
+		handbook: { groupBy: ["tarpot-*-{state}"] },
+		// How the sealed pot sits when ground-stored in the kiln pile; starting value, tuned in-game at T04.08.
+		groundStorageTransform: {
+			translation: { x: 0, y: 0, z: 0 },
+			rotation: { x: 0, y: 0, z: 0 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 1
+		}
+	},
+	attributesByType: {
+		"tarpot-blue-blue-sealed": {
+			handbook: {
+				groupBy: ["tarpot-*-{state}"],
+				extraSections: [
+					{ title: "immersivewoodworking:tarpot-sealed-handbook-title", text: "immersivewoodworking:tarpot-sealed-handbook-text" }
+				]
+			}
+		},
+		"tarpot-blue-blue-fired": {
+			handbook: {
+				groupBy: ["tarpot-*-{state}"],
+				include: true,
+				extraSections: [
+					{ title: "immersivewoodworking:tarpot-fired-handbook-title", text: "immersivewoodworking:tarpot-fired-handbook-text" }
+				]
+			}
+		},
+		"*": {
+			handbook: { groupBy: ["tarpot-*-{state}"], exclude: true }
+		}
+	},
+
+	// Calibrated in-game with .tfedit by the author (2026-07-29, T04.08 visual pass) — these are final, not starting
+	// values. They belong to the MERGED two-vessel `pot-combined` mesh ItemTarPot builds, which is roughly twice the
+	// height of a vanilla pot, so they legitimately differ from claypot's: the GUI pose tips the pot forward to show the
+	// lid, and the ground pose lifts it clear of the surface at scale 4.
+	guiTransform: {
+		translation: { x: 1, y: 1, z: 0 },
+		rotation: { x: 160, y: 47, z: 0 },
+		origin: { x: 0.5, y: 0.35, z: 0.5 },
+		scale: 1.7
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.4, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		scale: 4
+	},
+	// Hand pose: the vanilla FIRED clay pot's ROTATION and ORIGIN (`fired/pot.json`), kept verbatim because they are what
+	// `holdbothhandslarge` above is authored against — vanilla tunes a different transform per held animation, and the
+	// pot's raw variant (-52/20/-110) belongs to the other one. Translation and scale were then dialled in with .tfedit
+	// by the author (2026-07-29): the merged two-vessel mesh is about twice the height of `pot-opened-empty`, so it sits
+	// closer to the hand (z -0.5) and slightly lower (y -0.05) than a single pot at a near-vanilla 0.75 scale.
+	tpHandTransform: {
+		translation: { x: -0.4, y: -0.05, z: -0.5 },
+		rotation: { x: -82, y: 19, z: -103 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.75
+	}
+}

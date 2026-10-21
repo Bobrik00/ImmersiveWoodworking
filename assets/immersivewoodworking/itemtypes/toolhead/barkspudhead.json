@@ -1,0 +1,118 @@
+﻿{
+	// Bark spud HEAD — the forged toolhead `barkspudhead-{metal}` that becomes a bark spud once hafted
+	// (head + stick → barkspud-{metal}, T02.03). Authored as an ordinary vanilla toolhead so it rides the
+	// whole stock pipeline for free: forged on an anvil (T02.02), Quenchable, GroundStorable, handbook-grouped.
+	//
+	// METALS = the FULL vanilla tool set, identical to the vanilla saw / this mod's pitsaw (copper through
+	// steel, incl. soft gold/silver) — the bark spud is craftable from the same metals as any ordinary tool
+	// (user decision 2026-06-28, reversing the earlier "bronze-up gate"). The spud's tier-3 identity comes from
+	// being a CRAFTED dedicated tool (forge a head + haft it), NOT from a metal-age gate: even a copper spud
+	// must be made. The metal is a DURABILITY tier on the assembled tool, not a speed tier — speed is by tool
+	// TYPE (T01.03), so a copper and a steel spud both debark at ~1s.
+	//
+	// The code intentionally contains "head" so Toolsmith's toolhead regex ("head"/"blade",
+	// config/toolsmith/regex/toolheads/toolheads-base.json) classifies it as a HEAD. But naming alone is NOT
+	// enough (verified against decompiled Toolsmith 1.2.17, T02.04): Toolsmith only attaches the ToolHead
+	// behavior to a head when a grid recipe produces an OUTPUT that is already registered as a Tinkerable Tool
+	// (RecipeRegisterModSystem.AssetsFinalize gates head capture on the recipe output, not the head's name).
+	// So this head becomes workbench-tinkerable ONLY because we register the assembled tool as tinkerable via
+	// assets/immersivewoodworking/config/toolsmith/regex/tinkerabletools/tinkerabletools-immersivewoodworking.json
+	// = ["barkspud"] (T02.04). The assembled `barkspud-*` (T02.03) contains neither "head" nor "blade", so it is
+	// never mis-detected as a part. (See memory vs-toolsmith-compat; mis-detect guard = T02.05.)
+	code: "barkspudhead",
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	],
+	// Iron/meteoric/steel come off the anvil hot and can be quenched (mirrors vanilla hammerhead/axehead).
+	// GroundStorable lays the head FLAT on the ground like a vanilla axe/shovel/hammer head — Shift+RMB to
+	// place, up to 4 per block (Quadrants layout), no wall required. Props are identical to game:axehead /
+	// shovelhead / hammerhead. (Previously this was 'WallHalves' + wallOffY + ctrlKey, copied wholesale from
+	// cleaverhead, which made the spud head awkwardly lean against a wall — switched to the ordinary toolhead
+	// layout 2026-06-30 so it behaves like every other head.)
+	behaviorsByType: {
+		// iw-toolsmithbenchmesh: Toolsmith-only render shim — swaps to the floor-origined item/barkspudhead-toolsmith
+		// shape ONLY while this head sits in a Toolsmith workbench slot (whose hardcoded transform seats a part by
+		// its shape geometry, ignoring all item transforms); returns null everywhere else so inventory/hand/ground
+		// keep the normal centred item/barkspudhead. Inert without Toolsmith. behaviorsByType matches ONE key, so it
+		// must be in BOTH lists. Replaces the deleted global patch patches/toolsmith_head_shape.json.
+		"@(.*-steel|.*-meteoriciron|.*-iron)": [
+			{ name: "GroundStorable", properties: { layout: 'Quadrants', collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "Quenchable" },
+			{ name: "iw-toolsmithbenchmesh" }
+		],
+		"*": [
+			{ name: "GroundStorable", properties: { layout: 'Quadrants', collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
+			{ name: "iw-toolsmithbenchmesh" }
+		]
+	},
+	heldTpUseAnimation: "interactstatic",
+	maxstacksize: 4,
+	// Blender-authored head (source art/shapes/barkspud-head.json). Its whole body is
+	// metal; the shape's lone texture key "metal" is overridden per-variant below. "immersivewoodworking:" = the
+	// model lives in THIS mod's domain.
+	shape: { base: "immersivewoodworking:item/barkspudhead" },
+	// Per-variant ingot colour, like every vanilla toolhead. "game:" required — an unqualified path resolves to
+	// this mod's domain, where the vanilla ingot textures don't exist (memory vs-mod-asset-path-domain).
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	attributes: {
+		// Re-heatable in a forge (so iron/steel can be re-quenched), and grouped by metal in the handbook —
+		// same as vanilla toolheads. Anvil forging recipe is T02.02; on-tong / in-forge framing transforms are
+		// set below (inForgeTransform / onTongTransform), tuned in-game with .tfedit.
+		forgable: true,
+		handbook: {
+			groupBy: ["barkspudhead-*"]
+		},
+		// Poses the head as it lies ground-stored (GroundStorable Quadrants layout); tuned in-game with .tfedit.
+		groundStorageTransform: {
+			translation: { x: 0, y: -0.475, z: 0 },
+			rotation: { x: -4, y: -17, z: -6 },
+			scale: 0.72
+		},
+		// Framing while held over the firepit/forge and while gripped in tongs; tuned in-game with .tfedit.
+		// Tong pose is per tong TYPE: the tong item carries a transformCode telling the engine which key to read
+		// off this head — WOODEN tongs (game:tongs) → onTongTransform, METAL tongs (game:tongsmetal) →
+		// onMetalTongTransform (ItemTongs.cs). The two grips differ, so one value can't sit on both. A MISSING
+		// key falls back to onTongTransform for BOTH read AND write, so onMetalTongTransform must physically
+		// EXIST here or .tfedit can never tune the metal grip apart from the wooden one — hence both are present.
+		inForgeTransform: {
+			translation: { x: 0, y: -0.42, z: 0.02 },
+			rotation: { x: 0, y: 53, z: 13 },
+			scale: 0.79
+		},
+		// Wooden tongs. NOTE: still holds the iron-grip value (was the only key, so metal tongs tuned via fallback);
+		// re-tune in-game with WOODEN tongs equipped — the head currently floats in the wooden grip.
+		onTongTransform: {
+			translation: { x: -1.1, y: -0.69, z: -0.5 },
+			rotation: { x: -88, y: -27, z: -80 },
+			scale: 0.89
+		},
+		// Metal tongs — seeded from the iron-tuned value so the metal grip now reads its OWN key (no longer a fallback).
+		onMetalTongTransform: {
+			translation: { x: -1.1, y: -0.69, z: -0.5 },
+			rotation: { x: -88, y: -27, z: -80 },
+			scale: 0.89
+		}
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Starting display transforms cloned from the vanilla cleaverhead (a similar single-blade head); fine-tune
+	// in-game with .tfedit if framing is off (the mod's standard workflow — see pitsaw.json).
+	guiTransform: {
+		translation: { x: 4, y: 11, z: 0 },
+		rotation: { x: 78, y: 48, z: -165 },
+		origin: { x: 0.5299, y: 0.48, z: 0.4 },
+		scale: 2.26
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.03, z: 0 },
+		rotation: { x: -7, y: -11, z: -2 },
+		origin: { x: 0.5, y: 0.5, z: 0.45 },
+		scale: 3.54
+	},
+	tpHandTransform: {
+		translation: { x: -0.8, y: -0.5, z: -0.52 },
+		rotation: { x: 0, y: -3, z: 0 },
+		scale: 0.94
+	}
+}

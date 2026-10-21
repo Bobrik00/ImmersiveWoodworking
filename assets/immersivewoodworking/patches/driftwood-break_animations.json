@@ -1,0 +1,310 @@
+[
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "driftwood-break",
+                      "animation":  "driftwood-break",
+                      "animationSpeed":  0.6,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  8,
+                      "easeOutSpeed":  12,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage"
+                                           }
+                  }
+    },
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "driftwood-break-fp",
+                      "animation":  "driftwood-break-fp",
+                      "animationSpeed":  0.6,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  8,
+                      "easeOutSpeed":  12,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage"
+                                           }
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "driftwood-break",
+                      "code":  "driftwood-break",
+                      "version":  0,
+                      "quantityframes":  21,
+                      "onActivityStopped":  "PlayTillEnd",
+                      "onAnimationEnd":  "EaseOut",
+                      "keyframes":  [
+                                        {
+                                            "frame":  1,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  2.304708170316464,
+                                                                               "rotationY":  -1.2302550606848968,
+                                                                               "rotationZ":  -36.640273179872,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  0.9462706293128453,
+                                                                               "rotationY":  0.8419972795445811,
+                                                                               "rotationZ":  -32.29404964116907,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  -2.496511835041474,
+                                                                               "rotationY":  9.470304878580093,
+                                                                               "rotationZ":  -36.46285218599178,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -0.867155694382916,
+                                                                               "rotationY":  -0.8023295151967318,
+                                                                               "rotationZ":  -30.066704462260418,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  10,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  -24.266695649287737,
+                                                                               "rotationY":  -31.986400845478784,
+                                                                               "rotationZ":  -29.237567308345042,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  26.2438390460678,
+                                                                               "rotationY":  10.980607406910712,
+                                                                               "rotationZ":  -63.733956805871344,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  32.82384350942486,
+                                                                               "rotationY":  35.93571184622852,
+                                                                               "rotationZ":  -44.35295694159629,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -11.879519212065986,
+                                                                               "rotationY":  -7.686022118299093,
+                                                                               "rotationZ":  -52.656154953297744,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  20,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  4.8723286779201125,
+                                                                               "rotationY":  -7.998016621848823,
+                                                                               "rotationZ":  -19.55353215025691,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  47.44363461649996,
+                                                                               "rotationY":  17.58407271629312,
+                                                                               "rotationZ":  -69.02947077127396,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  2.7473078436278655,
+                                                                               "rotationY":  6.5433306163823275,
+                                                                               "rotationZ":  -26.029374521223986,
+                                                                               "offsetX":  -4.2468368377512888E-08,
+                                                                               "offsetY":  4.0907288223479554E-08,
+                                                                               "offsetZ":  2.3101181056972564E-07
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -32.08314705997742,
+                                                                               "rotationY":  -18.72166462822082,
+                                                                               "rotationZ":  -57.33850917652995,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        }
+                                    ]
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "driftwood-break-fp",
+                      "code":  "driftwood-break-fp",
+                      "version":  0,
+                      "quantityframes":  21,
+                      "onActivityStopped":  "PlayTillEnd",
+                      "onAnimationEnd":  "EaseOut",
+                      "keyframes":  [
+                                        {
+                                            "frame":  1,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  2.714042261048974,
+                                                                               "rotationY":  2.7709341082971837,
+                                                                               "rotationZ":  -66.38106492060149,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  0.9462706293128453,
+                                                                               "rotationY":  0.8419972795445811,
+                                                                               "rotationZ":  -32.29404964116907,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  1.2103581860240957,
+                                                                               "rotationY":  4.4787484185082365,
+                                                                               "rotationZ":  -66.28021034731711,
+                                                                               "offsetX":  -4.920963903032316E-08,
+                                                                               "offsetY":  7.8811623893670912E-09,
+                                                                               "offsetZ":  2.331517237053049E-07
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -0.867155694382916,
+                                                                               "rotationY":  -0.8023295151967318,
+                                                                               "rotationZ":  -30.066704462260418,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  10,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  -34.064909372183706,
+                                                                               "rotationY":  -12.707204950782739,
+                                                                               "rotationZ":  -54.298880335482906,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  26.2438390460678,
+                                                                               "rotationY":  10.980607406910712,
+                                                                               "rotationZ":  -63.733956805871344,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  42.36192947778087,
+                                                                               "rotationY":  13.477488072167361,
+                                                                               "rotationZ":  -66.5076419863002,
+                                                                               "offsetX":  -1.8466803908268048E-07,
+                                                                               "offsetY":  5.3343864436783406E-08,
+                                                                               "offsetZ":  1.4105168588685046E-07
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -11.879519212065986,
+                                                                               "rotationY":  -7.686022118299093,
+                                                                               "rotationZ":  -52.656154953297744,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  20,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotationX":  1.567475480551856,
+                                                                               "rotationY":  -4.372747724571047,
+                                                                               "rotationZ":  -49.517334690029195,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "LowerArmL":  {
+                                                                               "rotationX":  47.44363461649996,
+                                                                               "rotationY":  17.58407271629312,
+                                                                               "rotationZ":  -69.02947077127396,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotationX":  4.2904226007312545,
+                                                                               "rotationY":  -0.6256579744953257,
+                                                                               "rotationZ":  -55.21924832614212,
+                                                                               "offsetX":  -4.2153814661105571E-08,
+                                                                               "offsetY":  4.1145604257053492E-08,
+                                                                               "offsetZ":  2.310271014493992E-07
+                                                                           },
+                                                             "LowerArmR":  {
+                                                                               "rotationX":  -32.08314705997742,
+                                                                               "rotationY":  -18.72166462822082,
+                                                                               "rotationZ":  -57.33850917652995,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           }
+                                                         }
+                                        }
+                                    ]
+                  }
+    }
+]

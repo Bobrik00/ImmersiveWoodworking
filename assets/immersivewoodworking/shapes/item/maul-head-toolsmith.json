@@ -1,0 +1,1808 @@
+{
+  "textureWidth": 64,
+  "textureHeight": 64,
+  "textures": {
+    "material": "game:block/metal/ingot/copper"
+  },
+  "textureSizes": {
+    "material": [
+      64,
+      64
+    ]
+  },
+  "elements": [
+    {
+      "name": "axe head 2.003",
+      "from": [
+        10.863379955291748,
+        1.7279558777809143,
+        3.0466142892837524
+      ],
+      "to": [
+        14.863379955291748,
+        2.2279558777809143,
+        4.116162896156311
+      ],
+      "rotationOrigin": [
+        12.863379955291748,
+        2.2279558181762695,
+        7.616162896156311
+      ],
+      "rotationX": -7.50000106248016,
+      "rotationY": -1.0048161016304252e-06,
+      "rotationZ": -6.585896973372277e-08,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            54.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.021",
+      "from": [
+        10.863379955291748,
+        0.5066824532506189,
+        2.9839812517166138
+      ],
+      "to": [
+        14.863379955291748,
+        1.0066824555397034,
+        4.118387341499329
+      ],
+      "rotationOrigin": [
+        12.863379955291748,
+        0.5066823959350586,
+        7.618387341499329
+      ],
+      "rotationX": 7.50000106248016,
+      "rotationY": 1.0048161016304252e-06,
+      "rotationZ": -6.585896973372277e-08,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            54.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.022",
+      "from": [
+        13.119794316589832,
+        1.4447898864746094,
+        4.407260060310364
+      ],
+      "to": [
+        14.502415180206299,
+        2.1947899162769318,
+        7.423723936080933
+      ],
+      "rotationOrigin": [
+        13.002415180206299,
+        1.9447898864746094,
+        5.915492057800293
+      ],
+      "rotationX": -16.667546707042035,
+      "rotationY": -9.640047886059603,
+      "rotationZ": -2.8702008760429756,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            40.0,
+            56.0,
+            46.0,
+            60.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            40.0,
+            42.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            20.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            4.0,
+            28.0,
+            16.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            0.0,
+            30.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            12.0,
+            18.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.023",
+      "from": [
+        12.041409969329834,
+        1.8385754227638245,
+        3.63666832447052
+      ],
+      "to": [
+        14.041409969329834,
+        2.3385754227638245,
+        4.653132081031799
+      ],
+      "rotationOrigin": [
+        12.041409969329834,
+        2.3385753631591797,
+        8.1531320810318
+      ],
+      "rotationX": -7.633672133405541,
+      "rotationY": -10.706912335358194,
+      "rotationZ": -0.8579275752057253,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            46.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.024",
+      "from": [
+        12.040358066558838,
+        0.4456010437962732,
+        3.527429699897766
+      ],
+      "to": [
+        14.040358066558838,
+        0.9456010460853577,
+        4.661835789680481
+      ],
+      "rotationOrigin": [
+        12.040358066558838,
+        0.4456009864807129,
+        8.161835789680481
+      ],
+      "rotationX": 7.633672987179187,
+      "rotationY": -10.70691318913184,
+      "rotationZ": -0.5736205241171214,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            38.0,
+            56.0,
+            46.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            40.0,
+            40.0,
+            42.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            14.0,
+            28.0,
+            22.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            2.0,
+            32.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            6.0,
+            16.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.025",
+      "from": [
+        11.490055561065674,
+        1.4447898864746094,
+        4.407260060310364
+      ],
+      "to": [
+        13.490055561065674,
+        2.1947899162769318,
+        7.423723936080933
+      ],
+      "rotationOrigin": [
+        12.990055561065674,
+        1.9447898864746094,
+        5.915492057800293
+      ],
+      "rotationX": -16.667544999494744,
+      "rotationY": 9.640047032285956,
+      "rotationZ": 2.8702015163732106,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            48.0,
+            56.0,
+            40.0,
+            60.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            26.0,
+            42.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            20.0,
+            28.0,
+            12.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            4.0,
+            28.0,
+            16.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            0.0,
+            22.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            12.0,
+            26.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.026",
+      "from": [
+        11.951060771942139,
+        1.8385754227638245,
+        3.63666832447052
+      ],
+      "to": [
+        13.951060771942139,
+        2.3385754227638245,
+        4.653132081031799
+      ],
+      "rotationOrigin": [
+        13.951060771942139,
+        2.3385753631591797,
+        8.1531320810318
+      ],
+      "rotationX": -7.633672133405541,
+      "rotationY": 10.706914042905487,
+      "rotationZ": 0.8579278953708426,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            38.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            26.0,
+            40.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            28.0,
+            14.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            2.0,
+            24.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            6.0,
+            24.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.027",
+      "from": [
+        11.952112674713135,
+        0.4456010437962732,
+        3.527429699897766
+      ],
+      "to": [
+        13.952112674713135,
+        0.9456010460853577,
+        4.661835789680481
+      ],
+      "rotationOrigin": [
+        13.952112674713135,
+        0.4456009864807129,
+        8.161835789680481
+      ],
+      "rotationX": 7.633672133405541,
+      "rotationY": 10.706912335358194,
+      "rotationZ": 0.5736208976430915,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            38.0,
+            58.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            36.0,
+            26.0,
+            40.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            28.0,
+            14.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            32.0,
+            2.0,
+            24.0,
+            6.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            6.0,
+            24.0,
+            2.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.028",
+      "from": [
+        13.002415180206299,
+        0.5397514998912811,
+        4.407260060310364
+      ],
+      "to": [
+        14.502415180206299,
+        1.2897515296936035,
+        7.423723936080933
+      ],
+      "rotationOrigin": [
+        13.002415180206299,
+        0.7897515296936035,
+        5.915492057800293
+      ],
+      "rotationX": 16.667546707042035,
+      "rotationY": -9.640047032285956,
+      "rotationZ": 2.870201302929799,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            46.0,
+            56.0,
+            40.0,
+            60.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            40.0,
+            30.0,
+            42.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            20.0,
+            28.0,
+            14.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            28.0,
+            4.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            0.0,
+            30.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            24.0,
+            12.0,
+            18.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "axe head 2.029",
+      "from": [
+        11.490055561065674,
+        0.5397514998912811,
+        4.407260060310364
+      ],
+      "to": [
+        13.490055561065674,
+        1.2897515296936035,
+        7.423723936080933
+      ],
+      "rotationOrigin": [
+        12.990055561065674,
+        0.7897515296936035,
+        5.915492057800293
+      ],
+      "rotationX": 16.667546707042035,
+      "rotationY": 9.640047032285956,
+      "rotationZ": -2.870201729816622,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            40.0,
+            56.0,
+            48.0,
+            60.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            26.0,
+            30.0,
+            28.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            12.0,
+            28.0,
+            20.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            28.0,
+            4.0,
+            32.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            30.0,
+            0.0,
+            22.0,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            12.0,
+            26.0,
+            0.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.001",
+      "from": [
+        11.746235370635986,
+        0.11727046966552734,
+        10.0251225233078
+      ],
+      "to": [
+        14.246235370635986,
+        2.6172704696655273,
+        11.5251225233078
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        0.36727046966552734,
+        9.5251225233078
+      ],
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            12.0,
+            38.0,
+            22.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            0.3076919913291931,
+            8.0,
+            5.846153736114502,
+            18.000003814697266
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            24.0,
+            44.0,
+            34.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            26.153844833374023,
+            8.0,
+            31.692306518554688,
+            18.000003814697266
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            1.9999998807907104,
+            34.15384483337402,
+            12.0,
+            39.69230842590332
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            19.692310333251953,
+            31.999998092651367,
+            14.15384292602539
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.003",
+      "from": [
+        12.005054831504822,
+        2.1172704696655273,
+        11.525122623969509
+      ],
+      "to": [
+        13.987416744232178,
+        2.6172705076470635,
+        12.52512276172638
+      ],
+      "rotationOrigin": [
+        12.996235370635986,
+        2.6172704696655273,
+        11.52512264251709
+      ],
+      "rotationX": 15.00000212496032,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035274505615234,
+            10.0,
+            36.964717864990234,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.0352783203125,
+            24.0,
+            42.96472930908203,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352783203125,
+            26.0,
+            10.964723587036133,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964717864990234,
+            8.000003814697266,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.008",
+      "from": [
+        13.255054473876953,
+        0.8672704696655273,
+        11.52512261821215
+      ],
+      "to": [
+        15.23741590976715,
+        1.3672705150901088,
+        12.52512276172638
+      ],
+      "rotationOrigin": [
+        14.246235370635986,
+        1.3672704696655273,
+        11.52512264251709
+      ],
+      "rotationY": -15.000003832507613,
+      "rotationZ": -90.00000933466734,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.0352783203125,
+            10.0,
+            36.964725494384766,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.03527069091797,
+            24.0,
+            42.9647216796875,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.035275936126709,
+            26.0,
+            10.964725494384766,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.96472930908203,
+            8.000003814697266,
+            33.0352783203125,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.020",
+      "from": [
+        12.005053997039795,
+        -0.38272953033447266,
+        11.52512264251709
+      ],
+      "to": [
+        13.987416803836823,
+        0.11727046966552379,
+        12.52512276172638
+      ],
+      "rotationOrigin": [
+        12.996235370635986,
+        0.11727046966552734,
+        11.52512264251709
+      ],
+      "rotationX": -15.00000212496032,
+      "rotationY": 1.2964135277147425e-06,
+      "rotationZ": 179.99997768819966,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035274505615234,
+            10.0,
+            36.964725494384766,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.035274505615234,
+            24.0,
+            42.964725494384766,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.035274028778076,
+            26.0,
+            10.964725494384766,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964725494384766,
+            7.999996185302734,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.022",
+      "from": [
+        10.755054831504822,
+        0.8672704100608826,
+        11.52512263812491
+      ],
+      "to": [
+        12.73741626739502,
+        1.3672705317393437,
+        12.52512276172638
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        1.3672704696655273,
+        11.52512264251709
+      ],
+      "rotationX": 2.0568456800632425e-06,
+      "rotationY": 15.00000212496032,
+      "rotationZ": 89.99998201391065,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.035276412963867,
+            10.0,
+            36.9647216796875,
+            12.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            8.0,
+            5.999992370605469,
+            11.999999046325684,
+            8.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.035274505615234,
+            24.0,
+            42.96472930908203,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            18.0,
+            6.0,
+            22.000001907348633,
+            7.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352771282196045,
+            26.0,
+            10.96472454071045,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.96472930908203,
+            8.0,
+            33.035274505615234,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.023",
+      "from": [
+        12.005054831504822,
+        0.3760898560285568,
+        11.52512264251709
+      ],
+      "to": [
+        13.987416744232178,
+        2.3584513664245605,
+        12.491048574447632
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        0.36727046966552734,
+        11.02512264251709
+      ],
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            29.0352725982666,
+            11.0352783203125,
+            36.9647216796875,
+            18.9647216796875
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            0.1362963169813156,
+            7.035274505615234,
+            4.0,
+            14.9647216796875
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            35.0352783203125,
+            25.0352783203125,
+            42.96472930908203,
+            32.9647216796875
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            25.999998092651367,
+            7.0352783203125,
+            29.86370849609375,
+            14.9647216796875
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            3.0352783203125,
+            34.0,
+            10.964725494384766,
+            37.863704681396484
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            40.964717864990234,
+            15.863704681396484,
+            33.035274505615234,
+            12.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.024",
+      "from": [
+        11.648150444030762,
+        0.8672704696655273,
+        5.275032877922058
+      ],
+      "to": [
+        14.148150444030762,
+        1.8672704696655273,
+        6.775032877922058
+      ],
+      "rotationOrigin": [
+        11.648150444030762,
+        0.36727046966552734,
+        7.525032877922058
+      ],
+      "rotationY": -11.204856177740572,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            16.0,
+            38.0,
+            20.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            22.0,
+            20.0,
+            28.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            28.0,
+            44.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            12.0,
+            22.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            24.0,
+            12.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            10.0,
+            32.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.025",
+      "from": [
+        11.894206047058105,
+        0.8672704696655273,
+        5.7603806257247925
+      ],
+      "to": [
+        14.394206047058105,
+        1.8672704696655273,
+        7.2603806257247925
+      ],
+      "rotationOrigin": [
+        11.894206047058105,
+        0.36727046966552734,
+        8.010380625724792
+      ],
+      "rotationY": 11.378798044012347,
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            16.0,
+            38.0,
+            20.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            10.0,
+            12.0,
+            16.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            28.0,
+            44.0,
+            32.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0,
+            12.0,
+            22.0,
+            16.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.0,
+            24.0,
+            12.0,
+            30.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            10.0,
+            32.0,
+            4.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.026",
+      "from": [
+        11.746235370635986,
+        0.11727046966552734,
+        7.2751225233078
+      ],
+      "to": [
+        14.246235370635986,
+        2.6172704696655273,
+        8.7751225233078
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        0.36727046966552734,
+        9.5251225233078
+      ],
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            12.0,
+            38.0,
+            22.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            10.461536407470703,
+            7.999996185302734,
+            16.0,
+            18.00000762939453
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            24.0,
+            44.0,
+            34.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            16.0000057220459,
+            7.9999847412109375,
+            21.538463592529297,
+            17.999996185302734
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            2.000000476837158,
+            24.0,
+            12.000000953674316,
+            29.53845977783203
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            42.0,
+            9.538467407226562,
+            32.00000762939453,
+            3.9999847412109375
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.027",
+      "from": [
+        11.746235370635986,
+        2.1172704696655273,
+        8.7751225233078
+      ],
+      "to": [
+        14.246235370635986,
+        2.6172704696655273,
+        10.0251225233078
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        0.36727046966552734,
+        9.5251225233078
+      ],
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            28.0,
+            12.0,
+            38.0,
+            14.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            5.846150875091553,
+            8.0,
+            10.461536407470703,
+            10.000003814697266
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            24.0,
+            44.0,
+            26.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            21.538463592529297,
+            7.999992370605469,
+            26.153844833374023,
+            9.999992370605469
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            1.999999761581421,
+            29.53845977783203,
+            12.00000286102295,
+            34.15383529663086
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            41.99999237060547,
+            14.153861999511719,
+            32.0,
+            9.538459777832031
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    },
+    {
+      "name": "socketS.028",
+      "from": [
+        11.746235370635986,
+        0.11727046966552734,
+        8.7751225233078
+      ],
+      "to": [
+        14.246235370635986,
+        0.6172704696655273,
+        10.0251225233078
+      ],
+      "rotationOrigin": [
+        11.746235370635986,
+        0.36727046966552734,
+        9.5251225233078
+      ],
+      "group": "splittingmaul-head-toolsmith",
+      "faces": {
+        "north": {
+          "texture": "#material",
+          "uv": [
+            27.999996185302734,
+            19.999984741210938,
+            38.0,
+            22.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#material",
+          "uv": [
+            5.846153259277344,
+            16.00000762939453,
+            10.461541175842285,
+            18.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#material",
+          "uv": [
+            34.0,
+            32.00000762939453,
+            44.00000762939453,
+            34.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#material",
+          "uv": [
+            21.538469314575195,
+            15.999992370605469,
+            26.153854370117188,
+            17.999984741210938
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#material",
+          "uv": [
+            1.999999761581421,
+            29.53845977783203,
+            12.00000286102295,
+            34.15383529663086
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#material",
+          "uv": [
+            41.99999237060547,
+            14.153861999511719,
+            32.0,
+            9.538459777832031
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": []
+    }
+  ],
+  "groups": []
+}

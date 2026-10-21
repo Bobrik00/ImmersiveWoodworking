@@ -1,0 +1,93 @@
+{
+	// ASSEMBLED TAR RIG (BarkPlan/E04, T04.03; RE-ARCHITECTED 2026-07-28). The world-only, UNSEALED two-vessel rig: a
+	// clay-pot receiver with a birch-packable perforated pot on top.
+	//
+	// It is NOT a placed block and has NO BlockEntity any more. It lives as a stack INSIDE vanilla ground storage — one
+	// rig per quadrant — so up to four rigs (and/or bare pots) share a cell like the pots they are built on, each sitting
+	// on its own receiver instead of centring the whole cell (the playtest complaint e04-asm.3). All state rides the
+	// stack's attributes (receiver pot + its colour, perforated-pot colour, bark fill level). The BlockTarPot class
+	// implements IContainedInteractable (Shift+RMB birch packs, Shift+RMB clay seals a full rig IN PLACE into a
+	// `tarpot-{colour}-{perfcolour}-sealed` ITEM that STAYS in the quadrant — taken later by plain RMB or fired in a kiln,
+	// seal-in-place decision 2026-07-28 — plain empty-hand RMB takes it apart; any other click on the rig quadrant is a
+	// claimed no-op so vanilla ground storage can't scoop the rig) and
+	// IContainedMeshSource (renders the coloured pot-on-pot + birch fill overlay in the quadrant). BlockPerforatedPot
+	// builds it (Shift+RMB the fired perforated pot onto ONE ground-stored clay pot).
+	//
+	// The bare `tarpot` code stays free for this block (the sealed/fired PRODUCT is the tarpot ITEM, codes
+	// tarpot-{colour}-{perfcolour}-sealed / -fired, both vessels' colours riding the code so they survive the kiln) —
+	// a block and an item live in separate registries, so there is no clash.
+	code: "tarpot",
+	class: "iw-tarpot",
+
+	// Ground-storable like the pots it is built on (Quadrants + same footprint, so a cell that mixes bare pots and rigs
+	// keeps one consistent layout), Unplaceable so it exists ONLY inside a ground-storage pile — never as a standalone
+	// centred block. Breaking the cell drops rig stacks the player can re-place elsewhere.
+	//
+	// collisionBox y2 is RAISED to 0.72 (was 0.125, the flat pot slab) so the selection + collision box encloses the tall
+	// pot-on-pot rig instead of a foot-level slab under it (playtest: box did not match rig geometry). Vanilla ground storage
+	// keeps ONE box per cell, taken from the FIRST non-empty slot's GroundStorable props (BEGroundStorage.regenCollisionSelectionBox
+	// sets colBox = selBox = CollisionBox), so this height applies to the whole 1×1 cell and only when a rig leads the cell —
+	// there are no per-quadrant boxes in vanilla ground storage. That means a mixed cell whose first slot is a bare pot keeps
+	// the flat box; the accepted trade for matching the common rig-cell case without replacing the vanilla groundstorage block.
+	//
+	// `iw-sneaktoplace` (D50): a rig stack DOES reach the player's hand — breaking the cell drops one — and a plain right
+	// click with it was dead silent, because Unplaceable answers the placement path with the `__ignore__` silencer. The
+	// behaviour restores the vanilla fired-clay-pot line "Hold down [Shift] to place this block" (which vanilla gets from
+	// BlockCookingContainer.TryPlaceBlock, a class we have no equivalent of). It only SPEAKS: it claims nothing, so the
+	// Shift+RMB GroundStorable put-it-back gesture is untouched.
+	behaviors: [
+		{ name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.72, z2: 1 } } },
+		{ name: "Unplaceable" },
+		{ name: "iw-sneaktoplace" }
+	],
+
+	// pot-combined shape (T04.01/D20). These JSON textures are only a FALLBACK for the held/dropped rig stack (broken off
+	// a cell) and pick-block / break particles — inside a cell the rig is rendered per-instance by GenMesh (bottom =
+	// receiver colour, top = perforated-pot colour, lid/daub hidden while unsealed) with the correct pot colours. Blue is
+	// the mod-wide degenerate fallback colour, so the flat fallback uses it.
+	shape: { base: "immersivewoodworking:block/pot-combined" },
+	textures: {
+		"pot-combined-empty-top": { base: "game:block/clay/pot/blue" },
+		"pot-combined-empty-bot": { base: "game:block/clay/pot/blue" },
+		"pot-combined-lid":       { base: "game:block/clay/pot/blue" },
+		"clay":                   { base: "game:block/clay/fireclay" }
+	},
+
+	blockmaterial: "Ceramic",
+	replaceable: 400,
+	resistance: 1.5,
+	maxStackSize: 1,
+	lightAbsorption: 0,
+	// `game:`-qualified for correctness, NOT as a fix for anything audible: a bare "walk/stone" would resolve in THIS
+	// block's domain (immersivewoodworking), where no .ogg exists — the silent-sound class D44 fixed on the perforated
+	// pot. Here it is UNREACHABLE and expected to stay so: footsteps are read off the block at the player's FEET
+	// (EntityPlayer.PlayStepSound → `GetNearestBlockSoundSource(...)?.GetSounds(...)?.Walk`), which is the `groundstorage`
+	// block, and BlockGroundStorage does not override GetSounds nor consult a contained stack's block. The rig is
+	// Unplaceable and never becomes the block you stand on, so nothing ever reads this key; place/hit/break are likewise
+	// the groundstorage block's business. Kept correct so the key is already right if the rig ever becomes placeable.
+	sounds: { walk: "game:walk/stone" },
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+
+	// Roughly the receiver pot + the perforated pot stacked; only used if the rig were ever a standalone block (it is
+	// Unplaceable, so this never applies in practice). Kept for pick-block / break bookkeeping. Refined at the T04.08 pass.
+	collisionbox: { x1: 0.22, y1: 0, z1: 0.22, x2: 0.78, y2: 0.72, z2: 0.78 },
+	selectionbox: { x1: 0.22, y1: 0, z1: 0.22, x2: 0.78, y2: 0.72, z2: 0.78 },
+
+	// World-only construct: never given, never craftable, no creative entry (it needs a receiver pot to be meaningful).
+	// Excluded from the handbook for the same reason. The chain it exists for is written up on the two pages the player
+	// can actually reach: `blocktypes/perforatedpot.json` (assemble, pack, seal) and the sealed `tarpot` ITEM (fire,
+	// open). Until AuditFixPlan/T08.04 this line claimed the item already carried that prose; it did not carry a single
+	// line of it (F-L7-15).
+	attributes: {
+		handbook: { exclude: true },
+		// How the rig sits in a ground-storage quadrant. Identity start (renders at native pot-combined size at the
+		// quadrant offset, like claypot); a tuning hook for the T04.08 in-game .tfedit visual pass.
+		groundStorageTransform: {
+			translation: { x: 0, y: 0, z: 0 },
+			rotation: { x: 0, y: 0, z: 0 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 1
+		}
+	}
+}

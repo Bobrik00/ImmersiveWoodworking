@@ -1,0 +1,1285 @@
+[
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "woodchop",
+                      "animation":  "woodchop",
+                      "animationSpeed":  0.5,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  10,
+                      "easeOutSpeed":  1,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400,
+                                            "UpperTorso":  0.001,
+                                            "LowerTorso":  0.001,
+                                            "ItemAnchor":  100,
+                                            "UpperFootL":  0.001,
+                                            "LowerFootL":  0.001,
+                                            "UpperFootR":  0.001,
+                                            "LowerFootR":  0.001
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage",
+                                               "UpperTorso":  "Average",
+                                               "LowerTorso":  "Average",
+                                               "ItemAnchor":  "Average"
+                                           }
+                  }
+    },
+    {
+        "file":  "game:entities/humanoid/player",
+        "op":  "Add",
+        "path":  "/client/animations/-",
+        "value":  {
+                      "code":  "woodchop-fp",
+                      "animation":  "woodchop-fp",
+                      "animationSpeed":  0.5,
+                      "blendMode":  "AddAverage",
+                      "weight":  0.25,
+                      "weightCapFactor":  1,
+                      "easeInSpeed":  10,
+                      "easeOutSpeed":  1,
+                      "holdEyePosAfterEasein":  0.1,
+                      "elementWeight":  {
+                                            "UpperArmL":  400,
+                                            "LowerArmL":  400,
+                                            "UpperArmR":  400,
+                                            "LowerArmR":  400,
+                                            "UpperTorso":  0.001,
+                                            "LowerTorso":  0.001,
+                                            "ItemAnchor":  100,
+                                            "UpperFootL":  0.001,
+                                            "LowerFootL":  0.001,
+                                            "UpperFootR":  0.001,
+                                            "LowerFootR":  0.001
+                                        },
+                      "elementBlendMode":  {
+                                               "UpperArmL":  "AddAverage",
+                                               "LowerArmL":  "AddAverage",
+                                               "UpperArmR":  "AddAverage",
+                                               "LowerArmR":  "AddAverage",
+                                               "UpperTorso":  "Average",
+                                               "LowerTorso":  "Average",
+                                               "ItemAnchor":  "Average"
+                                           }
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "woodchop",
+                      "code":  "woodchop",
+                      "version":  0,
+                      "quantityframes":  20,
+                      "onActivityStopped":  "EaseOut",
+                      "onAnimationEnd":  "Hold",
+                      "keyframes":  [
+                                        {
+                                            "frame":  0,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  17.672,
+                                                                               "rotationY":  -6.5542,
+                                                                               "rotationZ":  -65.624,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -7.6611,
+                                                                               "rotationY":  7.8372,
+                                                                               "rotationZ":  -90.7686,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  15.7187,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "root":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  0.0,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  -5.3604,
+                                                                                "offsetX":  0.6837,
+                                                                                "offsetY":  -0.2129,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -3.7966,
+                                                                                "rotationY":  0.261,
+                                                                                "rotationZ":  -12.5972,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  1.5656,
+                                                                                "rotationY":  0.459,
+                                                                                "rotationZ":  11.0887,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.8003,
+                                                                                "rotationY":  1.0308,
+                                                                                "rotationZ":  13.9154,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -1.8583,
+                                                                                "rotationY":  0.089,
+                                                                                "rotationZ":  -0.1646,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  0.0,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  0.0,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  0.0,
+                                                                               "rotationY":  0.0,
+                                                                               "rotationZ":  0.0,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  0.0,
+                                                                               "rotationY":  0.0,
+                                                                               "rotationZ":  0.0,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  0.0,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  13,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  6.1385,
+                                                                               "rotationY":  -1.9291,
+                                                                               "rotationZ":  -174.0144,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -7.5042,
+                                                                               "rotationY":  -4.3131,
+                                                                               "rotationZ":  -190.1867,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  15.7187,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "root":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  0.0,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.3638,
+                                                                                "rotationY":  1.2752,
+                                                                                "rotationZ":  -7.862,
+                                                                                "offsetX":  0.8054,
+                                                                                "offsetY":  -1.1626,
+                                                                                "offsetZ":  0.0235
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -3.7619,
+                                                                                "rotationY":  0.7353,
+                                                                                "rotationZ":  -16.5857,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.4419,
+                                                                                "rotationY":  -0.6114,
+                                                                                "rotationZ":  35.504,
+                                                                                "offsetX":  0.0694,
+                                                                                "offsetY":  0.2495,
+                                                                                "offsetZ":  0.013
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.779,
+                                                                                "rotationY":  1.1446,
+                                                                                "rotationZ":  15.0383,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.317,
+                                                                                "rotationY":  1.0743,
+                                                                                "rotationZ":  30.9056,
+                                                                                "offsetX":  -0.007,
+                                                                                "offsetY":  -0.259,
+                                                                                "offsetZ":  0.0089
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.9032,
+                                                                                "rotationY":  3.3096,
+                                                                                "rotationZ":  -2.7763,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0086,
+                                                                          "rotationY":  1.1893,
+                                                                          "rotationZ":  -4.6979,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  11.9174,
+                                                                               "rotationY":  4.7246,
+                                                                               "rotationZ":  -1.0926,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -10.0813,
+                                                                               "rotationY":  -1.8159,
+                                                                               "rotationZ":  -1.2732,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  20.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  0.0,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  19,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  14.8338,
+                                                                               "rotationY":  2.0043,
+                                                                               "rotationZ":  -44.9833,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -12.4814,
+                                                                               "rotationY":  6.4765,
+                                                                               "rotationZ":  -61.5231,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  5.6003,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "root":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  0.0,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  18.0575,
+                                                                                "offsetX":  1.0134,
+                                                                                "offsetY":  -0.973,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.9579,
+                                                                                "rotationY":  3.287,
+                                                                                "rotationZ":  -39.1937,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.6491,
+                                                                                "rotationY":  -0.8646,
+                                                                                "rotationZ":  41.2794,
+                                                                                "offsetX":  0.1165,
+                                                                                "offsetY":  0.2983,
+                                                                                "offsetZ":  0.0155
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0739,
+                                                                                "rotationY":  -5.0277,
+                                                                                "rotationZ":  -54.6289,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.4255,
+                                                                                "rotationY":  1.3073,
+                                                                                "rotationZ":  38.2552,
+                                                                                "offsetX":  -0.0496,
+                                                                                "offsetY":  -0.3165,
+                                                                                "offsetZ":  0.0111
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  16.3827,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  10.9174,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  6.1639,
+                                                                               "rotationY":  -1.3216,
+                                                                               "rotationZ":  0.3893,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -7.7551,
+                                                                               "rotationY":  -1.4835,
+                                                                               "rotationZ":  -0.7453,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  22.4783,
+                                                                                "rotationY":  2.6574,
+                                                                                "rotationZ":  3.8928,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        }
+                                    ]
+                  }
+    },
+    {
+        "file":  "game:shapes/entity/humanoid/seraph-faceless",
+        "op":  "Add",
+        "path":  "/animations/-",
+        "value":  {
+                      "name":  "woodchop-fp",
+                      "code":  "woodchop-fp",
+                      "version":  0,
+                      "quantityframes":  20,
+                      "onActivityStopped":  "EaseOut",
+                      "onAnimationEnd":  "Hold",
+                      "keyframes":  [
+                                        {
+                                            "frame":  0,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  23.436,
+                                                                               "rotationY":  -25.2351,
+                                                                               "rotationZ":  -86.2682,
+                                                                               "offsetX":  1.7267,
+                                                                               "offsetY":  -2.5617,
+                                                                               "offsetZ":  5.9358
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -9.4957,
+                                                                               "rotationY":  20.8226,
+                                                                               "rotationZ":  -91.1005,
+                                                                               "offsetX":  0.2537,
+                                                                               "offsetY":  -1.4995,
+                                                                               "offsetZ":  -5.314
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  15.7187,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  -5.3604,
+                                                                                "offsetX":  0.6837,
+                                                                                "offsetY":  -0.2129,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -3.7966,
+                                                                                "rotationY":  0.261,
+                                                                                "rotationZ":  -12.5972,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  1.5656,
+                                                                                "rotationY":  0.459,
+                                                                                "rotationZ":  11.0887,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.8003,
+                                                                                "rotationY":  1.0308,
+                                                                                "rotationZ":  13.9154,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -1.8583,
+                                                                                "rotationY":  0.089,
+                                                                                "rotationZ":  -0.1646,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  0.0,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  0.0,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  11.5101,
+                                                                               "rotationY":  2.6538,
+                                                                               "rotationZ":  -0.0722,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -16.0289,
+                                                                               "rotationY":  -0.2038,
+                                                                               "rotationZ":  -1.055,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  50.9464,
+                                                                                "rotationY":  13.3076,
+                                                                                "rotationZ":  4.4109,
+                                                                                "offsetX":  -4.5315,
+                                                                                "offsetY":  -0.8193,
+                                                                                "offsetZ":  0.4038
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  6,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -14.4143,
+                                                                               "rotationY":  -16.9685,
+                                                                               "rotationZ":  -128.0764,
+                                                                               "offsetX":  3.0661,
+                                                                               "offsetY":  -0.4227,
+                                                                               "offsetZ":  2.1672
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  13,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -29.7541,
+                                                                               "rotationY":  4.7678,
+                                                                               "rotationZ":  -176.6109,
+                                                                               "offsetX":  3.0379,
+                                                                               "offsetY":  2.4847,
+                                                                               "offsetZ":  3.5706
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  19.5314,
+                                                                               "rotationY":  1.5284,
+                                                                               "rotationZ":  -191.5554,
+                                                                               "offsetX":  -0.7311,
+                                                                               "offsetY":  2.496,
+                                                                               "offsetZ":  -4.3977
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  15.7187,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.3638,
+                                                                                "rotationY":  1.2752,
+                                                                                "rotationZ":  -7.862,
+                                                                                "offsetX":  0.8054,
+                                                                                "offsetY":  -1.1626,
+                                                                                "offsetZ":  0.0235
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -3.7619,
+                                                                                "rotationY":  0.7353,
+                                                                                "rotationZ":  -16.5857,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.4419,
+                                                                                "rotationY":  -0.6114,
+                                                                                "rotationZ":  35.504,
+                                                                                "offsetX":  0.0694,
+                                                                                "offsetY":  0.2495,
+                                                                                "offsetZ":  0.013
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.779,
+                                                                                "rotationY":  1.1446,
+                                                                                "rotationZ":  15.0383,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.317,
+                                                                                "rotationY":  1.0743,
+                                                                                "rotationZ":  30.9056,
+                                                                                "offsetX":  -0.007,
+                                                                                "offsetY":  -0.259,
+                                                                                "offsetZ":  0.0089
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.9032,
+                                                                                "rotationY":  3.3096,
+                                                                                "rotationZ":  -2.7763,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0086,
+                                                                          "rotationY":  1.1893,
+                                                                          "rotationZ":  -4.6979,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -13.674,
+                                                                               "rotationY":  -9.4209,
+                                                                               "rotationZ":  -24.5817,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -11.2571,
+                                                                               "rotationY":  5.0563,
+                                                                               "rotationZ":  -7.407,
+                                                                               "offsetX":  0.0,
+                                                                               "offsetY":  0.0,
+                                                                               "offsetZ":  0.0
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  50.9464,
+                                                                                "rotationY":  13.3076,
+                                                                                "rotationZ":  4.4109,
+                                                                                "offsetX":  -4.5315,
+                                                                                "offsetY":  -0.8193,
+                                                                                "offsetZ":  0.4038
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  14,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -27.3948,
+                                                                               "rotationY":  -8.7588,
+                                                                               "rotationZ":  -156.2069,
+                                                                               "offsetX":  3.1835,
+                                                                               "offsetY":  2.7564,
+                                                                               "offsetZ":  3.9851
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  14.4433,
+                                                                               "rotationY":  9.2762,
+                                                                               "rotationZ":  -168.1327,
+                                                                               "offsetX":  0.1123,
+                                                                               "offsetY":  2.4581,
+                                                                               "offsetZ":  -4.4826
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  15,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -8.2403,
+                                                                               "rotationY":  -21.3367,
+                                                                               "rotationZ":  -133.6913,
+                                                                               "offsetX":  2.3474,
+                                                                               "offsetY":  1.154,
+                                                                               "offsetZ":  3.9474
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  5.903,
+                                                                               "rotationY":  15.9548,
+                                                                               "rotationZ":  -144.6154,
+                                                                               "offsetX":  1.083,
+                                                                               "offsetY":  2.074,
+                                                                               "offsetZ":  -4.1162
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  16,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  3.0268,
+                                                                               "rotationY":  -34.287,
+                                                                               "rotationZ":  -111.7591,
+                                                                               "offsetX":  2.1921,
+                                                                               "offsetY":  1.069,
+                                                                               "offsetZ":  4.6706
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -7.7102,
+                                                                               "rotationY":  23.2145,
+                                                                               "rotationZ":  -121.5722,
+                                                                               "offsetX":  0.4273,
+                                                                               "offsetY":  1.3216,
+                                                                               "offsetZ":  -5.4899
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  18,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  30.8922,
+                                                                               "rotationY":  -27.2283,
+                                                                               "rotationZ":  -67.0674,
+                                                                               "offsetX":  0.5452,
+                                                                               "offsetY":  -0.2737,
+                                                                               "offsetZ":  6.2095
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -27.8013,
+                                                                               "rotationY":  25.2664,
+                                                                               "rotationZ":  -75.1087,
+                                                                               "offsetX":  -0.605,
+                                                                               "offsetY":  1.0475,
+                                                                               "offsetZ":  -6.7574
+                                                                           }
+                                                         }
+                                        },
+                                        {
+                                            "frame":  19,
+                                            "elements":  {
+                                                             "UpperArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  44.6694,
+                                                                               "rotationY":  -23.9754,
+                                                                               "rotationZ":  -45.2802,
+                                                                               "offsetX":  -0.5474,
+                                                                               "offsetY":  1.439,
+                                                                               "offsetZ":  7.8909
+                                                                           },
+                                                             "UpperArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -37.6732,
+                                                                               "rotationY":  26.4259,
+                                                                               "rotationZ":  -52.2032,
+                                                                               "offsetX":  -1.0959,
+                                                                               "offsetY":  2.0244,
+                                                                               "offsetZ":  -7.1267
+                                                                           },
+                                                             "Head":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  5.6003,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  18.0575,
+                                                                                "offsetX":  1.0134,
+                                                                                "offsetY":  -0.973,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "UpperFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.9579,
+                                                                                "rotationY":  3.287,
+                                                                                "rotationZ":  -39.1937,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootL":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  2.6491,
+                                                                                "rotationY":  -0.8646,
+                                                                                "rotationZ":  41.2794,
+                                                                                "offsetX":  0.1165,
+                                                                                "offsetY":  0.2983,
+                                                                                "offsetZ":  0.0155
+                                                                            },
+                                                             "UpperFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0739,
+                                                                                "rotationY":  -5.0277,
+                                                                                "rotationZ":  -54.6289,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "LowerFootR":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  -2.4255,
+                                                                                "rotationY":  1.3073,
+                                                                                "rotationZ":  38.2552,
+                                                                                "offsetX":  -0.0496,
+                                                                                "offsetY":  -0.3165,
+                                                                                "offsetZ":  0.0111
+                                                                            },
+                                                             "UpperTorso":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  0.0,
+                                                                                "rotationY":  0.0,
+                                                                                "rotationZ":  16.3827,
+                                                                                "offsetX":  0.0,
+                                                                                "offsetY":  0.0,
+                                                                                "offsetZ":  0.0
+                                                                            },
+                                                             "Neck":  {
+                                                                          "rotShortestDistanceX":  false,
+                                                                          "rotShortestDistanceY":  false,
+                                                                          "rotShortestDistanceZ":  false,
+                                                                          "rotationX":  0.0,
+                                                                          "rotationY":  0.0,
+                                                                          "rotationZ":  10.9174,
+                                                                          "offsetX":  0.0,
+                                                                          "offsetY":  0.0,
+                                                                          "offsetZ":  0.0
+                                                                      },
+                                                             "LowerArmL":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  10.844,
+                                                                               "rotationY":  3.2491,
+                                                                               "rotationZ":  -3.9507,
+                                                                               "offsetX":  0.2788,
+                                                                               "offsetY":  -0.0626,
+                                                                               "offsetZ":  -0.615
+                                                                           },
+                                                             "ItemAnchorL":  {
+                                                                                 "rotShortestDistanceX":  false,
+                                                                                 "rotShortestDistanceY":  false,
+                                                                                 "rotShortestDistanceZ":  false,
+                                                                                 "rotationX":  0.0,
+                                                                                 "rotationY":  0.0,
+                                                                                 "rotationZ":  0.0,
+                                                                                 "offsetX":  0.0,
+                                                                                 "offsetY":  0.0,
+                                                                                 "offsetZ":  0.0
+                                                                             },
+                                                             "LowerArmR":  {
+                                                                               "rotShortestDistanceX":  false,
+                                                                               "rotShortestDistanceY":  false,
+                                                                               "rotShortestDistanceZ":  false,
+                                                                               "rotationX":  -5.0743,
+                                                                               "rotationY":  -3.9051,
+                                                                               "rotationZ":  -4.198,
+                                                                               "offsetX":  0.0775,
+                                                                               "offsetY":  -0.5404,
+                                                                               "offsetZ":  0.3632
+                                                                           },
+                                                             "ItemAnchor":  {
+                                                                                "rotShortestDistanceX":  false,
+                                                                                "rotShortestDistanceY":  false,
+                                                                                "rotShortestDistanceZ":  false,
+                                                                                "rotationX":  56.0766,
+                                                                                "rotationY":  13.6403,
+                                                                                "rotationZ":  3.2148,
+                                                                                "offsetX":  -4.5085,
+                                                                                "offsetY":  -0.8947,
+                                                                                "offsetZ":  0.492
+                                                                            },
+                                                             "Shovel2":  {
+                                                                             "rotShortestDistanceX":  false,
+                                                                             "rotShortestDistanceY":  false,
+                                                                             "rotShortestDistanceZ":  false,
+                                                                             "rotationX":  0.0,
+                                                                             "rotationY":  0.0,
+                                                                             "rotationZ":  0.0,
+                                                                             "offsetX":  0.0,
+                                                                             "offsetY":  0.0,
+                                                                             "offsetZ":  0.0
+                                                                         }
+                                                         }
+                                        }
+                                    ]
+                  }
+    }
+]

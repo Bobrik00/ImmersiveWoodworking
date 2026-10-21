@@ -1,0 +1,11 @@
+[
+    // Cut-mode tool mode (F) on the vanilla saw too, for the AllowVanillaSaw / RemovePitSaw configs where an ordinary
+    // saw rips at the sawhorse. The behavior shows its menu only when the saw is aimed at a sawhorse, so this stays
+    // inert on every other saw use. See CollectibleBehaviorSawMode / patches/sawhorse_build_behavior.json for the idiom.
+    {
+        "file": "game:itemtypes/tool/saw",
+        "op": "Add",
+        "path": "/behaviors/-",
+        "value": { "name": "iw-sawmode" }
+    }
+]

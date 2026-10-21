@@ -1,0 +1,79 @@
+[
+	// WEAK TANNIN FROM BARK (BarkPlan/E03, T03.02). Replaces the vanilla "whole oak log -> weak tannin" barrel chain
+	// (survival/recipes/barrel/weaktannin.json) with a bark-based one. The player's win is that the LOG survives: you
+	// strip its bark on the sawhorse (E02, one bark per log) and steep THAT, keeping the debarked log for lumber.
+	//
+	// THREE PATHS, all matched by TAG (never a code) so any mod's bark with the same tag drops into the chain for free:
+	//   - green tanning bark (tag `bark-tannin`)         -> the raw, wasteful path (also the default foreign/ACA bark joins)
+	//   - dried tanning bark (tag `bark-tannin-dry`)     -> the middle path: same yield as green but a faster seal, so
+	//                                                       drying is rewarded (playtest 2026-07-28)
+	//   - crushed bark       (tag `bark-tannin-crushed`) -> the thriftiest path (dry bark ground on a quern, T03.01)
+	//
+	// ENGINE SHAPE — why bark is `quantity` and water is `litres`, BOTH with no consume-field (co-drivers), mirroring
+	// vanilla weaktannin exactly:
+	//   * The barrel scales output by an INTEGER multiplier of the driver ingredients (BarrelRecipe.GetOutputSize):
+	//     every ingredient WITHOUT a consume-field must be an exact multiple of its quantity AND yield the SAME
+	//     multiplier. So bark:water is locked to the ratio below; the output litres = that multiplier x the recipe's
+	//     output litres. N bark + N L water -> N L tannin, both fully consumed.
+	//   * Water CANNOT use `consumeLitres` here. For a LIQUID output, TryCraftNow puts the tannin in the liquid slot
+	//     and any consume-ingredient's LEFTOVER in the ITEM slot — a leftover-water stack would land in the item slot,
+	//     which is wrong. Vanilla weaktannin dodges this the same way: water is a co-driver, wholly turned into tannin.
+	//   * The bark ingredient is pure TAGS-ONLY (no `code`, no `name`): GenerateRecipesForAllIngredientCombinations
+	//     leaves it unexpanded (one runtime recipe) and it matches ANY collectible carrying the tag at craft time —
+	//     that is the "foreign bark works automatically" property. Same idiom the mod's grid recipes use (chopper_head).
+	//   * Vanilla `game:` codes are qualified: this file lives in the immersivewoodworking domain, so bare codes would
+	//     resolve to immersivewoodworking: (memory vs-mod-asset-path-domain).
+	//
+	// NUMBERS were FINALISED at T03.04 (D19), RE-SPLIT into a green/dry/crushed ladder at the 2026-07-28 playtest pass,
+	// then the crushed row was BUMPED from 3:5 to a clean 1:2 on 2026-07-30 (D55): +67% -> +100% per bark for grinding.
+	// The 1:1 quern grind (D15) is unchanged; the old "1 crushed = 5 L" / "3:5" figures are stale drafts.
+	// The per-oak-log figures below ("~10 logs per 10 L" etc.) assume ONE bark per log; the sawhorse now drops
+	// Config.BarkPerLog bark per log (default 3), so divide those log counts by BarkPerLog for the shipped default:
+	//   green:   1 bark    + 1 L water -> 1 L weak tannin, seal 72 h.  (1 oak log -> 1 bark, so ~10 logs per 10 L)
+	//   dry:     1 bark    + 1 L water -> 1 L weak tannin, seal 48 h.  (same yield as green; the 24 h faster seal is the
+	//            reward for the 96 h drying — dried bark is strictly better to steep than green)
+	//   crushed: 1 crushed + 2 L water -> 2 L weak tannin, seal 24 h.  (2 L per crushed = +100% per log; ~5 logs
+	//            per 10 L). 1:2 yields integer output at every barrel multiplier (1 crushed : 2 L : 2 L out).
+	// SEAL times are the T03.04 lever (D19). The two VANILLA hide stages (preparedhide 72 h + leather 108 h = 180 h) are
+	// fixed and dominate the huge-hide critical path (= weakSeal + 180 h), so the mod can only move weakSeal, giving a clean
+	// ladder: GREEN 72 h -> huge chain 252 h (~+24%, the no-drying desperation route, log-heavy 30 oaks/huge hide); DRY 48 h
+	// -> huge chain 228 h (the dried middle tier); CRUSHED 24 h -> huge chain 204 h (ties vanilla, best). Litres and
+	// sealHours here are still hardcoded; moving them to config is a later pass. The 96 h drying they lean on
+	// is NOT hardcoded any more — BarkPlan T08.02 made it Config.BarkDryHours, which ApplyBarkDryHours writes over
+	// bark.json at load, so a server that shortens drying shortens the reward this ladder pays for it (AuditFixPlan
+	// T08.07 corrected the cross-reference).
+	//
+	// `code` is a pure handbook GROUPING key (BarrelRecipe.Code: "used only to group recipes together"; BEBarrel never
+	// reads it, it re-matches by ingredients). One code PER STATE, not the vanilla "weaktannin" it used to share: the
+	// handbook merges rows with the same code AND the same output volume into one cycling slideshow that shows a single
+	// seal time, so green (1 L, 72 h) and dry (1 L, 48 h) collapsed into one row labelled 48 h and the green route was
+	// invisible (2026-09-19). Sharing with vanilla never grouped anything anyway: its log routes output 10 L, a different
+	// group key. T03.03 gates those vanilla log routes off by config; ours stay.
+	{
+		code: "weaktannin-green",
+		sealHours: 72,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin"], quantity: 1 },
+			{ type: "item", code: "game:waterportion", litres: 1 }
+		],
+		output: { type: "item", code: "game:weaktanninportion", litres: 1 }
+	},
+	{
+		code: "weaktannin-dry",
+		sealHours: 48,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin-dry"], quantity: 1 },
+			{ type: "item", code: "game:waterportion", litres: 1 }
+		],
+		output: { type: "item", code: "game:weaktanninportion", litres: 1 }
+	},
+	{
+		code: "weaktannin-crushed",
+		sealHours: 24,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin-crushed"], quantity: 1 },
+			{ type: "item", code: "game:waterportion", litres: 2 }
+		],
+		output: { type: "item", code: "game:weaktanninportion", litres: 2 }
+	}
+]

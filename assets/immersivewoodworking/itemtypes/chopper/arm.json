@@ -1,0 +1,50 @@
+{
+	code: "chopperarm",
+	// PLACEHOLDER chopper part (T02.02) — the ARM (lever/helve that holds the head). Plain Item (no class/tool/
+	// behaviors), RMB-installed into `chopper-frame` in E03/T03.07 (analogue of sawmillsash, into which the blade is
+	// set). Mandatory part; the head `chopperhead-{metal}` installs ONLY after the arm is in (nowhere to mount it
+	// otherwise — install-order rule, T02.01). T03.06 wired the authored held mesh (dropmaul-arm) in place of the
+	// placeholder cube; poses/scale calibrate in-game at T07.06.
+	shape: { base: "immersivewoodworking:item/chopper/arm" },
+	// Two-handed carry in third person, like the frame (blocktypes/chopper/frame.json) and the sawmill's bulky parts
+	// (crankshaft/sash) — these machine assemblies are hauled with both hands (user decision 2026-07-05: ALL chopper parts
+	// held two-handed). ONLY the idle hold pose is copied: the frame's ready/place anims (heldblockready/twohandplaceblock)
+	// are block-placement-only and don't apply to an installed item. Hand/ground transforms calibrate later (item-scale).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// "game:" prefix REQUIRED (memory vs-mod-asset-path-domain). Keys match the authored shape (oak wood + iron metal).
+	textures: {
+		"oak":   { base: "game:block/wood/debarked/oak" },
+		"metal": { base: "game:block/metal/plate/iron" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:chopperpart-handbook-title", text: "immersivewoodworking:chopperpart-handbook-text" }
+			]
+		}
+	},
+	// Hand / ground / GUI transforms — calibrated in-game via .tfedit (2026-07-05, T07.06 held-item pass); tp is against
+	// the two-handed holdbothhandslarge pose set above. `rotate: false` is kept on gui so the inventory icon does not
+	// slow-spin: a plain Item defaults its unspecified ModelTransform.Rotate to TRUE (no merge with ItemDefaultGui), and
+	// the sibling parts (drive/head) are all rotate:false. Rotation is explicit because a plain Item's ItemDefaultGui is
+	// flat (0,0,0) — see memory vs-partial-guitransform-no-merge.
+	tpHandTransform: {
+		translation: { x: -1.15, y: -0.8, z: -0.8 },
+		rotation: { x: 6, y: 12, z: 29 },
+		scale: 0.5
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.2, z: 0 },
+		rotation: { x: 6, y: 15, z: -11 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 2.49
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 11, y: -9, z: 0 },
+		rotation: { x: -55, y: 144, z: -21 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.07
+	}
+}

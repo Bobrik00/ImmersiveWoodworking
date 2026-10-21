@@ -1,0 +1,94 @@
+﻿{
+	code: "sawhorse",
+	class: "iw-sawhorse",
+	entityClass: "iw-sawhorse",
+	// No wood variants — the trestle is made of sticks + rope, not cut from a specific log.
+
+	// Handbook (T07.02). The trestle is NOT in the creative inventory and has NO grid recipe (it's built
+	// stick→stick→rope in-world by BehaviorSawhorseBuild), so by default Collectible.GetHandBookStacks returns
+	// null and the block would have no handbook page at all. `include: true` forces one to exist (the else-branch
+	// makes a single ItemStack of the block). extraSections shows the detailed build+rip how-to ONLY on that page —
+	// never in the held-item tooltip: we deliberately avoid `blockdesc-*`, which GetItemDescText would echo into
+	// the tooltip too. The woodworking overview page (WoodworkingHandbookInfo.AddGuidePage) is only a brief cross-station overview.
+	attributes: {
+		handbook: {
+			include: true,
+			extraSections: [
+				{ title: "immersivewoodworking:sawhorse-handbook-title", text: "immersivewoodworking:sawhorse-handbook-text" }
+			]
+		},
+
+		// ── Hand-authored colliders for the ASSEMBLED PAIR (full manual control, edit freely) ──────────────
+		// Read at load on BOTH sides (BlockSawhorse.OnLoaded → BlockEntitySawhorse.GetPairBoxes); no recompile,
+		// an asset reload picks up changes. ONE AABB per part: "trestle" = one козлы (mirrored onto both cells),
+		// "log" = the laid billet (added only while a log is on the pair). Frame = the master cell's Z-orientation
+		// (pairAxis Z = authored facing), model space; the code rotates them onto the pair axis, places the partner/
+		// log one cell toward +axis, and clamps each cell to its own [0,1] footprint — so author here as if the pair
+		// runs along +Z with the master at the lower coordinate. collisionBoxes = what you physically bump into;
+		// selectionBoxes = the white highlight outline (a SEPARATE set, so it can differ from the collider).
+		// Omit any box to fall back to the built-in default. NOTE: a SINGLE / half-built trestle is NOT covered here
+		// — it uses the top-level collisionbox/selectionbox cube further down.
+		collisionBoxes: {
+			trestle: { x1: -0.115, y1: 0,    z1: 0.388,  x2: 1.049, y2: 1.005, z2: 0.675 },
+			log:     { x1: 0.146,  y1: 0.58, z1: -0.812, x2: 0.854, y2: 1.287, z2: 0.812 }
+		},
+		selectionBoxes: {
+			trestle: { x1: -0.115, y1: 0,    z1: 0.388,  x2: 1.049, y2: 1.005, z2: 0.675 },
+			log:     { x1: 0.146,  y1: 0.58, z1: -0.812, x2: 0.854, y2: 1.287, z2: 0.812 }
+		}
+	},
+
+	// Support/instability (T03.04) via the vanilla "Unstable" behavior (registered by the survival mod, used by
+	// the firepit construction): the trestle needs a solid block beneath it. CanPlaceBlock refuses placing it in
+	// mid-air (covers creative / generic placement; the stick build path in BehaviorSawhorseBuild self-checks
+	// support too), and OnNeighbourBlockChange BREAKS it through BreakBlock — the normal break path, so the
+	// stage-based drop (OnBlockBroken, T03.05) fires — once that support is removed. Checks the UP face of the
+	// block BELOW, so this block's own sidesolid:false (a thin frame) doesn't matter. attachedToFaces defaults to
+	// ["down"]; stated explicitly for clarity.
+	behaviors: [
+		{ name: "Unstable", properties: { attachedToFaces: ["down"] } }
+	],
+
+	// Authored stage models (Blender, source art/shapes/sawhorses_p1..3.json):
+	//   p1 = one stick, p2 = two sticks, p3 = finished trestle with rope. The BE swaps the IN-WORLD mesh per
+	//   build stage (BlockEntitySawhorse.UpdateMesh tesselates the matching shape). This `shape` (the Complete
+	//   trestle) is only the inventory/fallback mesh. The shapes paint faces with the #oak / #rope keys, which
+	//   we override below with real game textures (the editor PNGs sawhorses_p*.png are NOT shipped — same as
+	//   the pit saw). "immersivewoodworking:" = this mod's domain (the models live here); textures are "game:".
+	shape: { base: "immersivewoodworking:block/sawhorses_p3" },
+	textures: {
+		"oak":  { base: "game:block/wood/debarked/oak" },
+		"rope": { base: "game:item/resource/rope" }
+	},
+
+	// A thin frame, not a full cube: don't let the engine cull neighbouring faces against it or treat its
+	// sides as solid/opaque (mirrors choppingblock.json). lightAbsorption 0 so it casts no full-block shadow.
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	lightAbsorption: 0,
+
+	blockmaterial: "Wood",
+	maxStackSize: 1,
+	resistance: 1.5,
+
+	// No "sawhorse" item exists (T03.05): the trestle can only be BUILT (stick→stick→rope), never obtained as an
+	// item. So it's NOT in the creative inventory (creative players build it the same way — sticks are free),
+	// and `drops: []` disables the default self-drop. Breaking it instead returns its build materials by stage,
+	// spawned in BlockEntitySawhorse.OnBlockBroken; OnPickBlock (BlockSawhorse) returns null so middle-click
+	// can't grab one either.
+	drops: [],
+
+	// Sounds mirror a wooden block; "game:" prefix required or they resolve to this mod's (empty) sound folder.
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+
+	// One-cell full-cube collision/selection — the FALLBACK for a single / half-built trestle (easy to aim at when
+	// building, blocks movement like a solid object). A finished PAIR overrides BOTH with model-fitted, per-cell
+	// boxes in code (BlockSawhorse.GetCollisionBoxes / GetSelectionBoxes → BlockEntitySawhorse.GetPairCollisionBoxes).
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

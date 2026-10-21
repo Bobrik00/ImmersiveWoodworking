@@ -1,0 +1,167 @@
+﻿{
+	// Splitting maul (колун) — a heavy wedge-headed axe that, laid on the chopping block, turns a WHOLE log straight into
+	// firewood in one pass, skipping the half-log stage (E06). A full analog of the pitsaw / barkspud pipeline: forge a
+	// head (maulhead-{metal}) on the anvil, haft it onto a stick (recipes/grid/tool/maul.json), Toolsmith-tinkerable.
+	//
+	// tool:"axe" is LOAD-BEARING, not cosmetic: the chopping-block chop gate (BlockChoppingBlock.OnBlockInteractStart,
+	// ActiveTool == EnumTool.Axe) and the interaction-help filter both key off it, so the maul chops + shows hints for
+	// free. The one-pass firewood behaviour is added in C# by the IsMaul gate (FirstCodePart == "maul"), NOT by tool type.
+	//
+	// Deliberately NOT tagged "tool-axe" and NOT class:"ItemAxe": the maul is a SPLITTING tool, not a felling axe. Without
+	// the "tool-axe" tag it won't silently substitute into axe-tag recipes; without ItemAxe it can't fell a whole tree in
+	// one cascade. Combined with its lower wood mining speed (below), that makes it poor at felling and good at splitting —
+	// exactly its identity. It still breaks individual wood blocks (tool:"axe" + miningspeed.wood), just slowly.
+	code: "maul",
+	tool: "axe",
+	tags: ["tool"],
+	attributes: {
+		attachableToEntity: { categoryCode: "toolholding" },
+		// Held like the vanilla felling axe (user 2026-07-24): the axe's camera pitch-follow so the maul sits in hand and
+		// swings exactly as an axe does (paired with heldRightReadyAnimation "axeready" / heldTpHitAnimation "axechop" below).
+		heldItemPitchFollow: 0.9,
+		// Wall-rack + wall-lean poses, tuned in-game with .tfedit (user 2026-07-24). The maul can't be laid FLAT on the
+		// ground — it uses WallHalves like the vanilla axe (below) — so these frame the tool-rack pose and the wall-lean.
+		// (scale seeded 0.88 from the pitsaw/axe wall pose; the user tuned translation+rotation, .tfedit the scale if needed.)
+		toolrackTransform: {
+			translation: { x: -0.4, y: 0.68, z: 0 },
+			rotation: { x: 0, y: -3, z: 0 },
+			scale: 1.43
+		},
+		groundStorageTransform: {
+			translation: { x: 0.02, y: 0.17, z: -0.12 },
+			rotation: { x: 37, y: 101, z: -93 },
+			scale: 0.88
+		},
+		handbook: {
+			groupBy: ["maul-*"],
+			// Handbook back-link to its use (mirrors pitsaw/barkspud). extraSections, not the auto item-handbooktext-<code>
+			// lang path, which can't resolve for a mod-domain item.
+			extraSections: [
+				{ title: "immersivewoodworking:maul-handbook-title", text: "immersivewoodworking:maul-handbook-text" }
+			]
+		}
+	},
+	behaviors: [
+		{
+			name: "GroundStorable",
+			properties: {
+				layout: 'WallHalves',
+				wallOffY: 1,
+				ctrlKey: true,
+				selectionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.1, z2: 1 },
+				collisionBox: { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 },
+			}
+		},
+		{ name: "EntityDeconstructTool" },
+		{ name: "Buffable" }
+	],
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver",
+															"iron", "meteoriciron", "steel"
+		  ] },
+	],
+	damagedby: ["blockbreaking", "attacking"],
+	// Custom maul model authored in Blender (source: art/shapes/splittingmaul.json). The
+	// "immersivewoodworking:" prefix = this mod's domain (the model lives here, not in game).
+	shape: { base: "immersivewoodworking:item/tool/maul" },
+	// Full held-animation parity with the vanilla felling axe (user 2026-07-24): the axe ready stance + the axe chop swing,
+	// so held/swung the maul is indistinguishable from an ordinary axe (it was "breaktool" + no ready anim before). These
+	// are PLAYER animations (seraph arms), so they pose any held item; the chopping block already reconciles the vanilla
+	// held-ready ease-out against its own chop animation for every axe, so the maul rides that for free.
+	heldTpHitAnimation: "axechop",
+	heldRightReadyAnimation: "axeready",
+	// The shape paints faces with keys material/handle; override each with a real vanilla texture ("material" per-variant
+	// so each metal maul shows its ingot colour, like the vanilla axe; "handle" = a wooden haft). "game:" required — an
+	// unqualified path in a mod asset resolves to THIS mod's domain, where the vanilla textures don't exist.
+	texturesByType: {
+		"*": {
+			"material": { base: "game:block/metal/ingot/{metal}" },
+			"handle": { base: "game:block/wood/debarked/oak" }
+		}
+	},
+	// Reach = the vanilla felling axe's 2 m, against the 1.5 m GlobalConstants.DefaultAttackRange every collectible
+	// starts with (AuditFixPlan T09.04). The maul promises to swing exactly as an axe does (heldTpHitAnimation below),
+	// so leaving the default would have kept it half a metre shorter than the tool it copies. Same tooltip gate as
+	// attack power: the "Attack range" line only prints when the value is ABOVE the default.
+	attackRange: 2,
+	tooltierbytype: {
+		"maul-copper": 2,
+		"maul-gold": 2,
+		"maul-silver": 2,
+		"maul-bismuthbronze": 3,
+		"maul-tinbronze": 3,
+		"maul-blackbronze": 3,
+		"maul-iron": 4,
+		"maul-meteoriciron": 4,
+		"maul-steel": 5
+	},
+	// Wood mining speed = vanilla felling axe × ~0.6 (the maul is a POOR felling tool). The per-metal RATIOS match the axe
+	// exactly, so on the chopping block the metal-tier factor (ToolTierSpeedFactor = ws / maul-steel-ws) reproduces the
+	// axe's tiering — the maul-steel row is the family anchor (BuildWoodToolSpeedIndex, LastCodePart "steel"). The lower
+	// ABSOLUTE values only slow actual tree-felling; block balance is set by MaulChopSpeedMultiplier (T06.07). wood is
+	// mandatory here — without it ToolTierSpeedFactor returns 1.0 and the metal stops mattering on the block.
+	miningspeedbytype: {
+		"*-copper": { "wood": 3.1 },
+		"*-bismuthbronze": { "wood": 3.5 },
+		"*-tinbronze": { "wood": 3.8 },
+		"*-silver": { "wood": 2.7 },
+		"*-gold": { "wood": 2.7 },
+		"*-blackbronze": { "wood": 4.0 },
+		"*-iron": { "wood": 5.0 },
+		"*-meteoriciron": { "wood": 5.8 },
+		"*-steel": { "wood": 6.6 }
+	},
+	// Durability = vanilla felling axe × 1.5 (a heavy solid head — sturdier than an axe, but below the two-hand pit saw's
+	// ×2). Rounded to whole points.
+	durabilitybytype: {
+		"maul-gold": 188,
+		"maul-silver": 188,
+		"maul-copper": 375,
+		"maul-tinbronze": 600,
+		"maul-bismuthbronze": 750,
+		"maul-blackbronze": 900,
+		"maul-iron": 1350,
+		"maul-meteoriciron": 1800,
+		"maul-steel": 2700
+	},
+	// Attack power = the vanilla FELLING AXE of the same metal, value for value (AuditFixPlan T09.04). Without this
+	// field the engine hands out CollectibleObject.AttackPower = 0.5f, which is the exact number EntityAgent uses for
+	// an EMPTY HAND: a two-hand maul hit as hard as a fist, and the "Attack power" tooltip line never printed at all
+	// (GetHeldItemInfo gates it on > 0.5). Parity and NOT a bonus, on purpose: the maul is deliberately a POOR felling
+	// tool (wood speed ~x0.6, no ItemAxe, no "tool-axe" tag), so out-hitting the axe it grew from would hand it a
+	// second identity as a weapon. Vanilla's steel axe at 4 is already the top of the tool scale (steel hammer 2.5,
+	// steel shovel 2.5). Every value is a multiple of 0.25 = 16/64, i.e. exactly on the wire's 1/64 grid (AttackPower
+	// is one of the quantized collectible floats, see ImmersiveWoodworkingModSystem.QuantizeLikeWire), so the server
+	// and the client read the same number without any rounding of their own.
+	attackpowerbytype: {
+		"maul-copper": 2,
+		"maul-gold": 2.5,
+		"maul-silver": 2.5,
+		"maul-bismuthbronze": 2.5,
+		"maul-tinbronze": 2.75,
+		"maul-blackbronze": 3,
+		"maul-iron": 3,
+		"maul-meteoriciron": 3.5,
+		"maul-steel": 4
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"] },
+	// Display transforms SEEDED from the vanilla felling axe (the closest-shaped sibling). Fine-tune in-game with `.tfedit`
+	// once the maul model is loaded (the mod's standard workflow — see pitsaw.json / T06.01 batch checks).
+	guiTransform: {
+		translation: { x: -1, y: 3, z: 0 },
+		rotation: { x: -63, y: -123, z: -180 },
+		origin: { x: 0.61, y: 0, z: 0.47 },
+		scale: 1.58
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3.6
+	},
+	tpHandTransform: {
+		translation: { x: -0.43, y: -0.52, z: -0.07 },
+		rotation: { x: 90, y: 0, z: 0 },
+		scale: 0.95
+	}
+}

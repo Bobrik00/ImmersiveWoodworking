@@ -1,0 +1,24 @@
+{
+	// TEMPLATE, not a live recipe — note "enabled: false", which makes the vanilla RecipeLoader skip it.
+	// ImmersiveWoodworkingModSystem.AssetsFinalize loads this once and CLONES it per discovered wood species
+	// (vanilla + wildcrafttree + any wood mod, from worldproperties/block/wood across all domains, T04.01),
+	// stamping in code: the exact placed-log input ({domain}:log-placed-{wood}-ud) and the output's
+	// wood/woodDomain attributes (T04.02). A single static JSON recipe can't do this: a wildcard log code is
+	// domain-pinned (game:log-placed-*-ud never expands to wildcrafttree:), and the output domain can't be
+	// templated. Keeping the axe + grid shape here (rather than building them in C#) means the tag-based
+	// "tool-axe" ingredient is parsed by the engine, not hand-constructed. The output's species attributes are
+	// what make the result — and the handbook preview — the right wood; BlockChoppingBlock.OnCreatedByCrafting
+	// additionally re-derives them from the crafted log as a fallback for any non-standard craft path.
+	enabled: false,
+	ingredientPattern: "AL",
+	ingredients: {
+		"A": { type: "item", tags: ["tool-axe"], isTool: true },
+		// Placeholder code — replaced per species in code (set to the exact {domain}:log-placed-{wood}-ud, with
+		// the name/wildcard cleared so it matches exactly). Only the type matters here.
+		"L": { type: "block", code: "game:log-placed-oak-ud" }
+	},
+	width: 2,
+	height: 1,
+	// Output code + species attributes are set in code (immersivewoodworking:choppingblock + wood/woodDomain).
+	output: { type: "block", code: "choppingblock", quantity: 1 }
+}

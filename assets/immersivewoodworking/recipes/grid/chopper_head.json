@@ -1,0 +1,26 @@
+{
+	// Grid recipe (head redesign, user 2026-07-10) — the axe/maul HEAD `chopperhead-{metal}`, the chopper's WEAR-tier
+	// consumable, is now ASSEMBLED from two forged halves rather than forged whole on the anvil. The player forges TWO
+	// identical `chopperheadhalf-{metal}` of the SAME metal (recipes/smithing/chopperheadhalf.json) and joins them here
+	// with a hammer:
+	//   _ H _     H = hammer (tag tool-hammer, isTool + toolDurabilityCost 0 -> returned untouched, mod-independent)
+	//   _ D _     D = chopperheadhalf-* (name:"metal" -> both halves must be the SAME metal AND drive the {metal} output)
+	//   _ D _
+	// PLAIN, engine-loaded recipe (NO `enabled:false`) — like the old whole-head forge recipe it replaces, and unlike
+	// the frame/drive/arm templates: it consumes NO wood, so the vanilla RecipeLoader loads it straight in THIS mod's
+	// domain and the bare codes resolve to immersivewoodworking: (RegisterChopperRecipes handles only the wood parts).
+	// name:"metal" on BOTH D cells forces one metal across the two halves and captures {metal} for chopperhead-{metal}
+	// (the trick vanilla uses on plank.json's name:"wood"); the halves' own smithing recipe already pins the 9 metals,
+	// so no allowedVariants needed here. Hammer by TAG with no code (memory vs-recipe-ingredient-code-vs-tags: a
+	// tag-only match needs code==null). The halves stack to 2 (headhalf.json), and each of the two D cells consumes one,
+	// so a single stack of two halves is exactly one head. SHAPE is deliberately the middle column of a 3x3, distinct
+	// items from any other recipe -> no grid collision.
+	ingredientPattern: "_H_,_D_,_D_",
+	ingredients: {
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 },
+		"D": { type: "item", code: "chopperheadhalf-*", name: "metal" }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "chopperhead-{metal}", quantity: 1 }
+}

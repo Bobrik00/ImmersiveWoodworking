@@ -1,0 +1,44 @@
+[
+	// BAST POULTICES WITH THE TWO VANILLA AGENTS (BarkPlan/E05, playtest Variant A, 2026-07-28). The T05.02 patch
+	// (patches/poultice_bast.json) added `bast` to vanilla poultice's material axis — which CREATES the items
+	// poultice-bast-honey-sulfur and poultice-bast-horsetail and their HealingItem numbers — but vanilla's grid recipes
+	// (game:recipes/grid/poultice.json) only know the linen/reed materials, so those two bast items had NO way to be
+	// crafted. This file adds exactly the two missing recipes, cloned 1:1 from vanilla's reed recipes with the reed
+	// fibre (cattailtops x2) swapped for bast (bark-bast x2) — the same substitution T05.05's barkbrew poultices use.
+	// (The bark-medicinal AGENT poultices, incl. bast, live in the sibling poultice-bark.json.)
+	//
+	// DOMAINS: this file is in the immersivewoodworking domain, so all vanilla ingredient codes (powder-sulfur, bowl,
+	// honeyportion, flower-horsetail-free) and the game-domain OUTPUT items (poultice-bast-* are game items) are
+	// game:-qualified; only our own bast fibre stays immersivewoodworking:bark-bast (memory vs-mod-asset-path-domain).
+
+	// bast + honey-sulfur (clone of vanilla poultice-reed-honey-sulfur, cattailtops -> bark-bast)
+	{
+		"ingredientPattern": "SBS\t_F_",
+		"ingredients": {
+			"S": { "type": "item", "code": "game:powder-sulfur" },
+			"B": { "type": "block", "code": "game:bowl-*-fired" },
+			"F": { "type": "item", "code": "immersivewoodworking:bark-bast", "quantity": 2 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "game:honeyportion" },
+				"requiresLitres": 0.25
+			}
+		},
+		"width": 3,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-bast-honey-sulfur", "quantity": 4 }
+	},
+
+	// bast + horsetail (clone of vanilla poultice-reed-horsetail, cattailtops -> bark-bast)
+	{
+		"ingredientPattern": "H\tF",
+		"ingredients": {
+			"H": { "type": "block", "code": "game:flower-horsetail-free", "quantity": 4 },
+			"F": { "type": "item", "code": "immersivewoodworking:bark-bast", "quantity": 2 }
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "game:poultice-bast-horsetail", "quantity": 4 }
+	}
+]

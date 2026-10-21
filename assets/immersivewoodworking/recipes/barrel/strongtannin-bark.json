@@ -1,0 +1,50 @@
+[
+	// STRONG TANNIN FROM BARK (BarkPlan/E03, T03.02). Mirrors the vanilla "whole oak log + weak tannin -> strong tannin"
+	// step (survival/recipes/barrel/strongtannin.json) so the chain reaches strong tannin WITHOUT ever burning a log —
+	// otherwise dubbing would stall halfway. Same bark, now steeped in weak tannin instead of water to concentrate it.
+	//
+	// Identical engine shape and reasoning to weaktannin-bark.json (see the full note there): bark is TAGS-ONLY and a
+	// co-driver by `quantity`; the liquid (here game:weaktanninportion) is the other co-driver by `litres` with no
+	// `consumeLitres` — it is wholly upgraded into strong tannin, so no leftover liquid is misplaced into the item slot.
+	// Vanilla codes are `game:`-qualified because this file is in the immersivewoodworking domain.
+	//
+	// NUMBERS were FINALISED at T03.04 (D19) and RE-SPLIT into green/dry/crushed at the 2026-07-28 playtest pass, mirroring
+	// the weak step so drying and grinding stay uniformly better across the chain. Crushed was BUMPED from 3:5 to a clean
+	// 1:2 on 2026-07-30 (D55, weak step mirrored): +67% -> +100% per bark for grinding.
+	//   green:   1 bark    + 1 L weak tannin -> 1 L strong tannin, seal 72 h.
+	//   dry:     1 bark    + 1 L weak tannin -> 1 L strong tannin, seal 48 h.  (same yield as green, faster seal)
+	//   crushed: 1 crushed + 2 L weak tannin -> 2 L strong tannin, seal 24 h.  (+100% per bark)
+	// Crushed matches vanilla's 24 h strong-tannin seal; green is the slow 72 h wasteful route, dry the 48 h middle. NOTE
+	// the strong seal sits OFF the huge-hide critical path — it runs under preparedhide's 72 h window, so it does NOT extend
+	// the 252/228/204 h chains the weak step sets; these seals matter only for the strong-tannin-only case.
+	//
+	// `code` is one grouping key PER STATE, not the shared vanilla "strongtannin" (same reasoning as weaktannin-bark.json:
+	// equal-volume rows with one code merge into a single slideshow row with one seal time, which hid the green route).
+	{
+		code: "strongtannin-green",
+		sealHours: 72,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin"], quantity: 1 },
+			{ type: "item", code: "game:weaktanninportion", litres: 1 }
+		],
+		output: { type: "item", code: "game:strongtanninportion", litres: 1 }
+	},
+	{
+		code: "strongtannin-dry",
+		sealHours: 48,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin-dry"], quantity: 1 },
+			{ type: "item", code: "game:weaktanninportion", litres: 1 }
+		],
+		output: { type: "item", code: "game:strongtanninportion", litres: 1 }
+	},
+	{
+		code: "strongtannin-crushed",
+		sealHours: 24,
+		ingredients: [
+			{ type: "item", tags: ["bark-tannin-crushed"], quantity: 1 },
+			{ type: "item", code: "game:weaktanninportion", litres: 2 }
+		],
+		output: { type: "item", code: "game:strongtanninportion", litres: 2 }
+	}
+]

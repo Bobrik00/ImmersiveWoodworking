@@ -1,0 +1,50 @@
+{
+	// Anvil smithing recipe for the splitting-maul HEAD `maulhead-{metal}` (E06/T06.03). Forge one head from hot metal, the
+	// same pipeline as the mod's other toolheads (pitsawblade.json · barkspudhead.json) and the vanilla toolheads. Auto-loaded
+	// from this mod's domain with no code registration — recipes/smithing/* is scanned across every domain.
+	//
+	// METALS = the FULL vanilla tool set (copper…steel, incl. soft gold/silver), 1:1 with the maul itemtype and the mod's
+	// other toolheads. name:"metal" binds the ingot's metal to the {metal} output (copper ingot → maulhead-copper); a
+	// single metal, no mixing. The 9 allowedVariants match maulhead.json 1:1.
+	//
+	// 3-D SHAPE (user 2026-07-24, designed in Mods/forge-shape-editor.html): a chunky splitting-maul head, 2 layers over a
+	// 7×10 footprint. It is a HEIGHTMAP — every metal voxel is supported by metal directly below it, down to y=0 — which is
+	// exactly the forgeable class: the anvil's OnUpset/OnHit/moveVoxelDownwards ops (BEAnvil.cs) never create an unsupported
+	// (floating) voxel, so an overhang recipe can never be reached in-world. (An earlier flat→3D attempt here had its blade
+	// floating over empty base = 16 unsupported voxels and was un-forgeable; this heightmap fixes that.)
+	//   • y0 base (54 vox) — the full head silhouette: a full-height cutting-edge band on one side flaring into a broad body.
+	//   • y1 cap (28 vox) — thickness over the central cheeks only, so the cutting edge stays 1 voxel thin (splitting bevel)
+	//     while the body is 2 thick. Side profile edge→poll = 1 1 1 2 2 2 2 2 2 1.
+	// Budget: 54 + 28 = 82 filled → ceil(82 / ItemIngot.VoxelCount 42) = 2 INGOTS (98% of the 84-voxel 2-ingot capacity).
+	// Same 2-ingot cost as the old flat 72-voxel silhouette, so no balance ripple — only the geometry became 3-D. Single
+	// 6-connected solid, forges cleanly (flatten the tall 2-ingot blank into the body, keep/raise the cheeks, thin the edge).
+	// NOTE the anvil rotates the recipe 90° horizontally on load (SmithingRecipe.RotateRecipe = true); orientation-only.
+	//
+	// `game:` is REQUIRED on the ingot — an unqualified `ingot-*` resolves to THIS mod's domain (immersivewoodworking:
+	// ingot-*), matches NO collectible, and the recipe silently expands to zero sub-recipes (memory
+	// vs-mod-asset-path-domain). Vanilla axe.json / saw.json get away with a bare `ingot-*` only because they live in the
+	// game domain.
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"###_______",
+		"#########_",
+		"##########",
+		"##########",
+		"##########",
+		"#########_",
+		"###_______"
+	],[
+		"__________",
+		"___#####__",
+		"___######_",
+		"___######_",
+		"___######_",
+		"___#####__",
+		"__________"
+	]],
+	// `name` is an identifier (parsed to an AssetLocation), NOT a display label: the anvil recipe selector lists recipes
+	// by their OUTPUT item (maulhead-{metal}, named via lang in T06.04), so no recipe-name lang entry is needed.
+	name: "maulhead",
+	code: "maulhead-{metal}",
+	output: { type: "item", code: "maulhead-{metal}" }
+}

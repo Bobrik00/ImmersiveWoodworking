@@ -1,0 +1,64 @@
+﻿{
+	// CRUSHED TANNING BARK (BarkPlan/E03, T03.01). Dried tanning bark ground on a vanilla quern into a coarse tannin
+	// powder. Display name is "Crushed tanning bark" (playtest 2026-07-28 — the earlier "Crushed bark" hid that this is
+	// specifically the TANNIN intermediate; NOT meal/flour, it is shredded, not milled fine). The item code stays
+	// `barkcrushed` (renaming the code would ripple through grindingProps, the tannin recipes and saves for no gain).
+	//
+	// ENGINE FACT — the quern is strictly 1:1 (verified in BlockEntityQuern.grindInput, vssurvivalmod): each grind
+	// cycle does `InputSlot.TakeOut(1)` and emits `GroundStack.ResolvedItemstack.Clone()`, i.e. 1 input item ->
+	// GroundStack.StackSize output items, INTEGER only, with NO way to consume several inputs per output. The plan's
+	// "3 raw bark -> 1 crushed" was a MATERIAL ratio the quern cannot express, so grinding is 1 dry tanning bark ->
+	// 1 crushed bark (groundStack size defaults to 1), and the crushed-vs-raw value gap collapses into the tannin
+	// barrel yields (T03.02), NOT here — this is the plan's sanctioned fallback for the open question.
+	// HEADS-UP for T03.02: its draft "1 crushed = 5 L" was sized for a 3:1 grind. Under this real 1:1 grind 1 crushed
+	// costs just 1 dry bark, so the crushed value lives in the barrel recipe, not here. It was finalised at the T03.04
+	// balance pass, then BUMPED to 1 crushed -> 2 L (weak and strong) on 2026-07-30 (D55) = +100% per bark over raw's
+	// 1 L. Do not read "worth ~3 raw" or "5 L" into this item; those drafts never became real.
+	code: "barkcrushed",
+	// Authored crushed-bark model (user, 2026-07-25): a loose scatter of shredded bark chips ("россыпь", not a plate).
+	// Replaces the earlier D16 placeholder (vanilla `game:item/resource/crushed/normal` pile + a single bark-tan
+	// texture). Like every other bark silhouette, the shape carries its OWN full texture paths, so there is NO `texture`
+	// / texturesByType override here — each shape paints itself (bark.json D4). The Blender export's bare names were
+	// rewritten inside the shape to full paths (`bark-tan` -> immersivewoodworking:item/bark/bark-tan, `oak` ->
+	// game:block/wood/oak), the same fix + same two textures the sibling bark-tan.json uses (memory
+	// vs-blender-shape-texture-block-warning). Authored under art/, copied to assets/ (vs-iw-custom-model-locations).
+	shape: { base: "immersivewoodworking:item/bark/crushed-bark-tan" },
+	// TAGS. Its own `bark-tannin-crushed` tag, kept DISJOINT from raw tanning bark's `bark-tannin` so T03.02 can give
+	// crushed a separate, higher-yield barrel recipe without the raw-bark recipe also matching it. Deliberately NOT the
+	// generic `bark` tag — crushed is a refined tannin intermediate, not a compost/dye/tinder sink (those are E06).
+	tags: ["bark-tannin-crushed"],
+	maxstacksize: 64,
+	// Bark is a thin peel (~350, same family as bark.json); crushing does not change the material.
+	materialDensity: 350,
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Per-item handbook blurb (extraSections pattern, same as halflog). Honest: only states what is true once this
+	// chain ships — ground on a quern, a concentrated tannin input.
+	// inContainerTexture: the fill of a Food Shelves jar and of a barrel or open crate (Food Shelves compat, 1.3.10; the
+	// why is next to attributesByType in bark.json). Ground tanning bark, so it shares tan bark's own texture.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:barkcrushed-handbook-title", text: "immersivewoodworking:barkcrushed-handbook-text" }
+			]
+		},
+		inContainerTexture: { base: "immersivewoodworking:item/bark/bark-tan" }
+	},
+	// Transforms are a STARTING POINT carried over from vanilla bonemeal (they suited the old D16 pile shape). The
+	// authored crushed-bark silhouette differs, so these want an in-game .tfedit recalibration pass per view, the same
+	// way the bark.json silhouettes were each hand-tuned (user domain).
+	guiTransform: {
+		rotation: { x: 155, y: 12, z: 0 },
+		origin: { x: 0.48, y: 0.09, z: 0.49 },
+		scale: 2.54
+	},
+	tpHandTransform: {
+		translation: { x: -1.87, y: -1.25, z: -0.8 },
+		rotation: { x: 70, y: 11, z: -65 },
+		scale: 0.41
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.46, z: 0 },
+		rotation: { x: 0.2, y: 8, z: -0.2 },
+		scale: 4.5
+	}
+}

@@ -1,0 +1,78 @@
+[
+	// VSROOFING COMPAT (BarkPlan/E07, T07.04 + T07.05) — add birch bark as a roofing material.
+	//
+	// VSRoofing declares every material under attributes/Roofs of vsroofing:blocktypes/roof.json (20 stock materials;
+	// no bark). Adding one is a single `op: add` of a material object — no new block, no code. Birch bark was laid in
+	// overlapping courses as a historic roof (and under sod as the hydro/thermal layer), so it belongs here.
+	//
+	// SHAPE REUSE (task): this clones the `sticks` material's geometry — the simplest stock set, a single "material"
+	// texture code (its slope shapes reference only "material"), so one texture dresses the whole roof with no missing
+	// codes. Bark laid across the slope reads well on the sticks lattice. (A flatter wood-shingle / leather geometry is
+	// an option for a later look pass, but those pull per-plank / per-hide textures and need more wiring.)
+	//
+	// TEXTURE (T07.05): points at the vanilla birch-bark texture game:block/wood/bark/birch-h — a GENUINE birch-bark
+	// image (IW's own bark-birch item shape uses the same texture), not a fake placeholder, so the roof already reads
+	// as birch even before any dedicated art. The remaining T07.05 art task is an OPTIONAL authored tileable
+	// "overlapping strips" texture the user can swap in here later; the mechanism is complete without it.
+	//
+	// RETENTION (T07.05): deliberately OMITTED, which gives birch bark VSRoofing's DEFAULT (good) heat retention. Only
+	// `sticks` sets Retention at all (to 0 — a gappy lattice keeps no heat); every other material, INCLUDING the
+	// insulating `sod`, omits it and inherits the good default. Birch bark is a real insulator (it was laid under sod
+	// exactly for that), so it belongs with the defaulted materials, not with sticks' explicit 0 — i.e. it is at least
+	// as warm as thatch (which also omits Retention). No invented number; the omission IS the "sensible value".
+	//
+	// MATERIALS: ordinary bark won't do — this is specifically birch bark (`bark-birch-*`, both green and dry accepted,
+	// mirroring the "green works everywhere, just wastefully" rule). Quantity 1 per section: bark is precious (one per
+	// debarked birch), and a roof is many sections, so a birch-bark roof is a real investment — a premium look. The 1
+	// is a DRAFT balance number, tuned at the T07.06 modpack playtest.
+	//
+	// No `side` (Universal): a roof material must exist on BOTH sides — the client tessellates the shape/texture, the
+	// server owns placement and the material cost. dependsOn vsroofing so it is inert (and silent) without the mod.
+	//
+	// GESTURE NOTE: IW's old clash with VSRoofing (stick-on-RMB vs roofing) is already resolved — the offhand yield is
+	// gated on IsModEnabled("vsroofing") in BehaviorSawhorseBuild. This patch adds a material only and does not revive it.
+	{
+		"file": "vsroofing:blocktypes/roof.json",
+		"op": "add",
+		"path": "/attributes/Roofs/birchbark",
+		"value": {
+			"DisplayName": "immersivewoodworking:roof-birchbark",
+			"SlopeMin": 1,
+			"SlopeMax": 5,
+			"Shape": {
+				"Slopes": [
+					{ "Main": "vsroofing:shapes/sticks/main/sticks-slope1.json", "Sections": "vsroofing:shapes/sticks/main/sticks-slope1.json", "MainSnow": ["vsroofing:shapes/sticks/main/sticks-slope1-snow1.json"], "SectionsSnow": ["vsroofing:shapes/sticks/main/sticks-slope1-snow1.json"] },
+					{ "Main": "vsroofing:shapes/sticks/main/sticks-slope2.json", "Sections": "vsroofing:shapes/sticks/main/sticks-slope2.json", "MainSnow": ["vsroofing:shapes/sticks/main/sticks-slope2-snow1.json"], "SectionsSnow": ["vsroofing:shapes/sticks/main/sticks-slope2-snow1.json"] },
+					{ "Main": "vsroofing:shapes/sticks/main/sticks-slope3.json", "Sections": "vsroofing:shapes/sticks/main/sticks-slope3.json", "MainSnow": ["vsroofing:shapes/sticks/main/sticks-slope3-snow1.json"], "SectionsSnow": ["vsroofing:shapes/sticks/main/sticks-slope3-snow1.json"] },
+					{ "Main": "vsroofing:shapes/sticks/main/sticks-slope4.json", "Sections": "vsroofing:shapes/sticks/main/sticks-slope4.json", "MainSnow": ["vsroofing:shapes/sticks/main/sticks-slope4-snow1.json"], "SectionsSnow": ["vsroofing:shapes/sticks/main/sticks-slope4-snow1.json"] },
+					{ "Main": "vsroofing:shapes/sticks/main/sticks-slope5.json", "Sections": "vsroofing:shapes/sticks/main/sticks-slope5.json", "MainSnow": ["vsroofing:shapes/sticks/main/sticks-slope5-snow1.json"], "SectionsSnow": ["vsroofing:shapes/sticks/main/sticks-slope5-snow1.json"] }
+				],
+				"Rows": [4, 4, 4, 4, 4],
+				"Columns": 9,
+				"Offset": { "X": 0, "Y": 0, "Z": 0 }
+			},
+			"Textures": {
+				"material": { "base": "game:block/wood/bark/birch-h" }
+			},
+			"ColorTextureCode": "material",
+			"Sounds": {
+				"Place": "game:sounds/block/planks",
+				"Break": "game:sounds/block/planks",
+				"Hit": "game:sounds/block/planks"
+			},
+			"Materials": [
+				{
+					"Primary": {
+						"Code": [
+							"immersivewoodworking:bark-birch-dry",
+							"immersivewoodworking:bark-birch-green"
+						],
+						"Quantity": 1
+					}
+				}
+			],
+			"BlockMaterial": "Wood"
+		},
+		"dependsOn": [{ "modid": "vsroofing" }]
+	}
+]

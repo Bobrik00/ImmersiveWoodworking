@@ -1,0 +1,1904 @@
+{
+  "textureWidth": 64,
+  "textureHeight": 64,
+  "textures": {
+    "metal": "game:block/metal/ingot/iron",
+    "null": "game:block/wood/debarked/oak",
+    "wood": "game:block/wood/debarked/oak",
+    "brown": "game:item/bag/backpack/leather"
+  },
+  "textureSizes": {
+    "metal": [
+      64,
+      64
+    ],
+    "null": [
+      64,
+      64
+    ],
+    "wood": [
+      64,
+      64
+    ],
+    "brown": [
+      64,
+      64
+    ]
+  },
+  "elements": [
+    {
+      "name": "PitSaw_001",
+      "from": [
+        1.0,
+        7.5,
+        7.0
+      ],
+      "to": [
+        15.0,
+        7.699999809265137,
+        8.0
+      ],
+      "rotationOrigin": [
+        3.0,
+        7.599999904632568,
+        7.5
+      ],
+      "group": "pitsaw-body",
+      "faces": {
+        "north": {
+          "texture": "#metal",
+          "uv": [
+            4.0,
+            22.0,
+            60.0,
+            24.0
+          ],
+          "autoUv": false
+        },
+        "east": {
+          "texture": "#metal",
+          "uv": [
+            14.0,
+            18.0,
+            18.0,
+            20.0
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#metal",
+          "uv": [
+            6.0,
+            16.0,
+            62.0,
+            18.0
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#metal",
+          "uv": [
+            18.0,
+            26.0,
+            22.0,
+            28.0
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#metal",
+          "uv": [
+            6.0,
+            18.0,
+            62.0,
+            22.0
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#metal",
+          "uv": [
+            60.0,
+            22.0,
+            4.0,
+            18.0
+          ],
+          "autoUv": false,
+          "rotation": 180
+        }
+      },
+      "children": [
+        {
+          "name": "PitSaw_011",
+          "from": [
+            -1.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            -0.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            -0.75,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                0.0,
+                30.0,
+                2.0,
+                30.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                56.0,
+                38.0,
+                58.0,
+                38.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                36.0,
+                8.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                60.0,
+                32.0,
+                62.0,
+                34.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                36.0,
+                6.0,
+                34.0,
+                4.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_012",
+          "from": [
+            0.0,
+            -9.685754776000977e-08,
+            1.0
+          ],
+          "to": [
+            0.5,
+            0.19999990612268448,
+            1.5
+          ],
+          "rotationOrigin": [
+            0.25,
+            0.09999990463256836,
+            1.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                40.0,
+                36.0,
+                42.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                20.0,
+                8.0,
+                20.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                28.0,
+                56.0,
+                28.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                4.0,
+                58.0,
+                6.0,
+                60.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                12.0,
+                28.0,
+                10.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_013",
+          "from": [
+            1.0,
+            -9.685754776000977e-08,
+            1.0
+          ],
+          "to": [
+            1.5,
+            0.19999990612268448,
+            1.5
+          ],
+          "rotationOrigin": [
+            1.25,
+            0.09999990463256836,
+            1.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                20.0,
+                26.0,
+                22.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                0.0,
+                62.0,
+                2.0,
+                62.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                56.0,
+                20.0,
+                56.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                10.0,
+                30.0,
+                12.0,
+                32.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                2.0,
+                28.0,
+                0.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_014",
+          "from": [
+            -1.0,
+            -0.5,
+            -3.0
+          ],
+          "to": [
+            0.0,
+            0.5,
+            3.0
+          ],
+          "rotationOrigin": [
+            -0.5,
+            0.0,
+            0.0
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#wood",
+              "uv": [
+                42.0,
+                52.0,
+                46.0,
+                56.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#wood",
+              "uv": [
+                0.0,
+                48.0,
+                24.0,
+                52.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#wood",
+              "uv": [
+                26.0,
+                46.0,
+                30.0,
+                50.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#wood",
+              "uv": [
+                36.0,
+                0.0,
+                60.0,
+                4.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#wood",
+              "uv": [
+                16.0,
+                14.000007629394531,
+                39.99999237060547,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#wood",
+              "uv": [
+                63.999996185302734,
+                20.0,
+                40.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 270
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_015",
+          "from": [
+            14.0,
+            -0.5,
+            -3.0
+          ],
+          "to": [
+            15.0,
+            0.5,
+            3.0
+          ],
+          "rotationOrigin": [
+            14.5,
+            0.0,
+            0.0
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#wood",
+              "uv": [
+                42.0,
+                54.0,
+                46.0,
+                58.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#wood",
+              "uv": [
+                0.0,
+                50.0,
+                24.0,
+                54.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#wood",
+              "uv": [
+                26.0,
+                48.0,
+                30.0,
+                52.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#wood",
+              "uv": [
+                36.0,
+                2.0,
+                60.0,
+                6.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#wood",
+              "uv": [
+                16.0,
+                16.0,
+                40.0,
+                20.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#wood",
+              "uv": [
+                64.0,
+                22.0,
+                40.0,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 270
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_016",
+          "from": [
+            2.0,
+            -9.685754776000977e-08,
+            1.5
+          ],
+          "to": [
+            2.5,
+            0.19999990612268448,
+            2.0
+          ],
+          "rotationOrigin": [
+            2.25,
+            0.09999990463256836,
+            1.75
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                10.0,
+                58.0,
+                12.0,
+                59.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                60.0,
+                26.0,
+                61.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                52.0,
+                0.0,
+                54.0,
+                1.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                16.0,
+                0.0,
+                18.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                24.0,
+                22.0,
+                22.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_017",
+          "from": [
+            3.0,
+            -9.685754776000977e-08,
+            1.5
+          ],
+          "to": [
+            3.5,
+            0.19999990612268448,
+            2.0
+          ],
+          "rotationOrigin": [
+            3.25,
+            0.09999990463256836,
+            1.75
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                40.0,
+                48.0,
+                42.0,
+                48.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                50.0,
+                26.0,
+                52.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                52.0,
+                32.0,
+                54.0,
+                32.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                52.0,
+                50.0,
+                54.0,
+                52.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                56.0,
+                4.0,
+                54.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_018",
+          "from": [
+            4.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            4.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            4.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                52.0,
+                32.0,
+                54.0,
+                32.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                56.0,
+                50.0,
+                58.0,
+                50.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                10.0,
+                8.0,
+                10.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                20.0,
+                20.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                56.0,
+                42.0,
+                54.0,
+                40.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_019",
+          "from": [
+            5.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            5.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            5.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                32.0,
+                24.0,
+                34.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                60.0,
+                24.0,
+                62.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                2.0,
+                4.0,
+                4.0,
+                4.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                2.0,
+                20.0,
+                4.0,
+                22.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                4.0,
+                52.0,
+                2.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_020",
+          "from": [
+            6.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            6.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            6.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                34.0,
+                56.0,
+                34.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                4.0,
+                56.0,
+                6.0,
+                56.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                44.0,
+                36.0,
+                46.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                16.0,
+                20.0,
+                18.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                42.0,
+                46.0,
+                40.0,
+                44.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_021",
+          "from": [
+            7.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            7.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            7.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                36.0,
+                38.0,
+                38.0,
+                38.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                60.0,
+                62.0,
+                62.0,
+                62.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                42.0,
+                20.0,
+                42.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                42.0,
+                24.0,
+                44.0,
+                26.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                60.0,
+                48.0,
+                58.0,
+                46.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_022",
+          "from": [
+            8.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            8.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            8.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                22.0,
+                20.0,
+                22.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                18.0,
+                26.0,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                56.0,
+                0.0,
+                58.0,
+                0.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                8.0,
+                30.0,
+                10.0,
+                32.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                32.0,
+                12.0,
+                30.0,
+                10.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_023",
+          "from": [
+            9.0,
+            -9.685754776000977e-08,
+            2.0
+          ],
+          "to": [
+            9.5,
+            0.19999990612268448,
+            2.5
+          ],
+          "rotationOrigin": [
+            9.25,
+            0.09999990463256836,
+            2.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                2.0,
+                4.0,
+                4.0,
+                4.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                24.0,
+                62.0,
+                26.0,
+                62.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                38.0,
+                4.0,
+                40.0,
+                4.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                42.0,
+                16.0,
+                44.0,
+                18.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                42.0,
+                46.0,
+                40.0,
+                44.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_024",
+          "from": [
+            10.0,
+            -9.685754776000977e-08,
+            1.5
+          ],
+          "to": [
+            10.5,
+            0.19999990612268448,
+            2.0
+          ],
+          "rotationOrigin": [
+            10.25,
+            0.09999990463256836,
+            1.75
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                36.0,
+                56.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                16.0,
+                8.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                12.0,
+                56.0,
+                12.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                8.0,
+                60.0,
+                10.0,
+                62.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                20.0,
+                58.0,
+                18.0,
+                56.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_025",
+          "from": [
+            11.0,
+            -9.685754776000977e-08,
+            1.5
+          ],
+          "to": [
+            11.5,
+            0.19999990612268448,
+            2.0
+          ],
+          "rotationOrigin": [
+            11.25,
+            0.09999990463256836,
+            1.75
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                0.0,
+                30.0,
+                2.0,
+                30.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                56.0,
+                38.0,
+                58.0,
+                38.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                36.0,
+                8.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                60.0,
+                32.0,
+                62.0,
+                34.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                36.0,
+                6.0,
+                34.0,
+                4.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_026",
+          "from": [
+            12.0,
+            -9.685754776000977e-08,
+            1.0
+          ],
+          "to": [
+            12.5,
+            0.19999990612268448,
+            1.5
+          ],
+          "rotationOrigin": [
+            12.25,
+            0.09999990463256836,
+            1.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                40.0,
+                36.0,
+                42.0,
+                36.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                6.0,
+                20.0,
+                8.0,
+                20.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                54.0,
+                28.0,
+                56.0,
+                28.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                4.0,
+                58.0,
+                6.0,
+                60.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                12.0,
+                28.0,
+                10.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_027",
+          "from": [
+            13.0,
+            -9.685754776000977e-08,
+            1.0
+          ],
+          "to": [
+            13.5,
+            0.19999990612268448,
+            1.5
+          ],
+          "rotationOrigin": [
+            13.25,
+            0.09999990463256836,
+            1.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#null",
+              "uv": [
+                0.0,
+                0.0,
+                2.0,
+                2.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                20.0,
+                26.0,
+                22.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                0.0,
+                62.0,
+                2.0,
+                62.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                56.0,
+                20.0,
+                56.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                10.0,
+                30.0,
+                12.0,
+                32.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                2.0,
+                28.0,
+                0.0,
+                26.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_028",
+          "from": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "to": [
+            11.5,
+            0.19999980926513672,
+            1.5
+          ],
+          "rotationOrigin": [
+            1.75,
+            0.09999990463256836,
+            1.25
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                14.0,
+                22.0,
+                52.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                16.0,
+                18.0,
+                18.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                14.0,
+                16.0,
+                52.0,
+                18.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                18.0,
+                26.0,
+                20.0,
+                28.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                14.0,
+                16.0,
+                52.0,
+                18.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                52.0,
+                24.0,
+                14.0,
+                22.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_029",
+          "from": [
+            4.0,
+            0.0,
+            1.5
+          ],
+          "to": [
+            9.5,
+            0.19999980926513672,
+            2.0
+          ],
+          "rotationOrigin": [
+            2.25,
+            0.09999990463256836,
+            1.75
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#metal",
+              "uv": [
+                22.0,
+                22.0,
+                44.0,
+                24.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#metal",
+              "uv": [
+                14.000001907348633,
+                17.999996185302734,
+                16.0,
+                20.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#metal",
+              "uv": [
+                22.0,
+                16.0,
+                44.0,
+                18.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#metal",
+              "uv": [
+                20.0,
+                26.0,
+                22.000003814697266,
+                27.99999237060547
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#metal",
+              "uv": [
+                22.0,
+                14.0,
+                44.0,
+                16.0
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#metal",
+              "uv": [
+                44.0,
+                26.0,
+                22.0,
+                24.0
+              ],
+              "autoUv": false,
+              "rotation": 180
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_030",
+          "from": [
+            -1.0499999523162842,
+            -0.550000011920929,
+            -0.5499999523162842
+          ],
+          "to": [
+            0.04999995231628418,
+            0.550000011920929,
+            1.5499999523162842
+          ],
+          "rotationOrigin": [
+            -0.5,
+            0.0,
+            0.5
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#brown",
+              "uv": [
+                42.0,
+                52.0,
+                46.0,
+                56.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#brown",
+              "uv": [
+                6.0,
+                48.0,
+                14.0,
+                52.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#brown",
+              "uv": [
+                26.0,
+                46.0,
+                30.0,
+                50.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#brown",
+              "uv": [
+                46.0,
+                0.0,
+                54.0,
+                4.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#brown",
+              "uv": [
+                26.0,
+                14.0,
+                34.0,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#brown",
+              "uv": [
+                58.0,
+                20.0,
+                50.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 270
+            }
+          },
+          "children": []
+        },
+        {
+          "name": "PitSaw_031",
+          "from": [
+            13.950000047683716,
+            -0.550000011920929,
+            -0.5499999523162842
+          ],
+          "to": [
+            15.049999952316284,
+            0.550000011920929,
+            1.5499999523162842
+          ],
+          "rotationOrigin": [
+            14.5,
+            0.0,
+            0.5
+          ],
+          "group": "pitsaw-body",
+          "faces": {
+            "north": {
+              "texture": "#brown",
+              "uv": [
+                42.0,
+                52.0,
+                46.0,
+                56.0
+              ],
+              "autoUv": false
+            },
+            "east": {
+              "texture": "#brown",
+              "uv": [
+                6.0,
+                48.0,
+                14.0,
+                52.0
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#brown",
+              "uv": [
+                26.0,
+                46.0,
+                30.0,
+                50.0
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#brown",
+              "uv": [
+                46.0,
+                0.0,
+                54.0,
+                4.0
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#brown",
+              "uv": [
+                26.0,
+                14.0,
+                34.0,
+                18.0
+              ],
+              "autoUv": false,
+              "rotation": 90
+            },
+            "down": {
+              "texture": "#brown",
+              "uv": [
+                58.0,
+                20.0,
+                50.0,
+                16.0
+              ],
+              "autoUv": false,
+              "rotation": 270
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "groups": []
+}

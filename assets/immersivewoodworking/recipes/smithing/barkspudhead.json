@@ -1,0 +1,36 @@
+{
+	// Anvil smithing recipe for the bark spud HEAD `barkspudhead-{metal}` (T02.02). Mirrors the vanilla
+	// single-blade toolheads (game:recipes/smithing/axe.json · saw.json · cleaver.json): one hot ingot hammered
+	// into a flat blade silhouette. Auto-loaded from this mod's domain with no code registration — recipes/smithing/*
+	// is scanned across every domain, exactly like the mod's recipes/grid/*.
+	//
+	// METALS = the FULL vanilla tool set (copper…steel, incl. soft gold/silver), 1:1 with the vanilla saw and this
+	// mod's pitsaw — the bark spud is forgeable from any tool metal (user decision 2026-06-28; the spud's tier-3
+	// identity is the CRAFT itself — forge a head + haft it — not a metal-age gate). name:"metal" binds the ingot's
+	// metal to the {metal} output, so a copper ingot yields barkspudhead-copper, steel yields barkspudhead-steel;
+	// a single ingot, one metal, no mixing. The 9 allowedVariants match the barkspudhead itemtype 1:1 (T02.01).
+	//
+	// Voxel silhouette (ONE layer, like every vanilla toolhead — outer array length 1): a long haft SOCKET (the
+	// left run of the middle row, where the top/bottom rows are empty) widening into a compact blade HEAD (the
+	// right 6x3 block) — the "набалдашник" form of shapes/item/barkspudhead.json. 24 voxels, sitting between the
+	// chisel (16) and the axe (37): a single dedicated blade, well inside one ingot's worth (the axe's 37 voxels
+	// forge from a single ingot, so 24 is comfortably forgeable).
+	// `game:` is REQUIRED on the ingot — exactly like the grid recipe's `game:stick`. An unqualified `ingot-*`
+	// resolves to THIS mod's domain (immersivewoodworking:ingot-*), which matches NO collectible, so the recipe
+	// expands to ZERO sub-recipes (RecipeBase.GetNameToCodeMappingForBasicWildcard → empty set → no combinations)
+	// and silently never registers — the head then never shows up in the anvil's forge list. Vanilla axe.json /
+	// saw.json get away with a bare `ingot-*` only because they themselves live in the game domain (memory
+	// vs-mod-asset-path-domain: unqualified codes resolve to the MOD domain; vanilla needs the game: prefix).
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"_______######_",
+		"_############_",
+		"_______######_"
+	]],
+	// `name` is an identifier (parsed to an AssetLocation), NOT a display label: the anvil recipe selector lists
+	// recipes by their OUTPUT item (barkspudhead-{metal}, named via lang in T02.01), so no recipe-name lang entry
+	// is needed. RecipeLoader defaults a null Name to the asset path; vanilla still sets a short one, so we mirror.
+	name: "barkspudhead",
+	code: "barkspudhead-{metal}",
+	output: { type: "item", code: "barkspudhead-{metal}" }
+}

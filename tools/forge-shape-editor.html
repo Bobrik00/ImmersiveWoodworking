@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge Shape Editor — VS smithing heightmaps</title>
+<style>
+  :root{
+    --bg:#15140f; --panel:#211e17; --panel2:#2a261d; --line:#3a3427;
+    --txt:#e9e2d0; --dim:#a89b7d; --accent:#e0a060; --ok:#7bbf6a; --warn:#e6b84c; --bad:#e0644c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:13px/1.4 "Segoe UI",system-ui,sans-serif}
+  h1{font-size:15px;margin:0;font-weight:600;letter-spacing:.3px}
+  h2{font-size:12px;margin:0 0 6px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+  .wrap{display:flex;gap:14px;padding:14px;flex-wrap:wrap;align-items:flex-start}
+  .col{display:flex;flex-direction:column;gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px}
+  header{display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  header .hint{color:var(--dim);font-size:12px}
+  button,select,input{font:inherit;color:var(--txt);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  button.mini{padding:3px 7px}
+  input[type=number]{width:56px;cursor:text}
+  label.field{display:inline-flex;align-items:center;gap:5px;color:var(--dim)}
+  canvas{display:block;background:#100f0b;border:1px solid var(--line);border-radius:6px;touch-action:none}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .brush{display:flex;gap:4px;flex-wrap:wrap}
+  .brush button{width:34px;text-align:center;font-variant-numeric:tabular-nums}
+  .brush button.sel{background:var(--accent);color:#1a1508;border-color:var(--accent);font-weight:700}
+  .stat{display:flex;justify-content:space-between;gap:12px;padding:3px 0;border-bottom:1px dashed var(--line)}
+  .stat b{font-variant-numeric:tabular-nums}
+  .pill{padding:1px 8px;border-radius:20px;font-size:11px;font-weight:700}
+  .pill.ok{background:rgba(123,191,106,.18);color:var(--ok)}
+  .pill.warn{background:rgba(230,184,76,.18);color:var(--warn)}
+  .pill.bad{background:rgba(224,100,76,.18);color:var(--bad)}
+  textarea{width:100%;height:150px;background:#100f0b;color:#d8cba4;border:1px solid var(--line);border-radius:6px;padding:8px;font:12px/1.45 "Cascadia Code",Consolas,monospace;resize:vertical}
+  .presets button{background:var(--panel2)}
+  .legend{display:flex;gap:6px;flex-wrap:wrap;color:var(--dim);font-size:11px;align-items:center}
+  .sw{width:14px;height:14px;border-radius:3px;border:1px solid #0006;display:inline-block;vertical-align:-2px}
+  .note{color:var(--dim);font-size:11.5px;line-height:1.5}
+  .prof{font:12px/1.15 "Cascadia Code",Consolas,monospace;white-space:pre;color:var(--accent);background:#100f0b;border:1px solid var(--line);border-radius:6px;padding:8px;overflow:auto}
+  kbd{background:#0d0c09;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;font:11px monospace}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚒ Forge Shape Editor</h1>
+  <span class="hint">Карта высот для ковки на наковальне (VS smithing). Любая форма по построению <b>выковываема</b> — нет парящих вокселей.</span>
+</header>
+
+<div class="wrap">
+  <!-- LEFT: editor -->
+  <div class="col">
+    <div class="card">
+      <h2>Холст (вид сверху)</h2>
+      <div class="row" style="margin-bottom:8px">
+        <label class="field">ряды (ширина)<input id="inW" type="number" min="1" max="16" value="5"></label>
+        <label class="field">колонки (длина)<input id="inL" type="number" min="1" max="16" value="9"></label>
+        <button id="btnResize" class="mini">применить</button>
+        <span style="flex:1"></span>
+        <button id="btnClear" class="mini">очистить</button>
+      </div>
+      <canvas id="grid" width="500" height="300"></canvas>
+      <div class="row" style="margin-top:8px">
+        <span style="color:var(--dim)">кисть высоты:</span>
+        <div class="brush" id="brush"></div>
+      </div>
+      <p class="note" style="margin:8px 0 0">
+        ЛКМ / тянуть — ставит высоту кисти · ПКМ / тянуть — стирает (0) · колесо над клеткой — ±1.<br>
+        Высота = число вокселей в колонке (0-6). Столбец с высотой 0 = сквозная проушина.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Пресеты</h2>
+      <div class="row presets">
+        <button data-preset="flat72" class="mini">Плоская 72 (текущая)</button>
+        <button data-preset="M1" class="mini">M1 лезвие+обух</button>
+        <button data-preset="M2" class="mini">M2 топорный профиль</button>
+        <button data-preset="wedge3" class="mini">Клин 3 уровня</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIDDLE: preview -->
+  <div class="col">
+    <div class="card">
+      <h2>3D предпросмотр</h2>
+      <canvas id="iso" width="420" height="330"></canvas>
+      <div class="row" style="margin-top:8px">
+        <button id="btnRot" class="mini">↻ повернуть вид</button>
+        <span class="legend" id="legend"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Боковой профиль</h2>
+      <div class="prof" id="profCol"></div>
+      <div class="note" style="margin-top:4px">толщина по длине (кромка → обух)</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: stats + export -->
+  <div class="col">
+    <div class="card" style="min-width:250px">
+      <h2>Проверка</h2>
+      <div class="stat"><span>Размер (Ш×Д×В)</span><b id="stDim">—</b></div>
+      <div class="stat"><span>Заполнено вокселей</span><b id="stVox">—</b></div>
+      <div class="stat"><span>Слитков = ceil(вкс/42)</span><b id="stIng">—</b></div>
+      <div class="stat"><span>Отход металла</span><b id="stWaste">—</b></div>
+      <div class="stat"><span>Опёртость (heightmap)</span><b><span id="stFloat" class="pill ok">✓ нет парящих</span></b></div>
+      <div class="stat"><span>Связность</span><b><span id="stConn" class="pill ok">—</span></b></div>
+      <div class="stat" style="border:0"><span>В пределах 16×16×6</span><b><span id="stBounds" class="pill ok">—</span></b></div>
+      <label class="field" style="margin-top:8px">бюджет слитков <input id="inBudget" type="number" min="1" max="6" value="2"></label>
+    </div>
+
+    <div class="card" style="min-width:250px">
+      <h2>Экспорт — вставить в maulhead.json</h2>
+      <textarea id="out" readonly spellcheck="false"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button id="btnCopy">📋 копировать pattern</button>
+        <span id="copied" style="color:var(--ok);display:none">скопировано</span>
+      </div>
+    </div>
+
+    <div class="card" style="min-width:250px">
+      <h2>Импорт pattern</h2>
+      <textarea id="imp" placeholder='вставь сюда pattern: [[ "..." ],[ "..." ]]  и нажми загрузить' style="height:90px"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button id="btnImport" class="mini">загрузить в редактор</button>
+        <span id="impMsg" class="note"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const MAXH = 6;                 // SmithingRecipe.QuantityLayers
+const VOX_PER_INGOT = 42;       // ItemIngot.VoxelCount
+
+// ---- state: heightmap H[row][col] (row = width X, col = length Z) ----
+let W = 5, L = 9;
+let H = [];
+let brush = 2;
+let viewRot = 0;
+let painting = 0; // 0 none, 1 paint, 2 erase
+
+function blank(w,l){ return Array.from({length:w},()=>Array.from({length:l},()=>0)); }
+function fromRows(rows){ // rows: array of digit-strings, digit=height
+  const w=rows.length, l=rows[0].length;
+  const h=blank(w,l);
+  for(let x=0;x<w;x++) for(let z=0;z<l;z++){ const c=rows[x][z]; h[x][z]= c===' '||c==='.'||c==='_'?0:parseInt(c,10)||0; }
+  return {w,l,h};
+}
+
+// ---- height color ramp ----
+function heightColor(h){
+  if(h<=0) return null;
+  const t=(h-1)/(MAXH-1);
+  const c0=[92,70,50], c1=[230,168,96];
+  const r=Math.round(c0[0]+(c1[0]-c0[0])*t), g=Math.round(c0[1]+(c1[1]-c0[1])*t), b=Math.round(c0[2]+(c1[2]-c0[2])*t);
+  return `rgb(${r},${g},${b})`;
+}
+
+// =================== GRID (top-down) editor ===================
+const gc = document.getElementById('grid'), gctx = gc.getContext('2d');
+function cell(){ return Math.max(20, Math.min(46, Math.floor(Math.min((gc.width-2)/L, (gc.height-2)/W)))); }
+function drawGrid(){
+  const cs=cell(), ox=1, oy=1;
+  gc.width = L*cs+2; gc.height = W*cs+2;
+  gctx.clearRect(0,0,gc.width,gc.height);
+  for(let x=0;x<W;x++) for(let z=0;z<L;z++){
+    const px=ox+z*cs, py=oy+x*cs, h=H[x][z];
+    const col=heightColor(h);
+    gctx.fillStyle = col || '#17150f';
+    gctx.fillRect(px,py,cs-1,cs-1);
+    gctx.strokeStyle='#00000055'; gctx.strokeRect(px+.5,py+.5,cs-1,cs-1);
+    if(h>0){
+      gctx.fillStyle = h>=4?'#2a1c08':'#f3ead2';
+      gctx.font=`${Math.floor(cs*0.42)}px "Cascadia Code",monospace`;
+      gctx.textAlign='center'; gctx.textBaseline='middle';
+      gctx.fillText(h, px+cs/2, py+cs/2+1);
+    }
+  }
+}
+function gridCellAt(ev){
+  const r=gc.getBoundingClientRect(), cs=cell();
+  const z=Math.floor((ev.clientX-r.left-1)/cs), x=Math.floor((ev.clientY-r.top-1)/cs);
+  if(x<0||x>=W||z<0||z>=L) return null;
+  return {x,z};
+}
+function applyAt(ev, val){
+  const c=gridCellAt(ev); if(!c) return;
+  H[c.x][c.z]=val; refresh();
+}
+gc.addEventListener('contextmenu',e=>e.preventDefault());
+gc.addEventListener('mousedown',e=>{
+  e.preventDefault();
+  if(e.button===2){ painting=2; applyAt(e,0); }
+  else { painting=1; applyAt(e,brush); }
+});
+gc.addEventListener('mousemove',e=>{ if(painting===1) applyAt(e,brush); else if(painting===2) applyAt(e,0); });
+window.addEventListener('mouseup',()=>painting=0);
+gc.addEventListener('wheel',e=>{
+  e.preventDefault(); const c=gridCellAt(e); if(!c) return;
+  H[c.x][c.z]=Math.max(0,Math.min(MAXH, H[c.x][c.z]+(e.deltaY<0?1:-1))); refresh();
+},{passive:false});
+
+// ---- brush buttons ----
+const brushBox=document.getElementById('brush');
+for(let i=0;i<=MAXH;i++){
+  const b=document.createElement('button'); b.textContent=i; b.dataset.v=i;
+  if(i===brush) b.classList.add('sel');
+  b.onclick=()=>{ brush=i; [...brushBox.children].forEach(c=>c.classList.toggle('sel', +c.dataset.v===brush)); };
+  brushBox.appendChild(b);
+}
+
+// =================== ISO 3D preview ===================
+const ic=document.getElementById('iso'), ictx=ic.getContext('2d');
+const TW=24, TH=12, VH=15;
+function rotXZ(x,z){ // rotate grid coords for view (0..3), keep within a canonical box
+  switch(viewRot&3){
+    case 0: return [x, z];
+    case 1: return [z, W-1-x];
+    case 2: return [W-1-x, L-1-z];
+    case 3: return [L-1-z, x];
+  }
+}
+function dims(){ return (viewRot&1)? [L,W] : [W,L]; }
+function proj(x,y,z){ return [ (x - z)*(TW/2), (x + z)*(TH/2) - y*VH ]; }
+function shade(base,f){ const m=base.match(/\d+/g).map(Number); return `rgb(${m.map(v=>Math.round(v*f)).join(',')})`; }
+function drawIso(){
+  ictx.clearRect(0,0,ic.width,ic.height);
+  // collect voxels
+  const vox=[];
+  for(let x=0;x<W;x++) for(let z=0;z<L;z++){ const h=H[x][z]; for(let y=0;y<h;y++){ const [rx,rz]=rotXZ(x,z); vox.push([rx,y,rz,heightColor(y+1)]); } }
+  if(!vox.length){ ictx.fillStyle='#5a5442'; ictx.font='13px sans-serif'; ictx.textAlign='center'; ictx.fillText('пусто', ic.width/2, ic.height/2); return; }
+  // center
+  let minx=1e9,maxx=-1e9,miny=1e9,maxy=-1e9;
+  for(const [x,y,z] of vox){ for(const c of [[x,y,z],[x+1,y+1,z+1]]){ const [sx,sy]=proj(c[0],c[1],c[2]); minx=Math.min(minx,sx);maxx=Math.max(maxx,sx);miny=Math.min(miny,sy);maxy=Math.max(maxy,sy);} }
+  const cx=ic.width/2-(minx+maxx)/2, cy=ic.height/2-(miny+maxy)/2;
+  vox.sort((a,b)=>(a[0]+a[2]+a[1])-(b[0]+b[2]+b[1]));
+  const P=(x,y,z)=>{ const [sx,sy]=proj(x,y,z); return [sx+cx, sy+cy]; };
+  for(const [x,y,z,base] of vox){
+    const faces=[
+      {p:[P(x,y,z+1),P(x+1,y,z+1),P(x+1,y+1,z+1),P(x,y+1,z+1)], f:0.62}, // +z (left)
+      {p:[P(x+1,y,z),P(x+1,y,z+1),P(x+1,y+1,z+1),P(x+1,y+1,z)], f:0.80}, // +x (right)
+      {p:[P(x,y+1,z),P(x+1,y+1,z),P(x+1,y+1,z+1),P(x,y+1,z+1)], f:1.0},  // top
+    ];
+    for(const fc of faces){
+      ictx.beginPath(); ictx.moveTo(fc.p[0][0],fc.p[0][1]);
+      for(let i=1;i<4;i++) ictx.lineTo(fc.p[i][0],fc.p[i][1]);
+      ictx.closePath();
+      ictx.fillStyle=shade(base,fc.f); ictx.fill();
+      ictx.strokeStyle='#00000040'; ictx.lineWidth=1; ictx.stroke();
+    }
+  }
+}
+
+// =================== stats + profile + export ===================
+function totalVox(){ let s=0; for(let x=0;x<W;x++) for(let z=0;z<L;z++) s+=H[x][z]; return s; }
+function maxHeight(){ let m=0; for(let x=0;x<W;x++) for(let z=0;z<L;z++) m=Math.max(m,H[x][z]); return m; }
+function components(){ // 6-connected count over voxels
+  const key=(x,y,z)=>x+','+y+','+z, set=new Set(), seen=new Set();
+  for(let x=0;x<W;x++) for(let z=0;z<L;z++) for(let y=0;y<H[x][z];y++) set.add(key(x,y,z));
+  if(!set.size) return 0;
+  let comps=0;
+  for(const s of set){ if(seen.has(s)) continue; comps++; const st=[s]; seen.add(s);
+    while(st.length){ const [x,y,z]=st.pop().split(',').map(Number);
+      for(const [dx,dy,dz] of [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]){
+        const k=key(x+dx,y+dy,z+dz); if(set.has(k)&&!seen.has(k)){ seen.add(k); st.push(k); } } } }
+  return comps;
+}
+function pill(el, cls, txt){ el.className='pill '+cls; el.textContent=txt; }
+
+function buildProfile(){
+  // max height per column (length), edge->back
+  const prof=[]; for(let z=0;z<L;z++){ let m=0; for(let x=0;x<W;x++) m=Math.max(m,H[x][z]); prof.push(m); }
+  const mh=Math.max(1,...prof); let out='';
+  for(let lvl=mh; lvl>=1; lvl--){ out += prof.map(h=>h>=lvl?'#':' ').join('') + '   h'+lvl+'\n'; }
+  out += prof.join('')+'   высоты';
+  return out;
+}
+
+function patternRows(){ // -> array of layers, each = array of row-strings
+  const mh=maxHeight(); const layers=[];
+  for(let y=0;y<mh;y++){ const rows=[]; for(let x=0;x<W;x++){ let s=''; for(let z=0;z<L;z++) s+= H[x][z]>y?'#':'_'; rows.push(s); } layers.push(rows); }
+  return layers;
+}
+function exportText(){
+  const layers=patternRows();
+  if(!layers.length) return 'pattern: [[\n\t"_"\n]],';
+  const body=layers.map(rows=>rows.map(r=>`\t\t"${r}"`).join(',\n')).join('\n\t],[\n');
+  return `pattern: [[\n${body}\n\t]],`;
+}
+
+function refresh(){
+  drawGrid(); drawIso();
+  const vox=totalVox(), mh=maxHeight(), ing=Math.ceil(vox/VOX_PER_INGOT)||0, budget=+document.getElementById('inBudget').value;
+  document.getElementById('stDim').textContent = `${W}×${L}×${mh}`;
+  document.getElementById('stVox').textContent = vox;
+  const ingEl=document.getElementById('stIng'); ingEl.textContent = vox? `${ing}` : '0';
+  document.getElementById('stWaste').textContent = vox? `${ing*VOX_PER_INGOT-vox} вкс` : '—';
+  // floating impossible by construction
+  pill(document.getElementById('stFloat'),'ok','✓ нет парящих');
+  const comps=components();
+  const conn=document.getElementById('stConn');
+  if(comps<=1) pill(conn,'ok','✓ единая'); else pill(conn,'warn',`⚠ ${comps} части`);
+  const boundsOk = W<=16 && L<=16 && mh<=MAXH;
+  pill(document.getElementById('stBounds'), boundsOk?'ok':'bad', boundsOk?'✓':'✗ вне лимита');
+  // ingot vs budget coloring
+  ingEl.style.color = !vox?'':(ing===budget?'var(--ok)': ing<budget?'var(--warn)':'var(--bad)');
+  document.getElementById('profCol').textContent = buildProfile();
+  document.getElementById('out').value = exportText();
+  drawLegend();
+}
+function drawLegend(){
+  const el=document.getElementById('legend'); el.innerHTML='';
+  for(let h=1;h<=maxHeight()||h<=2;h++){ const s=document.createElement('span'); s.innerHTML=`<span class="sw" style="background:${heightColor(h)}"></span>${h}`; el.appendChild(s); if(h>=MAXH) break; }
+}
+
+// =================== controls ===================
+document.getElementById('btnResize').onclick=()=>{
+  const nw=Math.max(1,Math.min(16,+document.getElementById('inW').value|0));
+  const nl=Math.max(1,Math.min(16,+document.getElementById('inL').value|0));
+  const nh=blank(nw,nl);
+  for(let x=0;x<Math.min(W,nw);x++) for(let z=0;z<Math.min(L,nl);z++) nh[x][z]=H[x][z];
+  W=nw;L=nl;H=nh; refresh();
+};
+document.getElementById('btnClear').onclick=()=>{ H=blank(W,L); refresh(); };
+document.getElementById('btnRot').onclick=()=>{ viewRot=(viewRot+1)&3; drawIso(); };
+document.getElementById('inBudget').oninput=refresh;
+document.getElementById('btnCopy').onclick=()=>{
+  const ta=document.getElementById('out'); ta.select();
+  navigator.clipboard.writeText(ta.value).then(()=>{ const m=document.getElementById('copied'); m.style.display='inline'; setTimeout(()=>m.style.display='none',1200); });
+};
+
+// ---- import ----
+document.getElementById('btnImport').onclick=()=>{
+  const raw=document.getElementById('imp').value, msg=document.getElementById('impMsg');
+  try{
+    let t=raw.replace(/\/\/[^\n]*/g,'');           // strip // comments
+    const m=t.match(/\[\s*\[[\s\S]*\]\s*\]/);       // grab the [[...]] array
+    if(!m) throw new Error('не нашёл массив pattern');
+    let arrTxt=m[0].replace(/,(\s*[\]}])/g,'$1');    // trailing commas
+    const layers=JSON.parse(arrTxt);
+    const w=layers[0].length, l=layers[0][0].length;
+    // build heightmap = count of '#' stacked; detect floating
+    const h=blank(w,l); let floating=false;
+    for(let x=0;x<w;x++) for(let z=0;z<l;z++){
+      const ys=[]; for(let y=0;y<layers.length;y++) if(layers[y][x][z]==='#') ys.push(y);
+      h[x][z]=ys.length;                                   // collapse to a solid stack (forgeable equivalent)
+      for(let k=0;k<ys.length;k++) if(ys[k]!==k){ floating=true; break; }  // metal not contiguous from y=0 = floating
+    }
+    W=w;L=l;H=h;
+    document.getElementById('inW').value=W; document.getElementById('inL').value=L;
+    refresh();
+    msg.textContent = floating? '⚠ в исходнике были парящие воксели — сведено к карте высот (стопки)' : '✓ загружено';
+    msg.style.color = floating? 'var(--warn)':'var(--ok)';
+  }catch(e){ msg.textContent='ошибка: '+e.message; msg.style.color='var(--bad)'; }
+};
+
+// ---- presets (correct, validated heightmaps; digit = column height) ----
+const PRESETS = {
+  // flat single-layer 7x12 silhouette (72 vox) — the current shipped shape
+  flat72: ["011111111110","111111111111","111111111111","111111111111","111111111111","011111111110","000011110000"],
+  // M1: blade + pinched neck/eye + hammer poll (81 vox, 2 layers)
+  M1:     ["122202222","122222222","122222222","122222222","122202222"],
+  // M2: beefy axe-head profile (77 vox, 2 layers)
+  M2:     ["122222200","122222222","122222222","122222222","122222200"],
+  // 3-level wedge, chunky socket (82 vox)
+  wedge3: ["001112222","112223333","112223333","112223333","001112222"],
+};
+function setFromRows(rows){ const r=fromRows(rows); W=r.w;L=r.l;H=r.h; document.getElementById('inW').value=W; document.getElementById('inL').value=L; refresh(); }
+document.querySelectorAll('.presets button').forEach(b=>b.onclick=()=> setFromRows(PRESETS[b.dataset.preset]) );
+
+// ---- init ----
+setFromRows(PRESETS.M1);
+</script>
+</body>
+</html>

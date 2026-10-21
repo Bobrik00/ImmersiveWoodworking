@@ -1,0 +1,72 @@
+{
+	// BARK DROP TABLE (BarkPlan/E02, T02.01) — which special bark a fully-stripped log on the sawhorse yields, per species
+	// (`bySpecies`, by chance). A single server-side roll (T02.03) picks ONE kind per stripped log — a special kind or the
+	// ordinary `bark-generic` — and the log drops as many of it as the CONFIG says: the species' line in
+	// `BarkPerLogBySpecies`, else the global `BarkPerLog` (both in ModConfig/ImmersiveWoodworking/bark.json, default 3).
+	// The count used to live here as a `countBySpecies` map (1.3.2) that listed every vanilla species at 3; those lines
+	// beat the global value, so raising BarkPerLog did nothing for oak (ModDB reports). Moved to the config 2026-10-20;
+	// the loader warns if a stale copy of this file still carries the map.
+	//
+	// WHY AN ASSET, NOT THE CONFIG: this table is a mod ASSET (not a config/ number), so (1) it is immune to the config
+	// rebuild in ImprovementsPlan E04, and (2) any tree mod slots its own species in with a normal JSON PATCH — no code,
+	// no dependency on us. A species with no entry here silently yields `bark-generic`, so foreign woods just work.
+	//
+	// FORMAT: `bySpecies` maps a wood SPECIES CODE (the short code the game uses, e.g. `oak`, `birch`, `willow` — what
+	// BlockEntitySawhorse.GetWoodSpecies returns) to an ARRAY of special-bark entries. Each entry is:
+	//     { kind: <one of tan|birch|bast|medicinal>, chance: <0.0..1.0> }
+	//   - `kind` is a SPECIAL kind only. `generic` is NEVER listed — it is the implicit REMAINDER.
+	//   - `chance` is the probability THIS kind is rolled, as a fraction 0.0–1.0.
+	//   - Multiple entries per species are allowed (e.g. willow -> bast AND medicinal): the roll walks them as
+	//     CUMULATIVE intervals (T02.03), and whatever probability is left over (1.0 - sum) is `bark-generic`.
+	//   - The per-species sum of chances MUST be <= 1.0. The loader (T02.02) warns and clamps if it isn't.
+	//   - An empty array (or a missing species) => always `bark-generic`.
+	//
+	// KIND -> DROPPED ITEM (resolved at roll time, T02.03; fresh bark is always the GREEN state where one exists):
+	//     tan       -> bark-tan-green
+	//     birch     -> bark-birch-green
+	//     bast      -> bark-bast
+	//     medicinal -> bark-medicinal
+	//     (remainder) -> bark-generic
+	//
+	// The chances below are DRAFT balance numbers (PLAN.md open question) — tuned by measurement in later tasks. Tool
+	// tier (T02.05) and the xSkills forestry perk (T02.06) later MULTIPLY the special chance; those multipliers are
+	// config scalars, NOT part of this table.
+	bySpecies: {
+		// --- Vanilla woods (12 species) -------------------------------------------------------------------------------
+		// Tannin bark from the tannin-rich / bark-heavy woods; oak is the canonical tanbark, conifers weaker.
+		"oak":         [ { kind: "tan",       chance: 1.0 } ],
+		"acacia":      [ { kind: "tan",       chance: 0.8 } ],
+		"larch":       [ { kind: "tan",       chance: 0.5 } ],
+		"pine":        [ { kind: "tan",       chance: 0.25 } ],
+		// Birch bark (the tar/kindling species). Raised 0.8 -> 1.0 at the tar-pricing pass (playtest 2026-07-28, Set B):
+		// birch is THE tar species, so the TABLE puts no RNG floor on its bark. The 1.0 here is the TABLE chance, which the
+		// tool tier still MULTIPLIES before the roll (BlockEntitySawhorse.BarkChanceMultFor -> BarkDropTable.Roll): a bark
+		// spud strips birch at a certain 100%, an axe+hammer at 75%, a knife at 50% (Config.BarkChanceMult*, and each
+		// stripper's own xSkills `carefulsawyer` perk lifts their own factor back toward 1.0). Combined with TarYield 4 -> 8
+		// that puts the tar cost at ~4 birch logs/tar with a spud and ~8 with a knife, on DRY bark; wet bark doubles either
+		// figure (TarBirchPointsWet 1 vs TarBirchPointsDry 2). The tier split was missing from this comment — it promised
+		// the spud's numbers as everyone's — until AuditFixPlan T08.07.
+		"birch":       [ { kind: "birch",     chance: 1.0 } ],
+		// Bast (fibrous inner bark) from the stringy-barked woods.
+		"baldcypress": [ { kind: "bast",      chance: 0.4 } ],
+		"redwood":     [ { kind: "bast",      chance: 0.3 } ],
+		// Medicinal bark.
+		"maple":       [ { kind: "medicinal", chance: 0.25 } ],
+		"kapok":       [ { kind: "medicinal", chance: 0.6 } ],
+		"ebony":       [ { kind: "medicinal", chance: 0.6 } ],
+		// Generic only (listed explicitly so the intent is on the record, not a forgotten species).
+		"walnut":      [],
+		"purpleheart": [],
+		"aged":        [],
+
+		// --- Wildcraft Trees (finalised in T07.03) --------------------------------------------------------------------
+		// Harmless when Wildcraft is absent: these species never exist, so the resolver is never keyed with them. Only
+		// the species that earn a special bark are listed; every OTHER Wildcraft wood falls through to bark-generic.
+		"willow":      [ { kind: "bast",      chance: 0.4 }, { kind: "medicinal", chance: 0.4 } ],
+		"linden":      [ { kind: "bast",      chance: 0.7 } ],
+		"elm":         [ { kind: "bast",      chance: 0.7 } ],
+		"poplar":      [ { kind: "bast",      chance: 0.7 } ],
+		"spruce":      [ { kind: "tan",       chance: 0.25 } ],
+		"fir":         [ { kind: "tan",       chance: 0.25 } ]
+	}
+}

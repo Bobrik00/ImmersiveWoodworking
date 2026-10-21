@@ -1,0 +1,25 @@
+{
+	// Assemble the bark spud the ordinary way (WITHOUT Toolsmith): head + handle — head on top, stick below, a
+	// 1-wide column. Mirrors the vanilla saw (game:recipes/grid/tool/saw.json = sawblade-* + stick) and matches what
+	// the Toolsmith workbench assembles from head + handle (the binding is OPTIONAL there), so the craft looks the
+	// same with or without Toolsmith.
+	//   T      T = head  (barkspudhead-*, name:metal — drives the {metal} output)
+	//   S      S = stick (game:stick — the handle)
+	// Mod-domain rules: the head `barkspudhead-*` is THIS mod's item so it stays unqualified (resolves to
+	// immersivewoodworking); the handle `game:stick` MUST be game:-prefixed — an unqualified `stick` would resolve
+	// to this mod's domain and 404 (memory vs-mod-asset-path-domain). name:"metal" binds the output metal to the
+	// head's, so a copper head makes a copper spud. applyquenchablebuffs carries an iron/steel head's quench buff
+	// onto the assembled tool (the spud is Buffable), exactly like the vanilla saw.
+	// NB (2026-07-08): the earlier rope binding (head+stick+ROPE) was REMOVED so the ordinary craft matches vanilla
+	// EXACTLY (head+stick). Under Toolsmith the workbench makes a binding OPTIONAL, so requiring rope in the grid was
+	// the one thing making the spud harder to craft than a vanilla tool. Reverts locked plan decision #3. See
+	// ToolsmithIntegrationPlan/PLAN.md «Отклонения».
+	ingredientPattern: "T,S",
+	ingredients: {
+		"T": { type: "item", code: "barkspudhead-*", name: "metal" },
+		"S": { type: "item", code: "game:stick" }
+	},
+	width: 1,
+	height: 2,
+	output: { type: "item", code: "barkspud-{metal}", quantity: 1, recipeAttributes: { "applyquenchablebuffs": true } }
+}

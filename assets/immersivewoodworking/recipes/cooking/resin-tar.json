@@ -1,0 +1,118 @@
+[
+	// TAR BOILED DOWN INTO RESIN (1.3.12, author request 2026-10-05). Birch tar cooked alone in a clay pot on a firepit
+	// comes out as vanilla game:resin, one for one. Straight clone of vanilla rendered fat (survival/recipes/cooking/oil.json,
+	// "rendered fat1..4"): a solid in, a solid `cooksInto` out, one twin per number of filled slots.
+	//
+	// WHY A CONVERSION ON TOP OF THE `pitch` TAG (patches/tar_as_resin.json): the tag covers every vanilla grid recipe
+	// that takes resin, but some consumers match game:resin by CODE and can never see the tag:
+	//  - the vanilla water wheel, 4 resin in each of three RightClickConstructable stages (blocktypes/mechanics/
+	//    waterwheel.json). tar_as_resin.json leaves it resin-only on purpose: a tag-only stage ingredient has no
+	//    ResolvedItemStack and ConstructionStage.GetDrops throws when the wheel is broken;
+	//  - other mods' recipes, e.g. the Rudiments flax breaks and the StringSense bow recipes (code "game:resin").
+	// Resin logs only grow on acacia and four conifers (worldgen/treegen: acacia, bristleconepine, fir, mountainpine,
+	// scotspine), so in a birch or oak forest the water wheel had no resin source at all.
+	//
+	// ONE FOR ONE, NO LOSS: elsewhere tar already counts as resin one for one through the tag, so a lossy conversion
+	// would price the same material twice. stackSize 1 also avoids the integer-division trap a 3:2 batch would have
+	// (barkbrew.json, ENGINE LIMITS: a remainder in a slot burns with no warning).
+	//
+	// TWINS, AS VANILLA FAT: servings do not add up across slots, every filled slot yields the same serving count and the
+	// output is cooksInto.quantity x servings. A single recipe with minQuantity 1..4 would give one resin per serving no
+	// matter how many slots were filled, eating three tar in four. So twin N takes exactly N slots and gives N per serving:
+	// up to 6 servings (slot cap 6, MaxServingSize 6), i.e. 24 tar -> 24 resin with all four slots full. Slots must hold
+	// equal counts (6/6/6/5 shows "The item ratios are wrong"), the same as vanilla fat. The handbook draws each twin as
+	// its own row on the resin page, like the four rows on the rendered fat page.
+	//
+	// isFood keeps the pot clean (BlockCookingContainer.DoSmelt swaps a !IsFood cooksInto pot to dirtiedBlockCode),
+	// mirroring rendered fat. Its one side effect: the recipe will not cook in an already-dirty pot.
+	// Cook time: barktar has combustibleProps without meltingDuration and no meltingPoint, so the pot cooks it at 100 C
+	// in the minimum 40. The resin lands in the firepit's first cooking slot (BlockCookingContainer.DoSmelt writes the
+	// cooksInto stack to cookingSlotsProvider.Slots[0]), where the player takes it by hand.
+	//
+	// Domain: this file resolves in immersivewoodworking, so the vanilla output and shape are game:-qualified.
+	// Switched off with the bark chain (FeatureGate.BarkAssets).
+	{
+		"code": "resin-tar1",
+		"isFood": true,
+		"perishableProps": {
+			"type": "None",
+			"freshHours": { "avg": 48 },
+			"transitionHours": { "avg": 48 },
+			"transitionRatio": 1,
+			"transitionedStack": { "type": "item", "code": "game:resin" }
+		},
+		"shape": { "base": "game:block/food/meal/liquid" },
+		"ingredients": [
+			{
+				"code": "tar",
+				"validStacks": [ { "type": "item", "code": "immersivewoodworking:barktar" } ],
+				"minQuantity": 1,
+				"maxQuantity": 1
+			}
+		],
+		"cooksInto": { "type": "Item", "code": "game:resin", "quantity": 1 }
+	},
+	{
+		"code": "resin-tar2",
+		"isFood": true,
+		"perishableProps": {
+			"type": "None",
+			"freshHours": { "avg": 48 },
+			"transitionHours": { "avg": 48 },
+			"transitionRatio": 1,
+			"transitionedStack": { "type": "item", "code": "game:resin" }
+		},
+		"shape": { "base": "game:block/food/meal/liquid" },
+		"ingredients": [
+			{
+				"code": "tar",
+				"validStacks": [ { "type": "item", "code": "immersivewoodworking:barktar" } ],
+				"minQuantity": 2,
+				"maxQuantity": 2
+			}
+		],
+		"cooksInto": { "type": "Item", "code": "game:resin", "quantity": 2 }
+	},
+	{
+		"code": "resin-tar3",
+		"isFood": true,
+		"perishableProps": {
+			"type": "None",
+			"freshHours": { "avg": 48 },
+			"transitionHours": { "avg": 48 },
+			"transitionRatio": 1,
+			"transitionedStack": { "type": "item", "code": "game:resin" }
+		},
+		"shape": { "base": "game:block/food/meal/liquid" },
+		"ingredients": [
+			{
+				"code": "tar",
+				"validStacks": [ { "type": "item", "code": "immersivewoodworking:barktar" } ],
+				"minQuantity": 3,
+				"maxQuantity": 3
+			}
+		],
+		"cooksInto": { "type": "Item", "code": "game:resin", "quantity": 3 }
+	},
+	{
+		"code": "resin-tar4",
+		"isFood": true,
+		"perishableProps": {
+			"type": "None",
+			"freshHours": { "avg": 48 },
+			"transitionHours": { "avg": 48 },
+			"transitionRatio": 1,
+			"transitionedStack": { "type": "item", "code": "game:resin" }
+		},
+		"shape": { "base": "game:block/food/meal/liquid" },
+		"ingredients": [
+			{
+				"code": "tar",
+				"validStacks": [ { "type": "item", "code": "immersivewoodworking:barktar" } ],
+				"minQuantity": 4,
+				"maxQuantity": 4
+			}
+		],
+		"cooksInto": { "type": "Item", "code": "game:resin", "quantity": 4 }
+	}
+]
