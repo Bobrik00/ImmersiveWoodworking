@@ -31,7 +31,7 @@
   −0.24. Каждый рез идёт СВЕРХУ ВНИЗ, поэтому «зубец» (спуск, скачок вверх, спуск) — это правильная форма.
 
   ── ЧТО КРУТИТЬ: правь $Front и $Under ниже — и ВСЁ. Любая сборка (test.bat / -Build / голый dotnet build / IDE)
-     САМА перегенерит ..\SawdustPoints.cs из этих значений через csproj-таргет GenerateSawdustPoints. Отдельно
+     САМА перегенерит ..\src\Sawhorse\SawdustPoints.cs из этих значений через csproj-таргет GenerateSawdustPoints. Отдельно
      запускать этот скрипт НЕ обязательно (раньше забыть этот шаг = старые значения в билде — теперь невозможно). ──
 
   Использование (Windows PowerShell 5.1) — ручной запуск опционален:
@@ -51,7 +51,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProjectDir = Split-Path $PSScriptRoot -Parent
-$OutFile    = Join-Path $ProjectDir "SawdustPoints.cs"
+$OutFile    = Join-Path $ProjectDir "src\Sawhorse\SawdustPoints.cs"
 
 if (($Build -or $Run) -and -not $VintageStory) {
     throw "VINTAGE_STORY is not set. Set the VINTAGE_STORY environment variable to your Vintage Story install directory, or pass -VintageStory <path>."

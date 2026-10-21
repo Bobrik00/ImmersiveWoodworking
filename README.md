@@ -68,7 +68,7 @@ A mechanically-powered chopper that splits firewood hands-off, the powered count
 
 ## Configuration
 
-The config lives in a folder of thematic files (`ModConfig/ImmersiveWoodworking/`), generated on first run and synced from the server to all clients. If you are updating from an older version that used a single `ModConfig/immersivewoodworking.json`, your values are migrated into the folder automatically on first launch and the old file is kept as a `.bak` backup, so there is nothing to do by hand. Every value is range-checked on load, so a bad hand-edit can't crash the mod. The table below highlights the common settings; see `config-reference.md` for the full list.
+The config lives in a folder of thematic files (`ModConfig/ImmersiveWoodworking/`), generated on first run and synced from the server to all clients. If you are updating from an older version that used a single `ModConfig/immersivewoodworking.json`, your values are migrated into the folder automatically on first launch and the old file is kept as a `.bak` backup, so there is nothing to do by hand. Every value is range-checked on load, so a bad hand-edit can't crash the mod. The table below highlights the common settings; see `docs/config-reference.md` for the full list.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
