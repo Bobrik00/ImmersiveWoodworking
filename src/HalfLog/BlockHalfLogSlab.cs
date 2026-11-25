@@ -287,7 +287,7 @@ public partial class BlockHalfLogSlab : Block
         else if (missingSpecies.TryAdd(wood ?? "", 0))
         {
             world.Logger.Warning(
-                "[immersivewoodworking] No half-log slab block for wood species '{0}'; nothing will be placed. The slab's species axis is built at startup from every worldproperties/block/wood.json plus the wood states of every log and debarkedlog blocktype, and this species came from neither.",
+                "[immersivewoodworking] No half-log slab block for wood species '{0}'; nothing will be placed. The slab's species axis is built at startup from every worldproperties/block/wood.json plus the wood states of every log, logsection and debarkedlog blocktype, and this species came from neither.",
                 string.IsNullOrEmpty(wood) ? "(none)" : wood);
         }
 

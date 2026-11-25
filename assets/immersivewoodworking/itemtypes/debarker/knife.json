@@ -1,0 +1,74 @@
+{
+	code: "debarkerknife",
+	// The debarker's KNIVES `debarkerknife-{metal}` (AutoDebarkerPlan T02.01): ONE item is the set of four knives bolted
+	// to the disc, joined from four forged blanks `debarkerknifeblank-{metal}` and a hammer on the grid (T02.03). The
+	// wear-tier consumable, the analogue of the chopper's head: RMB-installed only once the disc is in (T03.06), the
+	// only part Ctrl+RMB takes back out. The metal sets ONLY the wear (decision В2); the bark-kind chance and the
+	// strip pace do not depend on it.
+	// No "head" or "blade" in the code: Toolsmith's toolhead list matches those substrings (comment in
+	// itemtypes/tool/barkspud.json).
+	maxstacksize: 1,
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	// Native VS durability is the single source of truth for the knives' life: the engine draws the slot bar once
+	// damaged and the durability line in the tooltip. NO `tool` tag: the bar needs only durability, and a tool tag
+	// would let the knives fill tag-pinned recipe slots and be captured by tinkering mods (memory
+	// vs-recipe-ingredient-code-vs-tags). Values = the bark spud table 1:1 (itemtypes/tool/barkspud.json, decision В8),
+	// parity with hand debarking: at DebarkerKnifeWearMultiplier = 1 the number IS logs per set (T06.05). Retune
+	// per-metal life here.
+	durabilitybytype: {
+		"debarkerknife-gold": 70,
+		"debarkerknife-silver": 90,
+		"debarkerknife-copper": 250,
+		"debarkerknife-tinbronze": 400,
+		"debarkerknife-bismuthbronze": 450,
+		"debarkerknife-blackbronze": 500,
+		"debarkerknife-iron": 900,
+		"debarkerknife-meteoriciron": 1200,
+		"debarkerknife-steel": 2250
+	},
+	// Held mesh = the model's four knives, copied into the Blender collection debarking-PreviewMeshes
+	// (art/shapes/LogForChoppingFirewood.blend) and laid side by side as a bundle of the four blanks the grid
+	// recipe joins (author's choice 2026-11-21, over the cross they form on the disc). Raw export in
+	// art/shapes/debarker/knife.json, this copy has its textures re-pinned to game: paths.
+	shape: { base: "immersivewoodworking:item/debarker/knife" },
+	// Two-handed carry like every chopper part, the head included (decision T02.01, В9).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// Per-metal texture keyed "metal" shows the tier, as on chopperhead-{metal}. "game:" REQUIRED. On the placed machine
+	// the knife elements are painted by a render rule from the installed set (T07.02), not by this key.
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine, shared by all installed parts.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:debarkerpart-handbook-title", text: "immersivewoodworking:debarkerpart-handbook-text" }
+			]
+		}
+	},
+	// Transforms calibrated in game with .tfedit at T03.05 (2026-11-21).
+	// On the ground the bundle lies upside down (x 180), as the author posed it.
+	// `rotate: false` stops the icon from spinning, and every vector is written with all three components: a partial
+	// vector zeroes the rest (memory vs-partial-guitransform-no-merge).
+	tpHandTransform: {
+		translation: { x: -0.4, y: -0.6, z: -0.5 },
+		rotation: { x: 4, y: -169, z: -92 },
+		scale: 0.67
+	},
+	groundTransform: {
+		translation: { x: 0, y: -0.25, z: 0 },
+		rotation: { x: 180, y: 1, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 2.8
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: -1, y: 10, z: 0 },
+		rotation: { x: -62, y: -48, z: 6 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.73
+	}
+}

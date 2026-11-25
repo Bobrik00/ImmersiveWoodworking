@@ -221,7 +221,8 @@ public partial class ImmersiveWoodworkingModSystem
     /// <summary>
     /// Grant <paramref name="amount"/> forestry XP to <paramref name="player"/> (XSkillsIntegrationPlan E02, once per
     /// completed manual operation). Effective ONLY on the server and ONLY when the integration is present and enabled —
-    /// a client call, a null player, a non-positive amount, or a missing/failed xSkills all resolve to a silent no-op.
+    /// a client call, a player not in the world (<see cref="PlayerPresence.IsInWorld"/>: null, or gone from this
+    /// session), a non-positive amount, or a missing/failed xSkills all resolve to a silent no-op.
     /// Callers grant from their server branch anyway; the side hard-gate here is belt-and-braces so an accidental
     /// client call can never touch skill state.
     /// </summary>
@@ -229,10 +230,13 @@ public partial class ImmersiveWoodworkingModSystem
     /// no effect on behaviour, and a Release build strips every <see cref="DbgXp"/> call that reads it.</param>
     public void GrantForestryXp(IPlayer player, float amount, string site = "?")
     {
-        if (xskills == null || player?.Entity == null) { DbgXp(site, player, "SKIP: bridge or player entity null"); return; }
+        if (xskills == null) { DbgXp(site, player, "SKIP: bridge null"); return; }
         if (!Config.XSkillsIntegration) { DbgXp(site, player, "SKIP: XSkillsIntegration=false"); return; }
         if (amount <= 0f) { DbgXp(site, player, "SKIP: amount=" + amount.ToString("0.####") + " <= 0"); return; }
         if (xskillsApi == null || xskillsApi.Side != EnumAppSide.Server) return; // AddExperience is a client no-op anyway; hard-gate per DoD (silent: the client hits this on EVERY grant)
+        // Not an entity null check: a player who left during this session keeps their entity, and only the connection
+        // says they are gone (AuditFix3Plan T01.01). The sawhorse filters its holders the same way before calling here.
+        if (!PlayerPresence.IsInWorld(xskillsApi.World, player)) { DbgXp(site, player, "SKIP: player not in the world"); return; }
         if (!xskills.Available) { DbgXp(site, player, "SKIP: xSkills not available"); return; }
 
         object? skill = xskills.GetForestrySkill(player.Entity);
@@ -364,6 +368,9 @@ public partial class ImmersiveWoodworkingModSystem
     bool TryGetForestryAbilityFraction(IPlayer player, string code, out float fraction)
     {
         fraction = 0f;
+        // A guard before GetForestrySkill dereferences the entity, not an "is the player here" test (AuditFix3Plan
+        // T01.01): this read also serves the client's own player, and every server caller hands in the interacting
+        // player or a holder PlayerPresence already let through.
         if (xskills == null || player?.Entity == null) return false;
         if (!Config.XSkillsIntegration) return false;
         if (!xskills.Available) return false;

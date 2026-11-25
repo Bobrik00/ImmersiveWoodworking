@@ -1,0 +1,26 @@
+{
+	// Grid recipe for the debarker's FEED mechanism `debarkerfeed` (AutoDebarkerPlan T02.03, draft from the T02.01
+	// spec): the three feed rollers, the worm wheel and the log lift. Plank rollers on metal-sheet bearings, nailed and
+	// put together with a hammer:
+	//   S P S     S = metal plate (game:metalplate-*)      P = plank (game:plank-* item, name:"wood")
+	//   N H N     N = nails (game:metalnailsandstrips-*)   H = hammer (tag tool-hammer, returned untouched)
+	//   P _ P
+	// The shape is distinct from the sawmill and chopper parts and every vanilla recipe (checked offline in T02.03).
+	// game:-prefix on vanilla ingredients (memory vs-mod-asset-path-domain); hammer by TAG with no code (memory
+	// vs-recipe-ingredient-code-vs-tags). The `name` on the planks labels them as one material and forces nothing on
+	// this code-registered path (docs/recipe-conventions.md, exception 3); the plates and the nails may be any metals.
+	// SHAPE and QUANTITIES are a BALANCE DRAFT (author tunes in game).
+	// enabled:false -> TEMPLATE, the RecipeLoader skips it. RegisterDebarkerRecipes re-registers it once per wood domain
+	// that ships planks, re-pointing the plank slot to {domain}:plank-*; the game-domain recipe comes from this template.
+	enabled: false,
+	ingredientPattern: "SPS,NHN,P_P",
+	ingredients: {
+		"P": { type: "item", code: "game:plank-*", name: "wood" },
+		"S": { type: "item", code: "game:metalplate-*" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*" },
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "debarkerfeed", quantity: 1 }
+}

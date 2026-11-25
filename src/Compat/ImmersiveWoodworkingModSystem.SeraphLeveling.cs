@@ -44,13 +44,14 @@ public partial class ImmersiveWoodworkingModSystem
     /// on a manual station, as Seraph would have counted the grid craft it replaces. Server-only.</summary>
     internal void ReportCraftToSeraph(IPlayer player, ItemStack product, int quantity)
     {
-        if (seraph == null || !seraph.Available) return; // Seraph absent, API changed, or SeraphLevelingIntegration off
+        if (seraph == null || seraphApi == null || !seraph.Available) return; // Seraph absent, API changed, or SeraphLevelingIntegration off
         if (quantity <= 0) return;
-        // The holder maps can still name a player who left during this session (server PlayerByUid keeps them), and
-        // Seraph writes the player's WatchedAttributes without a null check, so an offline holder is skipped. A holder
-        // who left and came back is Playing again and does get credited while the old hold lingers: that hold is the
-        // sawhorse's own ghost-hold bookkeeping (PruneOfflineSawyers), which wear and xSkills XP share.
-        if (player is not IServerPlayer serverPlayer || serverPlayer.ConnectionState != EnumClientState.Playing || serverPlayer.Entity == null)
+        // Seraph writes the player's WatchedAttributes without a null check, so only a player in the world is reported
+        // (PlayerPresence: the server's PlayerByUid also hands back one who left). The sawhorse asks the same test about
+        // the player object each hold was claimed with (AuditFix3Plan T01.01): a partner who left is not credited for the
+        // boards sawn after they went, and the hold they left behind stays dead when they come back. IsInWorld already
+        // implies an IServerPlayer on the server; the pattern below only names it for ReportCrafted.
+        if (!PlayerPresence.IsInWorld(seraphApi.World, player) || player is not IServerPlayer serverPlayer)
         {
             DbgSeraph(player, "SKIP: not an in-world server player");
             return;

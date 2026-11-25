@@ -8,13 +8,13 @@ using Vintagestory.API.Datastructures;
 namespace ImmersiveWoodworking;
 
 /// <summary>
-/// The asset side of the three subsystem switches (<see cref="ImmersiveWoodworkingConfig.EnableSawmill"/>,
-/// <see cref="ImmersiveWoodworkingConfig.EnableChopper"/>, <see cref="ImmersiveWoodworkingConfig.EnableBarkChain"/>),
-/// server only. A switched-off subsystem loses what would let a player obtain or find it: the mod's own recipe and
-/// patch entries for it are marked <c>enabled: false</c> before anything reads them, and its blocks and items leave
-/// the creative inventory and the handbook. Nothing is unregistered: a code that stops existing turns every placed
-/// machine and every carried stack into an unknown block or item, so a world that switches a part off keeps what it
-/// already has.
+/// The asset side of the four subsystem switches (<see cref="ImmersiveWoodworkingConfig.EnableSawmill"/>,
+/// <see cref="ImmersiveWoodworkingConfig.EnableChopper"/>, <see cref="ImmersiveWoodworkingConfig.EnableDebarker"/>,
+/// <see cref="ImmersiveWoodworkingConfig.EnableBarkChain"/>), server only. A switched-off subsystem loses what would
+/// let a player obtain or find it: the mod's own recipe and patch entries for it are marked <c>enabled: false</c>
+/// before anything reads them, and its blocks and items leave the creative inventory and the handbook. Nothing is
+/// unregistered: a code that stops existing turns every placed machine and every carried stack into an unknown block
+/// or item, so a world that switches a part off keeps what it already has.
 ///
 /// <para>WHY A SEPARATE SYSTEM. The bark chain's patches on vanilla recipes have to be switched off before the
 /// engine's JSON patch loader applies them, and that loader runs in AssetsLoaded at ExecuteOrder 0.05, ahead of the
@@ -29,8 +29,10 @@ namespace ImmersiveWoodworking;
 /// ever switch nothing off.</para>
 ///
 /// <para>The per-domain machine recipes are not here: they are templates the main system clones in code, and it
-/// simply skips the clone (<c>RegisterSawmillRecipes</c>, <c>RegisterChopperRecipes</c>). Nor is the bark drop
-/// (<c>BlockEntitySawhorse.CompleteDebark</c>) or the handbook prose (<c>WoodworkingHandbookInfo</c>).</para>
+/// simply skips the clone (<c>RegisterSawmillRecipes</c>, <c>RegisterChopperRecipes</c>,
+/// <c>RegisterDebarkerRecipes</c>). Nor is the bark drop (<c>BlockEntitySawhorse.CompleteDebark</c>,
+/// <c>BlockEntityDebarker.CompleteDebark</c>) or the handbook
+/// prose (<c>WoodworkingHandbookInfo</c>).</para>
 /// </summary>
 public class FeatureGate : ModSystem
 {
@@ -47,6 +49,13 @@ public class FeatureGate : ModSystem
     {
         "recipes/grid/chopper_head.json",
         "recipes/smithing/chopperheadhalf.json",
+    };
+
+    static readonly string[] DebarkerAssets =
+    {
+        "recipes/grid/debarker_disc.json",
+        "recipes/grid/debarker_knife.json",
+        "recipes/smithing/debarkerknifeblank.json",
     };
 
     // Every recipe that consumes or makes a bark-chain item, plus the patches that only change OTHER recipes or tags.
@@ -69,6 +78,8 @@ public class FeatureGate : ModSystem
         "patches/tar_as_resin.json",
         "patches/tar_glue.json",
         "patches/compat/aca_bark.json",
+        "patches/compat/ancienttools_bark.json",
+        "patches/compat/stringsense_cord.json",
     };
 
     // First code part of every bark-chain block and item the mod registers. The bark spud and its head are NOT here:
@@ -84,13 +95,14 @@ public class FeatureGate : ModSystem
         ImmersiveWoodworkingConfig config = api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>().Config;
         if (!config.EnableSawmill) DisableAssets(api, "EnableSawmill", SawmillAssets);
         if (!config.EnableChopper) DisableAssets(api, "EnableChopper", ChopperAssets);
+        if (!config.EnableDebarker) DisableAssets(api, "EnableDebarker", DebarkerAssets);
         if (!config.EnableBarkChain) DisableAssets(api, "EnableBarkChain", BarkAssets);
     }
 
     public override void AssetsFinalize(ICoreAPI api)
     {
         ImmersiveWoodworkingConfig config = api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>().Config;
-        if (config.EnableSawmill && config.EnableChopper && config.EnableBarkChain) return;
+        if (config.EnableSawmill && config.EnableChopper && config.EnableDebarker && config.EnableBarkChain) return;
 
         int hidden = 0;
         foreach (CollectibleObject obj in api.World.Collectibles)
@@ -101,13 +113,14 @@ public class FeatureGate : ModSystem
         }
 
         api.Logger.Notification(
-            "[immersivewoodworking] Hid {0} block/item type(s) from the creative inventory and the handbook (sawmill={1}, chopper={2}, bark chain={3}).",
-            hidden, config.EnableSawmill, config.EnableChopper, config.EnableBarkChain);
+            "[immersivewoodworking] Hid {0} block/item type(s) from the creative inventory and the handbook (sawmill={1}, chopper={2}, debarker={3}, bark chain={4}).",
+            hidden, config.EnableSawmill, config.EnableChopper, config.EnableDebarker, config.EnableBarkChain);
     }
 
     /// <summary>Whether <paramref name="obj"/> belongs to a subsystem this config switches off. Matched by code shape,
-    /// not by a list of variants: every sawmill block and item path starts with "sawmill" and every chopper one with
-    /// "chopper" ("choppingblock" does not), and the bark chain is a fixed set of first code parts.</summary>
+    /// not by a list of variants: every sawmill block and item path starts with "sawmill", every chopper one with
+    /// "chopper" ("choppingblock" does not) and every debarker one with "debarker", and the bark chain is a fixed set
+    /// of first code parts.</summary>
     static bool IsSwitchedOff(CollectibleObject obj, ImmersiveWoodworkingConfig config)
     {
         string path = obj.Code.Path;
@@ -115,6 +128,7 @@ public class FeatureGate : ModSystem
         {
             if (!config.EnableSawmill && path.StartsWith("sawmill", System.StringComparison.Ordinal)) return true;
             if (!config.EnableChopper && path.StartsWith("chopper", System.StringComparison.Ordinal)) return true;
+            if (!config.EnableDebarker && path.StartsWith("debarker", System.StringComparison.Ordinal)) return true;
             return !config.EnableBarkChain && System.Array.IndexOf(BarkCodeParts, obj.FirstCodePart()) >= 0;
         }
 

@@ -28,13 +28,13 @@ public class ImmersiveWoodworkingConfig
     // pit-saw / sawhorse acquisition tiers). Grouped first so a server can find every behaviour gate in one
     // place; the per-station NUMBERS (yields, timings, drop counts) live in their own sections below.
 
-    // The three subsystem switches come first: each takes a whole part of the mod out of a world. Off means nothing
+    // The four subsystem switches come first: each takes a whole part of the mod out of a world. Off means nothing
     // NEW of that part can be obtained or found (its recipes are not loaded, its blocks and items leave the creative
     // inventory and the handbook), while what a world already holds keeps working, because every block and item stays
     // registered: dropping a code would turn each placed machine and each carried stack into an unknown block or item.
     // The asset side lives in FeatureGate.cs, the per-domain machine recipes and the tannin strip in
-    // ImmersiveWoodworkingModSystem, the bark drop in BlockEntitySawhorse.Debarking.cs, the prose in
-    // WoodworkingHandbookInfo. All three are server-owned like the rest of the config and read by the client only for
+    // ImmersiveWoodworkingModSystem, the bark drop in BlockEntitySawhorse.Debarking.cs and BlockEntityDebarker.Debarking.cs, the prose in
+    // WoodworkingHandbookInfo. All four are server-owned like the rest of the config and read by the client only for
     // the handbook text, after the sync.
 
     /// <summary>When false, the automated SAWMILL is switched off for new builds: the grid recipes for its frame, its
@@ -52,7 +52,15 @@ public class ImmersiveWoodworkingConfig
     /// block, which the chopper takes as its bed, is not affected. Default true. Plain bool, nothing to clamp.</summary>
     public bool EnableChopper = true;
 
-    /// <summary>When false, the BARK CHAIN is switched off: a log stripped on the sawhorses drops only the debarked log
+    /// <summary>When false, the automated DEBARKER is switched off for new builds: the recipes for its frame, its three
+    /// parts (drive, disc, feed) and its knives are not registered, and those blocks and items leave the creative
+    /// inventory and the handbook, along with every handbook line that names the debarker. A debarker already built in
+    /// the world keeps running on the knives that already exist; no new knives can be made. Hand debarking on the
+    /// sawhorses is not affected. With <see cref="EnableBarkChain"/> off the machine, like the sawhorses, gives only the
+    /// debarked log. Default true. Plain bool, nothing to clamp.</summary>
+    public bool EnableDebarker = true;
+
+    /// <summary>When false, the BARK CHAIN is switched off: a log stripped on the sawhorses or the debarker drops only the debarked log
     /// and no bark. Debarking itself stays, with every tool, because the debarked log is the input of the beam rip. The
     /// bark items, birch tar, the bark decoction, the perforated pot and the tar pot leave the creative inventory and
     /// the handbook, and the recipes that work them are not loaded: bark tannin and bark compost in the barrel, the
@@ -85,8 +93,8 @@ public class ImmersiveWoodworkingConfig
     /// debarked log). The drop lands with no velocity, so the game's own item pickup collects it on the next tick,
     /// which keeps the player's "collect only while sneaking" setting working, plays the pickup sound, and leaves what
     /// does not fit lying at their feet instead of losing it. In a two-man rip or strip each batch goes to the player
-    /// whose stroke completed that section. The automated sawmill and chopper are NOT affected: they have no worker to
-    /// deliver to, and eject their batch from the machine as before. Default OFF: the stations keep their own drop
+    /// whose stroke completed that section. The automated sawmill, chopper and debarker are NOT affected: they have no
+    /// worker to deliver to, and eject their product from the machine. Default OFF: the stations keep their own drop
     /// physics (the block's scatter, the sawhorse's sideways eject). Plain bool, nothing to clamp.</summary>
     public bool DropsAtPlayer = false;
 
@@ -103,9 +111,9 @@ public class ImmersiveWoodworkingConfig
     /// steel saw / spud, and with <see cref="ChopSpeedMultiplier"/> at its default a log takes a single steel-axe strike
     /// (a copper axe needs proportionally MORE strikes — the per-swing <see cref="ChopSeconds"/> itself is unchanged by
     /// the metal). Set this false to make every allowed tool work at the full base speed regardless of its metal (the
-    /// original behaviour). The automated sawmill / chopper are NOT affected: their pace comes from the drive RPM, and
-    /// their blade/head metal stays a WEAR tier, not a speed tier (documented in those sections). Plain bool — nothing to
-    /// clamp.</summary>
+    /// original behaviour). The automated sawmill, chopper and debarker are NOT affected: their pace comes from the drive
+    /// RPM, and their blade/head/knife metal stays a WEAR tier, not a speed tier (documented in those sections). Plain
+    /// bool — nothing to clamp.</summary>
     public bool ScaleWorkSpeedByToolTier = true;
 
     /// <summary>When true, removes the vanilla "axe + log in the crafting grid → firewood" recipes,
@@ -125,15 +133,18 @@ public class ImmersiveWoodworkingConfig
 
     /// <summary>When true, removes the vanilla "axe + hammer + log in the crafting grid → debarked log" recipe, so a
     /// log can only be stripped in-world on the sawhorses (the SIDE action — stand at a long side, hold RMB with a
-    /// debarking tool). Mirrors <see cref="DisableVanillaPlankCrafting"/>: the grid recipe and the in-world station give
-    /// the SAME result (a bark-less <c>debarkedlog</c> — neither drops bark), so this just funnels that hand path onto
-    /// the station. The match is STRUCTURAL (output <c>debarkedlog-*</c> + a <c>log-placed-*</c> input), so it covers
-    /// vanilla AND any wood mod's own debark recipe (e.g. wildcrafttree's) with no per-mod patch. Set false to keep the
-    /// vanilla grid recipe alongside the sawhorses. Default true, matching the firewood/plank strips.</summary>
+    /// debarking tool) or in the automated debarker. Mirrors <see cref="DisableVanillaPlankCrafting"/>: the grid recipe
+    /// and the in-world station give the SAME <c>debarkedlog</c> (the station adds the bark while
+    /// <see cref="EnableBarkChain"/> is on, BarkPlan E02), so this just funnels that hand path onto the station. The
+    /// match is STRUCTURAL (output <c>debarkedlog-*</c> + a <c>log-placed-*</c> input), so it covers vanilla AND any
+    /// wood mod's own debark recipe (e.g. wildcrafttree's) with no per-mod patch. Set false to keep the vanilla grid
+    /// recipe alongside the sawhorses. Default true, matching the firewood/plank strips. With A Culinary
+    /// Artillery loaded it also removes ACA's two barrel recipes that steep tannin from its dry oak bark: that bark's only
+    /// source is this grid recipe, so they would be dead handbook entries (ModDbFeedbackPlan T03.05).</summary>
     public bool DisableVanillaDebarkCrafting = true;
 
     /// <summary>When true (the default), removes the vanilla "whole log + water in a barrel → weak/strong tannin"
-    /// recipes, so the tanning agent comes from BARK instead: strip a log's bark on the sawhorses (BarkPlan/E02,
+    /// recipes, so the tanning agent comes from BARK instead: strip a log's bark on the sawhorses or in the debarker (BarkPlan/E02,
     /// <see cref="BarkPerLog"/> bark per log) and steep THAT (the mod's own bark → tannin barrel recipes, E03/T03.02) — the debarked log survives for
     /// lumber, which is the whole point (vanilla burns the log for tannin). The match is STRUCTURAL (output
     /// <c>weaktanninportion</c>/<c>strongtanninportion</c> + a <c>log-placed-*</c> or <c>debarkedlog-*</c> input), so it
@@ -190,16 +201,19 @@ public class ImmersiveWoodworkingConfig
     /// 2 sticks + 1 rope — the same materials the craft cost — so the two acquisition paths stay balance-neutral.</summary>
     public bool CraftableSawhorse = false;
 
-    /// <summary>The fraction of a station's work — a rip on the sawhorses or the automated sawmill, or a bark strip on
-    /// the sawhorses — BELOW which a REMOVED or BROKEN log is handed back WHOLE instead of being forfeit: the
-    /// "misclick / barely-started" grace, shared by every station and both processes so they can't drift. 0.25 = 25%
+    /// <summary>The fraction of a station's work — a rip on the sawhorses or the automated sawmill, a split in the
+    /// automated chopper, or a bark strip on the sawhorses or in the automated debarker — BELOW which a REMOVED or
+    /// BROKEN log is handed back WHOLE instead of being forfeit: the "misclick / barely-started" grace, shared by these
+    /// four stations and their three processes so they can't drift. 0.25 = 25%
     /// (the default): a log under a quarter of the way through comes back intact on a Ctrl+RMB remove OR when the
     /// station is broken / its pair dissolves; at or past this fraction the original "begun → no free hand-back" rule
     /// stands (the partly-worked log is scrapped with no drop). An UNTOUCHED log (0% progress) is ALWAYS returned whole
     /// regardless of this value, so a freshly-loaded log can never be destroyed on break. Set 0 to return only untouched
     /// logs (strictest), up to 1 to always return the whole log (never forfeit). Clamped to [0, 1]. Read live/synced by
-    /// <see cref="ImmersiveWoodworking.BlockEntitySawhorse.LogRecoverable"/> and
-    /// <see cref="ImmersiveWoodworking.BlockEntitySawmill.LogRecoverable"/>.</summary>
+    /// <see cref="ImmersiveWoodworking.BlockEntitySawhorse.LogRecoverable"/>,
+    /// <see cref="ImmersiveWoodworking.BlockEntitySawmill.LogRecoverable"/>,
+    /// <see cref="ImmersiveWoodworking.BlockEntityChopper.LogRecoverable"/> and
+    /// <see cref="ImmersiveWoodworking.BlockEntityDebarker.LogRecoverable"/>.</summary>
     public float LogRecoverThreshold = 0.25f;
 
     // ── Chopping (chopping block) ───────────────────────────────────────────────────────────────────────
@@ -218,9 +232,9 @@ public class ImmersiveWoodworkingConfig
     /// <see cref="ImmersiveWoodworking.BlockEntityChoppingBlock.GetChopResult"/>. Only the intermediate item and the
     /// NUMBER of chop workpieces differ otherwise. Because a log is then ONE completed workpiece instead of three, with
     /// xSkills it grants forestry XP (<see cref="XSkillsChopXpPerWorkpiece"/>) ONCE per log instead of three times.
-    /// Only the HAND stand's WHOLE-LOG split is gated: a half-log already in your pack still chops into firewood, log
-    /// sections / a laid chopping block still go straight to firewood, and the automated chopper is untouched. Plain
-    /// bool — nothing to clamp.</summary>
+    /// Only the HAND stand's WHOLE-LOG split is gated, and a log section counts as a whole log here
+    /// (ModDbFeedbackPlan T06.01): a half-log already in your pack still chops into firewood, a laid chopping block still
+    /// goes straight to firewood, and the automated chopper is untouched. Plain bool — nothing to clamp.</summary>
     public bool HalfLogChopStage = true;
 
     /// <summary>When true (the default), FIREWOOD can be chopped into sticks on the hand chopping block AND the automated
@@ -327,9 +341,10 @@ public class ImmersiveWoodworkingConfig
     /// by their tool-tier factor, so a copper maul (~0.47) takes about two strikes at 1.5; raise the knob further to speed
     /// those up too. Applies ONLY to a maul with the half-log stage ON, on a ChopKind.Log workpiece — a whole log, a log
     /// SECTION, or a laid chopping block, all of which a maul clears straight to firewood. A plain axe, a billet workpiece
-    /// (half-log / firewood), and the whole HalfLogChopStage-off case are unaffected (1.0). The section / laid-block case
-    /// is rare misuse but stays in the penalised family so the both-sides speed gate stays deterministic and an
-    /// AutoRestock hold that started on a section can't dodge the knob (see ChopStrike,
+    /// (half-log / firewood), and the whole HalfLogChopStage-off case are unaffected (1.0). A section is a whole log for
+    /// the maul since ModDbFeedbackPlan T06.01. The laid-block case is rare misuse but stays in the penalised family so
+    /// the both-sides speed gate stays deterministic and an AutoRestock hold that started on a laid block can't dodge the
+    /// knob (see ChopStrike,
     /// ImprovementsPlan T06.05/T06.07). Multiplies alongside the tool-tier, sharpness and billet factors, BEFORE the
     /// ImprovementsPlan E05 jitter. Clamped to [0.05, 10] like <see cref="ChopSpeedMultiplier"/>.</summary>
     public float MaulChopSpeedMultiplier = 1.5f;
@@ -456,10 +471,11 @@ public class ImmersiveWoodworkingConfig
     // ── Debarking (sawhorse side action) ───────────────────────────────────────────────────────────────
     // Stripping bark is the SIDE counterpart to the end-gated rip on the SAME sawhorses (BlockEntitySawhorse.
     // Debarking.cs): stand at a long side of a laid log, hold RMB with a debarking tool, and log-placed-{wood}
-    // becomes debarkedlog-{wood} — the in-world echo of the vanilla axe+hammer grid recipe (which drops no bark
-    // either). Three TIERS by tool TYPE, differing only in SPEED: knife (starter, slow) → axe+hammer (copper,
-    // medium) → bark spud (a dedicated crafted tool, any tool metal copper…steel, fast — DebarkingPlan E02). Speeds
-    // mirror the saw's SawSeconds / VanillaSawSpeedMultiplier shape, with the BEST tool (the spud) as the 1.0 reference.
+    // becomes debarkedlog-{wood} — the in-world echo of the vanilla axe+hammer grid recipe, which drops no bark (the
+    // strip here does, BarkPlan E02, while EnableBarkChain is on). Three TIERS by tool TYPE, differing in SPEED and,
+    // since BarkPlan T02.05, in the special-bark chance: knife (starter, slow) → axe+hammer (copper, medium) → bark
+    // spud (a dedicated crafted tool, any tool metal copper…steel, fast — DebarkingPlan E02). Speeds mirror the saw's
+    // SawSeconds / VanillaSawSpeedMultiplier shape, with the BEST tool (the spud) as the 1.0 reference.
     // DebarkSeconds (the strip DURATION, the spud reference) was added by the strip-cycle task (DebarkingPlan T01.06),
     // which needs the target duration, and DebarkDurabilityPerLog by the wear loop (T01.07); T01.08 then added the full
     // Sanitize clamps (below) and the JSON "// Debarking" section header. AllowKnifeDebark + the per-tier speed
@@ -574,12 +590,14 @@ public class ImmersiveWoodworkingConfig
 
     /// <summary>Minimum effective network speed (TrueSpeed = |network.Speed × GearedRatio|) below which the
     /// saw simply won't turn — a barely-spinning network can't drive it, regardless of which blade is installed.
-    /// Clamped to ≥ 0 (0 = no minimum, runs at any non-zero speed).</summary>
+    /// Clamped to ≥ 0 (0 = no minimum, runs at any non-zero speed); NaN or ±∞ resets to this default with a
+    /// warning.</summary>
     public float SawmillMinTorque = 0.05f;
 
-    /// <summary>How much resistance/load the running sawmill adds to its mechanical network (returned from the
-    /// MP behaviour's GetResistance). Default 0.085 mirrors vanilla's pulverizer (BEBehaviorPulverizer with an
-    /// axle). Clamped to ≥ 0.</summary>
+    /// <summary>How much resistance/load an assembled sawmill adds to its mechanical network, working or idle, 0.6 of it
+    /// with the flywheel installed (returned from the MP behaviour's GetResistance; an unassembled one returns a fixed
+    /// 0.005). Default 0.085 mirrors vanilla's pulverizer (BEBehaviorPulverizer with an axle). Clamped to ≥ 0; NaN or
+    /// ±∞ resets to the default with a warning.</summary>
     public float SawmillResistance = 0.085f;
 
     /// <summary>Durability points the blade kit spends per completed log (AutomatedSawmillPlan T06.06). The kit carries
@@ -588,8 +606,9 @@ public class ImmersiveWoodworkingConfig
     /// 500 logs), 2 = wears twice as fast, <b>0 = blades never wear</b> (a permanent capital part). When the kit hits 0
     /// it breaks and the station stops until a new kit is installed (<see cref="BlockEntitySawmill"/>, E06). Integer
     /// durability has no sub-1 granularity: any rate &gt; 0 costs at least 1/log — to make a kit last LONGER raise its
-    /// <c>durabilitybytype</c>, not this. Clamped to ≥ 0. (Default flipped 0→1 in T06.06: wear is now ON by default,
-    /// matching the pit saw's <see cref="SawDurabilityPerStage"/>.)</summary>
+    /// <c>durabilitybytype</c>, not this. Clamped to ≥ 0; NaN or ±∞ resets to the default with a warning. (Default
+    /// flipped 0→1 in T06.06: wear is now ON by default, matching the pit saw's
+    /// <see cref="SawDurabilityPerStage"/>.)</summary>
     public float SawmillBladeWearMultiplier = 1f;
 
     // NOTE: the optional-flywheel multipliers (torque relief / network-load relief) and the sawdust-WAVE knobs
@@ -660,12 +679,14 @@ public class ImmersiveWoodworkingConfig
 
     /// <summary>Minimum effective network speed (TrueSpeed = |network.Speed × GearedRatio|) below which the chopper
     /// simply won't turn — a barely-spinning network can't drive it, regardless of which head is installed. Twin of
-    /// <see cref="SawmillMinTorque"/>. Clamped to ≥ 0 (0 = no minimum, runs at any non-zero speed).</summary>
+    /// <see cref="SawmillMinTorque"/>. Clamped to ≥ 0 (0 = no minimum, runs at any non-zero speed); NaN or ±∞ resets
+    /// to this default with a warning.</summary>
     public float ChopperMinTorque = 0.05f;
 
-    /// <summary>How much resistance/load the running chopper adds to its mechanical network (returned from the MP
-    /// behaviour's GetResistance). Default 0.085 mirrors vanilla's pulverizer and the automated sawmill
-    /// (<see cref="SawmillResistance"/>). Clamped to ≥ 0.</summary>
+    /// <summary>How much resistance/load an assembled chopper adds to its mechanical network, working or idle (returned
+    /// from the MP behaviour's GetResistance; an unassembled one returns a fixed 0.005). Default 0.085 mirrors vanilla's
+    /// pulverizer and the automated sawmill (<see cref="SawmillResistance"/>). Clamped to ≥ 0; NaN or ±∞ resets to the
+    /// default with a warning.</summary>
     public float ChopperResistance = 0.085f;
 
     /// <summary>Durability points the axe head (<c>chopperhead-{metal}</c>) spends per completed log — the chopper's
@@ -675,11 +696,83 @@ public class ImmersiveWoodworkingConfig
     /// capital part). When the head hits 0 it breaks and the station stops until a new head is installed
     /// (<c>BlockEntityChopper</c>, AutoChopperPlan E06). Integer durability has no sub-1 granularity: any rate &gt; 0
     /// costs at least 1/log — to make a head last LONGER raise its <c>durabilitybytype</c>, not this. Clamped to [0,
-    /// 100].</summary>
+    /// 100]; NaN or ±∞ resets to the default with a warning.</summary>
     public float ChopperHeadWearMultiplier = 1f;
 
+    // ── Automated debarker (knife disc on a mechanical axle) ────────────────────────────────────────────
+    // Tech-tier upgrade over hand debarking on the sawhorses (AutoDebarkerPlan): a mechanical-power multiblock that
+    // strips the SAME inputs to the SAME outputs (log-placed-{wood} → debarkedlog-{wood} plus one stack of bark), but
+    // UNATTENDED. Stripping is continuous like the sawmill's feed, not struck like the chopper's: the disc scrapes while
+    // the shaft turns, and a log costs DebarkerDefaultWork / DebarkerSpeed revolutions (the SpeedDecouplingPlan scheme,
+    // docs/INVARIANTS.md). These fields only describe the pace knob, the DRIVE (torque / network load) and the knives'
+    // wear. The output reuses the hand-debark settings and is NOT duplicated here:
+    //   - which kind of bark: one roll of the config/barkdrops.json asset per log at BarkChanceMultSpud (bark.json),
+    //     the spud reference WITHOUT BarkChanceMultSpudSteelBonus (the knives' metal is a wear tier only);
+    //   - how much: BarkPerLogFor(species), i.e. BarkPerLog and its BarkPerLogBySpecies lines (bark.json);
+    //   - whether any: EnableBarkChain (general.json; off → the debarked log alone, as on the sawhorses).
+    // One source per number keeps the machine and the sawhorses from drifting apart in balance. Per-machine drops.json
+    // overrides (like ChopperFirewoodPerLog) are left out on purpose until the author asks for them.
+
+    /// <summary>The baked-in reference WORK per log for the automated debarker: shaft revolutions to strip one log at
+    /// <see cref="DebarkerSpeed"/> = 1. Final value (AutoDebarkerPlan T07.01): 12 is a common multiple of the periods of
+    /// every part on the geared work clock, so the fold at <see cref="DebarkerFwdWrapBound"/> turns each of them a whole
+    /// number of times and stays invisible (invariant I6). By tooth count the reducer turns the idler gear 5/2 and the
+    /// feed rollers 5/4 per turn of the work clock (periods of 2 and 4 revolutions), every other part a whole multiple;
+    /// <c>AutoDebarkerPlan/debarker_anim.py</c> checks the division after a remodel. The log turns on the strip progress
+    /// (9 turns a log) and the lift linkage on its own eased state, so neither enters the multiple. The number itself
+    /// follows the hand pace, scaled the way the sawmill scales the sawhorse rip: the sawmill spends
+    /// <see cref="SawmillDefaultWork"/> (50) revolutions on a log the steel pit saw rips in the default
+    /// <see cref="SawSeconds"/> (6 s), and the steel bark spud strips one in the default <see cref="DebarkSeconds"/>
+    /// (1.5 s), a quarter of that. 50 / 4 = 12.5, taken as 12. A log thus takes about 25 s on a full-speed windmill line
+    /// (network speed 0.6) and 15 s at network speed 1, about four times faster than the sawmill rips one on the same
+    /// network. A code constant, not config.</summary>
+    public const int DebarkerDefaultWork = 12;
+
+    /// <summary>SPEED multiplier for the automated debarker's log THROUGHPUT, higher = FASTER; the twin of
+    /// <see cref="SawmillSpeed"/>. Default 1.0 = the shipped pace. The disc's rotation still comes ENTIRELY from the
+    /// network RPM (invariant I1); this scales, inversely, how much shaft rotation a log costs: a log costs
+    /// <c>DebarkerDefaultWork / this</c> revolutions (internal work factor <c>1/this</c>). The rectified mechanism is
+    /// geared by <see cref="DebarkerWorkScale"/> = this, so it keeps pace with the strip at any setting; the disc sits on
+    /// the input coupling and stays 1:1 with the shaft (invariant I2). <see cref="Sanitize"/> band-clamps this into
+    /// [<see cref="DebarkerSpeedMin"/>, <see cref="DebarkerSpeedMax"/>] and logs any correction. Tick and render code
+    /// read the derived values below, never this field (invariant I5).</summary>
+    public float DebarkerSpeed = 1f;
+
+    /// <summary>Plausibility band for <see cref="DebarkerSpeed"/>: the same [0.01, 100] as the sawmill and the chopper
+    /// (<see cref="SawmillSpeedMin"/>), functional safety rather than smoothness. The ceiling sets the smallest
+    /// <see cref="DebarkerFwdWrapBound"/> = 2π·DebarkerDefaultWork / this: at 12 that is ≈ 0.75 rad, a log
+    /// of 0.12 revolutions (the sawmill's smallest is π), so on a fast network one tick can carry the strip progress
+    /// past a whole log. The floor 0.01 caps a log at 100× the baked work. A non-positive / NaN value resets to 1.0;
+    /// <see cref="Sanitize"/> pins an out-of-band value to the nearer edge and logs it.</summary>
+    public const float DebarkerSpeedMin = 0.01f;
+    /// <summary>Upper edge of the <see cref="DebarkerSpeed"/> plausibility band; see
+    /// <see cref="DebarkerSpeedMin"/> for the reasoning.</summary>
+    public const float DebarkerSpeedMax = 100f;
+
+    /// <summary>Minimum effective network speed (TrueSpeed = |network.Speed × GearedRatio|) below which the debarker
+    /// won't turn, whatever knives are fitted (invariant I10: it gates speed, not torque). Twin of
+    /// <see cref="SawmillMinTorque"/> and <see cref="ChopperMinTorque"/>. Clamped to ≥ 0 (0 = no minimum, runs at any
+    /// non-zero speed); NaN or ±∞ resets to this default with a warning.</summary>
+    public float DebarkerMinTorque = 0.05f;
+
+    /// <summary>How much resistance/load an assembled debarker adds to its mechanical network, working or idle
+    /// (returned from the MP behaviour's GetResistance; an unassembled one returns a fixed 0.005). Default 0.085 mirrors
+    /// vanilla's pulverizer, the sawmill and the chopper (<see cref="SawmillResistance"/>,
+    /// <see cref="ChopperResistance"/>). Clamped to ≥ 0; NaN or ±∞ resets to the default with a warning.</summary>
+    public float DebarkerResistance = 0.085f;
+
+    /// <summary>Durability points the knives (<c>debarkerknife-{metal}</c>) spend per stripped log; the debarker's twin
+    /// of <see cref="ChopperHeadWearMultiplier"/>. How long a knife lasts per metal lives ONLY in its native
+    /// <c>durabilitybytype</c>: the metal changes neither the pace (that comes from RPM) nor the bark roll (always the
+    /// spud reference <see cref="BarkChanceMultSpud"/>). So this is just the per-log charge: 1 = one log costs 1 point,
+    /// 2 = wears twice as fast, <b>0 = the knives never wear</b>. Integer durability has no sub-1 granularity: any rate
+    /// &gt; 0 costs at least 1 per log, so to make knives last LONGER raise their <c>durabilitybytype</c>, not this.
+    /// Charged in AutoDebarkerPlan T06.05. Clamped to [0, 100]; NaN or ±∞ resets to the default with a
+    /// warning.</summary>
+    public float DebarkerKnifeWearMultiplier = 1f;
+
     // ── Derived speed constants (SpeedDecouplingPlan T01.02) ─────────────────────────────────────────────
-    // Precompute for the machine animations + feed, filled ONCE at the end of Sanitize from the two *Speed
+    // Precompute for the machine animations + feed, filled ONCE at the end of Sanitize from the three *Speed
     // fields. The public knob is SPEED (higher = faster); internally every derived value below is computed from the WORK
     // factor = 1/speed, so all the render/anim/feed math (and the "M" in their comments) keeps its original work-factor
     // form — only the boundary flips. The tick and render read these STRAIGHT — no ceil/division from the multiplier in
@@ -730,6 +823,23 @@ public class ImmersiveWoodworkingConfig
     /// (E03).</summary>
     [JsonIgnore]
     public float ChopperWorkScale = 1f;
+
+    /// <summary>Debarker gearing factor = <see cref="DebarkerSpeed"/> (1/work factor), the twin of
+    /// <see cref="SawmillWorkScale"/>: the rectified mechanism (reducer and feed rollers) reads
+    /// <c>animAngleFwd × this</c>, so it runs at <c>speed×</c> the shaft. The log turns on the strip progress instead,
+    /// which the same factor reaches through the divisor <see cref="DebarkerFwdWrapBound"/> = 2π·DebarkerDefaultWork /
+    /// speed (invariant I4, like the sawmill carriage). speed=1 → 1.0. Consumed by the render in AutoDebarkerPlan
+    /// E07.</summary>
+    [JsonIgnore]
+    public float DebarkerWorkScale = 1f;
+
+    /// <summary>Wrap period of the debarker's rectified clock and its strip-progress divisor,
+    /// <c>2π × DebarkerDefaultWork / DebarkerSpeed</c> = 2π·R, where one log is R = DebarkerDefaultWork / speed
+    /// revolutions; the twin of <see cref="SawmillFwdWrapBound"/>. speed=1 → 2π·DebarkerDefaultWork. Positive across the
+    /// whole band; <see cref="DebarkerSpeedMin"/> says how small it gets. Consumed by AutoDebarkerPlan T06.01 (progress)
+    /// and AutoDebarkerPlan E07 (render).</summary>
+    [JsonIgnore]
+    public float DebarkerFwdWrapBound = GameMath.TWOPI * DebarkerDefaultWork;
 
     // ── Automated-station drop overrides (ImprovementsPlan E04/T04.04) ───────────────────────────────────
     // Per-station YIELD knobs for the POWERED tiers (automated chopper + automated sawmill), so a server can tune
@@ -853,8 +963,8 @@ public class ImmersiveWoodworkingConfig
     // carefulsawyer (−saw/spud wear), swiftsaw (chop/rip speed). Without xSkills every field here is inert (the
     // facade reports "off"). IMPORTANT: the per-tier ABILITY VALUES live in the auto-generated
     // ModConfig/XLeveling/forestry.json (xSkills owns that file), NOT here — these are only the master enable, the
-    // Tier-1 XP rates, the per-ability apply toggles and the swiftsaw speed caps. The automated sawmill / chopper
-    // are NOT covered (no player owner at yield time — out of scope).
+    // Tier-1 XP rates, the per-ability apply toggles and the swiftsaw speed caps. The automated sawmill, chopper and
+    // debarker are NOT covered (no player owner at yield time — out of scope).
 
     /// <summary>Master switch for the whole xSkills integration. When false the mod behaves exactly as if xSkills
     /// were absent even when it is installed: no forestry XP is granted, no abilities are registered, and no
@@ -961,6 +1071,33 @@ public class ImmersiveWoodworkingConfig
     /// Seraph. Plain bool.</summary>
     public bool SeraphLevelingIntegration = true;
 
+    // ── Vigor (optional soft-dependency, ModDbFeedbackPlan T06.03) ─────────────────────────────────────
+    // Reflection-only bridge (no DLL reference, see VigorCompat.cs). With Vigor installed, hand work on the chopping
+    // block and the sawhorses spends stamina, and an exhausted player cannot work them until Vigor clears the state
+    // (bar back to 40%). Driftwood, the automated stations and creative players spend nothing. Defaults approved by
+    // the author 2026-11-21: a full default bar (150) lasts about 50 seconds of non-stop work at any station.
+
+    /// <summary>Master switch for the Vigor integration. When false the stations neither spend stamina nor stop an
+    /// exhausted player, even with Vigor installed. Inert without Vigor. Plain bool.</summary>
+    public bool VigorIntegration = true;
+
+    /// <summary>Stamina per axe or maul strike on the chopping block, firewood into sticks included. Default 4: about
+    /// 50 strikes on a full bar, some 14 logs with a steel axe, at the default <see cref="ChopSeconds"/> and
+    /// <see cref="ChopRestockDelaySeconds"/>. Vigor refills during any pause over a second, so a strike interval above
+    /// about 1.16 s gives back the whole default price. 0 = chopping spends nothing; an exhausted player is still stopped.
+    /// Clamped to [0, 150].</summary>
+    public float VigorChopStaminaPerStrike = 4f;
+
+    /// <summary>Stamina per second of ripping on the sawhorses, any saw. Each sawyer of a pair pays for their own time.
+    /// Default 3: about 50 seconds, some 8 logs with a steel pit saw. 0 = sawing spends nothing; an exhausted player is still
+    /// stopped. Clamped to [0, 150].</summary>
+    public float VigorSawStaminaPerSecond = 3f;
+
+    /// <summary>Stamina per second of debarking on the sawhorses, any tool. Each debarker of a pair pays for their own
+    /// time. Default 3: about 50 seconds, some 33 logs with a bark spud. 0 = debarking spends nothing; an exhausted player is
+    /// still stopped. Clamped to [0, 150].</summary>
+    public float VigorDebarkStaminaPerSecond = 3f;
+
     // ── Bark chain (BarkPlan/E08, T08.01) ───────────────────────────────────────────────────────────────
     // The bark-system numbers that lived in CODE (a C# constant until now), gathered here so a server can retune them
     // without a rebuild: how many bark a stripped log drops, globally and per species (E02), the debark tool-tier bonus to the special-bark roll (E02/T02.05), the birch-tar rig's pot
@@ -970,7 +1107,7 @@ public class ImmersiveWoodworkingConfig
     // decoction numbers stay in their own editable JSON assets (recipes/barrel/*, recipes/cooking/barkbrew.json,
     // recipes/grid/poultice-*.json) — a server edits those directly; the quern grind ratio is fixed 1:1 by the engine.
 
-    /// <summary>How many bark items a fully-stripped log drops on the sawhorses (BarkPlan/E02). Default 3. The KIND of
+    /// <summary>How many bark items a fully-stripped log drops on the sawhorses or the debarker (BarkPlan/E02). Default 3. The KIND of
     /// bark is still rolled ONCE per log from <c>config/barkdrops.json</c> (biased by the debark tool tier), then dropped
     /// as a single stack of this size — so raising it multiplies bark yield WITHOUT touching the odds of which kind a log
     /// gives, and every bark off one log is that one rolled kind. Applies to every species whose
@@ -996,7 +1133,8 @@ public class ImmersiveWoodworkingConfig
 
     /// <summary>How many bark a fully-stripped log of <paramref name="species"/> drops: its
     /// <see cref="BarkPerLogBySpecies"/> line when that is ≥ 1, else <see cref="BarkPerLog"/>. Always ≥ 1 once
-    /// <see cref="Sanitize"/> has run. Read by <see cref="ImmersiveWoodworking.BlockEntitySawhorse.DropRolledBark"/>.</summary>
+    /// <see cref="Sanitize"/> has run. Read by <see cref="ImmersiveWoodworking.BarkDropTable.BuildBarkStack"/>, the bark
+    /// build of the sawhorse pair and the debarker.</summary>
     public int BarkPerLogFor(string? species)
     {
         if (species != null && BarkPerLogBySpecies != null
@@ -1018,8 +1156,9 @@ public class ImmersiveWoodworkingConfig
     public float BarkChanceMultAxeHammer = 0.75f;
 
     /// <summary>Special-bark chance multiplier for the tier-3 BARK SPUD (T02.05) — the REFERENCE tool: a copper spud
-    /// rolls the table's special chances at exactly this. Default 1.0 (the table's own odds). A steel spud adds up to
-    /// <see cref="BarkChanceMultSpudSteelBonus"/> on top (scaled by the spud's metal). Clamped to [0, 1]; the steel
+    /// rolls the table's special chances at exactly this, and so does the automated debarker, whatever its knives'
+    /// metal. Default 1.0 (the table's own odds). A steel spud adds up to <see cref="BarkChanceMultSpudSteelBonus"/> on
+    /// top (scaled by the spud's metal). Clamped to [0, 1]; the steel
     /// bonus below is the only way past 1.0, and even then the roll's own cumulative top-clamp keeps a certain species
     /// (oak <c>tan 1.0</c>) at 100%.</summary>
     public float BarkChanceMultSpud = 1.0f;
@@ -1070,9 +1209,11 @@ public class ImmersiveWoodworkingConfig
     /// divide-by-zero when computing the chop animation speed (BlockChoppingBlock.StartChopAnimation).
     /// Called once right after the config is loaded (see ImmersiveWoodworkingModSystem.StartPre), before
     /// the file is written back, so any corrected values are persisted and visible to the user.
-    /// <paramref name="logger"/> receives the T01.03 band-clamp corrections (old/new value + geometric reason); it is
-    /// the server's logger on load and null on the client's post-sync re-sanitize, whose received config is already
-    /// clamped (invariant I9), so a correction logs exactly once, server-side.
+    /// <paramref name="logger"/> receives the corrections that must not pass silently: the SpeedDecouplingPlan T01.03
+    /// band-clamp of the three speed multipliers (old/new value + geometric reason) and the AutoDebarkerPlan T01.03
+    /// reset of a non-finite drive or wear value. It is the server's logger on load and null on the client's post-sync
+    /// re-sanitize, whose received config is already clamped (invariant I9), so a correction logs exactly once,
+    /// server-side.
     /// </summary>
     public void Sanitize(ILogger? logger = null)
     {
@@ -1241,31 +1382,57 @@ public class ImmersiveWoodworkingConfig
         if (DebarkRestockDelaySeconds > 10f) DebarkRestockDelaySeconds = 10f;
 
         // (The former SawmillStepsPerLog integer clamp is gone: it is now the float SawmillSpeed, floored
-        // positive and — in T01.03 — band-clamped next to the derived-constants fill at the end of Sanitize.)
+        // positive and — in SpeedDecouplingPlan T01.03 — band-clamped next to the derived-constants fill at the end of
+        // Sanitize.)
 
-        // Network thresholds/loads: 0 is allowed (no minimum / no added resistance); only negatives are
-        // nonsensical and would invert the gates.
-        if (SawmillMinTorque < 0f) SawmillMinTorque = 0f;
-        if (SawmillResistance < 0f) SawmillResistance = 0f;
+        // Drive and wear values of the three machines (AutoDebarkerPlan T01.03) go through SanitizeNonNegative. NaN
+        // fails every comparison, so the bare `< 0` floor let it through (a NaN load turns the speed of the whole
+        // network NaN), and +∞ passed the floor too (an infinite load stalls the network). A non-finite value is never
+        // a deliberate setting, so it resets to the field's shipped default with a warning; -∞ goes the same way
+        // instead of flooring to 0. `shipped` reads those defaults from the field initializers, their one source.
+        // Finite values are clamped exactly as before.
+        var shipped = new ImmersiveWoodworkingConfig();
 
-        // Wear rate: 0 means "blades never wear"; the DEFAULT is 1 (one durability charge per completed log). Only
-        // negatives are nonsensical (they'd make wear negative). Any value ≤ 0 is treated as "no wear", so flooring
-        // at 0 is enough.
-        if (SawmillBladeWearMultiplier < 0f) SawmillBladeWearMultiplier = 0f;
+        // Network thresholds/loads: 0 is allowed (no minimum / no added resistance); a negative would invert the
+        // gates, so it floors to 0.
+        SawmillMinTorque = SanitizeNonNegative(
+            SawmillMinTorque, shipped.SawmillMinTorque, float.PositiveInfinity, nameof(SawmillMinTorque), logger);
+        SawmillResistance = SanitizeNonNegative(
+            SawmillResistance, shipped.SawmillResistance, float.PositiveInfinity, nameof(SawmillResistance), logger);
+
+        // Wear rate: 0 means "blades never wear"; the DEFAULT is 1 (one durability charge per completed log). A
+        // negative would make wear negative; any value ≤ 0 is treated as "no wear", so flooring at 0 is enough. No
+        // upper cap, unlike the chopper's and the debarker's 100 (author's call 2026-11-20, AutoDebarkerPlan T01.03):
+        // a huge rate only breaks the kit on its first log, and a cap would silently change a config set above 100.
+        SawmillBladeWearMultiplier = SanitizeNonNegative(
+            SawmillBladeWearMultiplier, shipped.SawmillBladeWearMultiplier, float.PositiveInfinity,
+            nameof(SawmillBladeWearMultiplier), logger);
 
         // (The former ChopperStepsPerLog integer clamp is gone: it is now the float ChopperSpeed, handled with
         // the derived-constants fill at the end of Sanitize — SpeedDecouplingPlan.)
 
         // Network thresholds/loads mirror the sawmill's (SawmillMinTorque/SawmillResistance): 0 is allowed (no minimum
-        // / no added resistance); only negatives are nonsensical and would invert the gates. Floor at 0, NO upper cap.
-        if (ChopperMinTorque < 0f) ChopperMinTorque = 0f;
-        if (ChopperResistance < 0f) ChopperResistance = 0f;
+        // / no added resistance); a negative would invert the gates. Floor at 0, NO upper cap.
+        ChopperMinTorque = SanitizeNonNegative(
+            ChopperMinTorque, shipped.ChopperMinTorque, float.PositiveInfinity, nameof(ChopperMinTorque), logger);
+        ChopperResistance = SanitizeNonNegative(
+            ChopperResistance, shipped.ChopperResistance, float.PositiveInfinity, nameof(ChopperResistance), logger);
 
         // Head wear rate: 0 means "the head never wears"; the default is 1 (one durability charge per completed log).
         // Negatives would make wear negative (nonsensical); a generous upper cap of 100 keeps a hand-edit sane while
         // still allowing very fast wear. Mirrors SawmillBladeWearMultiplier's intent, with an added ceiling.
-        if (ChopperHeadWearMultiplier < 0f) ChopperHeadWearMultiplier = 0f;
-        if (ChopperHeadWearMultiplier > 100f) ChopperHeadWearMultiplier = 100f;
+        ChopperHeadWearMultiplier = SanitizeNonNegative(
+            ChopperHeadWearMultiplier, shipped.ChopperHeadWearMultiplier, 100f,
+            nameof(ChopperHeadWearMultiplier), logger);
+
+        // Debarker drive and knife wear (AutoDebarkerPlan T01.01): the chopper's clamps, for the same reasons.
+        DebarkerMinTorque = SanitizeNonNegative(
+            DebarkerMinTorque, shipped.DebarkerMinTorque, float.PositiveInfinity, nameof(DebarkerMinTorque), logger);
+        DebarkerResistance = SanitizeNonNegative(
+            DebarkerResistance, shipped.DebarkerResistance, float.PositiveInfinity, nameof(DebarkerResistance), logger);
+        DebarkerKnifeWearMultiplier = SanitizeNonNegative(
+            DebarkerKnifeWearMultiplier, shipped.DebarkerKnifeWearMultiplier, 100f,
+            nameof(DebarkerKnifeWearMultiplier), logger);
 
         // The blunt-tool sharpness floor mirrors the speed multipliers' clamp [0.05, 1]: a 0/negative would freeze a
         // fully blunt pit saw / bark spud at ~0 progress (the 0.05 floor stops it silently never finishing), and > 1 —
@@ -1298,6 +1465,16 @@ public class ImmersiveWoodworkingConfig
         // speeds ripping. A large value is harmless (just faster, no divisor) and the ability's own tier value caps the
         // real bonus, so only floor out negatives (which would SLOW the saw).
         if (XSkillsSwiftsawMaxSawSpeedBonus < 0f) XSkillsSwiftsawMaxSawSpeedBonus = 0f;
+
+        // Vigor stamina costs (ModDbFeedbackPlan T06.03): 0 = that action spends nothing; a negative would REFILL the
+        // bar through ConsumeStamina. The cap is Vigor's default full bar, so one action never costs more than all of it.
+        // Non-finite values reset to the default with a warning, like the machine values above.
+        VigorChopStaminaPerStrike = SanitizeNonNegative(
+            VigorChopStaminaPerStrike, shipped.VigorChopStaminaPerStrike, 150f, nameof(VigorChopStaminaPerStrike), logger);
+        VigorSawStaminaPerSecond = SanitizeNonNegative(
+            VigorSawStaminaPerSecond, shipped.VigorSawStaminaPerSecond, 150f, nameof(VigorSawStaminaPerSecond), logger);
+        VigorDebarkStaminaPerSecond = SanitizeNonNegative(
+            VigorDebarkStaminaPerSecond, shipped.VigorDebarkStaminaPerSecond, 150f, nameof(VigorDebarkStaminaPerSecond), logger);
 
         // (The flywheel multipliers and the sawdust-wave knobs are no longer config — baked into constants in
         // Power.cs / BEBehaviorSawmillMP.cs / Effects.cs — so there is nothing to clamp for them here anymore.)
@@ -1356,22 +1533,25 @@ public class ImmersiveWoodworkingConfig
         if (BarkDryHours > 100000f) BarkDryHours = 100000f;
 
         // ── Speed-multiplier plausibility band-clamp (SpeedDecouplingPlan T01.03) ──
-        // Pin the two SPEED multipliers into the safe window BEFORE the derived constants below consume them, and log any
+        // Pin the three SPEED multipliers into the safe window BEFORE the derived constants below consume them, and log any
         // correction (the config folder is rewritten from these values, so a silent shift is not allowed). The band is
         // now wide [0.01, 100] (author's call — freedom over animation smoothness); the ceiling keeps the derived wrap /
         // FeedAdvance divisor away from zero and the floor keeps a log from a pointless crawl. A non-positive/NaN value
-        // is garbage and resets to the speed=1 default. The default 1.0 is in band for both and never logs. Client-side
+        // is garbage and resets to the speed=1 default. The default 1.0 is in band for all three and never logs. Client-side
         // logger is null (invariant I9), so this logs once.
         SawmillSpeed = SanitizeSpeed(
             SawmillSpeed, SawmillSpeedMin, SawmillSpeedMax, nameof(SawmillSpeed), logger);
         ChopperSpeed = SanitizeSpeed(
             ChopperSpeed, ChopperSpeedMin, ChopperSpeedMax, nameof(ChopperSpeed), logger);
+        DebarkerSpeed = SanitizeSpeed(
+            DebarkerSpeed, DebarkerSpeedMin, DebarkerSpeedMax, nameof(DebarkerSpeed), logger);
 
         // ── Derived speed constants (SpeedDecouplingPlan T01.02) ──
         // Filled LAST from the now-clamped SPEED multipliers, so the tick/render read these straight (invariant I5). The
         // public knob is speed (higher = faster); the derived math is all in the WORK factor M = 1/speed, so every formula
         // below keeps its original work-factor form (and the render/anim comments' "M" stays valid). At speed=1 → M=1 and
-        // every value equals the pre-feature constant (invariant I8): 1f/1f = 1f exact, so no precision is lost at default.
+        // every value equals its initializer, for the sawmill and the chopper the pre-feature constant (invariant I8):
+        // 1f/1f = 1f exact, so no precision is lost at default.
 
         // Pilorama: M = 1/speed is the work factor. workScale = 1/M = speed gears the rectified mechanism (faster speed =
         // faster mechanism); the wrap-bound 2π·SawmillDefaultWork·M = 2π·50/speed is both the fold period of that clock and
@@ -1392,6 +1572,12 @@ public class ImmersiveWoodworkingConfig
         ChopperCycleRevs = ChopperCycleCap * chopWork / strikes;
         ChopperSplitPerStrike = 1f / strikes;
         ChopperWorkScale = ChopperCycleCap / ChopperCycleRevs;
+
+        // Debarker (AutoDebarkerPlan T01.01): the pilorama's formulas on DebarkerDefaultWork; the wrap-bound is also the
+        // strip-progress divisor.
+        float debarkWork = 1f / DebarkerSpeed;
+        DebarkerWorkScale = 1f / debarkWork;
+        DebarkerFwdWrapBound = GameMath.TWOPI * DebarkerDefaultWork * debarkWork;
     }
 
     /// <summary>Band-clamp a SPEED multiplier into its safe window, logging any correction with the old/new value and the
@@ -1415,9 +1601,29 @@ public class ImmersiveWoodworkingConfig
         }
         if (value > max)
         {
-            logger?.Warning("[immersivewoodworking] {0}={1} is above the plausibility band [{2}, {3}] - pinned to {3} (above it a log costs under half a revolution and the derived wrap/divisor lose safety). The config file is rewritten with the pinned value.", name, value, min, max);
+            logger?.Warning("[immersivewoodworking] {0}={1} is above the plausibility band [{2}, {3}] - pinned to {3} (above it the derived wrap/divisor lose safety). The config file is rewritten with the pinned value.", name, value, min, max);
             return max;
         }
+        return value;
+    }
+
+    /// <summary>Clamp a machine's drive or wear value (<c>*MinTorque</c>, <c>*Resistance</c>, the blade, head or knife
+    /// wear multiplier) into [0, <paramref name="max"/>] (AutoDebarkerPlan T01.03). Non-finite values are caught
+    /// first: NaN fails every comparison and +∞ passes a bare <c>x &lt; 0</c> floor. None of NaN, +∞, -∞ is a
+    /// deliberate setting, so each resets to <paramref name="shippedDefault"/> rather than to an edge, with a warning,
+    /// because <see cref="Sanitize"/> rewrites the config folder from the result. A finite negative floors to 0 and a
+    /// finite value above <paramref name="max"/> pins to it, both silently, as these clamps always did;
+    /// <see cref="float.PositiveInfinity"/> means no ceiling. A finite value inside the range comes back unchanged.
+    /// <paramref name="logger"/> is null on the client (invariant I9), so the reset logs once, server-side.</summary>
+    static float SanitizeNonNegative(float value, float shippedDefault, float max, string name, ILogger? logger)
+    {
+        if (!float.IsFinite(value))
+        {
+            logger?.Warning("[immersivewoodworking] {0}={1} is not a finite number - reset to the default {2}. The config file is rewritten with the default.", name, value, shippedDefault);
+            return shippedDefault;
+        }
+        if (value < 0f) return 0f;
+        if (value > max) return max;
         return value;
     }
 

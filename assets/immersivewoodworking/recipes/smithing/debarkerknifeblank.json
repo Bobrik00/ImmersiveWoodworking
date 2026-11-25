@@ -1,0 +1,30 @@
+{
+	// Anvil smithing recipe for ONE debarker knife `debarkerknifeblank-{metal}` (AutoDebarkerPlan T02.03, decision В8).
+	// Four knives of the same metal and a hammer join into the knife set on the grid (recipes/grid/debarker_knife.json),
+	// as the chopper's two head halves do. Auto-loaded from this mod's domain: recipes/smithing/* is scanned across
+	// every domain, like recipes/grid/*.
+	//
+	// METALS = the knife set's nine (itemtypes/debarker/knife.json and knifeblank.json). name:"metal" binds the ingot's
+	// metal to the {metal} output; allowedVariants pins the wildcard to exactly those nine, so a lead, tin or modded
+	// ingot cannot forge a non-existent variant (docs/recipe-conventions.md, memory vs-recipe-named-wildcard-expansion).
+	//
+	// Voxel silhouette, one flat layer like every vanilla toolhead: a long straight knife, two full rows over a bevelled
+	// cutting edge one voxel shorter at each end, after the model's knife (a 13 x 1.5 px strip on the disc).
+	// 14 + 14 + 12 = 40 voxels, under ItemIngot.VoxelCount 42, so ONE ingot per knife and four per set (memory
+	// vs-smithing-ingot-voxel-count; the vanilla knife blade is 17, a chopper head half 56). Above 42 the anvil demands
+	// a second welded ingot. BALANCE DRAFT (author tunes).
+	//
+	// `game:` is REQUIRED on the ingot: an unqualified `ingot-*` resolves to this mod's domain, matches nothing and the
+	// recipe silently never registers (memory vs-mod-asset-path-domain). The output stays bare, in-domain.
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] },
+	pattern: [[
+		"_##############_",
+		"_##############_",
+		"__############__"
+	]],
+	// `name` is an identifier, not a display label: the anvil selector lists recipes by their output item, named via
+	// lang, so no recipe-name lang entry is needed.
+	name: "debarkerknifeblank",
+	code: "debarkerknifeblank-{metal}",
+	output: { type: "item", code: "debarkerknifeblank-{metal}" }
+}

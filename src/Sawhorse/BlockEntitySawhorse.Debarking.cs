@@ -15,7 +15,8 @@ public partial class BlockEntitySawhorse
     // Stripping bark is the SIDE counterpart to the end-gated rip: the player stands at a LONG side of the laid log
     // and holds RMB with a debarking tool (a knife, an axe + offhand hammer, or the bark spud), and the bark comes
     // off in passes until log-placed-{wood} becomes debarkedlog-{wood} — the in-world equivalent of the vanilla
-    // axe+hammer grid recipe (assets/survival/recipes/grid/debarkedlog.json), which likewise drops NO bark. The
+    // axe+hammer grid recipe (assets/survival/recipes/grid/debarkedlog.json), which drops NO bark; the strip here drops
+    // the species' bark through DropRolledBark (BarkPlan E02) while the bark chain is on. The
     // machinery mirrors the rip (master routing, serialized progress, co-op by side), but the START gate is the
     // geometric INVERSION of IsPlayerAtAxisEnd: the player must be at a SIDE, not an end or a corner. T01.02 lays
     // the position gate + the CanDebarkHere shim; the tool gate (T01.03), the hold/progress (T01.06) and the
@@ -119,7 +120,7 @@ public partial class BlockEntitySawhorse
 
     // ── Bark drop CHANCE by tool tier (T02.05) ──
     // The tool tier also biases WHICH bark a completed strip yields (CompleteDebark samples the multiplier BEFORE its
-    // wear pass, T08.02, then hands it down: CompleteDebark -> DropRolledBark -> BarkDropTable.Roll): the bark spud
+    // wear pass, T08.02, then hands it down: CompleteDebark -> DropRolledBark -> BarkDropTable.BuildBarkStack -> Roll): the bark spud
     // is the REFERENCE (a copper spud = 1.0, so oak's 1.0 tanbark stays a certain 100% — the top clamp),
     // while the cheaper tiers PENALISE the special-bark chance (axe+hammer < spud, knife lower still) — the careful
     // stripper earns richer bark, the careless one more plain bark (user design 2026-07-25). On TOP of the spud's 1.0 its
@@ -176,8 +177,8 @@ public partial class BlockEntitySawhorse
         bool any = false;
         foreach (SawyerHold held in barkSides.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) continue; // offline
+            IPlayer player = held.Player;
+            if (!PlayerPresence.IsInWorld(Api.World, player)) continue; // left the game: their tools no longer strip here
             ItemStack? main = player.InventoryManager.ActiveHotbarSlot?.Itemstack;
             ItemStack? off = player.Entity?.LeftHandItemSlot?.Itemstack;
             if (!BarkToolIsEffective(main, off)) continue; // switched away from a valid tier mid-hold
@@ -267,30 +268,44 @@ public partial class BlockEntitySawhorse
            && BarkToolIsEffective(active?.Itemstack, byPlayer?.Entity?.LeftHandItemSlot?.Itemstack);
 
     /// <summary>Whether the held barked log has a resolvable <c>debarkedlog-{wood}-{orient}</c> product — i.e. the
-    /// strip can actually COMPLETE. Mirrors <see cref="CompleteDebark"/>'s resolution (the log's own domain then game,
-    /// same orientation). Vanilla ships a debarkedlog for EVERY log wood (incl. aged/veryaged/rotten), and a proper
-    /// wood mod ships them alongside its logs, so this is true in the normal case; it is false only for a wood that
-    /// adds <c>log-placed-{wood}</c> WITHOUT a matching <c>debarkedlog-{wood}</c> — such a log must NOT be offered a
-    /// strip that could never finish (the dead-end this closes, also hidden from the interaction help). Master-relative;
-    /// a cheap block lookup.</summary>
+    /// strip can actually COMPLETE. Asks the same <see cref="ResolveDebarkProduct"/> as <see cref="CompleteDebark"/>
+    /// (the log's own domain then game, same orientation). Vanilla ships a debarkedlog for EVERY log wood (incl.
+    /// aged/veryaged/rotten), and a proper wood mod ships them alongside its logs, so this is true in the normal case;
+    /// it is false only for a wood that adds <c>log-placed-{wood}</c> WITHOUT a matching <c>debarkedlog-{wood}</c> —
+    /// such a log must NOT be offered a strip that could never finish (the dead-end this closes, also hidden from the
+    /// interaction help). Master-relative; a cheap block lookup.</summary>
     internal bool DebarkProductResolves() => DebarkProductResolves(Api.World, GetMaster().heldLog);
 
     /// <summary>The same dead-end gate for an ARBITRARY stack rather than the laid log — the form the doors that see a
     /// stack before it is ever laid need: the put (<see cref="CanProcessInput"/>) and the debark auto-restock's accept
     /// predicate (<see cref="PeekDebarkRestockSlot"/>, AuditFixPlan T03.03 / F-L9-27, which used to hand the pair a log
     /// the start gate then refused to strip, silently). Self-contained where the instance form leans on its callers:
-    /// it re-checks <see cref="IsSawableLog"/> itself, mirroring <see cref="HasBark"/>, so an already-debarked log
-    /// answers false here rather than resolving its own code and claiming it could be stripped again. <c>static</c> and
-    /// world-parametrised for the same reason as <see cref="SawProductResolves"/> — one definition, every door.</summary>
+    /// <see cref="ResolveDebarkProduct"/> re-checks <see cref="IsSawableLog"/> itself, mirroring <see cref="HasBark"/>, so
+    /// an already-debarked log answers false here rather than resolving its own code and claiming it could be stripped
+    /// again. <c>static</c> and world-parametrised for the same reason as <see cref="SawProductResolves"/> — one
+    /// definition, every door.</summary>
     internal static bool DebarkProductResolves(IWorldAccessor world, ItemStack? log)
+        => ResolveDebarkProduct(world, log) != null;
+
+    /// <summary>The debarked log a strip of <paramref name="log"/> yields: <c>debarkedlog-{wood}-{orient}</c> of the
+    /// same wood and rotation, through the one domain-then-game resolver <see cref="ResolveProductBlock"/>. Null when
+    /// the stack is not a still-barked <c>log-placed-*</c> or the wood ships no debarked log. The one place that code is
+    /// built (AutoDebarkerPlan T06.04): the dead-end gate <see cref="DebarkProductResolves(IWorldAccessor, ItemStack)"/>
+    /// (and through it the debarker's <c>IsValidInput</c>), this pair's <see cref="CompleteDebark"/> and the debarker's
+    /// finish all call it, so a gate and the finish behind it build one code. It is no second resolver
+    /// (<c>source-conventions.md</c> §2): it builds the code by shape and hands it to <see cref="ResolveProductBlock"/>,
+    /// as the sawmill's <c>GetPassBatch</c> hands <c>plank-</c> to <see cref="ResolveProductItem"/> and
+    /// <c>supportbeam-</c> to <see cref="ResolveProductBlock"/>.</summary>
+    internal static Block? ResolveDebarkProduct(IWorldAccessor world, ItemStack? log)
     {
-        if (!IsSawableLog(log)) return false; // only a still-barked log-placed-* can be stripped at all (mirrors HasBark)
+        if (!IsSawableLog(log)) return null; // only a still-barked log-placed-* can be stripped at all (mirrors HasBark)
         // Kind is already settled by the line above, so the species read skips re-classifying, and both parts come off
-        // the code in place (AuditFixPlan T05.03): CanDebarkHere re-asks this gate on every tick of a strip hold.
+        // the code in place (AuditFixPlan T05.03): CanDebarkHere asks this through DebarkProductResolves on every tick of
+        // a strip hold, and the debarker's CanDebark on every 25 ms tick of a running machine.
         string? wood = GetWoodSpecies(log, SawInput.Log);
-        if (log!.Block == null || wood == null) return false;
+        if (log!.Block == null || wood == null) return null;
         string? orient = CodeParts.Last(log.Block.Code); // ud / ns / we — debarkedlog carries the same rotation variants
-        return ResolveProductBlock(world, log.Block.Code.Domain, "debarkedlog-" + wood + "-" + orient) != null;
+        return ResolveProductBlock(world, log.Block.Code.Domain, "debarkedlog-" + wood + "-" + orient);
     }
 
     /// <summary>The debark gate MINUS the "a barked log is laid" clause — the player stands at a long SIDE
@@ -390,10 +405,11 @@ public partial class BlockEntitySawhorse
     }
 
     /// <summary>The hold record for the side <paramref name="uid"/> currently mans, or null if none — a player mans at
-    /// most one side. The debark counterpart to <see cref="SawyerFor"/>. Server-side.</summary>
+    /// most one side. A hold left by an earlier connection of the same player does not count (AuditFix3Plan T01.01). The
+    /// debark counterpart to <see cref="SawyerFor"/>. Server-side.</summary>
     SawyerHold? DebarkerFor(string uid)
     {
-        foreach (SawyerHold h in barkSides.Values) if (h.Uid == uid) return h;
+        foreach (SawyerHold h in barkSides.Values) if (h.Uid == uid && PlayerPresence.IsInWorld(Api.World, h.Player)) return h;
         return null;
     }
 
@@ -409,25 +425,30 @@ public partial class BlockEntitySawhorse
         return true;
     }
 
-    /// <summary>Drop any co-op side hold whose player is no longer online. There is no <c>PlayerDisconnect</c> hook, so a
-    /// debarker who drops mid-strip would otherwise leave a ghost <see cref="barkSides"/> entry that blocks that side
-    /// forever (<see cref="ClaimOrVerifySide"/> refuses a new player on it) and pins a restock breather open
-    /// (<see cref="AbandonPendingDebarkRestockIfUnmanned"/> never reaches Count 0). Called before either acts on the
-    /// map — and, since AuditFixPlan T03.04, before the START gate reads it too (<see cref="TryStartDebarking"/>,
-    /// F-L5-25). Server-side. (If EVERY debarker is gone there is no live tick to run this, but the stale state
-    /// self-heals on the next interaction via <see cref="ResetDebarkState"/>, exactly like the serialized
-    /// restock-pending reload case, and the breather it pinned open ages out on its own clock —
-    /// <see cref="DebarkRestockPauseIsStale"/>.) Mirrors the rip's <see cref="PruneOfflineSawyers"/>.</summary>
+    /// <summary>Drop every co-op side hold whose player is no longer in the world (<see cref="PlayerPresence.IsInWorld"/>
+    /// on the hold's own <see cref="SawyerHold.Player"/>). The engine sends the block no Stop or Cancel when a holder
+    /// disconnects, so their entry stays in <see cref="barkSides"/> until this drops it, and until then it blocks that
+    /// side (<see cref="ClaimOrVerifySide"/> refuses a new player on it) and keeps a restock breather manned
+    /// (<see cref="AbandonPendingDebarkRestockIfUnmanned"/>). This prune serves the readers that only ask WHO holds a
+    /// side: the start gate (<see cref="TryStartDebarking"/>, AuditFixPlan T03.04 / F-L5-25), every mid-hold claim and
+    /// the breather's exits; the walks that act on a holder's player (feed, wear, bark chance, XP) skip one who is not in
+    /// the world themselves, so a holder who left costs nobody anything between two prunes. Until AuditFix3Plan T01.01
+    /// this tested <c>PlayerByUid == null</c>, which the server does not return for a player who left during the session,
+    /// so it dropped nobody. Like the rip's prune it does NOT catch a holder still in the world whose hold ended without a
+    /// Stop (death, a slot switch, Q, the inventory). Server-side. With every debarker gone no tick runs it: the ghost goes when the next strip starts on
+    /// this pair (the start gate prunes first) or with the log (<see cref="ResetDebarkState"/>), and a breather it pinned
+    /// open ages out on its own clock (<see cref="DebarkRestockPauseIsStale"/>). Mirrors the rip's
+    /// <see cref="PruneOfflineSawyers"/>.</summary>
     void PruneOfflineDebarkers()
     {
         if (barkSides.Count == 0) return;
         List<int>? dead = null;
         foreach (var kv in barkSides)
-            if (Api.World.PlayerByUid(kv.Value.Uid) == null) (dead ??= new List<int>()).Add(kv.Key);
+            if (!PlayerPresence.IsInWorld(Api.World, kv.Value.Player)) (dead ??= new List<int>()).Add(kv.Key);
         if (dead != null) foreach (int k in dead) barkSides.Remove(k);
     }
 
-    /// <summary>Ensure <paramref name="uid"/> mans the side at <paramref name="sideSign"/> — confirm the one they
+    /// <summary>Ensure <paramref name="byPlayer"/> mans the side at <paramref name="sideSign"/> — confirm the one they
     /// already hold, or claim a free one (giving up any other side first, since a player mans at most one). Returns the
     /// hold, or null when that side is manned by ANOTHER debarker (the caller refuses — no same-side stacking). A
     /// freshly claimed side baselines its timer to <paramref name="secondsUsed"/> — 0 delta this tick, contributing
@@ -437,15 +458,16 @@ public partial class BlockEntitySawhorse
     /// the seconds already elapsed belong to the hold, not to this side. A hold that BEGINS at the
     /// side (<see cref="TryStartDebarking"/>) baselines to 0, because there t=0 really is the press. The debark
     /// counterpart to <see cref="ClaimOrVerifyEnd"/>. Server-side.</summary>
-    SawyerHold? ClaimOrVerifySide(string uid, int sideSign, float secondsUsed)
+    SawyerHold? ClaimOrVerifySide(IPlayer byPlayer, int sideSign, float secondsUsed)
     {
+        string uid = byPlayer.PlayerUID;
         PruneOfflineDebarkers(); // drop ghost holds from disconnected players first, so a live player can claim/reclaim a side
         if (barkSides.TryGetValue(sideSign, out SawyerHold? held))
         {
             return held.Uid == uid ? held : null; // ours → use it; another debarker's → refuse
         }
-        ReleaseDebarker(uid);                       // give up any other side first (one side per player)
-        held = new SawyerHold(uid, secondsUsed);    // baseline = now → 0 delta this tick, contributes next
+        ReleaseDebarker(uid);                         // give up any other side first (one side per player)
+        held = new SawyerHold(byPlayer, secondsUsed); // baseline = now → 0 delta this tick, contributes next
         barkSides[sideSign] = held;
         return held;
     }
@@ -499,7 +521,7 @@ public partial class BlockEntitySawhorse
         // the engine's replayed steps inflate the argument — the strip's share of F-L4-04, and by far the worst-hit
         // of the two: at DebarkSeconds = 1.5 a constant ~0.14 s of over-credit is a tenth of the whole strip. The clamp
         // sits at the seam, in BlockSawhorse.OnBlockInteractStep (T02.03).
-        barkSides[sideSign] = new SawyerHold(uid, 0f);
+        barkSides[sideSign] = new SawyerHold(byPlayer, 0f);
         return true;
     }
 
@@ -551,6 +573,13 @@ public partial class BlockEntitySawhorse
                 DbgRestockPause("strip", "refused-nonowner", byPlayer, Api.World.ElapsedMilliseconds - barkRestockTickedAtMs);
                 return false;
             }
+            // ModDbFeedbackPlan T06.03 (Vigor): an exhausted debarker leaves the breather like one who stepped off the
+            // side, before FinishPendingDebarkRestock can take the next barked log out of their pack.
+            if (RefuseIfTooTired(byPlayer))
+            {
+                if (ReleaseDebarker(uid)) { AbandonPendingDebarkRestockIfUnmanned(); MarkDirty(true); }
+                return false;
+            }
             pausing.LastSecondsUsed = secondsUsed;     // consume the elapsed as PAUSE, not stripping → resumed strip starts at ~0 delta
             barkRestockTickedAtMs = Api.World.ElapsedMilliseconds; // freshness stamp: this pause still has a live owner
 
@@ -579,7 +608,16 @@ public partial class BlockEntitySawhorse
 
         if (Api.Side != EnumAppSide.Server) return true; // client keeps the hold alive; the server owns the progress
 
-        SawyerHold? held = ClaimOrVerifySide(uid, PlayerSideSign(byPlayer), secondsUsed);
+        // ModDbFeedbackPlan T06.03 (Vigor): an exhausted debarker stops at once, and a press made while exhausted ends on
+        // its first step. The side mirror of ContinueSawing's exit, data-only sync included; a partner at the other side
+        // strips on alone.
+        if (RefuseIfTooTired(byPlayer))
+        {
+            if (ReleaseDebarker(uid)) MarkDirty();
+            return false;
+        }
+
+        SawyerHold? held = ClaimOrVerifySide(byPlayer, PlayerSideSign(byPlayer), secondsUsed);
         if (held == null)
         {
             // This side is manned by ANOTHER debarker — no same-side stacking. The strip's one refusal point
@@ -596,7 +634,12 @@ public partial class BlockEntitySawhorse
         // is a defensive belt-and-suspenders. Each manned side advances by its OWN scaled elapsed → opposite sides sum.
         ItemStack? main = toolSlot?.Itemstack;
         ItemStack? off = byPlayer.Entity?.LeftHandItemSlot?.Itemstack;
-        if (delta > 0f && BarkToolIsEffective(main, off)) AdvanceDebark(delta * BarkSpeedFor(main, off), byPlayer);
+        if (delta > 0f && BarkToolIsEffective(main, off))
+        {
+            AdvanceDebark(delta * BarkSpeedFor(main, off), byPlayer);
+            // ModDbFeedbackPlan T06.03 (Vigor): stamina per real second of stripping, whatever the tool's speed.
+            SpendStamina(VigorCompat.DebarkAction, delta, Config.VigorDebarkStaminaPerSecond, byPlayer);
+        }
         return true;
     }
 
@@ -622,7 +665,11 @@ public partial class BlockEntitySawhorse
         ItemStack? main = byPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
         ItemStack? off = byPlayer.Entity?.LeftHandItemSlot?.Itemstack;
         float delta = secondsUsed - held.LastSecondsUsed;
-        if (delta > 0f && heldLog != null && BarkToolIsEffective(main, off)) AdvanceDebark(delta * BarkSpeedFor(main, off), byPlayer);
+        if (delta > 0f && heldLog != null && BarkToolIsEffective(main, off))
+        {
+            AdvanceDebark(delta * BarkSpeedFor(main, off), byPlayer);
+            SpendStamina(VigorCompat.DebarkAction, delta, Config.VigorDebarkStaminaPerSecond, byPlayer); // ModDbFeedbackPlan T06.03: the last partial second too
+        }
         ReleaseDebarker(uid);
         AbandonPendingDebarkRestockIfUnmanned(); // last debarker let go mid-breather → end the pause (no next log)
         // Persist + sync the final progress, DATA-ONLY — the side mirror of StopSawing's (T05.04 / F-L10-15): a release
@@ -701,27 +748,26 @@ public partial class BlockEntitySawhorse
     /// pair empties — the SIDE counterpart to the rip's <see cref="ConsumeLog"/>, which likewise drops its product and
     /// retires the billet. Resolves the held <c>log-placed-{wood}</c>'s debarked counterpart
     /// (<c>debarkedlog-{wood}</c>, same species/orientation/domain — domain-then-game via
-    /// <see cref="ResolveProductBlock"/>, like the saw products) — the in-world echo of the vanilla axe+hammer grid
-    /// recipe (which also drops NO bark) — wears each active debarker's tools (<see cref="DamageActiveDebarkTools"/>,
-    /// read from <see cref="barkSides"/> BEFORE any reset clears it), then EJECTS the bare log beside the construction
-    /// (<see cref="SpawnSawnItem"/>, the same drop physics as the boards) and AUTO-RESTOCKS the next BARKED log exactly
+    /// <see cref="ResolveDebarkProduct"/>, which the gate asks too) — the in-world echo of the vanilla axe+hammer grid
+    /// recipe (which drops NO bark, unlike this strip) — wears each active debarker's tools (<see cref="DamageActiveDebarkTools"/>,
+    /// read from <see cref="barkSides"/> BEFORE any reset clears it), then AUTO-RESTOCKS the next BARKED log exactly
     /// like the rip — either after a <see cref="ImmersiveWoodworkingConfig.DebarkRestockDelaySeconds"/> breather (the
-    /// pair sits empty while a strip is held) or instantly, or it just empties on the last log. The caller
-    /// (<see cref="AdvanceDebark"/>) MarkDirty's, syncing the cleared/restocked state so the client re-meshes. The
-    /// bark-item EJECT is the deferred E06 seam (just before the drop). Server-side, master-only.
+    /// pair sits empty while a strip is held) or instantly, or it just empties on the last log — and only then EJECTS
+    /// the bark and the bare log beside the construction (<see cref="SpawnEjectedItem"/>, the same drop physics as the
+    /// boards; restock first since ModDbFeedbackPlan T05.04, see the body). The caller
+    /// (<see cref="AdvanceDebark"/>) MarkDirty's, syncing the cleared/restocked state so the client re-meshes.
+    /// Server-side, master-only.
     /// </summary>
     void CompleteDebark(IPlayer byPlayer)
     {
-        // The debarked counterpart of the held log: same species + orientation, the log's own domain first then game
-        // (ResolveProductBlock), mirroring how the rip resolves plank-/supportbeam-. The gate (CanDebarkHere → HasBark)
-        // guarantees heldLog is a barked log-placed-* here, so the species/block are non-null; only a wood with no
-        // debarkedlog variant fails to resolve.
+        // The debarked counterpart of the held log: same species + orientation, the log's own domain first then game,
+        // built by ResolveDebarkProduct, which the start gate (DebarkProductResolves) and the debarker call as well
+        // (AutoDebarkerPlan T06.04). The gate (CanDebarkHere → HasBark) guarantees heldLog is a barked log-placed-*
+        // here, so the species/block are non-null; only a wood with no debarkedlog variant fails to resolve.
         string? wood = GetWoodSpecies(heldLog);
         if (heldLog?.Block == null || wood == null) return; // not a barked log (the gate should prevent this)
 
-        string domain = heldLog.Block.Code.Domain;
-        string orient = heldLog.Block.LastCodePart(); // ud / ns / we — debarkedlog carries the same rotation variants
-        Block? debarked = ResolveProductBlock(Api.World, domain, "debarkedlog-" + wood + "-" + orient);
+        Block? debarked = ResolveDebarkProduct(Api.World, heldLog);
         if (debarked == null)
         {
             // No debarkedlog for this species (a wood mod that ships logs but no debarked variant — NEVER vanilla,
@@ -731,7 +777,7 @@ public partial class BlockEntitySawhorse
             // ContinueDebarking re-gates to false and ends it cleanly, leaving the log barked AND untouched
             // (barkProgress 0) so Ctrl+RMB takes it back WHOLE rather than scrapping it. Server-side; the caller
             // (AdvanceDebark) MarkDirty's the cleared state, stopping the chips/sound/animation on the next tick.
-            Api.Logger.Warning("[immersivewoodworking] No debarkedlog-{0}-{1} to strip {2} into — leaving the log barked and recoverable.", wood, orient, heldLog.Block.Code);
+            Api.Logger.Warning("[immersivewoodworking] No debarkedlog-{0}-{1} to strip {2} into — leaving the log barked and recoverable.", wood, heldLog.Block.LastCodePart(), heldLog.Block.Code);
             ResetDebarkState();
             return;
         }
@@ -757,17 +803,18 @@ public partial class BlockEntitySawhorse
         // both land on the far side from the player rather than the fixed cut side the planks use.
         (double awayX, double awayZ) = DebarkAwayEjectDir();
 
-        // With the bark chain switched off the strip still makes the debarked log the beam rip needs, and nothing else.
-        if (Config.EnableBarkChain)
-            DropRolledBark(wood, awayX, awayZ, barkChanceMult, byPlayer); // E02 (T02.03): roll the species' bark kind and eject exactly one, away from the debarker, BEFORE the bare log drops — at the PRE-wear multiplier (T08.02)
-
-        // The strip is DONE: the bare log DROPS OUT beside the construction (the debark counterpart to the rip dropping
-        // its planks), then the pair auto-restocks the next BARKED log, exactly like ConsumeLog. Remember the finished
-        // BARKED input first (for the same-species restock preference) — the dropped stack is a fresh debarkedlog, a
-        // different code. Reusing the eject (SpawnEjectedItem) clears the multiblock collision box so the bare log falls
-        // beside the sawhorses instead of resting on them — here toward the far side from the player.
+        // The strip is DONE: the pair retires the stripped log and auto-restocks the next BARKED log, exactly like
+        // ConsumeLog. Remember the finished BARKED input first (for the same-species restock preference) — the dropped
+        // stack is a fresh debarkedlog, a different code.
+        //
+        // ModDbFeedbackPlan T05.04: the log is retired and the auto-feed settled BEFORE the bark and the bare log leave
+        // the sawhorse. Both go out through SpawnItemEntity, that is through every mod's item-spawn hooks, and the strip
+        // stage is already counted. A throw from a spawn used to skip the restock and the reset, no later advance called
+        // CompleteDebark again, and the log stayed barked at 100%: Ctrl+RMB or breaking the sawhorse destroyed it, and a
+        // dedicated server kicked whoever's stroke finished the strip. The spawns read what is captured above (wood,
+        // debarked, barkChanceMult, the eject direction, byPlayer), the config, pairAxis and Pos; never heldLog or
+        // barkSides, so the next log may already lie there.
         ItemStack finishedBarked = heldLog;
-        SpawnEjectedItem(new ItemStack(debarked), 0.0, awayX, awayZ, byPlayer); // one centred pile, ejected away from the debarker
 
         // AutoRestock WITH a configured breather (DebarkRestockDelaySeconds): don't snap straight onto the next log.
         // Empty the pair NOW and lay the next BARKED log after a short pause (FinishPendingDebarkRestock, tick-driven
@@ -788,15 +835,32 @@ public partial class BlockEntitySawhorse
             barkRestockPending = true;
             barkRestockReadyAtMs = Api.World.ElapsedMilliseconds + (long)(Config.DebarkRestockDelaySeconds * 1000f);
             barkRestockTickedAtMs = Api.World.ElapsedMilliseconds; // the hold that stripped the log IS this pause's first tick (AuditFixPlan T03.04)
-            return;
+        }
+        else
+        {
+            // No breather (delay 0, AutoRestock off, or no barked log left): instant restock exactly as the rip's instant
+            // path — read barkSides (via PeekDebarkRestockSlot inside TryAutoRestockBark) HERE, before ResetDebarkState
+            // zeroes them; the still-held right-click re-claims its side next tick (ContinueDebarking's "claim a free side
+            // mid-hold"), so a held strip carries on after a ≤1-tick gap.
+            heldLog = TryAutoRestockBark(finishedBarked);
+            ResetDebarkState();
         }
 
-        // No breather (delay 0, AutoRestock off, or no barked log left): instant restock exactly as the rip's instant
-        // path — read barkSides (via PeekDebarkRestockSlot inside TryAutoRestockBark) HERE, before ResetDebarkState
-        // zeroes them; the still-held right-click re-claims its side next tick (ContinueDebarking's "claim a free side
-        // mid-hold"), so a held strip carries on after a ≤1-tick gap.
-        heldLog = TryAutoRestockBark(finishedBarked);
-        ResetDebarkState();
+        // The products leave last. The catch keeps a spawn throw inside this call, so the caller's MarkDirty(true) still
+        // syncs the retired log; the cost is whatever had not spawned yet. Reusing the eject (SpawnEjectedItem) clears
+        // the multiblock collision box so the bark and the bare log fall beside the sawhorses instead of resting on
+        // them — here toward the far side from the player.
+        try
+        {
+            // With the bark chain switched off the strip still makes the debarked log the beam rip needs, and nothing else.
+            if (Config.EnableBarkChain)
+                DropRolledBark(wood, awayX, awayZ, barkChanceMult, byPlayer); // E02 (T02.03): roll the species' bark kind and eject one stack of BarkPerLogFor(wood) of it, away from the debarker, BEFORE the bare log drops — at the PRE-wear multiplier (T08.02)
+            SpawnEjectedItem(new ItemStack(debarked), 0.0, awayX, awayZ, byPlayer); // one centred pile, ejected away from the debarker
+        }
+        catch (System.Exception e)
+        {
+            LogFinishThrowOnce("ejecting the bark and the debarked log", e);
+        }
     }
 
     /// <summary>How far DOWN the log (along the pair axis) the bark pile is nudged from the bare-log pile — a FRACTION in
@@ -807,42 +871,28 @@ public partial class BlockEntitySawhorse
     /// debarker's side, so it never pushes the bark toward the player, and 0.6 stays well within the 2-cell pair.</summary>
     const double BarkDropAlongOffsetFrac = 1.0;
 
-    /// <summary>Eject the species' bark count (<see cref="ImmersiveWoodworkingConfig.BarkPerLogFor"/> — its <c>BarkPerLogBySpecies</c> line, else <c>Config.BarkPerLog</c>, default 3) of the ROLLED kind for a fully-stripped log of <paramref name="wood"/> — the
-    /// T02.03 replacement for the old ACA-only oak-bark drop (removed T02.04), called once per completed strip from
-    /// <see cref="CompleteDebark"/> (before the bare log drops). Rolls the species' bark drop table
-    /// (<see cref="ImmersiveWoodworkingModSystem.BarkDrops"/>) ONCE on the SERVER — <see cref="CompleteDebark"/> is
-    /// server-side, master-only — into a special KIND or the generic remainder, biased by
+    /// <summary>Eject the bark of a fully-stripped log of <paramref name="wood"/> — the T02.03 replacement for the old
+    /// ACA-only oak-bark drop (removed T02.04), called once per completed strip from <see cref="CompleteDebark"/> (before
+    /// the bare log drops). The stack comes from the shared <see cref="BarkDropTable.BuildBarkStack"/> (moved there by
+    /// AutoDebarkerPlan T06.02 so the debarker builds the same one): ONE server-side roll of the species' bark drop table
+    /// into a special KIND or the generic remainder, and the species' count
+    /// (<see cref="ImmersiveWoodworkingConfig.BarkPerLogFor"/>) of that one kind. The roll is biased by
     /// <paramref name="chanceMult"/>: the BEST active debarker's tool tier (T02.05,
     /// <see cref="BestActiveDebarkerBarkChanceMult"/>), so a bark spud rolls the special kinds at full odds and an
     /// axe+hammer/knife less often. That number arrives ALREADY SAMPLED from the caller, taken BEFORE the wear pass
-    /// (AuditFixPlan T08.02): re-reading it here would look at hands the wear had already emptied.
-    /// <see cref="BarkDropTable.ItemCodeForKind"/> maps the rolled kind to one of our bark
-    /// items (fresh = the green state where one exists). Resolved in the mod's OWN domain (all bark items register there)
-    /// and ejected AWAY from the debarker (<paramref name="ejectX"/>, <paramref name="ejectZ"/>) via the same
+    /// (AuditFixPlan T08.02): re-reading it here would look at hands the wear had already emptied. The stack is ejected
+    /// AWAY from the debarker (<paramref name="ejectX"/>, <paramref name="ejectZ"/>) via the same
     /// <see cref="SpawnEjectedItem"/> as the bare log — but nudged <see cref="BarkDropAlongOffsetFrac"/> DOWN the log so
     /// the two piles don't land on one spot — so it lands beside the sawhorses rather than on the multiblock collision
-    /// box. Unknown / generic-only / foreign woods roll to <c>bark-generic</c>, so EVERY log yields bark — the species' count of it, all one rolled kind.
-    /// Server-side, master-only (its caller is).</summary>
+    /// box. Server-side, master-only (its caller is).</summary>
     void DropRolledBark(string wood, double ejectX, double ejectZ, double chanceMult, IPlayer byPlayer)
     {
         ImmersiveWoodworkingModSystem mod = modSystem ??= Api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>();
-        string? kind = mod.BarkDrops.Roll(wood, Api.World.Rand, chanceMult);  // one server-side roll; null = the generic remainder
-        string code = BarkDropTable.ItemCodeForKind(kind);                    // kind → bark item path (fresh = green where a state exists)
-        int count = Config.BarkPerLogFor(wood);                               // per-species config line, else the global BarkPerLog
-
-        Item? bark = Api.World.GetItem(new AssetLocation("immersivewoodworking", code));
-        if (bark == null)
-        {
-            // Our own bark items always register, so this is unreachable in a normal install — guard so a broken asset
-            // set drops nothing rather than throwing (the bare log still ejects afterwards).
-            Api.Logger.Warning("[immersivewoodworking] Bark item immersivewoodworking:{0} not found — no bark dropped for the {1} strip.", code, wood);
-            return;
-        }
+        ItemStack? bark = BarkDropTable.BuildBarkStack(Api, mod, wood, chanceMult);
+        if (bark == null) return; // the bark item is missing (warned there); the bare log still ejects afterwards
         // Nudged DOWN the log (BarkDropAlongOffsetFrac) so the bark pile sits BESIDE the bare-log pile instead of on it —
         // the bare log stays centred (alongFrac 0.0 in CompleteDebark), both still eject away from the debarker.
-        // ONE stack of `count` (per-species config line, else BarkPerLog, ≥ 1): the KIND was rolled once above, so every bark
-        // off this log is that same kind — the count multiplies yield without touching the barkdrops.json kind odds.
-        SpawnEjectedItem(new ItemStack(bark, count), BarkDropAlongOffsetFrac, ejectX, ejectZ, byPlayer);
+        SpawnEjectedItem(bark, BarkDropAlongOffsetFrac, ejectX, ejectZ, byPlayer);
     }
 
     /// <summary>The auto-restock breather (<see cref="barkRestockPending"/>) has elapsed: lay the next BARKED log now —
@@ -878,10 +928,7 @@ public partial class BlockEntitySawhorse
         ItemSlot? src = PeekDebarkRestockSlot(finishedBarked);
         if (src?.Itemstack == null) return null; // off, no debarker resolvable, or none carries a barked log
 
-        ItemStack pulled = src.TakeOut(1);
-        src.MarkDirty();
-        Api.World.PlaySoundAt(BuildSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, true, 16f);
-        return pulled;
+        return TakeRestockLog(src);
     }
 
     /// <summary>The first active debarker's inventory slot holding a BARKED log to restock after
@@ -904,10 +951,9 @@ public partial class BlockEntitySawhorse
 
         foreach (SawyerHold held in barkSides.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) continue;
+            if (!PlayerPresence.IsInWorld(Api.World, held.Player)) continue; // never feed from the pack of a player who left
 
-            ItemSlot? src = AutoRestockUtil.FindRestockSlot(player, accept, preferred);
+            ItemSlot? src = AutoRestockUtil.FindRestockSlot(held.Player, accept, preferred);
             if (src?.Itemstack != null) return src;
         }
         return null;
@@ -916,9 +962,10 @@ public partial class BlockEntitySawhorse
     /// <summary>End an in-progress debark auto-restock breather if no debarker is still holding — the held strip that
     /// would have laid the next log is gone, so no further tick would run to lay it or clear the flag. Covers the
     /// "everyone let go DURING the pause" case (the put/take/discard paths are covered by <see cref="ResetDebarkState"/>).
-    /// The SIDE mirror of <see cref="AbandonPendingRestockIfUnmanned"/>. Server-side. The dirty exit — a hold ended by
-    /// disconnect, leaving a ghost side entry so <see cref="barkSides"/> never reaches 0 — is caught by the staleness
-    /// timeout instead (<see cref="DebarkRestockPauseIsStale"/>).</summary>
+    /// The SIDE mirror of <see cref="AbandonPendingRestockIfUnmanned"/>. Server-side. Its first line drops the ghost a
+    /// partner who disconnected left behind, so the map does reach 0 once the last live debarker lets go (AuditFix3Plan
+    /// T01.01). The dirty exit, the LAST debarker leaving by disconnect, delivers no release and never calls this; the
+    /// staleness timeout catches that one instead (<see cref="DebarkRestockPauseIsStale"/>).</summary>
     void AbandonPendingDebarkRestockIfUnmanned()
     {
         PruneOfflineDebarkers(); // a debarker who disconnected mid-breather leaves a ghost hold — drop it so Count can reach 0
@@ -947,10 +994,11 @@ public partial class BlockEntitySawhorse
     /// player currently manning a side (so a two-side co-op strip wears BOTH players' tools), resolving the hands the
     /// same way the gate does: main = active hotbar, off = left hand (the T01.01 spike). Wears exactly the tools that
     /// make up the player's tier — the tier-2 axe+hammer wears BOTH the main-hand axe AND the offhand hammer; the
-    /// single-tool tiers (the tier-1 knife and the tier-3 bark spud) wear only the main hand. The
-    /// <see cref="BarkToolIsEffective"/> re-check skips a debarker who switched to a non-tool mid-hold (mirrors the
-    /// saw's guard) and an offline player; the engine removes a tool whose durability hits zero. No-ops on the 0
-    /// config. Reads <see cref="barkSides"/>, so call it BEFORE <see cref="ResetDebarkState"/>. Server-side, master-only.
+    /// single-tool tiers (the tier-1 knife and the tier-3 bark spud) wear only the main hand. A debarker no longer in
+    /// the world (<see cref="PlayerPresence.IsInWorld"/>) is skipped, and the <see cref="BarkToolIsEffective"/> re-check
+    /// skips one who switched to a non-tool mid-hold (mirrors the saw's guard); the engine removes a tool whose
+    /// durability hits zero. No-ops on the 0 config. Reads <see cref="barkSides"/>, so call it BEFORE
+    /// <see cref="ResetDebarkState"/>. Server-side, master-only.
     /// </summary>
     void DamageActiveDebarkTools()
     {
@@ -959,8 +1007,8 @@ public partial class BlockEntitySawhorse
 
         foreach (SawyerHold held in barkSides.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) continue; // offline
+            IPlayer player = held.Player;
+            if (!PlayerPresence.IsInWorld(Api.World, player)) continue; // left the game: the tools in their pack are not in this strip
 
             ItemSlot? mainSlot = player.InventoryManager.ActiveHotbarSlot;
             ItemSlot? offSlot = player.Entity?.LeftHandItemSlot;
@@ -985,8 +1033,49 @@ public partial class BlockEntitySawhorse
     void DamageDebarkTool(ItemSlot? slot, IPlayer player, int cost)
     {
         if (slot?.Itemstack == null) return;
-        slot.Itemstack.Collectible.DamageItem(Api.World, player.Entity, slot, cost);
-        slot.MarkDirty();
+        AssetLocation tool = slot.Itemstack.Collectible.Code; // read first: a behaviour may swap the stack before it throws
+
+        // ModDbFeedbackPlan T05.02: DamageItem runs code IW does not own, every collectible behaviour and Harmony patch on
+        // the tool (Toolsmith takes over the wear of a tinkered bark spud). The wear runs inside CompleteDebark after
+        // AdvanceDebark has counted the strip stage, so a throw that got out skipped the bark, the bare log and the reset
+        // for good: no later advance calls CompleteDebark again, the log stayed barked with its strip at 100%, Ctrl+RMB or
+        // breaking the sawhorse destroyed it (LogRecoverable is false), and a dedicated server kicked whoever's stroke
+        // finished the strip. Caught per tool, so a partner's tools and the tier-2 hammer still wear when one tool throws
+        // on every strip.
+        try
+        {
+            slot.Itemstack.Collectible.DamageItem(Api.World, player.Entity, slot, cost);
+        }
+        catch (System.Exception e)
+        {
+            LogDebarkWearThrowOnce(tool, e);
+        }
+        // After a throw too: the behaviour may have changed the slot, and DamageItem's own MarkDirty never ran. Its own
+        // try (ModDbFeedbackPlan T05.04): a SlotModified listener or the tool's OnModifiedInInventorySlot that throws
+        // on every MarkDirty would otherwise get out here, before CompleteDebark retires the log.
+        try
+        {
+            slot.MarkDirty();
+        }
+        catch (System.Exception e)
+        {
+            LogDebarkWearThrowOnce(tool, e);
+        }
+    }
+
+    // Transient: one report per loaded sawhorse (ModDbFeedbackPlan T05.02). Its own flag, not the rip's
+    // stageThrowLogged, so a throw from the saw does not hide a later one from the debarking tools.
+    bool debarkWearThrowLogged;
+
+    /// <summary>Report a debarking tool whose wear threw (<see cref="DamageDebarkTool"/> contains it and the strip
+    /// finishes), once per sawhorse, with the mod prefix the engine's own catch would not add. The strip twin of
+    /// <see cref="LogStageThrowOnce"/>. Server-side.</summary>
+    void LogDebarkWearThrowOnce(AssetLocation tool, System.Exception e)
+    {
+        if (debarkWearThrowLogged) return;
+        debarkWearThrowLogged = true;
+        Api.Logger.Error("[immersivewoodworking] Sawhorse at {0}: wearing {1} threw. The strip still finishes; further throws on this sawhorse are not logged.", Pos, tool);
+        Api.Logger.Error(e);
     }
 
     /// <summary>Clear the per-log strip state (progress, the fired-stage counter, any in-progress co-op holds) — the

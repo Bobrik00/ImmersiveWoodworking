@@ -14,6 +14,27 @@ How to write an entry — short, direct, honest. No fluff, no selling:
                 sawmill. Configurable (LogRecoverProgressFraction, 0 = ..., 1 = ...)."
     Right:      "Logs can now be recovered from a station below a certain processing point."
 
+## 1.4.0
+- Added the automated debarker, a mechanically-powered machine that strips bark from logs hands-off. Feed it by hand or from a hopper or chute above the log; it gives the same bark as a copper bark spud on the sawhorses.
+- The debarker has its own handbook page, interaction hints and a status readout when you look at it, and the woodworking overview and the bark pages now mention it.
+- Server owners can switch the debarker off in the config, like the sawmill and the chopper.
+- The frames of the automated sawmill, chopper and debarker now carry an arrow that marks where a hopper feeds them.
+- A torque, load or wear setting of the sawmill or the chopper that is not a number now falls back to its default, with a warning in the server log.
+- Added compatibility with String Sense: ordinary bark and bast now make its bark cord. With String Sense installed, bast no longer makes rope directly and goes through the cord like String Sense's own fibres.
+- Added compatibility with Ancient Tools: its oak and acacia bark now makes tannin in the barrel, its birch bark goes into the tar pot, and all of it except oak and acacia makes compost in a barrel. Its adze works alongside the sawhorses, and logs stripped with it go to the stations like any other.
+- Added compatibility with Vigor: chopping on the chopping block and sawing or debarking on the sawhorses now cost stamina, and an exhausted player has to rest before working again. Server owners can turn this off or change the costs in the config.
+- Log sections, such as the redwood quarter log, now split into two half-logs on the chopping block, like a whole log, instead of going straight to firewood. On the chopping block and the chopper they now look like a round log.
+- Ctrl+right-click with a stick no longer starts a sawhorse, so other mods can use that gesture.
+- With VSRoofing, a stick now raises the roof frame for every off-hand material VSRoofing accepts, including the ones it adds for other mods, instead of starting a sawhorse.
+- With VS Siding, a stick with a saw or a stone in the off hand now places the wall frame without starting a sawhorse under it.
+- Starting a sawhorse with a stick no longer also fires another mod's action on the same click.
+- Alder from Vara's Alders can now give tanning bark when debarked on the sawhorses.
+- Twelve trees from Biodiversity: Trees, among them beech, eucalyptus, red cedar and yew, can now give tanning bark, bast or medicinal bark on the sawhorses. The same trees from Wildcraft Trees get it too.
+- Tannin from narrow alder logs of Biodiversity: Trees is cut back the same way as from Wildcraft Trees.
+- With A Culinary Artillery, its tannin recipes from dry oak bark are removed together with the vanilla debarking recipe, since that bark could no longer be obtained.
+- Birch tar now cooks into resin in a dirty clay pot too. Cooking resin now leaves a clean pot dirty.
+- An unusual recipe from another mod no longer stops the vanilla firewood and plank recipes from being replaced.
+
 ## 1.3.14
 - No more "Could not parse" warnings for other mods' recipe files that the game itself reads fine (seen with Tankards, Goblets and More). Such files are now handled like any other.
 - Half-log slabs and logs on the stations now take their textures from the log itself when a tree mod keeps them in an unusual place, instead of showing aged wood or a blank texture.

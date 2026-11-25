@@ -14,9 +14,9 @@ namespace ImmersiveWoodworking;
 /// <para>THE RULE the pages are written to: prose names no NUMBER that lives in the config, and asserts no FACT the
 /// config can switch off. Numbers are gone from the text outright — "the reducer turns shaft rotation into one slow,
 /// heavy blow" instead of a strike count that a reducer ratio or <c>ChopperSpeed</c> would falsify. Facts that a
-/// flag really does remove (the half-log stage, firewood → sticks, an ordinary saw on the trestles, the knife strip)
-/// cannot be written neutrally without losing the point, so they live in SEPARATE sentence keys that this file drops
-/// into numbered placeholders of the page's base text. One base key per page keeps the paragraph order authored by the
+/// flag really does remove (the half-log stage, firewood → sticks, an ordinary saw on the trestles, the knife strip,
+/// the debarker's bark, the debarker itself on the bark pages) cannot be written neutrally without losing the point,
+/// so they live in SEPARATE sentence keys that this file drops into numbered placeholders of the page's base text. One base key per page keeps the paragraph order authored by the
 /// translator rather than by the code, and a flag turning off substitutes an EMPTY string, which
 /// <see cref="Tidy"/> then closes up.</para>
 ///
@@ -40,16 +40,25 @@ namespace ImmersiveWoodworking;
 public partial class WoodworkingHandbookInfo
 {
     // ── The composed pages ──────────────────────────────────────────────────────────────────────────────
-    // Matched by the TITLE key their blocktype JSON declares (attributes.handbook.extraSections), which is stable and
+    // Matched by the TITLE key their JSON declares (handbook.extraSections; per type for the bark), which is stable and
     // unique per page; the base TEXT key is the one that JSON also declares, and stays the fallback for anything that
     // reads the asset without us (a JSON dump, a wiki scraper).
     const string ChoppingBlockTitle = Domain + ":choppingblock-handbook-title";
     const string ChoppingBlockText = Domain + ":choppingblock-handbook-text";
     const string SawhorseTitle = Domain + ":sawhorse-handbook-title";
     const string SawhorseText = Domain + ":sawhorse-handbook-text";
+    const string DebarkerTitle = Domain + ":debarker-handbook-title";
+    const string DebarkerText = Domain + ":debarker-handbook-text";
+
+    // The two bark pages whose first sentence names the trestles as where the bark comes off. While the debarker is on
+    // they name it as well (AutoDebarkerPlan T08.02); the other kinds name no station at all.
+    const string BarkGenericTitle = Domain + ":bark-generic-handbook-title";
+    const string BarkGenericText = Domain + ":bark-generic-handbook-text";
+    const string BarkTanGreenTitle = Domain + ":bark-tan-green-handbook-title";
+    const string BarkTanGreenText = Domain + ":bark-tan-green-handbook-text";
 
     // The Woodworking overview, the page every other page links to as handbook://craftinginfo-woodworking. It names
-    // the bark chain and both machines, each in a paragraph of its own that the config can switch off.
+    // the bark chain and the three machines, each in a paragraph of its own that the config can switch off.
     const string GuidePageCode = "craftinginfo-woodworking";
     const string GuideTitle = Domain + ":craftinginfo-woodworking-title";
     const string GuideText = Domain + ":craftinginfo-woodworking-text";
@@ -87,6 +96,10 @@ public partial class WoodworkingHandbookInfo
             config.AllowKnifeDebark ? Lang.Get(Domain + ":sawhorse-handbook-frag-knife") : "",
             Lang.Get(DebarkedDropFragment(config.DropsAtPlayer))));
 
+        string debarker = DebarkerPageText(config.EnableBarkChain);
+        string barkGeneric = BarkPageText(BarkGenericText, config.EnableDebarker);
+        string barkTanGreen = BarkPageText(BarkTanGreenText, config.EnableDebarker);
+
         int composed = 0;
         foreach (CollectibleObject obj in capi.World.Collectibles)
         {
@@ -101,11 +114,15 @@ public partial class WoodworkingHandbookInfo
 
             if (WriteComposed(bh, ChoppingBlockTitle, choppingBlock)) composed++;
             if (WriteComposed(bh, SawhorseTitle, sawhorse)) composed++;
+            if (WriteComposed(bh, DebarkerTitle, debarker)) composed++;
+            if (WriteComposed(bh, BarkGenericTitle, barkGeneric)) composed++;
+            if (WriteComposed(bh, BarkTanGreenTitle, barkTanGreen)) composed++;
         }
 
         capi.Logger.Notification(
-            "[immersivewoodworking] Composed {0} handbook section(s) from the live config (half-log stage={1}, firewood to sticks={2}, ordinary saw={3}, knife strip={4}, drops at player={5}).",
-            composed, config.HalfLogChopStage, config.AllowFirewoodToSticks, config.AllowVanillaSaw, config.AllowKnifeDebark, config.DropsAtPlayer);
+            "[immersivewoodworking] Composed {0} handbook section(s) from the live config (half-log stage={1}, firewood to sticks={2}, ordinary saw={3}, knife strip={4}, drops at player={5}, bark chain={6}, debarker={7}).",
+            composed, config.HalfLogChopStage, config.AllowFirewoodToSticks, config.AllowVanillaSaw, config.AllowKnifeDebark, config.DropsAtPlayer,
+            config.EnableBarkChain, config.EnableDebarker);
     }
 
     /// <summary>Add the Woodworking overview to the handbook as it builds its text pages. The page used to be a
@@ -128,14 +145,26 @@ public partial class WoodworkingHandbookInfo
     void ComposeGuidePage(ImmersiveWoodworkingConfig config)
     {
         if (guidePage == null) return;
-        guidePage.Text = GuidePageText(config.EnableBarkChain, config.EnableSawmill, config.EnableChopper);
+        guidePage.Text = GuidePageText(config.EnableBarkChain, config.EnableSawmill, config.EnableChopper, config.EnableDebarker);
         guidePage.Init(capi);
     }
 
-    static string GuidePageText(bool bark, bool sawmill, bool chopper) => Tidy(Lang.Get(GuideText,
+    static string GuidePageText(bool bark, bool sawmill, bool chopper, bool debarker) => Tidy(Lang.Get(GuideText,
         bark ? Lang.Get(Domain + ":craftinginfo-woodworking-frag-bark") : "",
         sawmill ? Lang.Get(Domain + ":craftinginfo-woodworking-frag-sawmill") : "",
-        chopper ? Lang.Get(Domain + ":craftinginfo-woodworking-frag-chopper") : ""));
+        chopper ? Lang.Get(Domain + ":craftinginfo-woodworking-frag-chopper") : "",
+        debarker ? Lang.Get(Domain + ":craftinginfo-woodworking-frag-debarker") : ""));
+
+    /// <summary>The debarker's page. The sentence on where the bark falls goes with the bark chain: with it off the
+    /// machine gives the debarked log alone, as the trestles do (AutoDebarkerPlan, decision В4).</summary>
+    static string DebarkerPageText(bool bark) => Tidy(Lang.Get(DebarkerText,
+        bark ? Lang.Get(Domain + ":debarker-handbook-frag-bark") : ""));
+
+    /// <summary>A bark page that names the trestles as the bark's source, with the sentence naming the debarker while
+    /// <see cref="ImmersiveWoodworkingConfig.EnableDebarker"/> is on. With it off the machine's page is hidden, and the
+    /// sentence would point at nothing.</summary>
+    static string BarkPageText(string textKey, bool debarker) => Tidy(Lang.Get(textKey,
+        debarker ? Lang.Get(Domain + ":bark-handbook-frag-debarker") : ""));
 
     /// <summary>Which sentence says what a log splits into on the block, and where it lands. The half-log stage is not
     /// optional prose but a fork: with it off a whole log goes straight to firewood, so the page needs the OTHER sentence
@@ -448,8 +477,8 @@ public partial class WoodworkingHandbookInfo
     /// things composition can silently get wrong: a placeholder left unfilled (a page whose text still shows
     /// <c>{0}</c>), a fragment key that does not exist (Lang answers a miss with the key itself, which would render as
     /// <c>immersivewoodworking:...</c> on the page), and a seam left by an empty substitution (a doubled space).
-    /// Cheap enough to run flat out: eight combinations for the block, sixteen for the trestles, eight for the
-    /// overview, all string work.
+    /// Cheap enough to run flat out: eight combinations for the block, sixteen for the trestles, sixteen for the
+    /// overview, two each for the debarker and the two bark pages that name it, all string work.
     ///
     /// <para>It checks the COMPOSITION, not the wording — no oracle here can know whether a sentence is true, which is
     /// what the live session is for. Stripped from a shipped build.</para></summary>
@@ -503,8 +532,16 @@ public partial class WoodworkingHandbookInfo
         foreach (bool bark in new[] { true, false })
         foreach (bool sawmill in new[] { true, false })
         foreach (bool chopper in new[] { true, false })
+        foreach (bool debarker in new[] { true, false })
         {
-            Check($"overview bark={bark} sawmill={sawmill} chopper={chopper}", GuidePageText(bark, sawmill, chopper));
+            Check($"overview bark={bark} sawmill={sawmill} chopper={chopper} debarker={debarker}", GuidePageText(bark, sawmill, chopper, debarker));
+        }
+
+        foreach (bool on in new[] { true, false })
+        {
+            Check($"debarker bark={on}", DebarkerPageText(on));
+            Check($"bark-generic debarker={on}", BarkPageText(BarkGenericText, on));
+            Check($"bark-tan-green debarker={on}", BarkPageText(BarkTanGreenText, on));
         }
 
         if (bad == 0)

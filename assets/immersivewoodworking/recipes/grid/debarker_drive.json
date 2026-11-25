@@ -1,0 +1,27 @@
+{
+	// Grid recipe for the debarker's DRIVE (gearbox) `debarkerdrive` (AutoDebarkerPlan T02.03, draft from the T02.01
+	// spec): the gear train from the input spindle to the feed rollers. A plank gear case shaped with a chisel, banded
+	// with a metal sheet and nails, put together with a hammer:
+	//   P C P     P = plank (game:plank-* item, name:"wood")   C = chisel (tag tool-chisel, returned untouched)
+	//   P S P     S = metal plate (game:metalplate-*)
+	//   N H _     N = nails (game:metalnailsandstrips-*)      H = hammer (tag tool-hammer, returned untouched)
+	// The shape is distinct from chopper_drive "HPP,CPP,SN_" and every vanilla recipe (checked offline in T02.03).
+	// game:-prefix on vanilla ingredients (memory vs-mod-asset-path-domain); hammer and chisel by TAG with no code, so
+	// any mod's hammer or chisel fits (memory vs-recipe-ingredient-code-vs-tags). The `name` on the planks labels them
+	// as one material and forces nothing on this code-registered path (docs/recipe-conventions.md, exception 3).
+	// SHAPE and QUANTITIES are a BALANCE DRAFT (author tunes in game).
+	// enabled:false -> TEMPLATE, the RecipeLoader skips it. RegisterDebarkerRecipes re-registers it once per wood domain
+	// that ships planks, re-pointing the plank slot to {domain}:plank-*; the game-domain recipe comes from this template.
+	enabled: false,
+	ingredientPattern: "PCP,PSP,NH_",
+	ingredients: {
+		"P": { type: "item", code: "game:plank-*", name: "wood" },
+		"C": { type: "item", tags: ["tool-chisel"], isTool: true, toolDurabilityCost: 0 },
+		"S": { type: "item", code: "game:metalplate-*" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*" },
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "item", code: "debarkerdrive", quantity: 1 }
+}

@@ -54,6 +54,15 @@ A mechanically-powered chopper that splits firewood hands-off, the powered count
 - Feed a **log or firewood** in by hand or through a chute: a log goes straight to **firewood** and firewood to **sticks**, ejected in front.
 - The **metal of the head** sets its durability, and heads come in every metal tier.
 
+### ⚙️ The Automated Debarker
+A mechanically-powered debarker that strips bark from logs hands-off, the powered counterpart to the bark spud on the sawhorses. Assemble it from a frame plus its parts, then drive it with an axle.
+
+- Place the **debarker frame**, then install its parts with right-click in any order (a drive, a disc and a feed mechanism), then fit a **knife set** onto the disc. The frame goes down with its front toward you.
+- Forge each knife on an anvil from an ingot, then join four knives of the same metal with a hammer in the crafting grid into a knife set.
+- Drive it with an **axle from a windmill or water wheel**, and it runs on its own.
+- Feed it any **log** the sawhorses can strip, by hand or through a hopper or chute set on top, right above where the log lies. The **debarked log** is ejected from the end on your left, and the **bark** drops out at the front, from under the disc: as much bark, and the same kinds, as a copper bark spud strips on the sawhorses.
+- The **metal of the knives** sets their durability, and knife sets come in every metal tier.
+
 ---
 
 ## Why use it
@@ -91,9 +100,9 @@ The config lives in a folder of thematic files (`ModConfig/ImmersiveWoodworking/
 
 By default the mod **disables the vanilla grid recipes** for firewood, planks and beams, so these can only be made at the new stations. Set either flag to `false` to keep hand-crafting alongside them. Recycling recipes (plank block → planks) and other saw recipes (cabinet, crate, table…) are never touched. Recipes a class mod locks behind a trait (Sacred Classes' Carpenter, for example) are kept by default, because they are that class's reward; `KeepTraitRecipes` set to `false` strips them too. With **Seraph Leveling ReClassed** installed, boards ripped on the sawhorses count toward its Carpenter trait just like grid-crafted ones (`SeraphLevelingIntegration`, on by default).
 
-The **automated sawmill and chopper** can be tuned to yield different amounts than the hand stations they mirror (the `Chopper*` and `Sawmill*` overrides in `drops.json`). Out of the box each inherits the matching hand-station value, so the powered stations drop exactly what the hand stations do until you set an override.
+The **automated sawmill and chopper** can be tuned to yield different amounts than the hand stations they mirror (the `Chopper*` and `Sawmill*` overrides in `drops.json`). Out of the box each inherits the matching hand-station value, so the powered stations drop exactly what the hand stations do until you set an override. The automated debarker has no such overrides: its bark follows the hand-debarking settings in `bark.json`.
 
-A server can switch off the automated sawmill, the automated chopper or the whole bark chain (`EnableSawmill`, `EnableChopper`, `EnableBarkChain` in `general.json`). A switched-off part can no longer be made and is hidden from the creative inventory and the handbook, while machines already built keep working. With the bark chain off a stripped log gives no bark, and the vanilla log-to-tannin barrel recipes come back.
+A server can switch off the automated sawmill, the automated chopper, the automated debarker or the whole bark chain (`EnableSawmill`, `EnableChopper`, `EnableDebarker`, `EnableBarkChain` in `general.json`). A switched-off part can no longer be made and is hidden from the creative inventory and the handbook, while machines already built keep working. With the bark chain off a stripped log gives no bark, and the vanilla log-to-tannin barrel recipes come back.
 
 ---
 

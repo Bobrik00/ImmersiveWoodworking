@@ -1,7 +1,8 @@
 [
 	// TAR BOILED DOWN INTO RESIN (1.3.12, author request 2026-10-05). Birch tar cooked alone in a clay pot on a firepit
-	// comes out as vanilla game:resin, one for one. Straight clone of vanilla rendered fat (survival/recipes/cooking/oil.json,
-	// "rendered fat1..4"): a solid in, a solid `cooksInto` out, one twin per number of filled slots.
+	// comes out as vanilla game:resin, one for one. Clone of vanilla rendered fat except isFood (below)
+	// (survival/recipes/cooking/oil.json, "rendered fat1..4"): a solid in, a solid `cooksInto` out, one twin per number of
+	// filled slots.
 	//
 	// WHY A CONVERSION ON TOP OF THE `pitch` TAG (patches/tar_as_resin.json): the tag covers every vanilla grid recipe
 	// that takes resin, but some consumers match game:resin by CODE and can never see the tag:
@@ -23,8 +24,13 @@
 	// equal counts (6/6/6/5 shows "The item ratios are wrong"), the same as vanilla fat. The handbook draws each twin as
 	// its own row on the resin page, like the four rows on the rendered fat page.
 	//
-	// isFood keeps the pot clean (BlockCookingContainer.DoSmelt swaps a !IsFood cooksInto pot to dirtiedBlockCode),
-	// mirroring rendered fat. Its one side effect: the recipe will not cook in an already-dirty pot.
+	// isFood FALSE, AS VANILLA GLUE (ModDbFeedbackPlan T01.01, 1.4.0): a dirty pot skips every isFood recipe.
+	// BlockCookingContainer.GetMatchingCookingRecipe (BlockCookingContainer.cs:301) does
+	// `if (isDirtyPot && (recipe.CooksInto == null || recipe.IsFood)) continue;`. Up to 1.3.14 this file copied
+	// `isFood: true` from rendered fat to keep the pot clean, and tar would not cook in a pot dirtied by glue or in the
+	// dirty receiver a tar pot hands back when opened (BehaviorTarPotOpen): the firepit said "No matching recipe found".
+	// The price of false: DoSmelt swaps the pot to dirtiedBlockCode after resin, as after glue or linseed oil.
+	//
 	// Cook time: barktar has combustibleProps without meltingDuration and no meltingPoint, so the pot cooks it at 100 C
 	// in the minimum 40. The resin lands in the firepit's first cooking slot (BlockCookingContainer.DoSmelt writes the
 	// cooksInto stack to cookingSlotsProvider.Slots[0]), where the player takes it by hand.
@@ -33,7 +39,7 @@
 	// Switched off with the bark chain (FeatureGate.BarkAssets).
 	{
 		"code": "resin-tar1",
-		"isFood": true,
+		"isFood": false,
 		"perishableProps": {
 			"type": "None",
 			"freshHours": { "avg": 48 },
@@ -54,7 +60,7 @@
 	},
 	{
 		"code": "resin-tar2",
-		"isFood": true,
+		"isFood": false,
 		"perishableProps": {
 			"type": "None",
 			"freshHours": { "avg": 48 },
@@ -75,7 +81,7 @@
 	},
 	{
 		"code": "resin-tar3",
-		"isFood": true,
+		"isFood": false,
 		"perishableProps": {
 			"type": "None",
 			"freshHours": { "avg": 48 },
@@ -96,7 +102,7 @@
 	},
 	{
 		"code": "resin-tar4",
-		"isFood": true,
+		"isFood": false,
 		"perishableProps": {
 			"type": "None",
 			"freshHours": { "avg": 48 },

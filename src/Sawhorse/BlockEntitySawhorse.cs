@@ -102,12 +102,20 @@ public partial class BlockEntitySawhorse : BlockEntity
     sealed class SawyerHold
     {
         public readonly string Uid;
+        // The player object of the CONNECTION that claimed this end or side (AuditFix3Plan T01.01). Every walk over the
+        // map asks PlayerPresence.IsInWorld about THIS object instead of re-resolving Uid: the server's PlayerByUid
+        // keeps handing back a player who left, and a player who reconnects gets a new server player object while this
+        // one stays Offline. So a hold dies with the connection that made it and stays dead after its owner comes back:
+        // the end is free, and nothing is fed from that pack, worn on that saw or credited to that player through it.
+        // Ask the predicate BEFORE touching anything on Player: a stale object still reaches the real backpack and the
+        // live entity of a player who came back, because both connections share the same world data.
+        public readonly IPlayer Player;
         public float LastSecondsUsed;
         // Wall-clock stamp of this hold's last OBSERVER effect broadcast (AuditFixPlan T06.01, F-L4-13). Per-hold,
         // not per-station, so two opposite-end sawyers each throw their own dust stream instead of racing for one
         // slot. Server-side only (the client never broadcasts) and transient like the rest of the record.
         public long LastFxMs;
-        public SawyerHold(string uid, float lastSecondsUsed) { Uid = uid; LastSecondsUsed = lastSecondsUsed; }
+        public SawyerHold(IPlayer player, float lastSecondsUsed) { Player = player; Uid = player.PlayerUID; LastSecondsUsed = lastSecondsUsed; }
     }
 
     // ───────────────────────── Crowded end / side: the refusal seam (AuditFixPlan T06.04, F-L4-06) ─────────────────
@@ -141,6 +149,10 @@ public partial class BlockEntitySawhorse : BlockEntity
     /// <summary>The strip's counterpart to <see cref="RipRefusedPacketId"/> — "this side is manned by another
     /// debarker" (<see cref="RefuseStripHold"/>).</summary>
     const int StripRefusedPacketId = 2212;
+
+    /// <summary>"You are exhausted, your rip or strip was refused or stopped" — server to the exhausted worker
+    /// (ModDbFeedbackPlan T06.03, Vigor), handled with the two refusals above.</summary>
+    const int TiredPacketId = 2213;
 
     // CLIENT-ONLY, transient: "the server refused the hold I am optimistically running". Set by the packet and read by
     // BlockSawhorse.OnBlockInteractStep, which from then on keeps the hold ALIVE but silent for the rest of the press
@@ -190,6 +202,21 @@ public partial class BlockEntitySawhorse : BlockEntity
     /// <summary>Tell <paramref name="byPlayer"/> that another debarker already mans the side they stand at.</summary>
     void RefuseStripHold(IPlayer byPlayer) => SendHoldRefusal(byPlayer, StripRefusedPacketId);
 
+    /// <summary>Stop an exhausted worker (ModDbFeedbackPlan T06.03, Vigor): true when Vigor holds
+    /// <paramref name="byPlayer"/> exhausted, after telling their client to drop its optimistic hold. Always false
+    /// without Vigor. The caller frees the end or side. Server-side, like everything that reads Vigor.</summary>
+    bool RefuseIfTooTired(IPlayer byPlayer)
+    {
+        if (!(modSystem ??= Api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>()).TooTiredToWork(byPlayer)) return false;
+        SendHoldRefusal(byPlayer, TiredPacketId);
+        return true;
+    }
+
+    /// <summary>Charge <paramref name="byPlayer"/> for <paramref name="seconds"/> of hand work at
+    /// <paramref name="perSecond"/> stamina (ModDbFeedbackPlan T06.03, Vigor). A no-op without Vigor.</summary>
+    void SpendStamina(string actionId, float seconds, float perSecond, IPlayer byPlayer)
+        => (modSystem ??= Api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>()).SpendStamina(actionId, seconds * perSecond, byPlayer);
+
     /// <summary>Send one refusal packet to the refused player alone. Server-side; a no-op anywhere else, so the call
     /// sites need no side gate of their own (they already run under one).</summary>
     void SendHoldRefusal(IPlayer byPlayer, int packetId)
@@ -210,6 +237,20 @@ public partial class BlockEntitySawhorse : BlockEntity
     /// round trip is a few frames of animation and a pinch of dust.</summary>
     public override void OnReceivedServerPacket(int packetid, byte[] data)
     {
+        if (packetid == TiredPacketId)
+        {
+            IPlayer? me = capi?.World.Player;
+            if (me == null) return;
+
+            // Either hold may be the one stopped; both flags gag the press the same way, and StopDebarkSound is a no-op
+            // for a sawyer.
+            ripRefusedLocally = true;
+            StopDebarkSound();
+            BlockSawhorse.CancelWorkAnim(me);
+            capi!.TriggerIngameError(this, "iwexhausted", Lang.Get("immersivewoodworking:ingameerror-vigor-exhausted"));
+            return;
+        }
+
         if (packetid == RipRefusedPacketId || packetid == StripRefusedPacketId)
         {
             IPlayer? me = capi?.World.Player;
@@ -304,7 +345,7 @@ public partial class BlockEntitySawhorse : BlockEntity
     // visual. Reset with the log alongside the saw fields (ResetSawState → ResetDebarkState). barkSides is the
     // TRANSIENT co-op map (like sawEnds), NOT serialized: at most one debarker PER SIDE, keyed by the side sign
     // (PlayerSideSign, the sign of the across-the-log offset), so two opposite sides strip at 2× and a second debarker
-    // crowding a manned side is refused. Reuses SawyerHold (a uid + last-elapsed record). Master-only (every debark
+    // crowding a manned side is refused. Reuses SawyerHold (a holder + last-elapsed record). Master-only (every debark
     // gesture routes through GetMaster); a slave's map stays empty.
     float barkProgress;
     int barkStagesFired;
@@ -336,7 +377,7 @@ public partial class BlockEntitySawhorse : BlockEntity
     // How long a restock breather may go untouched before it counts as ABANDONED (AuditFixPlan T03.04, F-L5-04). The
     // pause has always been kept alive by the holder's own ticks and torn down by their release — but the engine owes
     // us no Stop/Cancel when a hold ends by DISCONNECT, so the last sawyer dropping mid-breather left a ghost end hold
-    // (AbandonPendingRestockIfUnmanned then never sees Count 0) and a pause pinned open with its ready-time long past.
+    // (no release ever reaches AbandonPendingRestockIfUnmanned) and a pause pinned open with its ready-time long past.
     // The next player to right-click that empty pair with a saw in hand fell straight into the still-pending branch and
     // had a log yanked out of THEIR pack. So ownership is held by a freshness STAMP rather than by an exit event —
     // exactly the recipe BlockEntityChoppingBlock.ChopHoldOwnerTimeoutMs uses for the same reason, and the same 2 s: a
@@ -720,15 +761,18 @@ public partial class BlockEntitySawhorse : BlockEntity
             // counterpart of the rip line above. Shown only once stripping has actually begun (an untouched log reads
             // as just its name) AND while the strip is genuinely unfinished: the barkStagesFired < BarkStageFractions
             // .Length clause mirrors ShowDebarkModel's guard (BlockEntitySawhorse.Render.cs) so a STUCK log reads the
-            // same on both surfaces. A modded wood with no debarkedlog variant leaves CompleteDebark unable to
-            // transform (T01.07): it warns and returns WITHOUT ResetDebarkState, pinning barkProgress at DebarkSeconds
-            // and barkStagesFired at max. The render then keeps showing the still-barked model; without this clause the
-            // tooltip would contradict it with a permanent, misleading "100%". With it, a stuck log reads as just its
-            // (still-barked) name, exactly as the render shows. The mode lock (T05.03) makes sawing and debarking
-            // mutually exclusive on one log, so at most ONE of these two lines is ever non-zero. No extra sync is
-            // needed: barkProgress is serialized (To/FromTreeAttributes) and AdvanceDebark MarkDirty's on every
-            // visual-bucket change exactly like sawProgress, so this client-side hover read sees it climb. DebarkSeconds
-            // is live config; guard against a degenerate 0 so we never divide by it.
+            // same on both surfaces. A strip whose stage counted but whose CompleteDebark never finished pins
+            // barkProgress at DebarkSeconds and barkStagesFired at max: CompleteDebark's defensive species guard (the
+            // start gate already requires the species), or a log a throw left that way in 1.3.14 or older and a save
+            // still carries (those throws are contained since ModDbFeedbackPlan T05.02 and T05.04; a log already stuck
+            // stays stuck). A modded wood with no debarkedlog variant (T01.07) is not such a case: CompleteDebark warns
+            // and calls ResetDebarkState, so that log reads as untouched. The render keeps showing a stuck log as still
+            // barked; without this clause the tooltip would contradict it with a permanent, misleading "100%". With it,
+            // a stuck log reads as just its (still-barked) name, exactly as the render shows. The mode lock (T05.03)
+            // makes sawing and debarking mutually exclusive on one log, so at most ONE of these two lines is ever
+            // non-zero. No extra sync is needed: barkProgress is serialized (To/FromTreeAttributes) and AdvanceDebark
+            // MarkDirty's on every visual-bucket change exactly like sawProgress, so this client-side hover read sees
+            // it climb. DebarkSeconds is live config; guard against a degenerate 0 so we never divide by it.
             float barkSeconds = DebarkSeconds;
             if (master.barkProgress > 0f && barkSeconds > 0f && master.barkStagesFired < BarkStageFractions.Length)
             {

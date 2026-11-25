@@ -1,0 +1,49 @@
+{
+	code: "debarkerfeed",
+	// The debarker's FEED (AutoDebarkerPlan T02.01): the three rollers that turn the log, the worm wheel on the third
+	// roller's shaft and the pedal-driven lift (pedal, rod, lever, camshaft, cam, lift frame). A plain Item on purpose:
+	// no `class`/`tool`/`behaviors`. RMB-installed into the placed `debarker-frame` in T03.06, in any order with the
+	// drive and the disc.
+	// Held mesh = the feed's elements of the machine model, copied into the Blender collection debarking-PreviewMeshes
+	// (art/shapes/LogForChoppingFirewood.blend) and piled up as loose parts: the three rollers with the lift frame on
+	// them, the camshaft and the pedal linkage beside them. Raw export in art/shapes/debarker/feed.json, this copy has
+	// its textures re-pinned to game: paths.
+	shape: { base: "immersivewoodworking:item/debarker/feed" },
+	// Two-handed carry like every chopper part (decision T02.01, В9).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// "game:" REQUIRED (memory vs-mod-asset-path-domain). Keys match the shape, values match the machine's monolith.
+	textures: {
+		"oak_debarked": { base: "game:block/wood/debarked/oak" },
+		"metal":        { base: "game:block/metal/plate/iron" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine, shared by all installed parts.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:debarkerpart-handbook-title", text: "immersivewoodworking:debarkerpart-handbook-text" }
+			]
+		}
+	},
+	// Transforms calibrated in game with .tfedit at T03.05 (2026-11-21).
+	// `rotate: false` stops the icon from spinning, and every vector is written with all three components: a partial
+	// vector zeroes the rest (memory vs-partial-guitransform-no-merge).
+	tpHandTransform: {
+		translation: { x: -1.4, y: -0.5, z: -0.4 },
+		rotation: { x: 8, y: 11, z: -87 },
+		scale: 0.57
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.275, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 3.38
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 3, y: 6, z: 0 },
+		rotation: { x: -31, y: -118, z: 20 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.22
+	}
+}

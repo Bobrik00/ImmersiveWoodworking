@@ -9,9 +9,10 @@ namespace ImmersiveWoodworking;
 /// plank/supportbeam batch. T06.01 is the heartbeat itself — <see cref="OnSawmillTick"/> integrates the effective
 /// rip speed (E04) into <c>sawmillProgress</c> while the start gates hold, freezing (never resetting) the moment the
 /// drive stalls or the log is gone, so a half-sawn log resumes from the same fraction once the gates clear. Pass
-/// completion (T06.02 — <see cref="CompletePass"/>) computes the whole-log batch, EJECTS it forward out of the machine
-/// (T06.03's <see cref="EjectBatch"/>, pulverizer-style — the product is never stored in an output inventory), then
-/// consumes the log and resets the progress; folding the start conditions into one <c>CanSaw()</c> predicate is T06.05.
+/// completion (T06.02 — <see cref="CompletePass"/>) computes the whole-log batch, consumes the log and resets the
+/// progress, then EJECTS the batch forward out of the machine (T06.03's <see cref="EjectBatch"/>, pulverizer-style — the
+/// product is never stored in an output inventory; consume-first since ModDbFeedbackPlan T05.01); folding the start
+/// conditions into one <c>CanSaw()</c> predicate is T06.05.
 ///
 /// Modelled on vanilla <c>BEHelveHammer.onEvery25ms</c>: a 25 ms server tick that accumulates an instantaneous,
 /// speed-scaled increment and fires a hook once it crosses its threshold. The progress is the FEED STROKE — a 0..1
@@ -186,7 +187,7 @@ public partial class BlockEntitySawmill
 
         if (sawmillProgress >= 1f)
         {
-            sawmillProgress = 1f; // clamp to a full stroke; CompletePass resets it to 0 once the batch is ejected
+            sawmillProgress = 1f; // clamp to a full stroke; CompletePass resets it to 0 before it ejects the batch
             MarkDirty(true);      // pass-complete is a visible-state boundary — sync here, not every tick (sawhorse-style economy)
             CompletePass();
         }
@@ -211,9 +212,10 @@ public partial class BlockEntitySawmill
     /// E06/T06.02 — pass-complete hook (the plan's <c>OnPassComplete</c>), invoked from <see cref="OnSawmillTick"/>
     /// once <c>sawmillProgress</c> reaches a full feed stroke. Computes the whole-log batch FROM THE STILL-LOADED input
     /// (<see cref="GetPassBatch"/> reads the input slot, so this runs BEFORE the log is consumed — the sawhorse "compute
-    /// before ConsumeLog" ordering lesson), EJECTS it forward out of the machine (<see cref="EjectBatch"/>, T06.03 —
-    /// pulverizer-style, never buffered in an output slot), then consumes the input log and resets the progress under the
-    /// next one. The eject can't fail, so completion is unconditional (no "overflow → pause"): a full world around the
+    /// before ConsumeLog" ordering lesson), consumes the input log and resets the progress under the next one, and only
+    /// then EJECTS the batch forward out of the machine (<see cref="EjectBatch"/>, T06.03 — pulverizer-style, never
+    /// buffered in an output slot; ModDbFeedbackPlan T05.01 moved the consume ahead of the eject, see the body). The
+    /// eject can't be blocked, so completion is unconditional (no "overflow → pause"): a full world around the
     /// machine just means the planks pile up / despawn on the ground, exactly like the pulverizer's crushed output.
     /// Server-only by its caller (<see cref="OnSawmillTick"/> returns off-server before reaching here).
     /// </summary>
@@ -230,18 +232,55 @@ public partial class BlockEntitySawmill
             return;
         }
 
-        // Eject the whole batch forward, out of the machine (pulverizer-style — never buffered, so completion can't be
-        // blocked by a full output), then consume the input log (sawhorse ConsumeLog analogue) and reset under the next.
-        EjectBatch(batch.Value.product, batch.Value.count);
-        DropSawdust(); // one wearandtear:sawdust per completed log (Wear & Tear compat) — out the same exit cell as the batch
+        // ModDbFeedbackPlan T05.01: reset and consume the input log (sawhorse ConsumeLog analogue) BEFORE anything leaves
+        // the machine. The batch is captured above, and the eject, the sawdust and the kit wear never read the slot. The
+        // eject reaches code IW does not own (every mod's item-spawn hooks), and a throw out of a BE tick leaves the
+        // engine's tick stamp unmoved, so the tick re-runs on every server frame (vs-be-tick-exception-keeps-ticking).
+        // With the log still loaded and the progress at 1, every re-run ejected the batch again. The catches below keep
+        // such a throw inside the tick; this order is what holds even if one gets past them.
+        sawmillProgress = 0f;
         InputSlot.Itemstack = null;
         InputSlot.MarkDirty();
-        sawmillProgress = 0f;
         MarkDirty(true);
 
+        try
+        {
+            // Eject the whole batch forward, out of the machine (pulverizer-style — never buffered, so completion can't
+            // be blocked by a full output).
+            EjectBatch(batch.Value.product, batch.Value.count);
+            DropSawdust(); // one wearandtear:sawdust per completed log (Wear & Tear compat) — out the same exit cell as the batch
+        }
+        catch (Exception e)
+        {
+            LogPassThrowOnce("ejecting the batch", e);
+        }
+
         // One completed log wears the installed blade kit by the config charge (T06.06); may break it, which flips
-        // IsComplete false so the next tick stalls the station until a new kit is installed.
-        DamageBladeKit();
+        // IsComplete false so the next tick stalls the station until a new kit is installed. A try of its own, so a
+        // spawn hook that throws on every pass (say on the sawdust) can't leave the kit unworn for good.
+        try
+        {
+            DamageBladeKit();
+        }
+        catch (Exception e)
+        {
+            LogPassThrowOnce("wearing the blade kit", e);
+        }
+    }
+
+    // Transient: one report per loaded sawmill (ModDbFeedbackPlan T05.01). A foreign spawn hook that throws on every
+    // eject would otherwise print a stack trace per log.
+    bool passThrowLogged;
+
+    /// <summary>Report a pass whose eject or kit wear threw (<see cref="CompletePass"/> has already consumed the log, so
+    /// the machine goes on with the next one), once per sawmill, with the mod prefix the engine's own catch would not
+    /// add. The sawhorse's <c>LogStageThrowOnce</c> twin. Server-side.</summary>
+    void LogPassThrowOnce(string step, Exception e)
+    {
+        if (passThrowLogged) return;
+        passThrowLogged = true;
+        Api.Logger.Error("[immersivewoodworking] Sawmill at {0}: {1} threw. The log is already consumed and the machine goes on; further throws on this sawmill are not logged.", Pos, step);
+        Api.Logger.Error(e);
     }
 
     /// <summary>

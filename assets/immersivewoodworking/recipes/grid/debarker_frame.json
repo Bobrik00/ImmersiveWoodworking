@@ -1,0 +1,32 @@
+{
+	// Grid recipe for the AUTOMATED DEBARKER master frame block `debarker-frame` (AutoDebarkerPlan T02.03, draft from
+	// the T02.01 spec accepted by the author 2026-11-20). The only placed block of the machine; drive, disc, feed and
+	// knives are RMB-installed into it. A stand of support beams over two planks, banded with a metal sheet and nails,
+	// put together with a hammer:
+	//   B N B     B = support beam (game:supportbeam-* block, name:"beam")   N = nails (game:metalnailsandstrips-*)
+	//   P H P     P = plank        (game:plank-* item, name:"wood")          H = hammer (tag tool-hammer, returned untouched)
+	//   B S B     S = metal plate  (game:metalplate-*)
+	// The shape is distinct from chopper_frame "BBB,BPB,SHS", sawmill_frame "HMP,BBB,PMP" and every vanilla recipe
+	// (checked offline in T02.03). Vanilla ingredients MUST be game:-prefixed: an unqualified code in a mod recipe
+	// resolves to this mod's domain (memory vs-mod-asset-path-domain). Output is the canonical "-north" variant;
+	// placement re-orients it to the player's look via HorizontalOrientable.
+	// The `name` keys only label which cells hold one material: this enabled:false template is registered from C# and
+	// never goes through the RecipeLoader's per-variant expansion, so beams and planks of mixed species are accepted by
+	// design (docs/recipe-conventions.md, exception 3). The single-cell nails and plate carry no `name` on purpose.
+	// SHAPE and QUANTITIES are a BALANCE DRAFT (author tunes in game).
+	// enabled:false -> TEMPLATE, the RecipeLoader skips it. ImmersiveWoodworkingModSystem.RegisterDebarkerRecipes
+	// re-registers it for every (plank domain x beam domain) pair, re-pointing the plank and beam slots by Code.Path
+	// prefix, so a wood mod's own-domain planks and beams craft it; the game-domain recipe comes from this same template.
+	enabled: false,
+	ingredientPattern: "BNB,PHP,BSB",
+	ingredients: {
+		"B": { type: "block", code: "game:supportbeam-*", name: "beam" },
+		"N": { type: "item",  code: "game:metalnailsandstrips-*" },
+		"P": { type: "item",  code: "game:plank-*",       name: "wood" },
+		"S": { type: "item",  code: "game:metalplate-*" },
+		"H": { type: "item",  tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "debarker-frame-north", quantity: 1 }
+}

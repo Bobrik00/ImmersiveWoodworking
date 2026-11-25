@@ -1,0 +1,22 @@
+{
+	// Grid recipe for the debarker's DISC `debarkerdisc` (AutoDebarkerPlan T02.03, draft from the T02.01 spec): two
+	// metal sheets riveted into the disc with nails and a hammer.
+	//   S N S     S = metal plate (game:metalplate-*)   N = nails (game:metalnailsandstrips-*)
+	//   _ H _     H = hammer (tag tool-hammer, returned untouched)
+	// PLAIN, engine-loaded recipe (no `enabled:false`): it carries no wood, so the RecipeLoader loads it straight in this
+	// mod's domain and the bare output resolves to immersivewoodworking:, like chopper_head.json; metal mods add their
+	// plates as game-domain variants, so no per-domain clone is needed. A 3x2 pattern matches in the top or the bottom
+	// two rows of the grid; no vanilla or mod recipe shares that footprint with these items (checked offline in T02.03).
+	// No `name` anywhere: the output bakes no metal, and a name here would multiply the registry for nothing
+	// (docs/recipe-conventions.md, exception 2), so the two plates may be different metals.
+	// SHAPE and QUANTITIES are a BALANCE DRAFT (author tunes in game).
+	ingredientPattern: "SNS,_H_",
+	ingredients: {
+		"S": { type: "item", code: "game:metalplate-*" },
+		"N": { type: "item", code: "game:metalnailsandstrips-*" },
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 2,
+	output: { type: "item", code: "debarkerdisc", quantity: 1 }
+}

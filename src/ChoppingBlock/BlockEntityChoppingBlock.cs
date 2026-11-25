@@ -13,8 +13,8 @@ namespace ImmersiveWoodworking;
 /// Holds a single choppable stack as a nested itemstack (not a separate block) and renders it on top
 /// of the stand. Chopping is driven by <see cref="BlockChoppingBlock"/>, which calls <see cref="Chop"/>.
 ///
-/// Accepts, by hand: a full log (barked/debarked) → 2 half-logs (E04/T04.02); a half-log → firewood; a log section
-/// or a laid chopping block → firewood; firewood → sticks. The automated chopper skips the half-log step
+/// Accepts, by hand: a full log (barked/debarked, or a log section since ModDbFeedbackPlan T06.01) → 2 half-logs
+/// (E04/T04.02); a half-log → firewood; a laid chopping block → firewood; firewood → sticks. The automated chopper skips the half-log step
 /// (log → firewood in one pass); the split is the ONE hand-only divergence (see <see cref="GetHandChopResult"/> vs the
 /// shared <see cref="GetChopResult"/>). That split is opt-out via <see cref="ImmersiveWoodworkingConfig.HalfLogChopStage"/>
 /// (default on) — turned off, a hand-laid log chops straight to firewood too, so the stand matches the machine.
@@ -300,6 +300,12 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// (<see cref="RefuseChopHold"/>), handled in <see cref="OnReceivedServerPacket"/>. A private id: this BE has no
     /// dialog and so no <c>EnumBlockEntityPacketId</c> traffic to collide with.</summary>
     const int ChopRefusedPacketId = 2201;
+
+    /// <summary>Block-entity packet: "you are exhausted, your chop was refused or stopped" — server to the exhausted
+    /// chopper (ModDbFeedbackPlan T06.03, Vigor), handled with <see cref="ChopRefusedPacketId"/>.</summary>
+    const int ChopTiredPacketId = 2202;
+
+    ImmersiveWoodworkingModSystem Mod => modSystem ??= Api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>();
 
     // DISCRETE chop progress (E03): the fraction [0,1] of the current laid workpiece that has been chopped, advanced one
     // notch per axe strike (ChopStrike). SERIALIZED + synced (To/FromTreeAttributes) so a half-chopped log resumes after
@@ -927,12 +933,13 @@ public class BlockEntityChoppingBlock : BlockEntity
         // sides and MUST stay bit-identical, but the live workpiece (inventory[0]) lags the client every restock cycle —
         // the same reason kindSpeed above reads ChopHold.Ref, not the stand. ChopKind is stable across a hold (AutoRestock
         // is category-locked), so both sides agree. The catch: ChopKind.Log is BROADER than the skip's live IsFullLog (it
-        // also covers log sections and a laid choppingblock, which chop straight to firewood for every tool). Gating on
+        // also covers a laid choppingblock, which chops straight to firewood for every tool; log sections joined IsFullLog
+        // in ModDbFeedbackPlan T06.01). Gating on
         // IsFullLog(hold.Ref) — the FIRST workpiece — instead lets an AutoRestock hold that STARTED on a non-full-log
-        // (section / choppingblock) but tail-restocks full logs freeze the gate to false and clear those logs UNPENALISED,
+        // (a choppingblock) but tail-restocks full logs freeze the gate to false and clear those logs UNPENALISED,
         // bypassing the knob entirely (a real exploit caught in review 2026-07-24). Gating on ChopKind.Log penalises EVERY
         // log-family workpiece in the hold, so a restocked full log is always slowed — exploit closed. The only cost is
-        // the SAFE direction: a maul on a bare section/choppingblock (rare misuse — it saves no work there) chops at ~0.5×,
+        // the SAFE direction: a maul on a laid choppingblock (rare misuse — it saves no work there) chops at ~0.5×,
         // slower than an axe but never faster. Skip / XP / wear stay per-workpiece EXACT (server-side, off the live input);
         // only this both-sides speed gate uses the frozen approximation. HalfLogChopStage off = every tool one-passes the
         // log, so no penalty. Deterministic (F-S06-01); the E05 jitter still multiplies AFTER this, below.
@@ -975,6 +982,11 @@ public class BlockEntityChoppingBlock : BlockEntity
             // is unchanged — it's just spread across the strikes as progress milestones — so a player can't do the work
             // with a good axe and "finish" a nearly-chopped log with a throwaway flint one to dump all the wear on it.
             WearThisStrike(byPlayer, before, hold.Progress, completed);
+
+            // ModDbFeedbackPlan T06.03 (Vigor): every landed strike costs the chopper stamina, maul or axe alike. A no-op
+            // without Vigor. Exhaustion stops the hold at the next relaunch (ChopTick), never here: the client is already
+            // drawing this impact, so refusing it now would cut a strike it has seen land.
+            Mod.SpendStamina(VigorCompat.ChopAction, Config.VigorChopStaminaPerStrike, byPlayer);
 
             // Set the persisted bar BEFORE the completion Chop: Chop's own MarkDirty then syncs both the emptied stand
             // AND the reset bar in one round-trip; the mid-log branch persists + syncs the advanced fraction itself.
@@ -1229,6 +1241,21 @@ public class BlockEntityChoppingBlock : BlockEntity
         // it self-guards to a no-op and the same log keeps going.
         if (hold.InDelay)
         {
+            // ModDbFeedbackPlan T06.03 (Vigor): an exhausted chopper gets no next swing. Checked on every tick of the
+            // breather, not before the strike: the strike that emptied the bar has landed and counts, and the server
+            // latches on the first tick after Vigor raises its flag, so the packet usually reaches the client while it is
+            // still pausing, before its own relaunch, and never later than the next swing's impact at a sane ping. Before
+            // TryAutoRestock below, so no log leaves an exhausted player's pack. Server-only (Vigor's state lives there);
+            // the latch ends the server's loop the way the last log does, and the client drops its hold on the packet.
+            // Vigor raises the flag on its own tick after the strike, so a breather that ends inside the same hold packet
+            // burst (ChopRestockDelaySeconds near 0, or a late packet) lets one more strike through.
+            if (Api.Side == EnumAppSide.Server && Mod.TooTiredToWork(byPlayer))
+            {
+                hold.Done = true;
+                RefuseChopHold(byPlayer, ChopTiredPacketId);
+                return ChopTickAction.None;
+            }
+
             if (secondsUsed < hold.RelaunchAt) return ChopTickAction.None;   // still pausing → swing easing out
             hold.InDelay = false;
             TryAutoRestock(byPlayer, hold.Ref);              // server: lay the next log IF the stand is empty and axe-free; else no-op / client no-op
@@ -1290,7 +1317,18 @@ public class BlockEntityChoppingBlock : BlockEntity
         ChopHold? running = chopHold;
         if (running != null && running.OwnerUid != byPlayer.PlayerUID && nowMs - running.LastTickMs < ChopHoldOwnerTimeoutMs)
         {
-            RefuseChopHold(byPlayer);
+            RefuseChopHold(byPlayer, ChopRefusedPacketId);
+            return false;
+        }
+
+        // ModDbFeedbackPlan T06.03 (Vigor): an exhausted player cannot start a chop. Decided on the server alone, where
+        // Vigor keeps the state, so the client has already begun its swing and the packet cancels it, exactly like the
+        // busy refusal above; the first impact is a whole swing away. An own hold still standing (Stop and Cancel
+        // normally end it) is dropped so the server never strikes for a refused press.
+        if (Api.Side == EnumAppSide.Server && Mod.TooTiredToWork(byPlayer))
+        {
+            if (running?.OwnerUid == byPlayer.PlayerUID) chopHold = null;
+            RefuseChopHold(byPlayer, ChopTiredPacketId);
             return false;
         }
 
@@ -1316,17 +1354,19 @@ public class BlockEntityChoppingBlock : BlockEntity
         return true;
     }
 
-    /// <summary>Tell <paramref name="byPlayer"/> that somebody else is already chopping this stand. The refusal is
+    /// <summary>Tell <paramref name="byPlayer"/> that somebody else is already chopping this stand
+    /// (<see cref="ChopRefusedPacketId"/>), or that they are too exhausted to chop (<see cref="ChopTiredPacketId"/>,
+    /// ModDbFeedbackPlan T06.03). The busy refusal is
     /// decided on the SERVER because only the server sees every player's hold — the bundle is per-side and never synced,
     /// so a client knows only its own and cannot judge this. It reaches the refused player as a TARGETED block-entity
     /// packet rather than as synced state: nobody else needs to know, and a stand nobody is fighting over pays nothing.
     /// Their client turns it into the ingame error and cancels the swing it had already started optimistically
     /// (<see cref="OnReceivedServerPacket"/>).</summary>
-    void RefuseChopHold(IPlayer byPlayer)
+    void RefuseChopHold(IPlayer byPlayer, int packetId)
     {
         if (Api.Side == EnumAppSide.Server && byPlayer is IServerPlayer serverPlayer)
         {
-            ((ICoreServerAPI)Api).Network.SendBlockEntityPacket(serverPlayer, Pos, ChopRefusedPacketId);
+            ((ICoreServerAPI)Api).Network.SendBlockEntityPacket(serverPlayer, Pos, packetId);
         }
     }
 
@@ -1339,14 +1379,17 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// was refused.</summary>
     public override void OnReceivedServerPacket(int packetid, byte[] data)
     {
-        if (packetid == ChopRefusedPacketId)
+        if (packetid == ChopRefusedPacketId || packetid == ChopTiredPacketId)
         {
             IPlayer? me = capi?.World.Player;
             if (me == null) return;
 
             if (chopHold?.OwnerUid == me.PlayerUID) chopHold = null;
             BlockChoppingBlock.CancelChopAnim(me);
-            capi!.TriggerIngameError(this, "chopbusy", Lang.Get("immersivewoodworking:ingameerror-choppingblock-busy"));
+            if (packetid == ChopTiredPacketId)
+                capi!.TriggerIngameError(this, "iwexhausted", Lang.Get("immersivewoodworking:ingameerror-vigor-exhausted"));
+            else
+                capi!.TriggerIngameError(this, "chopbusy", Lang.Get("immersivewoodworking:ingameerror-choppingblock-busy"));
             return;
         }
 
@@ -1559,7 +1602,7 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// whether an axe SPLITS it (the split remainder <see cref="SplitWearCost"/> plus each half-log at
     /// <see cref="PerHalfLogWear"/>) or a maul clears it in ONE pass — the split chain sums back to the target by
     /// construction. A half-log is its <see cref="PerHalfLogWear"/> share; firewood → sticks (a separate step, not part of
-    /// a log) is a flat 1 at the shipped numbers; a bare log section is anchored to its firewood-equivalent output. 0 when
+    /// a log) is a flat 1 at the shipped numbers; a laid chopping block is anchored to its firewood-equivalent output. 0 when
     /// durability is disabled (target ≤ 0) or the product can't be resolved. Read from the workpiece on the stand, which
     /// is present on every strike (Chop empties it only after the final one). Server-side.</summary>
     int ChopWearCost()
@@ -1582,13 +1625,13 @@ public class BlockEntityChoppingBlock : BlockEntity
         // after the eventual half-log→firewood chops (SplitWearCost). Never zero at any reachable target (T03.01).
         if (IsHalfLog(result.Value.template)) return SplitWearCost();
 
-        // The workpiece produces firewood (a half-log, or a full log a MAUL clears in one pass, or a laid section) or
+        // The workpiece produces firewood (a half-log, or a full log a MAUL clears in one pass, or a laid chopping block) or
         // sticks (firewood → sticks). AxeDurabilityPerLog is the DIRECT whole-log target:
         //  • a half-log is its 1/ChopChainSteps share (PerHalfLogWear), matching the SplitWearCost remainder so the chain
         //    sums back to the target exactly;
         //  • a full log cleared straight to firewood (maul, or HalfLogChopStage off) is the whole target;
-        //  • anything else (a bare log section, and firewood → sticks) is anchored to its firewood-equivalent output, so a
-        //    section costs a log's share and firewood → sticks lands on the flat min of 1 (its stick yield is well under a log's firewood).
+        //  • anything else (a laid chopping block, and firewood → sticks) is anchored to its firewood-equivalent output, so a
+        //    chopping block costs a log's share and firewood → sticks lands on the flat min of 1 (its stick yield is well under a log's firewood).
         if (IsHalfLog(input)) return PerHalfLogWear();
         if (IsFullLog(input)) return dpl;
         int cost = (int)System.Math.Round((double)result.Value.template.StackSize / System.Math.Max(1, Config.FirewoodPerLog) * dpl);
@@ -1718,8 +1761,8 @@ public class BlockEntityChoppingBlock : BlockEntity
     // leave an item that can be placed but not chopped. FirstCodePart() of "log-placed-oak-ud" is "log",
     // of "choppingblock-oak" is "choppingblock", of "flotsam-driftwood-1" is "flotsam", etc.
     // Note: FirstCodePart()=="log" matches ALL log kinds by design — log-placed, log-grown and log-resin are all
-    // choppable. By hand a full log (IsFullLog: "log"/"debarkedlog") splits into half-logs first (E04/T04.02); a
-    // section keeps chopping straight to firewood, and the automated chopper chops every log straight to firewood.
+    // choppable. By hand a full log (IsFullLog: "log"/"logsection"/"debarkedlog") splits into half-logs first
+    // (E04/T04.02), and the automated chopper chops every log straight to firewood.
     // (The sawhorse deliberately narrows to log-placed only, because it mirrors a recipe; the chopping block has no
     // such constraint and accepts any log.)
     // NOTE: beach driftwood ("flotsam-driftwood-*") is deliberately NOT here. It used to be chopped on the block into
@@ -1767,20 +1810,28 @@ public class BlockEntityChoppingBlock : BlockEntity
     // (like firewood) it's matched off stack.Item, never stack.Block.
     static bool IsHalfLog(ItemStack? stack) => CodeParts.Is(stack?.Item?.Code, 0, HalfLogCode);
 
-    // A FULL log — a barked or debarked log (FirstCodePart "log" or "debarkedlog"), the ONLY inputs the HAND stand
-    // splits into half-logs (E04/T04.02). Deliberately NARROWER than IsLog: it excludes log SECTIONS (E08's domain) and
-    // a laid chopping block, which keep chopping straight to firewood, while still covering grown/resin logs (they share
-    // the "log" first part). The automated chopper never calls this, so every log there goes straight to firewood.
+    // A FULL log — a barked or debarked log or a log section (FirstCodePart "log", "logsection" or "debarkedlog"), the
+    // ONLY inputs the HAND stand splits into half-logs (E04/T04.02). NARROWER than IsLog by a laid chopping block alone,
+    // which keeps chopping straight to firewood; grown/resin logs and grown sections share their first part and count.
+    // The automated chopper reads this only to draw its workpiece: its product never splits.
     static bool IsFullLog(ItemStack? stack) => IsFullLogBlock(stack?.Block);
 
-    /// <summary>The BLOCK-level form of <see cref="IsFullLog"/> — a barked or debarked log, i.e. exactly the set of
-    /// blocks that can become half-logs. <c>internal</c> so the mod system's non-combustible-species scan
-    /// (<see cref="ImmersiveWoodworkingModSystem.IsNonCombustibleWood"/>) walks the SAME block set the split accepts,
-    /// instead of restating "log or debarkedlog" a second time.</summary>
+    /// <summary>The BLOCK-level form of <see cref="IsFullLog"/> — a barked or debarked log or a log section, i.e.
+    /// exactly the set of blocks that can become half-logs. <c>internal</c> so the mod system's non-combustible-species
+    /// scan (<see cref="ImmersiveWoodworkingModSystem.IsNonCombustibleWood"/>) and the half-log slab's coverage check
+    /// (<c>BlockHalfLogSlab</c>) walk the SAME block set the split accepts, instead of restating it.
+    ///
+    /// <para>The section joined in ModDbFeedbackPlan T06.01. Vanilla and the sawhorse already count it as a whole log
+    /// (12 planks in the grid, <see cref="ImmersiveWoodworkingConfig.PlanksPerLog"/> on the sawhorse), while the stand
+    /// chopped it straight to a whole log's firewood: the same wood in one chop where a log takes three. It joined THIS predicate,
+    /// not a split-only twin, because both other readers ask "which species can a half-log carry", and a section now
+    /// makes half-logs. Both stay quiet on the shipped content: vanilla's only section species (redwood) and the seven of
+    /// Biodiversity: Trees all have a burning log and a slab already. <c>DiscoverLogOnlySpecies</c> probes the same
+    /// three first parts for the same reason.</para></summary>
     internal static bool IsFullLogBlock(Block? block)
     {
         AssetLocation? code = block?.Code;
-        return CodeParts.Is(code, 0, "log") || CodeParts.Is(code, 0, "debarkedlog");
+        return CodeParts.Is(code, 0, "log") || CodeParts.Is(code, 0, "logsection") || CodeParts.Is(code, 0, "debarkedlog");
     }
 
     /// <summary>Whether this block is the ALREADY-STRIPPED kind of full log — the half of <see cref="IsFullLogBlock"/>
@@ -1865,7 +1916,7 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// This is the AUTOMATED-CHOPPER / shared resolver: it never produces half-logs. The manual stand's log→half-log
     /// split is the ONE divergence and lives in <see cref="GetHandChopResult"/> (E04/T04.02, user decision 2026-07-07 —
     /// the machine stays a single-pass log→firewood). Everything else — half-log→firewood, firewood→sticks,
-    /// and the non-splitting log kinds (sections, a laid chopping block) → firewood — is identical on both paths, so it
+    /// and the non-splitting log kind (a laid chopping block) → firewood — is identical on both paths, so it
     /// lives here and both call it.
     ///
     /// <c>internal static</c> + world-parametrised (E06/T06.02): the automated chopper has no <see cref="BlockEntityChoppingBlock"/>
@@ -1892,8 +1943,8 @@ public class BlockEntityChoppingBlock : BlockEntity
                                 System.Math.Max(1, a.FirewoodDropCount / HalfLogsPerLog));
 
         // Logs (incl. sections, debarked, chopping blocks) -> firewood. This is the machine's whole-log output AND the
-        // hand stand's output for the log kinds that DON'T split into half-logs (sections, the mod's own block); a
-        // hand-laid FULL log instead splits into half-logs first (GetHandChopResult).
+        // hand stand's output for the log kind that DOESN'T split into half-logs (the mod's own block); a hand-laid
+        // FULL log, a section included, instead splits into half-logs first (GetHandChopResult).
         if (IsLog(input)) return MakeFirewood(world, ChopInputSpecies(input), a.FirewoodPerLog, a.FirewoodDropCount);
 
         // Firewood -> sticks. Gated by AllowFirewoodToSticks (default on): with it off, firewood yields NO product here
@@ -1983,7 +2034,7 @@ public class BlockEntityChoppingBlock : BlockEntity
 
     /// <summary>
     /// The HAND stand's chop product (E04/T04.02) — identical to the automated chopper's <see cref="GetChopResult"/>
-    /// EXCEPT that a FULL log (<see cref="IsFullLog"/>: a barked/debarked log, not a section or the mod's own block) is
+    /// EXCEPT that a FULL log (<see cref="IsFullLog"/>: a barked/debarked log or a log section, not the mod's own block) is
     /// split LENGTHWISE into <see cref="HalfLogsPerLog"/> half-logs instead of going straight to firewood. That split is
     /// the ONE manual-only divergence the plan calls for (user decision 2026-07-07): the machine stays single-pass
     /// log→firewood, while by hand a log becomes 2 half-logs that are each then chopped into firewood (so a whole log
@@ -2052,7 +2103,8 @@ public class BlockEntityChoppingBlock : BlockEntity
 
     /// <summary>Read the wood species + its domain off a full-log stack for stamping onto the half-logs it splits into.
     /// A <c>debarkedlog-{wood}-{rot}</c> carries the species at code part 1; every <c>log-{placed|grown|resin}-{wood}-{rot}</c>
-    /// carries it at part 2 (the extra kind part shifts it one slot right) — the same offset the sawhorse's
+    /// and <c>logsection-{placed|grown}-{wood}-{seg}-{rot}</c> carries it at part 2 (the extra kind part shifts it one
+    /// slot right) — the same offset the sawhorse's
     /// <see cref="BlockEntitySawhorse.GetWoodSpecies"/> uses, widened here to the grown/resin logs the stand also
     /// accepts. The domain is the log block's OWN domain, so a modded species resolves its textures in its mod's domain
     /// (T04.04). Returns null wood on an unexpected code shape — the half-log then falls back to the default look, never
@@ -2180,8 +2232,9 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// E05: a laid FULL log (barked or debarked) shows its chop STAGE through a custom per-bucket shape (whole →
     /// part-hewn → deeply-hewn, <see cref="LogStageBucket"/>), and a laid HALF-LOG a 2-stage split (fresh → part-hewn,
     /// <see cref="HalfLogStageBucket"/>), each textured for its own species — so chopping either over several strikes
-    /// visibly splits it apart before it drops at 100 %. Everything else (log sections, a laid chopping block,
-    /// firewood) takes the plain laid path. A null staged mesh (missing shape or unreadable species) falls back to that
+    /// visibly splits it apart before it drops at 100 %. A log section is a full log here too and draws as a round log
+    /// of its species through the same stages (ModDbFeedbackPlan T06.01, author's decision 2026-11-20: no section-shaped
+    /// variant). Everything else (a laid chopping block, firewood) takes the plain laid path. A null staged mesh (missing shape or unreadable species) falls back to that
     /// same path, so a workpiece is never invisible.
     ///
     /// The stage shapes are authored in block space ALREADY sitting on the stand top, so they are not posed — and they
@@ -2326,8 +2379,8 @@ public class BlockEntityChoppingBlock : BlockEntity
     /// <see cref="LogTexSource"/> (bark round sides / tree-ring end caps / freshly-hewn inner face), the same
     /// species-bound source the sawhorse and half-log use — so one geometry set per stage serves every wood, vanilla or
     /// modded. Barked vs debarked (<see cref="IsFullLog"/> covers both) picks the side/end textures via
-    /// <see cref="LogTexSource.ForLog"/>. Unlike <see cref="BuildLaidContentMesh"/>'s scaled/centred content, the stage
-    /// shapes are authored in block space ALREADY sitting on the stand's top surface, so they are NOT run through
+    /// <see cref="LogTexSource.ForLog"/>; a log section takes the barked branch. Unlike
+    /// <see cref="BuildLaidContentMesh"/>'s scaled/centred content, the stage shapes are authored in block space ALREADY sitting on the stand's top surface, so they are NOT run through
     /// <see cref="PoseLaidContent"/>. Returns null if the shape can't be loaded or the species can't be read off the
     /// code (the caller then falls back to the plain laid-log mesh, so a log is never invisible). Client-side, MAIN
     /// thread (capi.Tesselator). Reached only through <see cref="BuildLaidWorkpieceMesh"/>, so BOTH stations stage

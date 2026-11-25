@@ -4,6 +4,29 @@ Settings added in recent updates, grouped by the version that introduced them (n
 
 As of v1.2.1 the config lives in a FOLDER of thematic files, `ModConfig/ImmersiveWoodworking/`; an older single `immersivewoodworking.json` is migrated into it automatically on first launch (the old file is renamed to `immersivewoodworking.json.bak`). Existing values are preserved; new settings take their defaults until you edit them.
 
+## Unreleased — Vigor stamina (in `integration.json`)
+
+With Vigor installed, hand work on the chopping block and the sawhorses spends stamina, and an exhausted player cannot chop, saw or debark until Vigor lets them recover. Exhaustion stops the work at any station, also one whose cost is `0`. Without Vigor nothing changes.
+
+| Setting | Default | What it does |
+|---|---|---|
+| `VigorIntegration` | `true` | Master switch. `false`: no stamina is spent and exhaustion does not stop the work, even with Vigor installed. |
+| `VigorChopStaminaPerStrike` | `4` | Stamina per axe or maul strike on the chopping block. `0` = chopping spends nothing. |
+| `VigorSawStaminaPerSecond` | `3` | Stamina per second of ripping on the sawhorses. `0` = sawing spends nothing. |
+| `VigorDebarkStaminaPerSecond` | `3` | Stamina per second of debarking on the sawhorses. `0` = debarking spends nothing. |
+
+## Unreleased — Automated debarker (in `general.json` and `automation.json`)
+
+The new automated debarker gets a switch and the same drive settings as the sawmill and the chopper. Its bark has no settings of its own: amount and kind follow the hand-debark settings in `bark.json` (`BarkPerLog`, `BarkPerLogBySpecies`, `BarkChanceMultSpud` without `BarkChanceMultSpudSteelBonus`).
+
+| Setting | File | Default | What it does |
+|---|---|---|---|
+| `EnableDebarker` | `general.json` | `true` | `false`: the debarker's frame, drive, disc, feed mechanism, knife sets and knives can no longer be made and are hidden. A debarker already built keeps working on the knife sets that already exist. Debarking on the sawhorses is not affected. |
+| `DebarkerSpeed` | `automation.json` | `1.0` | Debarker throughput multiplier. Higher is faster, lower is slower. The turning speed comes from the network; this only scales the work a log costs. Clamped to the range `0.01` to `100`. |
+| `DebarkerMinTorque` | `automation.json` | `0.05` | Minimum network speed below which the debarker won't turn. `0` = no minimum. |
+| `DebarkerResistance` | `automation.json` | `0.085` | Load an assembled debarker adds to its mechanical network, working or idle. |
+| `DebarkerKnifeWearMultiplier` | `automation.json` | `1.0` | Knife-set durability spent per stripped log. `0` = never wears. Clamped to the range `0` to `100`. |
+
 ## Unreleased — Bark per wood moved into the config (in `bark.json`)
 
 `BarkPerLog` now applies to every wood. Before, the `barkdrops.json` asset listed each vanilla wood at 3 bark, and that line beat the config value, so raising `BarkPerLog` changed nothing for oak or any other listed tree. The per-wood counts are now a config setting, and the asset no longer carries them.

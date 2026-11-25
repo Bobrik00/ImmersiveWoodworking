@@ -32,7 +32,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     {
         ("general.json", new[]
         {
-            "EnableSawmill", "EnableChopper", "EnableBarkChain",
+            "EnableSawmill", "EnableChopper", "EnableDebarker", "EnableBarkChain",
             "AutoRestock", "DropsAtPlayer", "ScaleWorkSpeedByToolTier", "DisableVanillaFirewoodCrafting",
             "DisableVanillaPlankCrafting", "DisableVanillaDebarkCrafting", "DisableVanillaLogTannin", "KeepTraitRecipes",
             "AllowVanillaSaw", "RemovePitSaw", "CraftableSawhorse", "LogRecoverThreshold",
@@ -61,6 +61,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         {
             "SawmillSpeed", "SawmillMinTorque", "SawmillResistance", "SawmillBladeWearMultiplier",
             "ChopperSpeed", "ChopperMinTorque", "ChopperResistance", "ChopperHeadWearMultiplier",
+            "DebarkerSpeed", "DebarkerMinTorque", "DebarkerResistance", "DebarkerKnifeWearMultiplier",
         }),
         // Drop yields for BOTH tiers side by side (ImprovementsPlan E04/T04.04): each manual field immediately followed
         // by its automated override (default -1 = inherit the manual value). The MANUAL fields moved here out of
@@ -84,6 +85,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             "XSkillsFirewoodChopXp", "XSkillsCoopXpFullToBoth", "XSkillsSawyerYield", "XSkillsSplitterYield", "XSkillsCarefulSawyer",
             "XSkillsSwiftsawSpeed", "XSkillsSwiftsawMaxChopSpeedBonus", "XSkillsSwiftsawMaxSawSpeedBonus",
             "SeraphLevelingIntegration",
+            "VigorIntegration", "VigorChopStaminaPerStrike", "VigorSawStaminaPerSecond", "VigorDebarkStaminaPerSecond",
         }),
         // The bark-system numbers that used to be baked into the code (BarkPlan/E08, T08.01): how many bark a stripped
         // log drops, the debark tool-tier bonus to the special-bark roll, the tar rig's capacity / per-birch fill /
@@ -143,6 +145,16 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         ("chopper_frame", "recipes/grid/chopper_frame.json"),
         ("chopper_drive", "recipes/grid/chopper_drive.json"),
         ("chopper_arm",   "recipes/grid/chopper_arm.json"),
+    };
+
+    // The automated debarker's plank/beam-consuming grid recipes (AutoDebarkerPlan T02.03): the master frame and the two
+    // wooden parts, drive and feed, cloned per wood DOMAIN for the same reason as the chopper's. The disc, the knife set
+    // and the knife forge carry no wood and load straight from JSON. (stem → the per-domain recipe Name; asset → lookup.)
+    static readonly (string stem, string asset)[] DebarkerRecipeTemplates = new (string stem, string asset)[]
+    {
+        ("debarker_frame", "recipes/grid/debarker_frame.json"),
+        ("debarker_drive", "recipes/grid/debarker_drive.json"),
+        ("debarker_feed",  "recipes/grid/debarker_feed.json"),
     };
 
     // Bark drop table (BarkPlan/E02): the sawhorse strip's species → special-bark table, loaded from the mod ASSET
@@ -260,8 +272,9 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         // Clamp any out-of-range values (e.g. a hand-edited ChopSeconds = 0 that would divide-by-zero) before anything
         // reads them, so the rest of the mod can trust the config. ONE validation point over the fully-merged object,
         // run AFTER every file is loaded (E04/T04.02 — so a value in the last-loaded file is still validated). The
-        // logger carries the T01.03 work-multiplier band-clamp corrections to the main log (the client re-sanitizes
-        // without a logger, invariant I9, so each correction is reported once here on the server).
+        // logger carries the SpeedDecouplingPlan T01.03 speed band-clamp corrections and the AutoDebarkerPlan T01.03
+        // non-finite drive/wear resets to the main log (the client re-sanitizes without a logger, invariant I9, so each
+        // correction is reported once here on the server).
         Config.Sanitize(api.Logger);
 
         // (Re)write the folder so it stays in sync with the current schema: missing fields get their defaults added,
@@ -729,6 +742,22 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         api.RegisterBlockClass("iw-chopper-ghostpower", typeof(BlockChopperGhostPower));
         api.RegisterBlockEntityBehaviorClass("iw-choppermp", typeof(BEBehaviorChopperMP));
 
+        // Automated DEBARKER (AutoDebarkerPlan E03+), the third machine of the sawmill's and chopper's shape: a placed
+        // master frame (BlockDebarker / "iw-debarker" BE) whose footprint fillers (BlockDebarkerGhost /
+        // "iw-debarker-multiblock" BE) route every interaction back to it. One filler, BlockDebarkerGhostPower, is the
+        // mechanical-power connector at the coupling cell, and its BE carries the consumer node BEBehaviorDebarkerMP
+        // ("iw-debarkermp" in the entityBehaviors of ghostpower.json, AutoDebarkerPlan T04.01). These strings MUST match
+        // class/entityClass and that behavior name in blocktypes/debarker/{frame,ghost,ghostpower}.json: for an unknown
+        // name the block loader logs "no such class registered" and builds a plain Block (class) or no block entity at all
+        // (entityClass), and all routing is lost; an unknown behavior is skipped with a "not found" log line, and the
+        // machine never joins a network.
+        api.RegisterBlockClass("iw-debarker", typeof(BlockDebarker));
+        api.RegisterBlockEntityClass("iw-debarker", typeof(BlockEntityDebarker));
+        api.RegisterBlockClass("iw-debarker-ghost", typeof(BlockDebarkerGhost));
+        api.RegisterBlockEntityClass("iw-debarker-multiblock", typeof(BEMultiblockDebarker));
+        api.RegisterBlockClass("iw-debarker-ghostpower", typeof(BlockDebarkerGhostPower));
+        api.RegisterBlockEntityBehaviorClass("iw-debarkermp", typeof(BEBehaviorDebarkerMP));
+
         // Backfills the woodchop keyframes onto whatever body shape a player actually uses, so the swing
         // plays on non-seraph-faceless shapes too (skins / reskin mods built on the seraph skeleton). The
         // JSON patch can only place keyframes on the single seraph-faceless file; this behavior copies them
@@ -827,6 +856,10 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         // without Seraph. See ImmersiveWoodworkingModSystem.SeraphLeveling.cs.
         InitSeraphLeveling(api);
 
+        // Optional Vigor bridge, server-only (ModDbFeedbackPlan T06.03): hand work on the chopping block and the
+        // sawhorses spends stamina. See ImmersiveWoodworkingModSystem.Vigor.cs.
+        InitVigor(api);
+
         // Green bark near a fire finds its container by Inventory.Pos, and a freshly placed crate loses it: see
         // ItemIwGreenBark.RestoreContainerPos.
         api.Event.DidPlaceBlock += (byPlayer, oldBlockId, blockSel, withItemStack) =>
@@ -910,18 +943,19 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             // Notification-level (log file, not on-screen), once per join. The former 29-argument positional format
             // string (indices out of order, unreadable, and growing with every new field — ImprovementsPlan E04/E05/E06) is replaced by
             // a compact-JSON DIGEST plus a handful of representative fields spanning the sections (a manual, a sawing,
-            // an automation drive, and one E04 override from each auto station): the digest answers "same config or
-            // not?" at a glance, and under IW_DEBUG the FULL config is dumped as compact JSON so a desync can be diffed
-            // field-by-field without cluttering the normal log.
+            // an automation drive, one ImprovementsPlan E04 override each from the sawmill and the chopper, and the
+            // debarker's speed in place of the drops override it does not have, AutoDebarkerPlan T01.02): the digest
+            // answers "same config or not?" at a glance, and under IW_DEBUG the FULL config is dumped as compact JSON so
+            // a desync can be diffed field-by-field without cluttering the normal log.
             // The text is the SERVER'S OWN (the packet payload), not a re-serialization of the adopted object: the
             // digest then answers "did the server's bytes arrive intact?" rather than "does my copy re-serialize the
             // same?". The two are identical in a healthy pair — the server sanitizes before it serializes, so the
             // client's defensive Sanitize above is a no-op.
             string configJson = packet!.Json;
             api.Logger.Notification(
-                "[immersivewoodworking] Received server config (digest {0}): ChopSeconds={1}, FirewoodPerLog={2}, PlanksPerLog={3}, SawmillSpeed={4}, ChopperFirewoodPerLog={5}, SawmillPlanksPerLog={6}.",
+                "[immersivewoodworking] Received server config (digest {0}): ChopSeconds={1}, FirewoodPerLog={2}, PlanksPerLog={3}, SawmillSpeed={4}, ChopperFirewoodPerLog={5}, SawmillPlanksPerLog={6}, DebarkerSpeed={7}.",
                 ConfigDigest(configJson), Config.ChopSeconds, Config.FirewoodPerLog, Config.PlanksPerLog,
-                Config.SawmillSpeed, Config.ChopperFirewoodPerLog, Config.SawmillPlanksPerLog);
+                Config.SawmillSpeed, Config.ChopperFirewoodPerLog, Config.SawmillPlanksPerLog, Config.DebarkerSpeed);
 #if IW_DEBUG
             api.Logger.Notification("[immersivewoodworking] Full server config (IW_DEBUG): {0}", configJson);
 #endif
@@ -1003,6 +1037,9 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     ///     <c>log-placed-*</c> / <c>debarkedlog-*</c> input. The bark chain (E03/T03.02) replaces it, so the log
     ///     survives for lumber; the mod's OWN bark→tannin recipes are spared (tags-only bark input, no log code), as are
     ///     <c>lognarrow-placed-*</c> (undebarkable) and leaf routes — the same lognarrow discipline as the firewood strip.
+    ///     The same barrel pass also removes A Culinary Artillery's tannin from its dry oak bark
+    ///     (<see cref="IsAcaOakBarkTannin"/>, ModDbFeedbackPlan T03.05), gated on the DEBARK flag and ACA being loaded:
+    ///     the debark strip takes away that bark's only source.
     ///
     /// Why server-only is the whole story (unchanged from the original per-file approach, verified against the
     /// engine): VSSurvivalMod's RecipeLoader registers grid recipes ONLY on the server (its AssetsLoaded loads only
@@ -1066,6 +1103,8 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
 
         if (api.Side != EnumAppSide.Server) return;
 
+        recipeAssetsWarned.Clear(); // ModDbFeedbackPlan T05.03: one warning per file per world, see ForEachRecipeAsset
+
         // ImprovementsPlan E03: replace the fragile index-pinned JSON patch (the removed patches/pitsaw_cabinet_compat.json, which did
         // op:Remove on /0/ingredients/S/code … /5/…) with a STRUCTURAL pass — relax any grid-recipe slot that gates a
         // saw by BOTH a tool-saw tag AND a concrete code (vanilla's cabinet is the only such recipe) so the pit saw and
@@ -1120,7 +1159,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
 
         // Grid recipes — all four families the stations replace live under recipes/grid/, so one scan with a
         // combined predicate covers them (firewood, saw log→plank/beam, the mod's own pit-saw craft, axe+hammer
-        // debark). See StripMatchingRecipes for the file-shape / malformed-JSON / write-only-on-change handling.
+        // debark). See StripMatchingRecipes for the file-shape / malformed-JSON / per-file failure / write-only-on-change handling.
         StripMatchingRecipes(api, "recipes/grid/", recipe =>
         {
             bool replaced =
@@ -1165,24 +1204,41 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         // (RegisterRecipeRegistry<...BarrelRecipe...>("barrelrecipes")), so editing the asset before it is read removes
         // the recipe from both the craft-match set AND the handbook, and the removal propagates to every client on join.
         // The mod's OWN bark→tannin recipes are spared: their inputs are tags-only bark + water/weak-tannin, no log.
-        if (stripLogTannin)
-            StripMatchingRecipes(api, "recipes/barrel/", IsLogToTannin, ref filesChanged, ref totalRemoved);
+        // ModDbFeedbackPlan T03.05: the same pass also drops A Culinary Artillery's two tannin recipes from its dry oak
+        // bark (IsAcaOakBarkTannin). That bark's only survival source is a returnedStack ACA patches onto the vanilla
+        // debark grid recipe, which stripDebark removes above, so while the flag is on the two recipes are dead handbook
+        // entries. They follow the debark flag, not the tannin one: turn it off and the bark source comes back, and the
+        // recipes with it. Counted on their own so the strip line can name them.
+        bool stripAcaTannin = stripDebark && api.ModLoader.IsModEnabled("aculinaryartillery");
+        int acaTanninRemoved = 0;
+        if (stripLogTannin || stripAcaTannin)
+            StripMatchingRecipes(api, "recipes/barrel/", recipe =>
+            {
+                if (stripLogTannin && IsLogToTannin(recipe)) return true;
+                if (!stripAcaTannin || !IsAcaOakBarkTannin(recipe)) return false;
+                acaTanninRemoved++;
+                return true;
+            }, ref filesChanged, ref totalRemoved);
 
         // BarkPlan/E07 (T07.03): Wildcraft: Trees ships its OWN barrel tannin recipes. The strip above removes its
         // WHOLE-log routes (walnut/willow/beech, log-placed-*), but IsLogToTannin deliberately SPARES its two NON-log
         // routes (leaves-oak, lognarrow-alder) so they aren't orphaned. Left at Wildcraft's numbers those are a cheap
         // bypass of the whole bark chain (a huge hide = 120 free oak leaves, vs ~18 debarked oaks of milled bark), so
-        // when the log→tannin strip is ON and Wildcraft is present we NERF (not remove) those two routes: they survive
+        // when the log→tannin strip is ON and Wildcraft (or BD, below) is present we NERF (not remove) those two routes: they survive
         // as an EXPENSIVE fallback, bark stays the primary path. Gated on the same DisableVanillaLogTannin flag, so
         // flag-off leaves Wildcraft's original balance untouched. Same server-only, before-RecipeLoader, mutate-asset
         // .Data discipline as the strip (runs after it, so it reads the already-stripped array), keyed structurally so
-        // it only ever hits leaves-*/lognarrow-* → tannin (Wildcraft's; the mod's own tags-only bark recipes are inert).
+        // it only ever hits leaves-*/lognarrow-* → tannin (Wildcraft's and BD's; the mod's own tags-only bark recipes are inert).
+        // ModDbFeedbackPlan T03.03: Biodiversity: Trees (bdtree) ships the same narrow-log route, weak AND strong
+        // tannin from lognarrow-placed-alder-ud at 5 L per log in 24 h, and no leaf route, so it opens the gate too:
+        // with BD and no Wildcraft that alder was a full-strength bypass. The pass walks every domain, so with both
+        // mods it still runs once and reaches each mod's own recipes; the log line names no mod for the same reason.
         int nerfFiles = 0, nerfRecipes = 0;
-        if (stripLogTannin && api.ModLoader.IsModEnabled("wildcrafttree"))
+        if (stripLogTannin && (api.ModLoader.IsModEnabled("wildcrafttree") || api.ModLoader.IsModEnabled("bdtree")))
             NerfWildcraftNonLogTannin(api, "recipes/barrel/", ref nerfFiles, ref nerfRecipes);
         if (nerfRecipes > 0)
             api.Logger.Notification(
-                "[immersivewoodworking] Nerfed {0} Wildcraft non-log tannin recipe(s) across {1} asset(s) so bark stays the primary tanning path; synced to clients.",
+                "[immersivewoodworking] Nerfed {0} leaf/narrow-log tannin recipe(s) across {1} asset(s) so bark stays the primary tanning path; synced to clients.",
                 nerfRecipes, nerfFiles);
 
         if (totalRemoved > 0)
@@ -1193,6 +1249,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             if (stripPitsaw) fam.Add("pit saw + blade recipes"); // grid craft AND the blade's smithing recipe (E09)
             if (stripDebark) fam.Add("axe+hammer log→debarked log");
             if (stripLogTannin) fam.Add("barrel log→tannin"); // vanilla/wood-mod whole-log tannin, replaced by the bark chain (E03)
+            if (acaTanninRemoved > 0) fam.Add("ACA oak bark→tannin x" + acaTanninRemoved); // ModDbFeedbackPlan T03.05
             string families = string.Join(" + ", fam);
             api.Logger.Notification(
                 "[immersivewoodworking] Disabled {0} recipe(s) across {1} asset(s) ({2}); synced to clients.",
@@ -1254,6 +1311,9 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             // straight by the RecipeLoader; the bed is the hand choppingblock (its own recipe). See RegisterChopperRecipes.
             // Skipped when the chopper is switched off; the head and head-half recipes are FeatureGate's.
             if (Config.EnableChopper) RegisterChopperRecipes(sapi);
+            // The automated debarker's wooden parts (frame + drive/feed), same path. Skipped when the debarker is
+            // switched off; the disc, knife-set and knife-blank recipes are FeatureGate's. See RegisterDebarkerRecipes.
+            if (Config.EnableDebarker) RegisterDebarkerRecipes(sapi);
 
             // Conflict-proof (re)attach of the driftwood hand-break behavior. Runs LAST, after every JSON patch, so no
             // other mod's patch order can wipe it. Server-only, like the recipes above (the finalized block registry
@@ -1581,7 +1641,17 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         => RegisterWoodDomainRecipes(sapi, ChopperRecipeTemplates, "chopper");
 
     /// <summary>
-    /// Shared engine of <see cref="RegisterSawmillRecipes"/> and <see cref="RegisterChopperRecipes"/>: re-register a set
+    /// Re-register the automated DEBARKER's plank/beam-consuming grid recipes (the master frame + the wooden parts
+    /// drive/feed) across every discovered wood domain, via the shared <see cref="RegisterWoodDomainRecipes"/>
+    /// (AutoDebarkerPlan T02.03). The disc, the knife set and the knife forge carry no wood and load straight from JSON,
+    /// like the chopper's head.
+    /// </summary>
+    void RegisterDebarkerRecipes(ICoreServerAPI sapi)
+        => RegisterWoodDomainRecipes(sapi, DebarkerRecipeTemplates, "debarker");
+
+    /// <summary>
+    /// Shared engine of <see cref="RegisterSawmillRecipes"/>, <see cref="RegisterChopperRecipes"/> and
+    /// <see cref="RegisterDebarkerRecipes"/>: re-register a set
     /// of plank/beam-consuming grid-recipe TEMPLATES generically across every discovered wood domain, so a wood mod's
     /// own-domain planks and support beams craft the powered tiers with no per-mod patch — the same mod-independence the
     /// hand stations already have. WHY this is needed: those recipes pin their wood slots to <c>game:plank-*</c> /
@@ -1766,9 +1836,10 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     /// reach the half-log slab, whose <c>wood</c> axis was built from worldproperties alone — which is why an aged
     /// half-log had no slab to place and the click did nothing at all.
     ///
-    /// <para>Matched by the asset's own <c>code</c> being <c>log</c> or <c>debarkedlog</c> — the SAME pair
-    /// <see cref="BlockEntityChoppingBlock.IsFullLogBlock"/> accepts for the split, so this list can never cover more
-    /// or less than the set of species a half-log can actually carry. All domains, so a wood mod that writes literal
+    /// <para>Matched by the asset's own <c>code</c> being <c>log</c>, <c>logsection</c> or <c>debarkedlog</c> — the SAME
+    /// three <see cref="BlockEntityChoppingBlock.IsFullLogBlock"/> accepts for the split (the section joined in
+    /// ModDbFeedbackPlan T06.01), so this list can never cover more or less than the set of species a half-log can
+    /// actually carry. All domains, so a wood mod that writes literal
     /// states gets its variants with no patch from us; the species' domain is the asset's own, exactly as in
     /// <see cref="DiscoverWoodSpecies"/> (a mod ships its logs in the domain its blocktype lives in).
     ///
@@ -1780,9 +1851,10 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     ///
     /// <para><b>Cheap by construction.</b> A full JSON parse of every blocktype asset in every domain would be some
     /// 500 files and several megabytes to find four; instead each asset's raw text is scanned with one regex for a
-    /// <c>code</c> key valued <c>log</c> / <c>debarkedlog</c>, and only the handful that match are parsed. The parse
-    /// then re-checks the TOP-LEVEL code properly, so a stray nested match costs a parse and nothing else. Measured
-    /// offline over vanilla's 543 blocktypes: 3 files match (log, log-debarked, log-withresin), and all 3 parse.
+    /// <c>code</c> key valued <c>log</c> / <c>logsection</c> / <c>debarkedlog</c>, and only the handful that match are
+    /// parsed. The parse then re-checks the TOP-LEVEL code properly, so a stray nested match costs a parse and nothing
+    /// else. Measured offline over vanilla's 543 blocktypes: 3 files match (log, log-debarked, log-withresin), and all 3
+    /// parse; log-section makes it 4 since ModDbFeedbackPlan T06.01.
     ///
     /// <para><b>The text scanned is not the file on disk.</b> The engine's JSON patch loader (VSEssentials
     /// <c>ModJsonPatchLoader</c>, ExecuteOrder 0.05, so it runs before this 0.1 pass) writes every asset a mod has
@@ -1815,7 +1887,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             if (ReadAssetLikeEngine(asset) is not JObject block) continue;
 
             string? code = (string?)block["code"];
-            if (code != "log" && code != "debarkedlog") continue;  // a nested match — re-checked properly
+            if (code != "log" && code != "logsection" && code != "debarkedlog") continue;  // a nested match — re-checked properly
 
             if (block["variantgroups"] is not JArray groups) continue;
             foreach (JToken group in groups)
@@ -1846,7 +1918,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
 #endif
     }
 
-    /// <summary>A <c>code</c> key valued exactly <c>log</c> or <c>debarkedlog</c>, in both spellings VS JSON allows
+    /// <summary>A <c>code</c> key valued exactly <c>log</c>, <c>logsection</c> or <c>debarkedlog</c>, in both spellings VS JSON allows
     /// (bare key and quoted key), WHEREVER it sits on its line. All it asks of the position is that <c>code</c> is a
     /// whole key name (<c>(?&lt;!\w)</c> keeps <c>barkcode</c> out); the closing quote right after the value keeps a
     /// drop's <c>log-placed-{wood}-ud</c> out.
@@ -1857,7 +1929,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     /// <see cref="DiscoverLogOnlySpecies"/> re-checks the parsed top-level field. The contract is to be cheap and
     /// never MISS, not to be exact.</para></summary>
     static readonly System.Text.RegularExpressions.Regex FullLogAssetProbe = new System.Text.RegularExpressions.Regex(
-        "(?<!\\w)\"?code\"?\\s*:\\s*\"(log|debarkedlog)\"",
+        "(?<!\\w)\"?code\"?\\s*:\\s*\"(log|logsection|debarkedlog)\"",
         System.Text.RegularExpressions.RegexOptions.Compiled);
 
     /// <summary>Add one (species, domain) pair unless the exact pair is already there. Blank codes are skipped; the
@@ -2410,14 +2482,33 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         return 1f;                                                          // neutral band → vanilla
     }
 
+    /// <summary>Recipe files <see cref="ForEachRecipeAsset"/> has already reported in this AssetsLoaded
+    /// (ModDbFeedbackPlan T05.03). Cleared before the first pass: AssetsLoaded runs once per world, and a static outlives
+    /// a single-player world.</summary>
+    static readonly HashSet<AssetLocation> recipeAssetsWarned = new HashSet<AssetLocation>();
+
     /// <summary>Shared traversal for the AssetsLoaded recipe passes — the config-gated strip AND the ImprovementsPlan E03 saw-tool
     /// relax. Iterates every recipe asset under <paramref name="basePath"/> across ALL domains, normalizes the two
     /// VALID recipe-file shapes RecipeLoader reads — an ARRAY of recipes, or a single recipe OBJECT — to a JArray so
     /// one path covers both (~half of vanilla's recipes/grid files are single objects, so this is the common, expected
     /// case, NOT an error), hands the array to <paramref name="mutate"/>, and writes the asset back ONLY when mutate
-    /// reports a non-zero change count. A file the game itself cannot read is left exactly as-is, silently (see
+    /// reports a non-zero change count, in the shape it was read: our own AssetsFinalize reads its recipe templates
+    /// with <c>ToObject&lt;GridRecipe&gt;</c>, which an array would break (ModDbFeedbackPlan T05.03, F-L5-08). A file the
+    /// game itself cannot read is left exactly as-is, silently (see
     /// <see cref="ReadAssetLikeEngine"/>) — a missed edit is safe; blind-editing an unparseable file isn't. Accumulates the
-    /// file/element counters, so a re-run (or a file with nothing to change) is a no-op.</summary>
+    /// file/element counters, so a re-run (or a file with nothing to change) is a no-op.
+    ///
+    /// <para>ModDbFeedbackPlan T05.03: a throw from <paramref name="mutate"/> skips that one file for that pass,
+    /// unwritten; uncaught, it would end AssetsLoaded, and no later pass, the vanilla recipe strip included, would
+    /// run. The helpers read a child only off a <c>JObject</c>, so the shapes the engine loads past (a <c>null</c>
+    /// element in a recipe array, which RecipeLoader drops with "Failed to parse … recipe"; a <c>null</c> output; a
+    /// <c>null</c> slot in a disabled recipe) read as "no match" and cost nothing else in the file. What is left to
+    /// throw is a shape that breaks RecipeLoader as well, such as a slot written as a string or an array (no catch
+    /// around its <c>ToObject</c>; that exception names the JSON path but not the file, so our warning is the line
+    /// that does), or a bug of ours. Logged once per file per AssetsLoaded (<see cref="recipeAssetsWarned"/>), with
+    /// the stack: the passes walk the same recipes. The returned count is exact, but what a pass collects on the
+    /// side (kept trait recipes, the ACA tannin count, the beam and remap tables) may include recipes of a file
+    /// that then failed.</para></summary>
     static void ForEachRecipeAsset(ICoreAPI api, string basePath, System.Func<JArray, int> mutate,
         ref int filesChanged, ref int elementsChanged)
     {
@@ -2427,10 +2518,24 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
             JArray? recipes = token as JArray ?? (token is JObject ? new JArray(token) : null);
             if (recipes == null) continue; // not an array or object — not a shape any recipe file should be; skip
 
-            int changed = mutate(recipes);
+            int changed;
+            try
+            {
+                changed = mutate(recipes);
+            }
+            catch (System.Exception e)
+            {
+                if (recipeAssetsWarned.Add(asset.Location))
+                    api.Logger.Warning("[immersivewoodworking] Could not fully process recipe file {0}: a recipe in it has a shape this mod does not expect, so some of the mod's changes to this file may be missing (a vanilla firewood or plank recipe in it can stay craftable). Other recipe files are not affected. {1}",
+                        asset.Location, e);
+                continue;
+            }
             if (changed == 0) continue; // nothing matched here (or already applied on a re-run) → no write
 
-            asset.Data = Encoding.UTF8.GetBytes(recipes.ToString(Formatting.None));
+            // A single-recipe file stays an object; one whose recipe was removed becomes [], because RecipeLoader
+            // throws on an empty object (a grid recipe without ingredients).
+            JToken written = token is JObject && recipes.Count == 1 ? recipes[0] : recipes;
+            asset.Data = Encoding.UTF8.GetBytes(written.ToString(Formatting.None));
             asset.IsPatched = true; // parity with the engine's own asset writer: without it ServerMain.Launch()'s closing
                                     // UnloadUnpatchedAssets() nulls these bytes back out. Harmless today (every reader
                                     // runs on AssetsLoaded/AssetsFinalize, i.e. earlier — AuditFixPlan T10.01), but a
@@ -2467,9 +2572,9 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     ///
     /// <para>The comments are dropped. <c>DeserializeObject</c> keeps a <c>//</c> or <c>/* */</c> comment that sits
     /// inside an array, at any depth, as a <c>JTokenType.Comment</c> element (inside an object it is dropped), while
-    /// <c>JToken.Parse</c> drops them all. Every pass walks the array assuming recipes, and
-    /// <see cref="RelaxSawToolSlots"/> would throw on <c>comment["ingredients"]</c>; a comment among a log's wood
-    /// <c>states</c> would read as a species; and a written-back file stays free of comments, as it was.</para></summary>
+    /// <c>JToken.Parse</c> drops them all. In a recipe array a comment would only be skipped, since the passes
+    /// read nothing off a non-object (ModDbFeedbackPlan T05.03), but a comment among a log's wood <c>states</c> would
+    /// read as a species, and a written-back file stays free of comments, as it was.</para></summary>
     static JToken? ReadAssetLikeEngine(IAsset asset)
     {
         JToken? token;
@@ -2602,7 +2707,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     /// <summary>Scan every recipe asset under <paramref name="basePath"/> (all domains) and remove the recipes for
     /// which <paramref name="shouldRemove"/> holds. Shared by the grid strip (firewood/saw/pit-saw/debark) and the
     /// smithing strip (pit-saw blade, ManualOpsBalancePlan E09). Thin wrapper over <see cref="ForEachRecipeAsset"/> —
-    /// the file-shape, malformed-JSON and write-only-on-change handling all live there.</summary>
+    /// the file-shape, malformed-JSON, per-file failure and write-only-on-change handling all live there.</summary>
     static void StripMatchingRecipes(ICoreAPI api, string basePath, System.Func<JToken, bool> shouldRemove,
         ref int filesChanged, ref int totalRemoved)
         => ForEachRecipeAsset(api, basePath, recipes => RemoveRecipesWhere(recipes, shouldRemove), ref filesChanged, ref totalRemoved);
@@ -2652,14 +2757,18 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     /// list.</summary>
     static int RelaxSawToolSlots(JToken recipe)
     {
-        if (recipe["ingredients"] is not JObject ingredients) return 0;
+        if ((recipe as JObject)?["ingredients"] is not JObject ingredients) return 0;
         int relaxed = 0;
         foreach (JProperty slot in ingredients.Properties())
         {
             if (slot.Value is not JObject ing || ing["tags"] is not JArray tags) continue;
 
+            // ModDbFeedbackPlan T05.03: plain string tags only. The engine also reads tags as nested conditions (an
+            // array of arrays or of objects, e.g. [["tool-knife"], ["tool-axe"]], or an object, which the JArray test
+            // above already skips); casting a nested element to string throws, so a tool-saw inside a nested condition
+            // is not seen and its slot keeps its code.
             bool hasSawTag = false;
-            foreach (JToken t in tags) if ((string?)t == "tool-saw") { hasSawTag = true; break; }
+            foreach (JToken t in tags) if (t.Type == JTokenType.String && (string?)t == "tool-saw") { hasSawTag = true; break; }
             if (!hasSawTag) continue;
 
             string? code = StripDomain((string?)ing["code"]);
@@ -2762,6 +2871,32 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         return BarrelRecipeHasInput(recipe, code =>
             code.StartsWith("log-placed-", System.StringComparison.Ordinal) ||
             code.StartsWith("debarkedlog-", System.StringComparison.Ordinal));
+    }
+
+    /// <summary>True if this BARREL recipe brews weak/strong tannin from A Culinary Artillery's dry oak bark: OUTPUT
+    /// <c>weaktanninportion</c>/<c>strongtanninportion</c> AND an ingredient whose FULL code is
+    /// <c>aculinaryartillery:bark-oak-dry</c> (ACA's recipes/barrel/tannins.json since 2.0.0-dev.23, ModDbFeedbackPlan
+    /// T03.05). Used while <see cref="ImmersiveWoodworkingConfig.DisableVanillaDebarkCrafting"/> strips the only
+    /// recipe that yields this bark.
+    ///
+    /// <para>The only predicate here that matches a domain-qualified item code. Accept-by-shape (source-conventions.md
+    /// 2) governs which logs the stations take; this one removes another mod's recipe that names its own item by exact
+    /// code, and the shape alone would hit the wrong mod: In Dappled Groves brews tannin from
+    /// <c>indappledgroves:bark-oak-dry</c>, the same bare code, and that bark does have a source. Hence no
+    /// <see cref="BarrelRecipeHasInput"/> either: it strips the domain before matching.</para>
+    ///
+    /// <para>Removed rather than moved onto our <c>bark-tannin</c> tag: ACA steeps 10 L of tannin from one bark, while
+    /// our green tanning bark, the only bark with that tag, gives 1 L, so the retagged recipe would hand it ten times
+    /// its own yield. The reverse link already exists: patches/compat/aca_bark.json tags this bark so leftover stacks
+    /// still tan through our recipes.</para></summary>
+    static bool IsAcaOakBarkTannin(JToken recipe)
+    {
+        string? output = OutputBareCode(recipe);
+        if (output != "weaktanninportion" && output != "strongtanninportion") return false;
+        if (recipe["ingredients"] is not JArray ingredients) return false;
+        foreach (JToken ing in ingredients)
+            if ((string?)(ing as JObject)?["code"] == "aculinaryartillery:bark-oak-dry") return true;
+        return false;
     }
 
     /// <summary>True if this grid recipe outputs the mod's own pit saw (<c>pitsaw-{metal}</c>) — matched by OUTPUT
@@ -2970,7 +3105,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     /// it consumes, so a domain-less output means that same mod). First writer wins on the rare key collision.</summary>
     static void CollectProductRemap(JToken recipe)
     {
-        string? outputRaw = (string?)recipe["output"]?["code"];
+        string? outputRaw = (string?)((recipe as JObject)?["output"] as JObject)?["code"];
         string? outputBare = StripDomain(outputRaw);
         if (outputBare == null) return;
         if (!outputBare.StartsWith("plank-", System.StringComparison.Ordinal) &&
@@ -3037,8 +3172,9 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     }
 
     /// <summary>The recipe's output collectible code with any domain prefix stripped (so "game:firewood" and a
-    /// bare "firewood" compare equal), or null if the node has no output code.</summary>
-    static string? OutputBareCode(JToken recipe) => StripDomain((string?)recipe["output"]?["code"]);
+    /// bare "firewood" compare equal), or null if the node has no output code. A recipe or output that is not an
+    /// object (a <c>null</c> the engine drops with its own error) has none either (ModDbFeedbackPlan T05.03).</summary>
+    static string? OutputBareCode(JToken recipe) => StripDomain((string?)((recipe as JObject)?["output"] as JObject)?["code"]);
 
     /// <summary>Strip a leading "domain:" from an asset code, returning the bare path (null in → null out).</summary>
     internal static string? StripDomain(string? code)
@@ -3066,7 +3202,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         if (recipe["ingredients"] is not JObject ingredients) return false;
         foreach (JProperty ing in ingredients.Properties())
         {
-            string? code = StripDomain((string?)ing.Value["code"]);
+            string? code = StripDomain((string?)(ing.Value as JObject)?["code"]); // a null slot (disabled recipe) has no code
             if (code != null && match(code)) return true;
         }
         return false;
@@ -3082,13 +3218,13 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         if (recipe["ingredients"] is not JArray ingredients) return false;
         foreach (JToken ing in ingredients)
         {
-            string? code = StripDomain((string?)ing["code"]);
+            string? code = StripDomain((string?)(ing as JObject)?["code"]); // a null ingredient (disabled recipe) has no code
             if (code != null && match(code)) return true;
         }
         return false;
     }
 
-    // --- BarkPlan/E07 (T07.03): Wildcraft: Trees NON-log tannin NERF ---------------------------------------------------
+    // --- BarkPlan/E07 (T07.03): Wildcraft: Trees NON-log tannin NERF, also Biodiversity: Trees (ModDbFeedbackPlan T03.03) ---
     // DRAFT balance numbers (tuned at the T07.06 modpack playtest), hardcoded like every other BarkPlan scalar until E08.
     // Leaf route: MULTIPLY the leaf count (Wildcraft's 4 → 8 per litre) and a long seal, so leaf tannin is a slow,
     // tedious poor-man's path. Narrow-log route: cut the yield (5 L → 2 L per narrow log) to IW's raw-bark tier, medium
@@ -3099,14 +3235,15 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
     const int WildcraftNarrowLogTanninLitres = 2;      // 5 L → 2 L per narrow log
     const int WildcraftNarrowLogTanninSealHours = 72;
 
-    /// <summary>NERF (not remove) Wildcraft: Trees' two NON-log barrel tannin routes — leaf steeping and narrow-log
-    /// steeping — so bark stays the primary tanning path (BarkPlan/E07, T07.03). A pass over <paramref name="basePath"/>
+    /// <summary>NERF (not remove) the NON-log barrel tannin routes of Wildcraft: Trees and Biodiversity: Trees — leaf
+    /// steeping (Wildcraft only) and narrow-log steeping (both) — so bark stays the primary tanning path (BarkPlan/E07,
+    /// T07.03; Biodiversity: Trees added by ModDbFeedbackPlan T03.03). A pass over <paramref name="basePath"/>
     /// (<c>recipes/barrel/</c>, all domains) via the shared <see cref="ForEachRecipeAsset"/> traversal (same server-only,
     /// before-RecipeLoader, mutate-asset.Data-then-write path as the strip). Runs only when
-    /// <see cref="ImmersiveWoodworkingConfig.DisableVanillaLogTannin"/> is on AND <c>wildcrafttree</c> is loaded (caller
-    /// gate); the whole-log routes are already removed by <see cref="IsLogToTannin"/>, and these two are the routes that
-    /// pass spares. Structural, so it catches every leaf / narrow-log tannin recipe Wildcraft ships (weak AND strong)
-    /// with no per-recipe pinning.</summary>
+    /// <see cref="ImmersiveWoodworkingConfig.DisableVanillaLogTannin"/> is on AND <c>wildcrafttree</c> or <c>bdtree</c>
+    /// is loaded (caller gate); the whole-log routes are already removed by <see cref="IsLogToTannin"/>, and these two
+    /// are the routes that pass spares. Structural, so it catches every leaf / narrow-log tannin recipe either mod ships
+    /// (weak AND strong) with no per-recipe pinning.</summary>
     static void NerfWildcraftNonLogTannin(ICoreAPI api, string basePath, ref int filesChanged, ref int recipesChanged)
         => ForEachRecipeAsset(api, basePath, recipes =>
         {
@@ -3135,7 +3272,7 @@ public partial class ImmersiveWoodworkingModSystem : ModSystem
         JObject? leaf = null, lognarrow = null;
         foreach (JToken ing in ingredients)
         {
-            string? code = StripDomain((string?)ing["code"]);
+            string? code = StripDomain((string?)(ing as JObject)?["code"]);
             if (code == null) continue;
             string part = FirstCodePart(code);
             if (part == "leaves") leaf = ing as JObject;

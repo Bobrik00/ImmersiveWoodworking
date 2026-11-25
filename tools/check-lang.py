@@ -104,13 +104,14 @@ TAG_RE = re.compile(r"</?([a-zA-Z][a-zA-Z0-9]*)[^>]*>")
 HK_RE = re.compile(r"<(?:hk|hotkey)>([^<]*)</(?:hk|hotkey)>")
 PLACEHOLDER_RE = re.compile(r"\{(\d+)\}")
 HREF_RE = re.compile(r'href="([^"]*)"')
-# The three handbook pages that are COMPOSED at runtime are named in full rather than by a pattern:
-# WoodworkingHandbookInfo.OwnPages fills their {0}/{1}/{2} with a config-conditional sentence or paragraph
-# (AuditFixPlan T09.01; the Woodworking overview since the subsystem switches), and every OTHER handbook text
-# must keep failing this check.
+# The handbook pages that are COMPOSED at runtime are named in full rather than by a pattern:
+# WoodworkingHandbookInfo.OwnPages fills their numbered placeholders with a config-conditional sentence or paragraph
+# (AuditFixPlan T09.01; the Woodworking overview since the subsystem switches; the debarker and the two bark pages
+# that name it since AutoDebarkerPlan T08.02), and every OTHER handbook text must keep failing this check.
 PLACEHOLDER_OK = re.compile(
     r"(-name$|^blockdesc-|^itemdesc-|^ingameerror-|^blockinfo-|^contained-|^abilitydesc-"
-    r"|^choppingblock-handbook-text$|^sawhorse-handbook-text$|^craftinginfo-woodworking-text$)")
+    r"|^choppingblock-handbook-text$|^sawhorse-handbook-text$|^craftinginfo-woodworking-text$"
+    r"|^debarker-handbook-text$|^bark-generic-handbook-text$|^bark-tan-green-handbook-text$)")
 
 # ── C# key extraction (check 11) ─────────────────────────────────────────────────────────────────────────
 # EVERY domain-prefixed string literal in the C# is treated as a lang key, because a key reaches the player by
@@ -143,17 +144,21 @@ RUNTIME_KEY_FAMILIES = {
     "immersivewoodworking:material-":
         "WoodName.cs: the species word, last of three lookups after the bare name and the log's own domain",
     "immersivewoodworking:item-":
-        "BlockEntitySawmill.cs: names the product item of the current cut",
+        "BlockEntitySawmill.cs: names the product item of the current cut; it and BlockEntityDebarker.cs name a "
+        "missing part in the block info",
     "immersivewoodworking:":
         "BlockEntityChopper/Sawmill.Parts.cs and BlockEntityChopper.cs: an ingame-error code and a part name, "
         "both whole keys held in a variable",
 }
 
-# Domain-prefixed literals that are not lang keys after all. Empty today: the only shape that existed, the
-# TesselateShape label, is masked by the scanner itself, which is better than listing each one. Kept as the
-# declared way out, so the next such literal is written down here rather than waved through by loosening
-# the scan.
-NOT_LANG_KEYS = {}
+# Domain-prefixed literals that are not lang keys after all. The TesselateShape label is masked by the scanner
+# itself, which is better than listing each one; this table is the declared way out for the rest, so the next
+# such literal is written down here rather than waved through by loosening the scan.
+NOT_LANG_KEYS = {
+    "immersivewoodworking:chop": "VigorCompat.cs: a Vigor stamina action id (ModDbFeedbackPlan T06.03)",
+    "immersivewoodworking:saw": "VigorCompat.cs: a Vigor stamina action id (ModDbFeedbackPlan T06.03)",
+    "immersivewoodworking:debark": "VigorCompat.cs: a Vigor stamina action id (ModDbFeedbackPlan T06.03)",
+}
 
 
 failures = []

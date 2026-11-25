@@ -1,0 +1,74 @@
+[
+	// STRING SENSE COMPAT (ModCompatPlan/E01, T01.01): ordinary bark becomes String Sense's bark cord.
+	// SS feeds `stringsense:cord-bark` from `stringsense:barkstrands` alone, handed out as a returnedStack on the vanilla
+	// axe+hammer debark grid recipe (stringsense:patches/debarkedlog.json). DisableVanillaDebarkCrafting strips that
+	// recipe by its debarkedlog-* output after the patch loader has run, so under IW defaults the cord had no source.
+	// This row feeds it the sawhorse's bark instead: 3 in a column = 1 cord, the ratio of SS's own strands and of its
+	// AncientTools / In Dappled Groves bridges. Checked against String Sense 2.4.0 on 2026-10-27.
+	// EXACT code, not a tag: no tag isolates the ordinary bark (`bark` sits on all seven kinds, `bark-compost` on five),
+	// and tanning and medicinal bark keep to their own chains. Server only: grid recipes load on the server alone and
+	// reach clients through the recipe sync. dependsOn keeps it silent without SS, where the cord file does not exist.
+	// KNOWN EDGE, accepted (user decision 2026-11-18): with EnableBarkChain off the cord has no source again. FeatureGate
+	// switches this whole file off with the other bark assets, the sawhorse drops no bark or bast, and the debark strip
+	// does not depend on the chain, so SS's strand recipe stays stripped (SS's ACA bridge is empty too: ACA bark comes
+	// off the same recipe). Nothing is blocked, since every SS recipe takes `stringsense:cord-*`; only the bark variant
+	// of the cord and of the basket, basket trap, skep and mat is lost. Keeping this file on would feed it nothing, and
+	// sparing the grid debark would let it bypass the sawhorses. DisableVanillaDebarkCrafting=false brings the strand
+	// recipe back.
+	{
+		"file": "stringsense:recipes/grid/cord.json",
+		"op": "add",
+		"path": "/-",
+		"value": {
+			"ingredientPattern": "X,X,X",
+			"width": 1,
+			"height": 3,
+			"ingredients": {
+				"X": { "type": "item", "code": "immersivewoodworking:bark-generic" }
+			},
+			"output": { "type": "item", "code": "stringsense:cord-bark" }
+		},
+		"side": "server",
+		"dependsOn": [{ "modid": "stringsense" }]
+	},
+
+	// BAST JOINS THE CORD TIER (ModCompatPlan/E01, T01.02, user decision). recipes/grid/rope-bast.json makes bast the
+	// forest twin of cattail and papyrus in vanilla's one-step "fibre -> rope" tier. String Sense removes that tier
+	// (stringsense:patches/rope.json switches off game:recipes/grid/rope 0-3 and makes rope from 6 cords) but never
+	// touches our file, so under SS bast alone would still skip the cord. The two entries below put it where SS puts
+	// every fibre: 3 bast in a column = 1 bark cord, and the direct rope recipe off. That is 18 bast per rope instead
+	// of 6, a deliberate nerf for one shared tier.
+	// TAG `bark-fiber`, the same match rope-bast.json uses (user decision 2026-11-17, not the bast code): a foreign
+	// fibrous bark tagged into the rope chain keeps a way to rope through the cord instead of losing it with
+	// rope-bast. Today only our bast carries the tag. No grid clash: rope-bast is a 3x1 row and all three bast
+	// poultices (poultice-bast.json and the bast entry of poultice-bark.json) are 1x2 or 3x2.
+	// KNOWN EDGE: IW does not read String Sense's ConfigLib settings. A world that turns SS's ROPE_RECIPES off gets
+	// vanilla's fibre ropes back, but the same switch turns off SS's 6-cord rope (its configlib-patches.json gates
+	// patches/rope.json 4/value/0), while rope-bast stays off here. Bast then still makes cord and has no way to rope.
+	{
+		"file": "stringsense:recipes/grid/cord.json",
+		"op": "add",
+		"path": "/-",
+		"value": {
+			"ingredientPattern": "X,X,X",
+			"width": 1,
+			"height": 3,
+			"ingredients": {
+				"X": { "type": "item", "tags": ["bark-fiber"] }
+			},
+			"output": { "type": "item", "code": "stringsense:cord-bark" }
+		},
+		"side": "server",
+		"dependsOn": [{ "modid": "stringsense" }]
+	},
+	// rope-bast.json is a single recipe object, hence /enabled. With the bark chain off FeatureGate has switched off
+	// both the recipe and this patch already, and the recipe stays off either way.
+	{
+		"file": "immersivewoodworking:recipes/grid/rope-bast.json",
+		"op": "add",
+		"path": "/enabled",
+		"value": false,
+		"side": "server",
+		"dependsOn": [{ "modid": "stringsense" }]
+	}
+]

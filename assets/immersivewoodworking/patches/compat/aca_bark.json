@@ -19,9 +19,12 @@
 	// Under IW defaults ACA bark also has no survival source. ACA's only source is a `returnedStack` it patches onto
 	// game:recipes/grid/debarkedlog.json, and DisableVanillaDebarkCrafting (on by default) strips that recipe by its
 	// debarkedlog-* output (IsLogToDebarkedLog). So this tag only reaches ACA bark that exists anyway: stacks from
-	// before IW, the creative inventory, or a server that turned the flag off. While In Dappled Groves is loaded, ACA
-	// skips `bark-oak-dry` altogether (its patches/compatibility/indappledgroves/boiledbark.json), so the tagsByType
-	// key below matches no variant and the tags land on no item.
+	// before IW, the creative inventory, or a server that turned the flag off. The same flag also strips ACA's two
+	// barrel tannin recipes above (IsAcaOakBarkTannin, ModDbFeedbackPlan T03.05), so with the flag on the handbook
+	// lists only our tag recipes as this bark's barrel tannin; with it off the bark's source and ACA's recipes are
+	// back. The Material Needs dye stays as it is. While In Dappled Groves is loaded, ACA skips `bark-oak-dry`
+	// altogether (its patches/compatibility/indappledgroves/boiledbark.json), so the tagsByType key below matches no
+	// variant and the tags land on no item.
 	//
 	// ONLY the dry raw bark (`bark-oak-dry`) is tagged, via tagsByType keyed on the full code (ACA's bark.json has no
 	// `tags`/`tagsByType`, so `op: add /tagsByType` creates it). The BOILED intermediate (`bark-oak-boiled`) is left
@@ -44,11 +47,10 @@
 	//     codes bark-{wood}-{dry|soaked}, no tags.
 	//   - the AncientTools fork 1.6.5, modid `ancienttoolsfork` while its asset domain stays `ancienttools`:
 	//     ancienttools:itemtypes/resources/bark.json, codes bark-{wood}, no tags.
-	// Their tag patches are not written and wait on a separate decision. BarkPlan closed on 2026-07-31 without them;
-	// T07.06, which this note used to name as their home, was the modpack smoke run. For whoever writes them: the patch
-	// loader matches each `dependsOn` entry against Mod.Info.ModID exactly and ANDs the entries, so a gate on
-	// `ancienttools` (the modid ACA's own compat patches use) never fires for the fork, and covering both the original
-	// mod and the fork takes one patch per modid.
+	// AncientTools got its own file, compat/ancienttools_bark.json (ModCompatPlan/E02), which also shows the
+	// one-patch-per-modid gate the fork needs; In Dappled Groves' tag patch is not written and waits on a separate
+	// decision. BarkPlan closed on 2026-07-31 without either; T07.06, which this note used to name as their home, was
+	// the modpack smoke run.
 	// MaterialNeeds is still absent. Its bark is the vanilla orphan game:oakbark, which BarkPlan scope deliberately
 	// does not touch.
 	{

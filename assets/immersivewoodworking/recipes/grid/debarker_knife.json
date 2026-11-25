@@ -1,0 +1,21 @@
+{
+	// Grid recipe for the debarker's KNIFE SET `debarkerknife-{metal}` (AutoDebarkerPlan T02.03, decision В8): four
+	// forged knives `debarkerknifeblank-{metal}` of the SAME metal (recipes/smithing/debarkerknifeblank.json) joined
+	// with a hammer, the scheme of the chopper's head halves (chopper_head.json).
+	//   K H K     K = debarkerknifeblank-* (name:"metal": all four the same metal, and {metal} picks the output)
+	//   K _ K     H = hammer (tag tool-hammer, returned untouched)
+	// PLAIN, engine-loaded recipe (no `enabled:false`): no wood, so the RecipeLoader loads it in this mod's domain and
+	// expands name:"metal" into one sub-recipe per blank metal, which is what makes the four cells one metal. The input
+	// is this mod's own item, whose metal list other mods cannot extend, so no allowedVariants (docs/recipe-conventions.md,
+	// exception 1); the smithing recipe already pins the nine metals. The blanks carry no durability and the hammer is
+	// isTool, so the default averageDurability leaves the set at full durability (memory vs-grid-recipe-average-durability).
+	// A blank stack holds 4, one full stack is one set. A 3x2 pattern matches in the top or the bottom two rows.
+	ingredientPattern: "KHK,K_K",
+	ingredients: {
+		"K": { type: "item", code: "debarkerknifeblank-*", name: "metal" },
+		"H": { type: "item", tags: ["tool-hammer"], isTool: true, toolDurabilityCost: 0 }
+	},
+	width: 3,
+	height: 2,
+	output: { type: "item", code: "debarkerknife-{metal}", quantity: 1 }
+}

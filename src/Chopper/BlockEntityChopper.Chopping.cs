@@ -168,8 +168,8 @@ public partial class BlockEntityChopper
 
     /// <summary>Block-entity packet: "the drive phase is here" — server to the nearby clients, once per
     /// <see cref="AnimSyncIntervalMs"/> while the mechanism turns (<see cref="SendAnimAnchor"/>), handled in
-    /// <see cref="OnReceivedServerPacket"/>. A private id in the mod's 22xx block (the chopping block holds 2201, the
-    /// sawhorse 2211/2212): this BE has no dialog and so no <c>EnumBlockEntityPacketId</c> traffic to collide with.</summary>
+    /// <see cref="OnReceivedServerPacket"/>. A private id in the mod's 22xx block (the chopping block holds 2201/2202, the
+    /// sawhorse 2211-2213): this BE has no dialog and so no <c>EnumBlockEntityPacketId</c> traffic to collide with.</summary>
     const int AnimAnchorPacketId = 2221;
 
     /// <summary>How far the anchor packet carries. The anchor keeps the visible axe-fall on the server's split, and
@@ -404,7 +404,7 @@ public partial class BlockEntityChopper
         // threshold is 0.5 and the single strike (progress → 1.0) completes exactly as before — bit-identical at default.
         if (chopProgress >= 1f - Config.ChopperSplitPerStrike * 0.5f)
         {
-            chopProgress = 1f; // clamp to a full pass; CompletePass resets it to 0 once the batch is ejected (T06.02)
+            chopProgress = 1f; // clamp to a full pass; CompletePass resets it to 0 before it ejects the batch (T06.02)
             MarkDirty(true);   // pass-complete is a visible-state boundary — sync it (sawhorse-style economy)
             CompletePass();
             return;
@@ -445,13 +445,13 @@ public partial class BlockEntityChopper
     /// <summary>
     /// E06/T06.02 — pass completion, invoked from <see cref="OnChopperTick"/> once <c>chopProgress</c> reaches a full
     /// pass. Computes the batch FROM THE STILL-LOADED input (<see cref="GetChopBatch"/> reads the input slot, so this runs
-    /// BEFORE the log is consumed — the "compute before consume" lesson), EJECTS it forward out of the machine
-    /// (<see cref="EjectBatch"/>, T06.03 — pulverizer-style, never buffered in an output slot), then consumes the input
-    /// log and resets the progress under the next one. Order mirrors <see cref="BlockEntitySawmill.CompletePass"/>
-    /// (compute → eject → consume → reset) MINUS its <c>DropSawdust</c> (Wear &amp; Tear opt-out: chopping yields chips,
-    /// not sawdust, and strips no W&amp;T recipe — PLAN "Ключевые решения"). The eject uses the already-captured batch and
-    /// never re-reads the slot, so consume-after-eject is order-safe. The head wear (<c>DamageHead</c>, T06.05) wires in
-    /// at the seam below.
+    /// BEFORE the log is consumed — the "compute before consume" lesson), consumes the input log and resets the progress
+    /// under the next one, and only then EJECTS the batch forward out of the machine (<see cref="EjectBatch"/>, T06.03 —
+    /// pulverizer-style, never buffered in an output slot). Order mirrors <see cref="BlockEntitySawmill.CompletePass"/>
+    /// (compute → consume → reset → eject, ModDbFeedbackPlan T05.01) MINUS its <c>DropSawdust</c> (Wear &amp; Tear
+    /// opt-out: chopping yields chips, not sawdust, and strips no W&amp;T recipe — PLAN "Ключевые решения"). The eject uses
+    /// the already-captured batch and never re-reads the slot, so consume-before-eject is order-safe. The head wear
+    /// (<c>DamageHead</c>, T06.05) wires in at the seam below.
     ///
     /// Completion is UNCONDITIONAL (no "output full → pause"): the batch is ejected forward, never into a slot, so a full
     /// world around the machine just piles / despawns the firewood — the pass always finishes. It fires exactly once per
@@ -472,19 +472,53 @@ public partial class BlockEntityChopper
             return;
         }
 
-        // Eject the whole batch forward, out of the machine (never buffered → a completed pass can't be blocked by a full
-        // world), then consume the input log and reset under the next. No DropSawdust (W&T opt-out — see summary).
-        EjectBatch(batch.Value.product, batch.Value.count);
+        // ModDbFeedbackPlan T05.01: reset and consume the input log BEFORE the eject. A throw from a foreign item-spawn
+        // hook used to leave the log loaded with chopProgress at 1; the tick already advanced its strike phase, so the
+        // re-run did not split again at once, but the next strike of the arm did, and every strike after it ejected the
+        // batch again. (The sawmill re-ejected on every server frame, see BlockEntitySawmill.CompletePass.)
+        chopProgress = 0f;
         InputSlot.Itemstack = null;
         InputSlot.MarkDirty();
-        chopProgress = 0f;
         chopsCompleted++; // signal the client this emptying was a CHOP → it defers the log's visual vanish to its own axe-landing (see chopsCompleted)
         MarkDirty(true);
 
+        try
+        {
+            // Eject the whole batch forward, out of the machine (never buffered → a completed pass can't be blocked by a
+            // full world). No DropSawdust (W&T opt-out — see summary).
+            EjectBatch(batch.Value.product, batch.Value.count);
+        }
+        catch (Exception e)
+        {
+            LogPassThrowOnce("ejecting the batch", e);
+        }
+
         // One completed log wears the installed head by the config charge (T06.05); may break it, which flips IsComplete
         // false so the next tick stalls the station until a new head is installed. Mirrors the sawmill's DamageBladeKit
-        // call in the same position (last, after eject + consume + reset).
-        DamageHead();
+        // call in the same position (last, after consume + reset + eject), in a try of its own for the same reason.
+        try
+        {
+            DamageHead();
+        }
+        catch (Exception e)
+        {
+            LogPassThrowOnce("wearing the head", e);
+        }
+    }
+
+    // Transient: one report per loaded chopper (ModDbFeedbackPlan T05.01). A foreign spawn hook that throws on every
+    // eject would otherwise print a stack trace per log.
+    bool passThrowLogged;
+
+    /// <summary>Report a pass whose eject or head wear threw (<see cref="CompletePass"/> has already consumed the log, so
+    /// the machine goes on with the next one), once per chopper, with the mod prefix the engine's own catch would not
+    /// add. Twin of <see cref="BlockEntitySawmill.LogPassThrowOnce"/>. Server-side.</summary>
+    void LogPassThrowOnce(string step, Exception e)
+    {
+        if (passThrowLogged) return;
+        passThrowLogged = true;
+        Api.Logger.Error("[immersivewoodworking] Chopper at {0}: {1} threw. The log is already consumed and the machine goes on; further throws on this chopper are not logged.", Pos, step);
+        Api.Logger.Error(e);
     }
 
     /// <summary>

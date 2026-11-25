@@ -60,13 +60,54 @@
 		"aged":        [],
 
 		// --- Wildcraft Trees (finalised in T07.03) --------------------------------------------------------------------
-		// Harmless when Wildcraft is absent: these species never exist, so the resolver is never keyed with them. Only
-		// the species that earn a special bark are listed; every OTHER Wildcraft wood falls through to bark-generic.
+		// Harmless when neither Wildcraft nor Biodiversity: Trees is installed: these species never exist, so the resolver
+		// is never keyed with them. Only the species that earn a special bark are listed; every OTHER Wildcraft wood falls
+		// through to bark-generic, unless the Biodiversity: Trees block below lists the same species code.
 		"willow":      [ { kind: "bast",      chance: 0.4 }, { kind: "medicinal", chance: 0.4 } ],
 		"linden":      [ { kind: "bast",      chance: 0.7 } ],
 		"elm":         [ { kind: "bast",      chance: 0.7 } ],
 		"poplar":      [ { kind: "bast",      chance: 0.7 } ],
 		"spruce":      [ { kind: "tan",       chance: 0.25 } ],
-		"fir":         [ { kind: "tan",       chance: 0.25 } ]
+		"fir":         [ { kind: "tan",       chance: 0.25 } ],
+
+		// --- Vara's Alders (ModDbFeedbackPlan T03.01) -----------------------------------------------------------------
+		// Requested by Varaxia, the mod's author (ModDB, 2026-11-09). Vara's Alders 1.2.1 adds `alder` to vanilla
+		// `game:worldproperties/block/wood.json` and makes its tannin from the log in barrel recipes, which
+		// DisableVanillaLogTannin strips, so tan bark is how alder reaches tannin under IW. 0.5 like larch (author's
+		// decision, 2026-11-17). Harmless without the mod, like the Wildcraft lines above.
+		"alder":       [ { kind: "tan",       chance: 0.5 } ],
+
+		// --- Biodiversity: Trees (ModDbFeedbackPlan T03.02) -----------------------------------------------------------
+		// Requested by Maevelynne (ModDB, 2026-10-29). Biodiversity: Trees 1.1.0-pre.2 (modid `bdtree`) lists its woods in
+		// its own `bdtree:block/wood`, and its logs are `bdtree:log-placed-<wood>-ud`, so the bare species key reaches them.
+		// 41 of its 42 wood codes (all but rosewood) are also Wildcraft Trees 1.3.4 codes: every line below applies to the
+		// same-named Wildcraft wood too, and the Wildcraft lines above (elm, fir, linden, poplar, spruce, willow) already
+		// apply to BD. Table approved by the author 2026-11-19; the other 24 BD woods (and `chlorociboria`, commented out
+		// in BD's list) stay generic and are not listed. Harmless when neither mod is installed. The bark lore below is
+		// general knowledge, not checked against sources.
+		// Tannin bark. BD tans the beech log in its own barrel recipes; 0.25 is the author's decision of 2026-11-17.
+		"beech":       [ { kind: "tan",       chance: 0.25 } ],
+		// Mangrove bark holds more tannin than oak bark and was shipped to tanneries. 0.8 like acacia, so only oak has 1.0.
+		"mangrove":    [ { kind: "tan",       chance: 0.8 } ],
+		// Thick-barked eucalypts were stripped for tannin extract in Western Australia. 0.5 like larch.
+		"eucalyptus":  [ { kind: "tan",       chance: 0.5 } ],
+		// Conifers at the weak conifer rate of pine, spruce and fir. BD's `cedar` is the "Cedar pine".
+		"douglasfir":  [ { kind: "tan",       chance: 0.25 } ],
+		"cedar":       [ { kind: "tan",       chance: 0.25 } ],
+		// Bast. BD grows `redcedar` in a mild, very wet band (13-17 C), so it is western red cedar, whose bark the
+		// Northwest Coast peoples wove into clothing and rope: 0.7 like linden. Blue mahoe is the hibiscus whose inner bark
+		// was sold as "Cuba bast": 0.7. `tuja` is arborvitae (Wildcraft's name for it), inner bark used for cordage, a
+		// relative of baldcypress: 0.4 like baldcypress.
+		"redcedar":    [ { kind: "bast",      chance: 0.7 } ],
+		"bluemahoe":   [ { kind: "bast",      chance: 0.7 } ],
+		"tuja":        [ { kind: "bast",      chance: 0.4 } ],
+		// Medicinal bark. Guaiacum ("holy wood"): a decoction of its wood and bark was Europe's 16th-century cure for
+		// syphilis, 0.6 like kapok and ebony. Ash (a fever bark in European folk use and a bark of the Chinese materia
+		// medica), horse chestnut (a fever bark, where aesculin was found) and yew (the source of paclitaxel, though the
+		// bark itself is poisonous) take maple's 0.25.
+		"guajacum":    [ { kind: "medicinal", chance: 0.6 } ],
+		"ash":         [ { kind: "medicinal", chance: 0.25 } ],
+		"horsechestnut": [ { kind: "medicinal", chance: 0.25 } ],
+		"yew":         [ { kind: "medicinal", chance: 0.25 } ]
 	}
 }

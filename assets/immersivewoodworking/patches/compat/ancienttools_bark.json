@@ -1,0 +1,65 @@
+[
+	// ANCIENT TOOLS COMPAT (ModCompatPlan/E02, T02.03): Ancient Tools' bark joins our tanning and compost barrels and the
+	// tar pot. Our sinks match TAGS (`bark-tannin`, `bark-compost`, `bark-birch`), and AT's bark ships with no tags at all
+	// (ancienttools:itemtypes/resources/bark.json has no `tags`/`tagsByType`, and no AT patch adds one), so
+	// `op: add /tagsByType` creates the map, exactly as aca_bark.json does for ACA's oak bark. Checked against the AT fork
+	// 1.6.5 on 2026-11-22.
+	//
+	// THE MAP, per species. AT's codes are bark-{wood}: the 12 species of game:block/wood plus `aged` and `cypress` (the
+	// narrow cypress log), and any species another mod adds to game:block/wood (loadFromProperties reads the whole list).
+	//   - oak, acacia -> tanning. Tannin-rich in all three references: vanilla tans only their logs
+	//     (survival recipes/barrel/weaktannin.json), our config/barkdrops.json gives them the top `tan` chances (1.0 and
+	//     0.8), and they sit in the richest tier of AT's own bark liquor (16 bark chunks per 10 L). That tier also holds
+	//     pine, walnut, redwood and ebony, so AT alone does not single them out; vanilla does. Pine (0.25 in our table)
+	//     and larch (0.5) are only sometimes tanning bark on the sawhorse, while a tag here covers every bark of the
+	//     species, so they compost instead.
+	//   - birch -> the tar pot (`bark-birch`, TarRig.IsBirchBark) plus compost, like our own birch bark. The pot would
+	//     take it even untagged: IsBirchBark's code fallback checks the path prefix `bark-birch` in any domain. The tag
+	//     is the designed route and keeps the map whole. AT's bark never dries, so TarRig.BirchPoints counts it as dry.
+	//   - every other species, the `*` catch-all -> compost. It MUST stay the last key: *ByType takes the first match.
+	// Only the green tanning tier: `bark-tannin` is the 72 h row of weaktannin-bark.json and strongtannin-bark.json. AT's
+	// bark has no dry state, and our crushed bark comes from grinding our own dried tanning bark.
+	//
+	// NO `bark-compost` ON THE TANNING ROWS (AuditFixPlan/T08.01, finding F-L7-01): the compost barrel would take
+	// tanning bark before the weak-tannin one (see itemtypes/bark.json). Same rule as our own tanning bark and ACA's.
+	//
+	// SCOPE: tanning and compost (ModCompatPlan decision D2), plus birch for the tar pot. No `bark-medicinal` and no
+	// `bark-fiber`: AT's salve, bark flour, bark leather and pitch stay AT's own, and AT's attributes and behaviors are
+	// left untouched.
+	//
+	// TWO COPIES, ONE PER MODID. The AT fork 1.6.5 declares modid `ancienttoolsfork`, while its asset domain and item
+	// codes stayed `ancienttools`. The patch loader compares every dependsOn entry with Mod.Info.ModID exactly and ANDs
+	// the entries, so one patch listing both modids in dependsOn would need both installed. The first copy fires for
+	// the original mod, the second for the fork; both target the `ancienttools` domain. Should both be installed, the
+	// second add writes the same map again. While In Dappled Groves is loaded, AT switches its own bark off
+	// (ancienttools:patches/compatibility/dappledgroves/ancienttools disables/bark.json), and the map lands on no item.
+	// Rule: docs/source-conventions.md, section 3 "Gating on another mod".
+	//
+	// No `side`, like aca_bark.json. Only the server loads itemtypes; the client gets item types, tags included, in the
+	// server's item packets (ItemTypeNet), so the client pass only counts the file as missing at VerboseDebug.
+	// FeatureGate.BarkAssets switches this file off with EnableBarkChain=false, like the rest of the chain.
+	{
+		"file": "ancienttools:itemtypes/resources/bark.json",
+		"op": "add",
+		"path": "/tagsByType",
+		"value": {
+			"bark-oak":    ["bark", "bark-tannin"],
+			"bark-acacia": ["bark", "bark-tannin"],
+			"bark-birch":  ["bark", "bark-birch", "bark-compost"],
+			"*":           ["bark", "bark-compost"]
+		},
+		"dependsOn": [{ "modid": "ancienttools" }]
+	},
+	{
+		"file": "ancienttools:itemtypes/resources/bark.json",
+		"op": "add",
+		"path": "/tagsByType",
+		"value": {
+			"bark-oak":    ["bark", "bark-tannin"],
+			"bark-acacia": ["bark", "bark-tannin"],
+			"bark-birch":  ["bark", "bark-birch", "bark-compost"],
+			"*":           ["bark", "bark-compost"]
+		},
+		"dependsOn": [{ "modid": "ancienttoolsfork" }]
+	}
+]

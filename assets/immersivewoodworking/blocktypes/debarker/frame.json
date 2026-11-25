@@ -1,0 +1,140 @@
+{
+	// Master frame of the AUTOMATED DEBARKER (`debarker`, AutoDebarkerPlan), the mech-powered twin of hand debarking on
+	// the sawhorse. It is the ONLY placed block; the rest of the machine is RMB-installed into it (T03.06): debarkerdrive
+	// (gearbox) + debarkerdisc (spinning disc) + debarkerfeed (rollers and lift) in any order, then debarkerknife-{metal}
+	// once the disc is in. Part split of the model: AutoDebarkerPlan/debarker_parts.py (T02.01). Mirrors
+	// blocktypes/chopper/frame.json.
+	//
+	// T03.01: `class`/`entityClass` are the BlockDebarker master and its BlockEntityDebarker, byte-for-byte equal to their
+	// registration in ImmersiveWoodworkingModSystem.Start (for an unregistered name the loader logs "no such class
+	// registered" and builds a plain Block, or no block entity at all). The skeleton routes right-clicks into the BE;
+	// footprint, collision, parts and power grow it in their tasks.
+	code: "debarker",
+	class: "iw-debarker",
+	entityClass: "iw-debarker",
+	// `type:[frame]` keeps `frame` in the generated code as a variant, so HorizontalOrientable's CodeWithVariant rebuild
+	// does not drop it (memory vs-horizontal-orientable-variant). Declared BEFORE `side`: debarker-frame-{side}.
+	// The behavior gives the -north drop and pick and the schematic rotation; which variant a player's placement gets is
+	// BlockDebarker.GetLookAwareBlockVariant's call (the look turned a quarter clockwise, bark side to the player), not the
+	// behavior's.
+	behaviors: [ { name: "HorizontalOrientable" } ],
+	variantgroups: [
+		{ code: "type", states: [ "frame" ] },
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// Two shapes, by the author's call at T03.05 (2026-11-21). `shapeInventory` is the frame taken apart and stacked,
+	// debarker_frame.json, built in Blender from copies of the model's frame elements (collection
+	// debarking-PreviewMeshes) without the shaft and coupling. The engine tesselates the inventory mesh from it and
+	// draws that mesh as the slot icon, the handbook picture, in hand and dropped on the ground
+	// (ShapeTesselatorManager.TesselateBlockForInventory, InventoryItemRenderer.GetItemStackRenderInfo).
+	// The `selectiveElements` of `shapeByType` below cut the source model debarker.json down to the bare frame: the
+	// globs of the "frame" part of AutoDebarkerPlan/debarker_parts.py (T02.01), the shaft and coupling included, 206
+	// elements, of which the master bakes 203
+	// into the chunk mesh (DebarkerParts "frame") and draws the shaft and both coupling halves as the turning "spindle"
+	// mover (T07.02). Its OnTesselation returns true, so this default block mesh is not in the chunk; the engine still
+	// reads it elsewhere, for one the crack decal while the block is being broken (SystemRenderDecals.UpdateDecal ->
+	// GetDefaultBlockMesh). The engine keeps an element whose name starts with the text before a trailing "*", and a
+	// mask that matches nothing fails silently. The "_" anchor comes from debarker_parts.py, where the feed's
+	// "debarker-pedal_*" must not catch the frame's "debarker-pedal-hinge_*". Rename an element in Blender and update
+	// debarker_parts.py, these masks, debarker_anim.py and DebarkerParts.Rules together, then re-run debarker_anim.py.
+	// The master's frame mesh and movers turn by this variant's rotateY. The values are the chopper's; the author
+	// confirmed them against this model on all four facings at T07.07 (2026-11-25).
+	shapeInventory: { base: "immersivewoodworking:block/debarker/debarker_frame" },
+	shapeByType: {
+		"*-north": {
+			base: "immersivewoodworking:block/debarker/debarker", rotateY: 180,
+			selectiveElements: [ "debarker-frame_*", "debarker-shoe_*", "debarker-rivet_*", "debarker-brace_*",
+				"debarker-bearing_*", "debarker-bracket_*", "debarker-bushing_*", "debarker-lid_*", "debarker-casing_*",
+				"debarker-hoop_*", "debarker-chute_*", "debarker-pedal-hinge_*", "debarker-thrust_*", "debarker-shaft_*",
+				"debarker-coupling_*" ]
+		},
+		"*-east": {
+			base: "immersivewoodworking:block/debarker/debarker", rotateY: 90,
+			selectiveElements: [ "debarker-frame_*", "debarker-shoe_*", "debarker-rivet_*", "debarker-brace_*",
+				"debarker-bearing_*", "debarker-bracket_*", "debarker-bushing_*", "debarker-lid_*", "debarker-casing_*",
+				"debarker-hoop_*", "debarker-chute_*", "debarker-pedal-hinge_*", "debarker-thrust_*", "debarker-shaft_*",
+				"debarker-coupling_*" ]
+		},
+		"*-south": {
+			base: "immersivewoodworking:block/debarker/debarker", rotateY: 0,
+			selectiveElements: [ "debarker-frame_*", "debarker-shoe_*", "debarker-rivet_*", "debarker-brace_*",
+				"debarker-bearing_*", "debarker-bracket_*", "debarker-bushing_*", "debarker-lid_*", "debarker-casing_*",
+				"debarker-hoop_*", "debarker-chute_*", "debarker-pedal-hinge_*", "debarker-thrust_*", "debarker-shaft_*",
+				"debarker-coupling_*" ]
+		},
+		"*-west": {
+			base: "immersivewoodworking:block/debarker/debarker", rotateY: 270,
+			selectiveElements: [ "debarker-frame_*", "debarker-shoe_*", "debarker-rivet_*", "debarker-brace_*",
+				"debarker-bearing_*", "debarker-bracket_*", "debarker-bushing_*", "debarker-lid_*", "debarker-casing_*",
+				"debarker-hoop_*", "debarker-chute_*", "debarker-pedal-hinge_*", "debarker-thrust_*", "debarker-shaft_*",
+				"debarker-coupling_*" ]
+		}
+	},
+	// The model's five face keys on real game: paths ("game:" REQUIRED, memory vs-mod-asset-path-domain). Both shape
+	// files carry the same values (the stack uses only oak_debarked and metal); this map is what the master BE's texture
+	// source reads for the frame and every mover but the knives, whose #metal comes from the installed set.
+	// wood / debarked_wood / wood_corner paint only the log (bark strips, stripped surface, end grain); the log's
+	// species texture comes from code at T07.04.
+	textures: {
+		"oak_debarked":  { base: "game:block/wood/debarked/oak" },
+		"metal":         { base: "game:block/metal/plate/iron" },
+		"wood":          { base: "game:block/wood/bark/oak" },
+		"debarked_wood": { base: "game:block/wood/debarked/oak" },
+		"wood_corner":   { base: "game:block/wood/treetrunk/oak" }
+	},
+	// Handbook page: assemble + operate. Strings land in T02.04, polished in T08.02. NO `include` key, deliberately:
+	// the creative entry below grants a page to "-north" alone; `include: true` would give each of the four facings
+	// its own page (the chopper's 2026-08-01 fix, see blocktypes/chopper/frame.json).
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:debarker-handbook-title", text: "immersivewoodworking:debarker-handbook-text" }
+			]
+		}
+	},
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	lightAbsorption: 0,
+	// Only the canonical "-north" in creative; placement picks the facing from the look (BlockDebarker.GetLookAwareBlockVariant)
+	// and every facing drops as -north. This
+	// line is also the block's only handbook-page source.
+	creativeinventory: { "general": ["*-north"] },
+	blockmaterial: "Wood",
+	// Carried like the chopper frame (decision T02.01, В9).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	heldRightReadyAnimation: "heldblockready",
+	heldTpUseAnimation: "twohandplaceblock",
+	// In-hand / ground / GUI transforms of the stack (shapeInventory above; the placed block ignores them). A block
+	// transform merges with the block default per top-level key, but a partially written vector is zeroed, so every
+	// vector carries all three components (memory vs-partial-guitransform-no-merge). The hand pose is the author's .tfedit
+	// calibration at T03.05 (2026-11-21); ground and GUI keep their starting values, worked out from the chopper frame's,
+	// since the author sent no change for them.
+	tpHandTransform: {
+		translation: { x: -1.6, y: -1, z: -0.6 },
+		rotation: { x: 180, y: -7, z: -57 },
+		scale: 0.45
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: -45, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 2.98
+	},
+	guiTransform: {
+		rotation: { x: -22.6, y: -45.3, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 0.68
+	},
+	maxStackSize: 1,
+	// ghost.json and ghostpower.json carry the same value: a break started on a filler mines that filler's resistance
+	// with the frame's tier and speed (BlockDebarkerGhost.OnGettingBroken), so the machine breaks alike from any cell.
+	resistance: 3.5,
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

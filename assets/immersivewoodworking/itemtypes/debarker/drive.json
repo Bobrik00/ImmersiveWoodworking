@@ -1,0 +1,51 @@
+{
+	code: "debarkerdrive",
+	// The debarker's DRIVE (AutoDebarkerPlan T02.01): the gearbox from the input spindle's main gear through the idler,
+	// countershaft, crown and lantern gears down to the worm on the vertical shaft. A plain Item on purpose: no
+	// `class`/`tool`/`behaviors`, so it loads on the base Item class. RMB-installed into the placed `debarker-frame`
+	// in T03.06, in any order with the disc and the feed. Mandatory: without it the feed rollers stand still.
+	// Held mesh = the drive's elements of the machine model, copied into the Blender collection debarking-PreviewMeshes
+	// (art/shapes/LogForChoppingFirewood.blend) and piled up as loose parts: the main gear lies flat, the idler, the
+	// countershaft and the vertical shaft lie on it. Raw export in art/shapes/debarker/drive.json, this copy has its
+	// textures re-pinned to game: paths.
+	shape: { base: "immersivewoodworking:item/debarker/drive" },
+	// Two-handed carry like every chopper part (decision T02.01, В9). Only the idle hold pose; the frame's
+	// block-placement anims do not apply to an item.
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// "game:" REQUIRED (memory vs-mod-asset-path-domain). Keys match the shape, values match the machine's monolith.
+	textures: {
+		"oak_debarked": { base: "game:block/wood/debarked/oak" },
+		"metal":        { base: "game:block/metal/plate/iron" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	// Handbook back-link to the assembled machine, one section shared by all installed parts.
+	attributes: {
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:debarkerpart-handbook-title", text: "immersivewoodworking:debarkerpart-handbook-text" }
+			]
+		}
+	},
+	// Transforms calibrated in game with .tfedit at T03.05 (2026-11-21).
+	// The editor leaves out a value equal to the item default, so the icon scale is that default, 1, written out.
+	// `rotate: false` stops the icon from spinning, and every vector is written with all three components: a partial
+	// vector zeroes the rest (memory vs-partial-guitransform-no-merge).
+	tpHandTransform: {
+		translation: { x: -1.55, y: -1, z: -0.6 },
+		rotation: { x: -60, y: -1, z: -101 },
+		scale: 0.58
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0.28, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 3.2
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 4, y: 8, z: 0 },
+		rotation: { x: -31, y: -118, z: 20 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1
+	}
+}

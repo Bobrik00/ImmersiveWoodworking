@@ -1,0 +1,48 @@
+{
+	// The ONE ghost-filler that is also the debarker's mechanical-power connector (AutoDebarkerPlan): the model's
+	// coupling `debarker-coupling` exits the +X face of cell (0,1,0), one above the master (AutoDebarkerPlan/PLAN.md),
+	// and the network looks for the node in the cell the axle touches, so the node lives here, not on the master.
+	// Otherwise a plain `debarker-ghost`: invisible, solid, routes everything to the master. NEVER hand-placed (no
+	// creativeinventory); the frame SetBlocks it in T03.03.
+	//
+	// `class`/`entityClass` (BlockDebarkerGhostPower, the filler BE BEMultiblockDebarker) and the behavior name below are
+	// byte-for-byte equal to their registration in ImmersiveWoodworkingModSystem.Start.
+	code: "debarker-ghostpower",
+	class: "iw-debarker-ghostpower",
+	entityClass: "iw-debarker-multiblock",
+	// The mechanical-power consumer node, BEBehaviorDebarkerMP (AutoDebarkerPlan T04.01). mechPartShape: null is the
+	// vanilla quern convention and the only way to keep this node out of the instanced mech renderer: an empty shape stays
+	// registered and is drawn every frame (see blocktypes/chopper/ghostpower.json). The master's own renderer draws the
+	// coupling and the disc (E07). No `resistance` in these behavior properties on purpose (the top-level `resistance`
+	// below is mining time): the network load lives in BEBehaviorDebarkerMP.GetResistance (Config.DebarkerResistance once
+	// IsComplete, 0.005 before, AutoDebarkerPlan T04.02), which never reads the JSON value.
+	entityBehaviors: [
+		{ name: "iw-debarkermp", properties: { mechPartShape: null } }
+	],
+	// `side` = the machine's facing, stamped explicitly by the master at placement via SetBlock. NO HorizontalOrientable
+	// here: the master picks the variant itself, and the behavior's GetDrops/OnPickBlock would bypass `drops: []` and
+	// hand out a `debarker-ghostpower-north` item (vssurvivalmod BehaviorHorizontalOrientable.cs).
+	variantgroups: [
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation" }
+	],
+	// `game:` REQUIRED (memory vs-mod-asset-path-domain). `block/basic/nothing` is the engine's empty shape.
+	shape: { base: "game:block/basic/nothing" },
+	blockmaterial: "Wood",
+	drops: [],
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	rainPermeable: true,
+	resistance: 3.5,
+	lightAbsorption: 0,
+	// Not reinforcable, the same as the plain ghost (see ghost.json).
+	attributes: { reinforcable: false },
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	// Full-cube collision/selection FALLBACK only, same as the plain ghost (T03.02 routes the live boxes).
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

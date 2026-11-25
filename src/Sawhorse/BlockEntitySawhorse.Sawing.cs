@@ -173,7 +173,7 @@ public partial class BlockEntitySawhorse
         // is what made the zero baseline look like a gift, F-L4-04. The clamp lives at the seam, in
         // BlockSawhorse.OnBlockInteractStep, T02.03.) A MID-hold claim is the other case and baselines differently —
         // see ClaimOrVerifyEnd.
-        sawEnds[endSign] = new SawyerHold(uid, 0f);
+        sawEnds[endSign] = new SawyerHold(byPlayer, 0f);
         return true;
     }
 
@@ -339,10 +339,12 @@ public partial class BlockEntitySawhorse
     }
 
     /// <summary>The hold record for the end <paramref name="uid"/> currently owns, or null if they man none. A player
-    /// owns at most one end. Server-side.</summary>
+    /// owns at most one end. A hold left by an earlier connection of the same player does not count: its player is not
+    /// in the world (<see cref="SawyerHold.Player"/>), so someone who left mid-breather and came back is not taken for
+    /// one of its owners (AuditFix3Plan T01.01). Server-side.</summary>
     SawyerHold? SawyerFor(string uid)
     {
-        foreach (SawyerHold h in sawEnds.Values) if (h.Uid == uid) return h;
+        foreach (SawyerHold h in sawEnds.Values) if (h.Uid == uid && PlayerPresence.IsInWorld(Api.World, h.Player)) return h;
         return null;
     }
 
@@ -357,26 +359,32 @@ public partial class BlockEntitySawhorse
         return true;
     }
 
-    /// <summary>Drop any co-op end hold whose player is no longer online — the rip counterpart to
-    /// <see cref="PruneOfflineDebarkers"/>. There is no <c>PlayerDisconnect</c> hook, so a sawyer who drops mid-rip
-    /// would otherwise leave a ghost <see cref="sawEnds"/> entry that blocks that end forever
-    /// (<see cref="ClaimOrVerifyEnd"/> refuses a new player on it) and pins a restock breather open
-    /// (<see cref="AbandonPendingRestockIfUnmanned"/> never reaches Count 0). Called before either acts on the map —
-    /// and, since AuditFixPlan T03.04, before the START gate reads it too (<see cref="TryStartSawing"/>, F-L5-25),
-    /// which had been trusting the raw map while every mid-hold reader weeded it first.
-    /// Server-side. (If EVERY sawyer is gone there is no live tick to run this; the stale state self-heals on the next
-    /// interaction via <see cref="ResetSawState"/>, and the breather it pinned open now ages out on its own clock —
-    /// <see cref="RestockPauseIsStale"/>.)</summary>
+    /// <summary>Drop every co-op end hold whose player is no longer in the world (<see cref="PlayerPresence.IsInWorld"/>
+    /// on the hold's own <see cref="SawyerHold.Player"/>); the rip twin of <see cref="PruneOfflineDebarkers"/>.
+    /// The engine sends the block no Stop or Cancel when a holder disconnects, so their entry stays in
+    /// <see cref="sawEnds"/> until this drops it, and until then it blocks that end (<see cref="ClaimOrVerifyEnd"/>
+    /// refuses a new player on it) and keeps a restock breather manned (<see cref="AbandonPendingRestockIfUnmanned"/>).
+    /// This prune serves the readers that only ask WHO holds an end: the start gate (<see cref="TryStartSawing"/>,
+    /// AuditFixPlan T03.04 / F-L5-25), every mid-hold claim and the breather's exits. The walks that act on a holder's
+    /// player (feed, wear, yield bonus, XP, the Seraph report) skip one who is not in the world themselves, so a holder
+    /// who left costs nobody anything between two prunes. Until AuditFix3Plan T01.01 this tested <c>PlayerByUid == null</c>,
+    /// which the server does not return for a player who left during the session, so it dropped nobody. It does NOT
+    /// catch a holder who is still in the world but whose hold ended without a Stop: death, a slot switch, Q, opening
+    /// the inventory. The engine tells only the item in hand about those, so they need a freshness stamp like the
+    /// chopping block's ChopHoldOwnerTimeoutMs.
+    /// Server-side. With every sawyer gone no tick runs it: the ghost goes when the next rip starts on this pair (the
+    /// start gate prunes first) or with the log (<see cref="ResetSawState"/>), and a breather it pinned open ages out on
+    /// its own clock (<see cref="RestockPauseIsStale"/>).</summary>
     void PruneOfflineSawyers()
     {
         if (sawEnds.Count == 0) return;
         List<int>? dead = null;
         foreach (var kv in sawEnds)
-            if (Api.World.PlayerByUid(kv.Value.Uid) == null) (dead ??= new List<int>()).Add(kv.Key);
+            if (!PlayerPresence.IsInWorld(Api.World, kv.Value.Player)) (dead ??= new List<int>()).Add(kv.Key);
         if (dead != null) foreach (int k in dead) sawEnds.Remove(k);
     }
 
-    /// <summary>Ensure <paramref name="uid"/> owns the end at <paramref name="endSign"/> — confirm the one they
+    /// <summary>Ensure <paramref name="byPlayer"/> owns the end at <paramref name="endSign"/> — confirm the one they
     /// already hold, or claim a free one (giving up any other end first, since a player owns at most one). Returns the
     /// hold, or null when that end is manned by ANOTHER sawyer (the caller refuses — no same-end stacking). A freshly
     /// claimed end baselines its timer to <paramref name="secondsUsed"/> — 0 delta this tick, contributing from the
@@ -386,15 +394,16 @@ public partial class BlockEntitySawhorse
     /// the hold has been running for a while and only the time from HERE on is this end's work, so the
     /// seconds already elapsed must not land on it. A hold that begins at the end (<see cref="TryStartSawing"/>)
     /// baselines to 0 instead, because there t=0 really is the press. Server-side.</summary>
-    SawyerHold? ClaimOrVerifyEnd(string uid, int endSign, float secondsUsed)
+    SawyerHold? ClaimOrVerifyEnd(IPlayer byPlayer, int endSign, float secondsUsed)
     {
+        string uid = byPlayer.PlayerUID;
         PruneOfflineSawyers(); // drop ghost holds from disconnected players first, so a live player can claim/reclaim an end
         if (sawEnds.TryGetValue(endSign, out SawyerHold? held))
         {
             return held.Uid == uid ? held : null; // ours → use it; another sawyer's → refuse
         }
-        ReleaseSawyer(uid);                        // give up any other end first (one end per player)
-        held = new SawyerHold(uid, secondsUsed);   // baseline = now → 0 delta this tick, contributes next
+        ReleaseSawyer(uid);                          // give up any other end first (one end per player)
+        held = new SawyerHold(byPlayer, secondsUsed); // baseline = now → 0 delta this tick, contributes next
         sawEnds[endSign] = held;
         return held;
     }
@@ -497,6 +506,13 @@ public partial class BlockEntitySawhorse
                 DbgRestockPause("rip", "refused-nonowner", byPlayer, Api.World.ElapsedMilliseconds - restockTickedAtMs);
                 return false;
             }
+            // ModDbFeedbackPlan T06.03 (Vigor): an exhausted sawyer leaves the breather like one who stepped off the
+            // end, before FinishPendingRestock can take the next log out of their pack.
+            if (RefuseIfTooTired(byPlayer))
+            {
+                if (ReleaseSawyer(uid)) { AbandonPendingRestockIfUnmanned(); MarkDirty(true); }
+                return false;
+            }
             pausing.LastSecondsUsed = secondsUsed;     // consume the elapsed as PAUSE, not cutting → resumed rip starts at ~0 delta
             restockTickedAtMs = Api.World.ElapsedMilliseconds; // freshness stamp: this pause still has a live owner
 
@@ -526,7 +542,17 @@ public partial class BlockEntitySawhorse
 
         if (Api.Side != EnumAppSide.Server) return true; // client keeps the hold alive; the server owns the progress
 
-        SawyerHold? held = ClaimOrVerifyEnd(uid, PlayerEndSign(byPlayer), secondsUsed);
+        // ModDbFeedbackPlan T06.03 (Vigor): an exhausted sawyer stops at once, and a press made while exhausted ends on
+        // its first step. The gate-broke exit above, plus the packet that drops the client's optimistic hold; a partner
+        // at the other end saws on alone. The sync is DATA-ONLY like StopSawing's: TryStartSawing has already claimed the
+        // end on every refused press, so a redraw here would repaint the section on each click for nothing visible.
+        if (RefuseIfTooTired(byPlayer))
+        {
+            if (ReleaseSawyer(uid)) MarkDirty();
+            return false;
+        }
+
+        SawyerHold? held = ClaimOrVerifyEnd(byPlayer, PlayerEndSign(byPlayer), secondsUsed);
         if (held == null)
         {
             // This end is manned by ANOTHER sawyer — no same-end stacking. The ONE place the rip reports it
@@ -548,7 +574,12 @@ public partial class BlockEntitySawhorse
         // swiftsaw (xSkills, T04.03): scale the rip TEMPO by this end-owner's own swiftsaw factor (×1.20 cap inside, ×1
         // without xSkills). Server-authoritative path — the client never advances progress, so there's no independent
         // client scaling to desync. The saw animation/sound loop is untouched (its baked-in frame sound would drift).
-        if (delta > 0f && SawIsEffective(tool)) AdvanceSaw(delta * SawSpeedFor(tool) * SwiftsawSawFactor(byPlayer), byPlayer);
+        if (delta > 0f && SawIsEffective(tool))
+        {
+            AdvanceSaw(delta * SawSpeedFor(tool) * SwiftsawSawFactor(byPlayer), byPlayer);
+            // ModDbFeedbackPlan T06.03 (Vigor): stamina per real second at the saw, whatever the saw's speed.
+            SpendStamina(VigorCompat.SawAction, delta, Config.VigorSawStaminaPerSecond, byPlayer);
+        }
         return true;
     }
 
@@ -763,7 +794,11 @@ public partial class BlockEntitySawhorse
         ItemStack? tool = byPlayer.InventoryManager.ActiveHotbarSlot?.Itemstack;
         float delta = secondsUsed - held.LastSecondsUsed;
         // Same swiftsaw rip-tempo scale as ContinueSawing (T04.03): this player's own factor charges their final partial tick.
-        if (delta > 0f && heldLog != null && SawIsEffective(tool)) AdvanceSaw(delta * SawSpeedFor(tool) * SwiftsawSawFactor(byPlayer), byPlayer); // charge runs here, while this end is still owned
+        if (delta > 0f && heldLog != null && SawIsEffective(tool))
+        {
+            AdvanceSaw(delta * SawSpeedFor(tool) * SwiftsawSawFactor(byPlayer), byPlayer); // charge runs here, while this end is still owned
+            SpendStamina(VigorCompat.SawAction, delta, Config.VigorSawStaminaPerSecond, byPlayer); // ModDbFeedbackPlan T06.03: the last partial second too
+        }
         ReleaseSawyer(uid);                                   // then free it (no-op if AdvanceSaw consumed the log)
         AbandonPendingRestockIfUnmanned();                    // last sawyer let go mid-breather → end the pause (no next log)
         // Persist + sync the final progress. DATA-ONLY (AuditFixPlan T05.04 / F-L10-15): a release lands wherever the
@@ -877,6 +912,22 @@ public partial class BlockEntitySawhorse
         Api.Logger.Error(e);
     }
 
+    // Transient: one report per loaded sawhorse (ModDbFeedbackPlan T05.04) for what runs once a log is finished, the
+    // product spawns and the auto-feed, on the rip and the strip alike. Its own flag, so a throw from a sawing stage or
+    // a debarking tool does not hide one from here.
+    bool finishThrowLogged;
+
+    /// <summary>Report a throw from the end of a log (<see cref="ConsumeLog"/>, <see cref="CompleteDebark"/>,
+    /// <see cref="TakeRestockLog"/>), once per sawhorse, with the mod prefix the engine's own catch would not add. The
+    /// finished log is already off the sawhorse by then. Server-side.</summary>
+    void LogFinishThrowOnce(string step, System.Exception e)
+    {
+        if (finishThrowLogged) return;
+        finishThrowLogged = true;
+        Api.Logger.Error("[immersivewoodworking] Sawhorse at {0}: {1} threw. The finished log is already off the sawhorse and the work goes on; further throws on this sawhorse are not logged.", Pos, step);
+        Api.Logger.Error(e);
+    }
+
     /// <summary>Clear the per-log sawing state (progress, the fired-stage counter, and any in-progress co-op holds) —
     /// called wherever the held log is placed fresh, taken, scrapped, released or consumed, so a new log always starts
     /// from a clean slate and the fields can never drift. Server-side callers; the progress fields serialize out on
@@ -929,9 +980,10 @@ public partial class BlockEntitySawhorse
     /// <summary>End an in-progress auto-restock breather if no sawyer is still holding — the held rip that would have
     /// laid the next log is gone, so no further tick would run to lay it or clear the flag. Covers the "everyone let go
     /// DURING the pause" case (the put/take/discard paths are covered by <see cref="ResetSawState"/>). Server-side.
-    /// <para>This is the CLEAN exit, driven by a release the engine actually delivered; the dirty one — a hold that
-    /// ended by disconnect and left a ghost end entry so <see cref="sawEnds"/> never reaches 0 — is caught by the
-    /// staleness timeout instead (<see cref="RestockPauseIsStale"/>).</para></summary>
+    /// <para>This is the CLEAN exit, driven by a release the engine actually delivered. Its first line drops the ghost a
+    /// partner who disconnected left behind, so the map does reach 0 once the last live sawyer lets go (AuditFix3Plan
+    /// T01.01). The dirty exit, the LAST sawyer leaving by disconnect, delivers no release at all and so never calls
+    /// this; the staleness timeout catches that one instead (<see cref="RestockPauseIsStale"/>).</para></summary>
     void AbandonPendingRestockIfUnmanned()
     {
         PruneOfflineSawyers(); // a sawyer who disconnected mid-breather leaves a ghost hold — drop it so Count can reach 0
@@ -982,18 +1034,19 @@ public partial class BlockEntitySawhorse
 
         // Seraph Leveling: the batch counts as crafted, as the grid "saw + log" recipe this rip replaces would have
         // (Carpenter wants 120 plank-*). Every sawyer on the log gets the full batch, sawyer bonus included: both
-        // made these boards. No-op without Seraph; the facade skips a holder who is offline right now.
+        // made these boards. No-op without Seraph; a holder who is not in the world right now is skipped.
         ImmersiveWoodworkingModSystem mod = modSystem ??= Api.ModLoader.GetModSystem<ImmersiveWoodworkingModSystem>();
         foreach (SawyerHold held in sawEnds.Values)
-            if (Api.World.PlayerByUid(held.Uid) is IPlayer sawyer)
-                mod.ReportCraftToSeraph(sawyer, product.Value.template, amount);
+            if (PlayerPresence.IsInWorld(Api.World, held.Player))
+                mod.ReportCraftToSeraph(held.Player, product.Value.template, amount);
     }
 
     /// <summary>
     /// Charge <see cref="ImmersiveWoodworkingConfig.SawDurabilityPerStage"/> durability to the saw of EVERY player
     /// currently manning an end, for one completed section — so a two-man rip wears BOTH saws (the cut is twice as
-    /// fast, the wear is shared honestly). 4 sections per log, so a full solo rip costs 4× this (default 4). Resolves
-    /// each end-owner by UID and damages their active hotbar slot only if it is still an EFFECTIVE saw
+    /// fast, the wear is shared honestly). 4 sections per log, so a full solo rip costs 4× this (default 4). Takes
+    /// each end-owner still in the world (<see cref="PlayerPresence.IsInWorld"/>, on the hold's own player) and damages
+    /// their active hotbar slot only if it is still an EFFECTIVE saw
     /// (<see cref="SawIsEffective"/> — pit saw, or a vanilla saw when allowed; an ineffective vanilla saw and a
     /// mid-hold slot switch to a non-saw never wear); the engine removes a saw whose durability hits zero. No-ops on the 0 config
     /// (no wear). Progress lives in the BE (<see cref="sawProgress"/>) independent of the tool, so a saw that snaps
@@ -1006,21 +1059,22 @@ public partial class BlockEntitySawhorse
 
         foreach (SawyerHold held in sawEnds.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            ItemSlot? slot = player?.InventoryManager.ActiveHotbarSlot;
+            IPlayer player = held.Player;
+            if (!PlayerPresence.IsInWorld(Api.World, player)) continue; // left the game: the saw in their pack is not in this rip
+            ItemSlot? slot = player.InventoryManager.ActiveHotbarSlot;
             // Only an EFFECTIVE saw wears. A flag-off ordinary saw never owns an end (it's refused at the start
             // gate, so it's never in sawEnds), so the ineffective case this guard actually catches is a mid-hold
             // SLOT SWITCH — an end-owner who swapped to a non-saw, or to an ordinary saw after AllowVanillaSaw was
-            // turned off mid-rip. Skips that, plus an offline player. (In a mixed co-op rip — one pit saw, one
-            // allowed-but-slower ordinary saw — both are effective, so both wear.)
+            // turned off mid-rip. (In a mixed co-op rip — one pit saw, one allowed-but-slower ordinary saw — both are
+            // effective, so both wear.)
             if (slot?.Itemstack == null || !SawIsEffective(slot.Itemstack)) continue;
 
             // carefulsawyer (xSkills, T03.03): a chance to spend LESS (or no) durability this section, per THIS sawyer's
             // own forestry tier — so in a two-man rip each saw is spared by its own owner's ability. No-op without xSkills
             // (ApplyCarefulSawyer returns cost unchanged); a full save roll drops the wear to 0 and the DamageItem is skipped.
-            int effectiveCost = ApplyCarefulSawyer(player!, cost);
+            int effectiveCost = ApplyCarefulSawyer(player, cost);
             if (effectiveCost <= 0) continue;
-            slot.Itemstack.Collectible.DamageItem(Api.World, player!.Entity, slot, effectiveCost);
+            slot.Itemstack.Collectible.DamageItem(Api.World, player.Entity, slot, effectiveCost);
             slot.MarkDirty();
         }
     }
@@ -1079,9 +1133,8 @@ public partial class BlockEntitySawhorse
         int ghosts = 0;
         foreach (SawyerHold held in holders)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) { ghosts++; continue; } // offline ghost hold — no credit, no dilution (mirrors the wear pass)
-            (players ??= new List<IPlayer>()).Add(player);
+            if (!PlayerPresence.IsInWorld(Api.World, held.Player)) { ghosts++; continue; } // offline ghost hold — no credit, no dilution (mirrors the wear pass)
+            (players ??= new List<IPlayer>()).Add(held.Player);
         }
         if (players == null)
         {
@@ -1107,8 +1160,6 @@ public partial class BlockEntitySawhorse
     {
         ItemStack? finished = heldLog;
 
-        DropSawdust(byPlayer); // one wearandtear:sawdust per fully-ripped billet — BEFORE the auto-restock branch's early return so every log yields it (no-op when Wear & Tear is absent)
-
         // AutoRestock WITH a configured breather (SawRestockDelaySeconds): don't snap straight onto the next log.
         // Empty the pair NOW and lay the next one after a short pause (FinishPendingRestock, tick-driven from
         // ContinueSawing), so a held rip reads rip → pause (empty) → place → rip — the saw's counterpart to the
@@ -1127,14 +1178,29 @@ public partial class BlockEntitySawhorse
             restockPending = true;
             restockReadyAtMs = Api.World.ElapsedMilliseconds + (long)(Config.SawRestockDelaySeconds * 1000f);
             restockTickedAtMs = Api.World.ElapsedMilliseconds; // the hold that consumed the log IS this pause's first tick (AuditFixPlan T03.04)
-            return;
+        }
+        else
+        {
+            // No breather (delay 0, AutoRestock off, or no log left to pull): instant restock exactly as before — read
+            // sawEnds + the finished log HERE, before ResetSawState zeroes them; the still-held right-click re-claims its
+            // end next tick (ContinueSawing's "claim a free end mid-hold"), so a held rip carries on after a ≤1-tick gap.
+            heldLog = TryAutoRestockLog(finished);
+            ResetSawState();
         }
 
-        // No breather (delay 0, AutoRestock off, or no log left to pull): instant restock exactly as before — read
-        // sawEnds + the finished log HERE, before ResetSawState zeroes them; the still-held right-click re-claims its
-        // end next tick (ContinueSawing's "claim a free end mid-hold"), so a held rip carries on after a ≤1-tick gap.
-        heldLog = TryAutoRestockLog(finished);
-        ResetSawState();
+        // ModDbFeedbackPlan T05.04: the sawdust leaves only after the log is retired and the auto-feed settled. This
+        // runs after AdvanceSaw's stage loop, outside its try, with sawStagesFired already at 4, so a throw from an
+        // item-spawn hook used to skip the reset above and no later advance consumed the log: the ripped billet stayed
+        // on the sawhorse for good. The catch keeps the throw inside this call, so the caller's MarkDirty(true) still
+        // syncs the retired log. SpawnSawnItem reads sawCutReversed and pairAxis, which no reset touches.
+        try
+        {
+            DropSawdust(byPlayer); // one wearandtear:sawdust per fully-ripped billet, on both branches above (no-op when Wear & Tear is absent)
+        }
+        catch (System.Exception e)
+        {
+            LogFinishThrowOnce("dropping the sawdust", e);
+        }
     }
 
     /// <summary>The auto-restock breather (<see cref="restockPending"/>) has elapsed: lay the next log now — pulled
@@ -1169,9 +1235,36 @@ public partial class BlockEntitySawhorse
         ItemSlot? src = PeekRestockSlot(finished);
         if (src?.Itemstack == null) return null; // off, no sawyer resolvable, or none carries a matching input
 
-        ItemStack pulled = src.TakeOut(1);
-        src.MarkDirty();
-        Api.World.PlaySoundAt(BuildSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, true, 16f);
+        return TakeRestockLog(src);
+    }
+
+    /// <summary>Take one log out of <paramref name="src"/> for an auto-feed and play the place sound — the take shared by
+    /// <see cref="TryAutoRestockLog"/> and <see cref="TryAutoRestockBark"/>. Null when the take threw before handing a
+    /// log back. Server-side, master-only.</summary>
+    ItemStack? TakeRestockLog(ItemSlot src)
+    {
+        // ModDbFeedbackPlan T05.04: TakeOut and MarkDirty run code IW does not own (a modded slot's overrides, the
+        // inventory's SlotModified listeners, the log's own collectible behaviours), and the instant auto-feed runs inside
+        // ConsumeLog / CompleteDebark before the reset that retires the finished log, so a throw here kept that log on
+        // the sawhorse for good. A log TakeOut handed back is already out of the pack, so it is laid even when MarkDirty
+        // threw. The last log of a stack goes through TakeOutWhole, which empties the slot BEFORE it calls the slot
+        // listeners; if one throws there, the slot is one log short and TakeOut handed nothing back, so the log taken
+        // is laid from the copy made first. A TakeOut that threw before taking anything lays nothing.
+        int before = src.StackSize;
+        ItemStack one = src.Itemstack!.GetEmptyClone(); // both callers return early on an empty slot
+        one.StackSize = 1;
+        ItemStack? pulled = null;
+        try
+        {
+            pulled = src.TakeOut(1);
+            src.MarkDirty();
+        }
+        catch (System.Exception e)
+        {
+            LogFinishThrowOnce("auto-feeding the next log", e);
+            if (pulled == null && src.StackSize < before) pulled = one;
+        }
+        if (pulled != null) Api.World.PlaySoundAt(BuildSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, true, 16f);
         return pulled;
     }
 
@@ -1197,10 +1290,9 @@ public partial class BlockEntitySawhorse
 
         foreach (SawyerHold held in sawEnds.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) continue;
+            if (!PlayerPresence.IsInWorld(Api.World, held.Player)) continue; // never feed from the pack of a player who left
 
-            ItemSlot? src = AutoRestockUtil.FindRestockSlot(player, accept, preferred);
+            ItemSlot? src = AutoRestockUtil.FindRestockSlot(held.Player, accept, preferred);
             if (src?.Itemstack != null) return src;
         }
         return null;
@@ -1264,9 +1356,8 @@ public partial class BlockEntitySawhorse
         float best = 0f;
         foreach (SawyerHold held in sawEnds.Values)
         {
-            IPlayer? player = Api.World.PlayerByUid(held.Uid);
-            if (player == null) continue; // offline ghost hold — no bonus
-            if (mod.TryGetSawyerYield(player, out float f) && f > best) best = f;
+            if (!PlayerPresence.IsInWorld(Api.World, held.Player)) continue; // offline ghost hold — no bonus
+            if (mod.TryGetSawyerYield(held.Player, out float f) && f > best) best = f;
         }
         return best;
     }
@@ -1455,7 +1546,7 @@ public partial class BlockEntitySawhorse
     const int SawdustPerLog = 1;
 
     /// <summary>Drop <see cref="SawdustPerLog"/> wearandtear:sawdust beside the construction for one fully-ripped
-    /// billet — called once per log from <see cref="ConsumeLog"/> (which itself fires exactly once per log, before
+    /// billet — called once per log from <see cref="ConsumeLog"/> (which itself fires exactly once per log, after
     /// its auto-restock branch). Reuses the sawn-item eject physics (<see cref="SpawnSawnItem"/>) so the dust lands
     /// beside the sawhorses rather than resting on the multiblock collision box. Soft, modinfo-free integration:
     /// <see cref="IWorldAccessor.GetItem"/> returns null when Wear &amp; Tear isn't installed and we drop nothing.

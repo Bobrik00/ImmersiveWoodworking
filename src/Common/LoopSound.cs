@@ -5,9 +5,10 @@ using Vintagestory.API.MathTools;
 namespace ImmersiveWoodworking;
 
 /// <summary>
-/// AuditFixPlan T06.03 / F-L10-08 (+ F-L10-14, F-L2-26) — one owned, gated, releasable looping sound. Both powered
-/// machines drive their ambience through this, so the lifecycle rule exists once instead of drifting into two
-/// versions, exactly like <see cref="MachineRenderGate"/> holds the one per-frame visibility rule.
+/// AuditFixPlan T06.03 / F-L10-08 (+ F-L10-14, F-L2-26) — one owned, gated, releasable looping sound. The powered
+/// machines drive their ambience through this (the debarker's bed since AutoDebarkerPlan T07.06), so the lifecycle rule
+/// exists once instead of drifting into several versions, exactly like <see cref="MachineRenderGate"/> holds the one
+/// per-frame visibility rule.
 ///
 /// <para><b>Why the slot matters.</b> The client's concurrency budget is <c>ClientMain.ActiveSounds</c>, and the
 /// "max concurrent sounds of 250 reached" check sits ONLY on the one-shot path (<c>PlaySoundAtInternal</c>);
@@ -34,10 +35,10 @@ namespace ImmersiveWoodworking;
 /// against a distance cut in the renderers: that decision rests on the static frame living in the chunk mesh and
 /// having to keep drawing, which has no audio counterpart.</para>
 ///
-/// <para><b>Resume inside a fade-out (F-L2-26).</b> Both machines used to ask <c>if (!snd.IsPlaying)</c> before
-/// (re)starting. <c>IsPlaying</c> reads the live OpenAL source state, and <c>FadeOutAndStop</c> ramps the volume on
-/// a pool thread WITHOUT stopping the source — so through the whole fade the answer is "yes, playing", the restart
-/// was skipped, and the pending <c>Stop()</c> callback fired anyway. A gate that flickered faster than the fade
+/// <para><b>Resume inside a fade-out (F-L2-26).</b> The chopper and the sawmill used to ask
+/// <c>if (!snd.IsPlaying)</c> before (re)starting. <c>IsPlaying</c> reads the live OpenAL source state, and
+/// <c>FadeOutAndStop</c> ramps the volume on a pool thread WITHOUT stopping the source — so through the whole fade the
+/// answer is "yes, playing", the restart was skipped, and the pending <c>Stop()</c> callback fired anyway. A gate that flickered faster than the fade
 /// therefore dropped the ambience into silence for the fade plus a tick and then faded it back in from zero.
 /// Here the desired state is OUR flag (<see cref="started"/>), so a resume always acts; it re-targets the fade with
 /// <c>FadeTo</c> from whatever volume the fade-out reached, which the API documents as cancelling the earlier
@@ -99,7 +100,7 @@ internal sealed class LoopSound
     /// machine's own gate, <paramref name="at"/> the world anchor to sound from.
     ///
     /// Must be called from the main thread — <c>LoadSound</c> throws otherwise, by design — which the 100 ms block
-    /// entity tick both callers use satisfies.</summary>
+    /// entity tick every caller uses satisfies.</summary>
     internal void Update(ICoreClientAPI? capi, float dt, bool shouldPlay, Vec3d at)
     {
         if (capi == null) return;

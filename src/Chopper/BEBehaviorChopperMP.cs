@@ -109,19 +109,20 @@ public class BEBehaviorChopperMP : BEBehaviorMPConsumer
     /// <summary>
     /// Anti-burst speed limit on joining an already-spinning network — copied 1:1 from
     /// <c>BEBehaviorMPPulverizer.JoinNetwork</c> (the ×1.6 and the &gt;1 threshold are vanilla-calibrated; copied, not
-    /// "improved", so the chopper behaves like every other consumer on the line). Without it a node dropped onto a
+    /// "improved", so the chopper trims a line exactly as the pulverizer and the helve hammer toggle do; the quern has
+    /// no limit). Without it a node dropped onto a
     /// fast, low-resistance network would instantly adopt that speed — a visible jolt of the axe arm. We damp the
     /// network's <c>Speed</c> back toward a sane value AND its <c>clientSpeed</c> (or the client shows a jolt the server
     /// doesn't); if the line genuinely has the torque to drive faster, the resistance/torque balance spins it back up
     /// afterwards. <c>base.JoinNetwork</c> first — it performs the actual join (and fires
-    /// <c>BEBehaviorMPConsumer.OnConnected</c>); the limit is a correcting step on top. Null-guarded: <c>network</c> is
-    /// null when the node LEAVES a network, which must not throw.
+    /// <c>BEBehaviorMPConsumer.OnConnected</c>); the limit is a correcting step on top. Null-guarded like the vanilla
+    /// original, although no engine path hands this node a null network (leaving goes through <c>LeaveNetwork</c>).
     /// </summary>
     public override void JoinNetwork(MechanicalNetwork network)
     {
         base.JoinNetwork(network);
 
-        // network is null when the node LEAVES a network — nothing to damp then, and dereferencing it would throw.
+        // No engine path hands this node a null network (leaving goes through LeaveNetwork); the guard mirrors vanilla.
         // (The vanilla original folds this into `network == null ? 0f : …`; under this mod's Nullable=enable the
         // compiler can't carry that test into the block below, so the guard is explicit — behaviour is identical.)
         if (network == null) return;

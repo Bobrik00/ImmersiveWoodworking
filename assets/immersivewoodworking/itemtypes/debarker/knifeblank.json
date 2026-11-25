@@ -1,0 +1,80 @@
+{
+	code: "debarkerknifeblank",
+	// One forged knife `debarkerknifeblank-{metal}` (AutoDebarkerPlan T02.01, decision В8): a crafting INTERMEDIATE,
+	// never installed. Forged from one ingot on the anvil (recipes/smithing, T02.03); four blanks of the SAME metal and a
+	// hammer join into the knife set `debarkerknife-{metal}` on the grid, the scheme of the chopper's head halves
+	// (itemtypes/chopper/headhalf.json). No durability: the set carries it. No "head" or "blade" in the code (Toolsmith,
+	// see itemtypes/tool/barkspud.json).
+	// Stacks to 4: one full stack is one set. No Quenchable behavior, so iron, meteoric iron and steel blanks stack too
+	// (memory vs-quenchable-toolhead-no-stack).
+	maxstacksize: 4,
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	// Held mesh = one knife of the machine model, copied into the Blender collection debarking-PreviewMeshes
+	// (art/shapes/LogForChoppingFirewood.blend) with its disc angle cleared and laid flat like the strips of the knife
+	// set; raw export in art/shapes/debarker/knifeblank.json, this copy has its textures re-pinned to game: paths.
+	shape: { base: "immersivewoodworking:item/debarker/knifeblank" },
+	// Two-handed carry like the chopper's head half (decision T02.01, В9).
+	heldTpIdleAnimation: "holdbothhandslarge",
+	// Per-metal texture keyed "metal" shows the tier. "game:" REQUIRED (memory vs-mod-asset-path-domain).
+	textures: {
+		"metal": { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	attributes: {
+		// Re-heatable in a forge: BEForge accepts a stack whose first code part is ingot/metalplate/workitem OR whose
+		// attributes.forgable is true, and this code is none of those parts. A firepit heats it without the flag.
+		forgable: true,
+		// Its own short note (forge four, join into a set) rather than the shared part text: this piece is never
+		// installed. Strings land in T02.04.
+		handbook: {
+			extraSections: [
+				{ title: "immersivewoodworking:debarkerknifeblank-handbook-title", text: "immersivewoodworking:debarkerknifeblank-handbook-text" }
+			]
+		},
+		// Forge and tong framing calibrated with .tfedit against the blank's own shape at T03.05 (2026-11-21). Wooden
+		// tongs (game:tongs) read onTongTransform, metal tongs (game:tongsmetal) onMetalTongTransform. .tfedit has only
+		// the onTongTransform target, and ItemTongs redirects it to the held tongs' key, so its copied JSON names
+		// onTongTransform for the metal grip too. The metal key must exist on its own, or a later wooden-tong tune
+		// overwrites the metal pose through the fallback.
+		inForgeTransform: {
+			translation: { x: 0, y: -0.9, z: -0.1 },
+			rotation: { x: -163, y: -137, z: -1 }
+		},
+		onTongTransform: {
+			translation: { x: -0.8, y: -0.15, z: -0.6 },
+			rotation: { x: -100, y: -17, z: -61 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.96
+		},
+		onMetalTongTransform: {
+			translation: { x: -1.5, y: -0.2, z: -0.7 },
+			rotation: { x: 0, y: -12, z: 50 },
+			origin: { x: 0.5, y: 0, z: 0.5 },
+			scale: 0.7
+		}
+	},
+	// Transforms calibrated in game with .tfedit at T03.05 (2026-11-21).
+	// On the ground the knife lies upside down (x 180), as the author posed it.
+	// `rotate: false` stops the icon from spinning, and every vector is written with all three components: a partial
+	// vector zeroes the rest (memory vs-partial-guitransform-no-merge).
+	tpHandTransform: {
+		translation: { x: -0.35, y: -0.75, z: -0.5 },
+		rotation: { x: 8, y: -165, z: -103 },
+		scale: 0.72
+	},
+	groundTransform: {
+		translation: { x: 0, y: -0.22, z: 0 },
+		rotation: { x: 180, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.5, z: 0.5299 },
+		scale: 2.62
+	},
+	guiTransform: {
+		rotate: false,
+		translation: { x: 0, y: 10, z: 0 },
+		rotation: { x: -64, y: -40, z: 5 },
+		origin: { x: 0.5, y: 0.5, z: 0.5 },
+		scale: 1.86
+	}
+}

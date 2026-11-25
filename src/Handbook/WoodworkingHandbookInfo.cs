@@ -199,9 +199,9 @@ public partial class WoodworkingHandbookInfo : ModSystem
         }
 
         capi.Logger.Notification(
-            "[immersivewoodworking] Backfilled woodworking-station handbook notes onto {0} collectible(s) (saw stripped={1}, firewood stripped={2}, debark stripped={3}, firewood to sticks={4}, sawmill={5}, chopper={6}).",
+            "[immersivewoodworking] Backfilled woodworking-station handbook notes onto {0} collectible(s) (saw stripped={1}, firewood stripped={2}, debark stripped={3}, firewood to sticks={4}, sawmill={5}, chopper={6}, debarker={7}).",
             annotated, config.DisableVanillaPlankCrafting, config.DisableVanillaFirewoodCrafting, config.DisableVanillaDebarkCrafting, config.AllowFirewoodToSticks,
-            config.EnableSawmill, config.EnableChopper);
+            config.EnableSawmill, config.EnableChopper, config.EnableDebarker);
     }
 
     /// <summary>The lang key of the "made/worked at a station" note for this collectible, or null if it
@@ -231,9 +231,10 @@ public partial class WoodworkingHandbookInfo : ModSystem
     /// F-L2-09).
     ///
     /// <para>Every note that names a powered machine has a twin without it, picked when
-    /// <see cref="ImmersiveWoodworkingConfig.EnableSawmill"/> or <see cref="ImmersiveWoodworkingConfig.EnableChopper"/>
-    /// is off: the machine's page is hidden then, and the note would point at nothing. The sawmill appears in the
-    /// plank, beam and log notes, the chopper only in the firewood ones.</para></summary>
+    /// <see cref="ImmersiveWoodworkingConfig.EnableSawmill"/>, <see cref="ImmersiveWoodworkingConfig.EnableChopper"/> or
+    /// <see cref="ImmersiveWoodworkingConfig.EnableDebarker"/> is off: the machine's page is hidden then, and the note
+    /// would point at nothing. The sawmill appears in the plank, beam and log notes, the chopper only in the firewood
+    /// ones, the debarker only in the debarked log's (<see cref="DebarkedLogNoteKey"/>).</para></summary>
     static string? NoteKeyFor(CollectibleObject obj, ImmersiveWoodworkingConfig config)
     {
         bool sawStripped = config.DisableVanillaPlankCrafting;
@@ -260,16 +261,29 @@ public partial class WoodworkingHandbookInfo : ModSystem
         }
 
         string path = obj.Code.Path;
-        if (path.StartsWith("debarkedlog-", StringComparison.Ordinal))
-        {
-            if (sawmill) return config.DisableVanillaDebarkCrafting ? Domain + ":iwsource-debarkedlog-text" : Domain + ":iwsource-debarkedlog-text-also";
-            return config.DisableVanillaDebarkCrafting ? Domain + ":iwsource-debarkedlog-text-nosawmill" : Domain + ":iwsource-debarkedlog-text-also-nosawmill";
-        }
+        if (path.StartsWith("debarkedlog-", StringComparison.Ordinal)) return DebarkedLogNoteKey(config);
         if (path.StartsWith("logsection-", StringComparison.Ordinal))
             return sawmill ? Domain + ":iwsource-logsection-text" : Domain + ":iwsource-logsection-text-nosawmill";
         if (path.StartsWith("log-placed-", StringComparison.Ordinal))
             return sawmill ? Domain + ":iwsource-log-text" : Domain + ":iwsource-log-text-nosawmill";
         return null;
+    }
+
+    /// <summary>The debarked log's note: where the log is stripped, then what it is worked into. It names two machines,
+    /// the debarker in the first paragraph and the sawmill in the second, so each of the stripped and kept wordings
+    /// comes in four forms, one per pair of <see cref="ImmersiveWoodworkingConfig.EnableDebarker"/> and
+    /// <see cref="ImmersiveWoodworkingConfig.EnableSawmill"/> (AutoDebarkerPlan T08.02).</summary>
+    static string DebarkedLogNoteKey(ImmersiveWoodworkingConfig config)
+    {
+        bool stripped = config.DisableVanillaDebarkCrafting;
+        bool sawmill = config.EnableSawmill;
+        if (config.EnableDebarker)
+        {
+            if (sawmill) return stripped ? Domain + ":iwsource-debarkedlog-text" : Domain + ":iwsource-debarkedlog-text-also";
+            return stripped ? Domain + ":iwsource-debarkedlog-text-nosawmill" : Domain + ":iwsource-debarkedlog-text-also-nosawmill";
+        }
+        if (sawmill) return stripped ? Domain + ":iwsource-debarkedlog-text-nodebarker" : Domain + ":iwsource-debarkedlog-text-also-nodebarker";
+        return stripped ? Domain + ":iwsource-debarkedlog-text-nosawmill-nodebarker" : Domain + ":iwsource-debarkedlog-text-also-nosawmill-nodebarker";
     }
 
     /// <summary>Which of the two stick notes this config earns, or null when it earns neither: both the chopping

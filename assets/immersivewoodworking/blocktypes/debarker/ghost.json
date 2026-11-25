@@ -1,0 +1,38 @@
+{
+	// Invisible ghost-filler for the non-master cells of the debarker's footprint (AutoDebarkerPlan), the analogue of
+	// `chopper-ghost`. NEVER hand-placed: the placed `debarker-frame` captures its footprint and SetBlocks these fillers
+	// in T03.03, so there is no `creativeinventory` and `drops:[]`. Its jobs are to occupy space, route every click/break
+	// to the master and, through its block entity, hand a chute the master's input slot (T05.04).
+	//
+	// T03.01: `class`/`entityClass` are the routing filler BlockDebarkerGhost and BEMultiblockDebarker (carries the master
+	// link `Principal`), byte-for-byte equal to their registration in ImmersiveWoodworkingModSystem.Start.
+	code: "debarker-ghost",
+	class: "iw-debarker-ghost",
+	entityClass: "iw-debarker-multiblock",
+	// `game:` REQUIRED (memory vs-mod-asset-path-domain). `block/basic/nothing` is the engine's empty shape.
+	shape: { base: "game:block/basic/nothing" },
+	blockmaterial: "Wood",
+	drops: [],
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	rainPermeable: true,
+	resistance: 3.5,
+	lightAbsorption: 0,
+	// No plumb-and-square reinforcement on a filler (AutoDebarkerPlan, the author's call at T03.04, 2026-11-21). A break
+	// started on a filler goes to the frame past this block's behaviors, and the frame's reinforcement holds the whole
+	// machine against breaking. A reinforced filler only kept its own cell through an explosion; an unreinforced one
+	// blown out comes back when the frame next loads (the self-heal of T03.03). Vanilla gives the Reinforcable behavior
+	// to every non-soft block unless this attribute is false (ModSystemBlockReinforcement.IsReinforcable, vssurvivalmod
+	// Systems/BlockReinforcement.cs), and the plumb and square refuses a block without it before taking any material.
+	attributes: { reinforcable: false },
+	sounds: {
+		"place": "game:block/planks",
+		"walk": "game:walk/wood",
+		"hit": "game:block/planks",
+		"break": "game:block/planks"
+	},
+	// Full-cube collision/selection FALLBACK. The per-cell boxes routed through the master are T03.02; an orphaned
+	// filler keeps these and stays solid.
+	selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+	collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 }
+}

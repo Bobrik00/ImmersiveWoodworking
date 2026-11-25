@@ -1,7 +1,8 @@
 # Source annotations: plan IDs and named invariants (for maintainers)
 
 Developer note, not shipped in the mod zip (like `config-reference.md` and `recipe-conventions.md`).
-Read this when a comment in the source says `E03`, `T06.02`, or refers to a *mod-independence rule*.
+Read this when a comment in the source says `E03`, `T06.02`, or refers to a *mod-independence rule*, and before
+you gate anything on another mod.
 
 ---
 
@@ -20,6 +21,7 @@ to read one without unpacking).
 |---|---|
 | `AuditFixPlan` | wear, tiers & acceptance gates |
 | `AutoChopperPlan` | multiblock assembly |
+| `AutoDebarkerPlan` | multiblock assembly |
 | `AutomatedSawmillPlan` | multiblock assembly |
 | `AutoRestockPlan` | polish |
 | `BarkPlan` | tannin: grinding & the barrel |
@@ -47,13 +49,17 @@ owning plan is obvious from the table below. In **shared or infrastructure** cod
 | `ManualOpsBalancePlan` | Balance of the hand operations: yields, tool tiers, chop progress, half-logs | 01 drops · 02 tier speed · 03 chop progress bar · 04 half-log item · 05 chop visual stages · 06 spill on remove · 07 flotsam hand-break · 08 log sections · 09 pit-saw blade strip · 10 README · 11 floating chop speed multiplier · 12 chopper assembly & balance |
 | `AutomatedSawmillPlan` | Powered sawmill (`BlockSawmill*`, `BlockEntitySawmill.*`, `Sawmill{Anim,Parts,Renderer}`) | 01 config · 02 blades & recipes · 03 multiblock assembly · 04 mechanical power · 05 inventory io · 06 sawing cycle · 07 visual & sound · 08 integration polish · 09 part materials |
 | `AutoChopperPlan` | Powered chopper (`BlockChopper*`, `BlockEntityChopper.*`, `Chopper{Anim,Parts,Renderer}`) | 01 config · 02 head & recipes · 03 multiblock assembly · 04 mechanical power · 05 inventory io · 06 chopping cycle · 07 visual & sound · 08 integration polish |
+| `AutoDebarkerPlan` | Powered debarker, everything in `src/Debarker/` (`BlockDebarker*`, `BlockEntityDebarker.*`, `BEBehaviorDebarkerMP`, `BEMultiblockDebarker`, `InventoryDebarker`, `Debarker{Anim,Parts,Renderer}`). Its qualified IDs also sit in the shared code it added to or widened: `BarkDropTable.BuildBarkStack` (the bark stack of the sawhorse and the debarker), `BlockEntitySawhorse.Debarking.cs` (`ResolveDebarkProduct`, `CompleteDebark`, `DropRolledBark`), `ImmersiveWoodworkingConfig.cs`, `ImmersiveWoodworkingModSystem.cs`, `MachineRenderGate.cs`, `LoopSound.cs` and the handbook (`WoodworkingHandbookInfo*.cs`) | 01 config · 02 parts, knives, recipes & switch · 03 multiblock assembly · 04 mechanical power · 05 inventory io · 06 debarking cycle · 07 visual & sound · 08 integration, docs & acceptance |
 | `AutoRestockPlan` | Auto-feeding logs from the player inventory (`AutoRestockUtil.cs`) | 01 foundation · 02 station feed · 03 polish |
 | `ImprovementsPlan` | v1.2.1 polish pack: the maul, the config FOLDER, chop jitter, recipe compat (`DropAmounts.cs`, the config I/O in `ImmersiveWoodworkingModSystem.cs`, `ImmersiveWoodworkingConfig.cs`) | 01 half-log visual-stage threshold · 02 per-metal recipe expansion · 03 pit-saw compat with saw-requiring recipes · 04 config reorg: folder, files, drops · 05 chop-progress jitter · 06 the maul: log straight to firewood · 07 verification & release |
 | `BarkPlan` | The bark chain: tanning, birch tar, bast, medicinal bark (`BarkDropTable.cs`, `TarRig.cs`, `TarDbg.cs`, `BlockTarPot`, `BlockPerforatedPot`, `ItemTarPot`, `BehaviorTarPotOpen`, `BehaviorSneakToPlace`) | 01 bark items: kinds, tags, drying · 02 debark drop table · 03 tannin: grind & barrel · 04 birch tar · 05 bast & medicinal bark · 06 ordinary-bark sinks & storage · 07 compat: bark mods, species, roofing · 08 config, verification, release |
 | `HalfLogBlockPlan` | The half-log as a building block (`BlockHalfLogSlab.cs`, `BlockHalfLogSlab.Wrench.cs`, `HalfLogPlacement.cs`, `WoodName.cs`) | 01 spike: per-species variant generation · 02 model & profile · 03 block: JSON + class · 04 placement from the hand & drop · 05 rotations: the wrench · 06 lang & handbook · 07 verification & release |
 | `ToolsmithIntegrationPlan` | `pitsaw` / `barkspud` ↔ Toolsmith heads and sharpness | 01 pit-saw blade head · 02 crafting recipes & tinkerable · 03 sharpness → speed · 04 visual parity · 05 docs & test |
 | `XSkillsIntegrationPlan` | Own forestry abilities + XP (`ImmersiveWoodworkingModSystem.XSkills.cs`, `XSkills*.cs`) | 01 soft-dependency infra · 02 tier-1 xp grants · 03 apply yield & durability · 04 swift-saw speed · 05 test & verification |
-| `AuditFixPlan` (ACTIVE) | Fixing the second audit's findings (`AuditPlan2/FINDINGS.md`), release 1.3.1. No subsystem of its own: its IDs sit in ~50 files across every station | 01 eyes-on baseline · 02 client/server seams · 03 wear, tiers & acceptance gates · 04 half-log, species & textures · 05 hot render paths · 06 sound & particles · 07 stations: pairing, multiblock, claims, mech power · 08 bark & tar chain · 09 player-facing text · 10 assets, build, docs, release |
+| `AuditFixPlan` | Fixing the second audit's findings (`AuditPlan2/FINDINGS.md`), release 1.3.1. No subsystem of its own: its IDs sit in ~50 files across every station | 01 eyes-on baseline · 02 client/server seams · 03 wear, tiers & acceptance gates · 04 half-log, species & textures · 05 hot render paths · 06 sound & particles · 07 stations: pairing, multiblock, claims, mech power · 08 bark & tar chain · 09 player-facing text · 10 assets, build, docs, release |
+| `AuditFix3Plan` (cancelled 2026-11-17) | Fixing the short 1.3.14 audit (`AuditPlan3.rar`). Only `T01.01` landed: `PlayerPresence.IsInWorld` and the hold walks in `BlockEntitySawhorse.*` and the xSkills and Seraph bridges. Its `T02.01`, `T02.02` and `T04.01` moved to `ModDbFeedbackPlan` E05 | 01 player holds (only `T01.01` done) |
+| `ModDbFeedbackPlan` | Bug fixes and compatibility from the October and November 2026 ModDB comments, release 1.4.0. No subsystem of its own: its IDs sit in the sawhorse (`BlockEntitySawhorse.*`, `BehaviorSawhorseBuild.cs`), the chopping block, the sawmill and chopper finish, the recipe strip in `ImmersiveWoodworkingModSystem.cs`, `barkdrops.json` and the Vigor bridge (`VigorCompat.cs`, `ImmersiveWoodworkingModSystem.Vigor.cs`) | 01 bugs from comments: tar resin, Toolsmith pit saw · 02 the stick yields to other mods' frames · 03 bark & tannin of other mods' woods · 04 translation, replies & release · 05 a foreign throw breaks neither the stations nor the recipe strip · 06 comments after 15 November: log section, Ctrl+right-click, Vigor |
+| `ModCompatPlan` | Bridges to String Sense and Ancient Tools: two JSON patches, `patches/compat/stringsense_cord.json` and `patches/compat/ancienttools_bark.json`, plus their lines in `FeatureGate.BarkAssets` | 01 String Sense: bark cord and bast · 02 Ancient Tools: bark tags · 03 Ancient Tools: debarking side by side · 04 fork detection, changelog, checks |
 
 Plans still in the mod root (not yet archived) are listed in `Plans_archive/README.md`.
 
@@ -77,7 +83,9 @@ firewood / a half-log), never a whitelist of species or domains. A modded log su
 
 Lives in `BlockEntityChoppingBlock.IsChoppable` and `BlockEntitySawhorse.IsSawableInput`; every other gate
 (`BlockEntityChopper.IsValidInput`, `InventoryChopper.GetSuitability`, `BlockEntitySawmill.IsValidInput`,
-`InventorySawmill.GetSuitability`) reuses one of those two rather than writing a second copy.
+`InventorySawmill.GetSuitability`, `BlockEntityDebarker.IsValidInput` and `InventoryDebarker.CanContain`) reuses one
+of those two rather than writing a second copy. The debarker takes the barked-log part of the sawhorse gate,
+`IsSawableLog`, through `DebarkProductResolves` (see "a per-species product must resolve" below).
 
 ### Rule: the chop product is vanilla on purpose
 
@@ -117,6 +125,13 @@ is their disjunction and stands on the put-down), built on the sawhorse's single
 the body as `BlockEntitySawmill.CanResolveProduct`, moved by `AuditFixPlan` T03.03 because it only ever read
 sawhorse classifiers. Never write a second resolver.
 
+The strip's product code is built in one place too. `BlockEntitySawhorse.ResolveDebarkProduct` turns a barked
+`log-placed-{wood}-{rot}` into `debarkedlog-{wood}-{rot}` and hands it to `ResolveProductBlock`;
+`DebarkProductResolves` is that call compared with null, and the sawhorse's `CompleteDebark` and the debarker's
+`CompleteDebark` take the block from it as well, so a gate and the finish behind it always build the same code
+(`AutoDebarkerPlan` T06.04). `BlockEntityDebarker.IsValidInput` adds one clause to that gate: it refuses the stub
+block a removed mod leaves behind (`Block.IsMissing`), which the sawhorse gate lets through.
+
 ### Rule: textures come from the log itself
 
 Every species texture goes through one resolver, `WoodTextures`, so a modded species paints correctly without being
@@ -141,4 +156,42 @@ back to `game`, so a missing or wrong `woodDomain` yields the unknown texture in
 design, for wood-mod compatibility.
 
 Lives in `WoodTextures.cs`. `LogTexSource.ForLog` / `ForSpecies` bind it to a mesh for the sawhorse, the sawmill, the
-chopping block, the chopper and `ItemHalfLog`; the chopping block's stand and the half-log slab call it directly.
+chopping block, the chopper, the debarker and `ItemHalfLog`; the chopping block's stand and the half-log slab call it directly.
+
+---
+
+## 3. Gating on another mod
+
+A compat patch is gated by `dependsOn`, which the patch loader checks against `Mod.Info.ModID` from the other mod's
+`modinfo.json`: exact string, case included, and the entries of one `dependsOn` array are ANDed. The asset domain
+plays no part. An unmet condition is logged only at VerboseDebug, so a gate on the wrong modid fails without a trace
+in the normal logs (fact base: `.shared/claude-memory/content-json/vs-patch-dependson-and-exact-modid.md`).
+
+The same holds for any fork or port published under a new modid: `patches/compat/foodshelves_bark.json` carries a
+second copy for `foodshelves2compat22`, the 2.3.4 port of Food Shelves.
+
+### Rule: gate Ancient Tools on both modids
+
+The Ancient Tools fork 1.6.5 declares modid `ancienttoolsfork` in its `modinfo.json`, while its asset domain and
+every item code stayed `ancienttools` (`ancienttools:bark-oak`). A gate on `ancienttools` alone is silently false
+with the fork, and a gate on the fork alone misses the original mod. Gate on either:
+
+- Write each patch twice, with the same `file`, `op`, `path` and `value`: one with
+  `dependsOn: [{ "modid": "ancienttools" }]`, one with `dependsOn: [{ "modid": "ancienttoolsfork" }]`. A single
+  patch listing both modids would need both mods at once.
+- To act when Ancient Tools is absent, write one patch with both entries inverted,
+  `dependsOn: [{ "modid": "ancienttools", "invert": true }, { "modid": "ancienttoolsfork", "invert": true }]`: the
+  AND then means neither is installed. Two inverted copies would fire whenever either one is missing.
+- Target the `ancienttools` domain for files and codes (`ancienttools:itemtypes/resources/bark.json`,
+  `ancienttools:bark-*`), whichever modid is installed.
+- A C# gate, if one is ever needed, checks both ids, as `XSkillsCompat.TryResolve` does for `xskills` and
+  `xskillsfork`.
+
+Do not copy another mod's Ancient Tools gate. String Sense 2.4.0 names only `ancienttools` in the gate of its
+bark-cord bridge (`stringsense:patches/compatibility/ancienttools.json`), never `ancienttoolsfork`, so with the fork
+Ancient Tools' bark makes no String Sense cord. A Culinary Artillery 2.0.0-dev.24 trips on the inverted case: in
+`aculinaryartillery:patches/compatibility/ancienttools/boiledbark.json` the entry gated on `ancienttools` with
+`invert: true` fires with the fork and switches off the recipe that boils Ancient Tools' oak bark, while the entry
+that would retire ACA's own dry oak bark never fires.
+
+Live example: `patches/compat/ancienttools_bark.json`.

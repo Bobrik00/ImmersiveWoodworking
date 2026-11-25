@@ -7,7 +7,7 @@ namespace ImmersiveWoodworking;
 /// AuditFixPlan T05.06 / F-L5-13 — the ONE per-frame visibility rule shared by both powered-machine renderers
 /// (<see cref="ChopperRenderer"/> and <see cref="SawmillRenderer"/>, twins by design). It lives here so the rule
 /// exists once instead of drifting into two versions, exactly like <see cref="AutoRestockUtil"/> holds the one
-/// auto-feed rule for both manual stations.
+/// auto-feed rule for both manual stations. AutoDebarkerPlan T07.02 added a third caller, <see cref="DebarkerRenderer"/>.
 ///
 /// Both renderers are registered from <c>Initialize</c> UNCONDITIONALLY, on three stages (opaque + the two shadow
 /// passes), long before a single part is fitted into the frame. Without a gate an empty frame paid, every frame,
@@ -32,20 +32,27 @@ internal static class MachineRenderGate
     // extent — local X ∈ [-1,1], Y ∈ [0,3], Z ∈ [-1,1] around the master (BlockEntity{Chopper,Sawmill}.Footprint) —
     // so the drawn geometry spans about [-1,2] × [0,4] × [-1,2] from the block origin. Centre it and take a radius
     // with slack for the workpiece log overhanging the bed/carriage: a sphere that is too LARGE only costs a draw
-    // that would have been skipped, one that is too small pops the machine out of frame edges.
+    // that would have been skipped, one that is too small pops the machine out of frame edges. The debarker
+    // (AutoDebarkerPlan T07.02) occupies local X ∈ [-1,0], Y ∈ [0,2], Z ∈ [-1,1] (BlockEntityDebarker.Footprint) and
+    // fits the same sphere: its farthest corner is 2.9 from the centre.
     const double CentreX = 0.5, CentreY = 2.0, CentreZ = 0.5;
     const double CullRadius = 4.0;
 
     /// <summary>True when the renderer has no geometry at all this frame and must return before touching GL state:
     /// no mover mesh was uploaded (nothing installed yet — the static frame is in the chunk mesh, not here) AND no
-    /// workpiece surface is loaded (the sawmill's merged workpiece log, the chopper's billet and species-painted bed).
+    /// workpiece surface is loaded (the sawmill's merged workpiece log, the chopper's billet and species-painted bed, the
+    /// debarker's log of AutoDebarkerPlan T07.04).
     ///
     /// Skipping the whole frame also skips the opaque state advance (<c>GetPartMatrices</c>, the effects/audio pump,
     /// the sawmill's client feed), which is a behavioural no-op here: every one of those gates internally on
     /// <c>IsComplete</c> via <c>IsMechanismTurning()</c>/<c>CanSaw()</c>, and a machine with no movers is by
     /// definition not complete. The one deferred-state case — the chopper holding a consumed billet across
     /// <c>pendingChopVanish</c> — cannot be starved either: holding the billet is exactly what keeps
-    /// <c>LogMeshRef</c> non-null, so <paramref name="hasWorkpiece"/> is true and the frame runs.</summary>
+    /// <c>LogMeshRef</c> non-null, so <paramref name="hasWorkpiece"/> is true and the frame runs. The debarker
+    /// (AutoDebarkerPlan T07.02) always uploads its spindle mover, which turns on an incomplete machine too, so for it
+    /// this skips only a renderer whose meshes all failed to build, the log's included (one model); its lift
+    /// (AutoDebarkerPlan T07.03), which moves without the IsComplete gate, then stands until the renderer is
+    /// rebuilt.</summary>
     public static bool NothingToDraw(bool hasMoverMesh, bool hasWorkpiece) => !hasMoverMesh && !hasWorkpiece;
 
     /// <summary>True when the machine is outside the camera frustum and this frame's DRAW can be skipped — the
@@ -58,9 +65,11 @@ internal static class MachineRenderGate
     /// this, and gate only the drawing on it. A working machine must keep sounding and keep its carriage advancing
     /// while you look away.
     ///
-    /// <paramref name="pos"/> is read with the same plain <c>Y</c> the renderers put in their model matrix (as the
-    /// helve hammer does), not <c>InternalY</c>, so the test and the draw can never disagree about where the machine
-    /// is.</summary>
+    /// <paramref name="pos"/> is read with the same <c>Y</c> the caller puts in its model matrix, so the test and the
+    /// draw can never disagree about where the machine is. The chopper and the sawmill pass the plain <c>Y</c>, as the
+    /// helve hammer does; the debarker (AutoDebarkerPlan T07.02) passes a position whose <c>Y</c> already holds
+    /// <c>InternalY</c>, because <c>CameraPos</c> carries the dimension offset (memory
+    /// vs-camerapos-includes-dimension-offset).</summary>
     public static bool OutOfView(ICoreClientAPI api, BlockPos pos, EnumRenderStage stage)
     {
         if (stage != EnumRenderStage.Opaque) return false;

@@ -537,9 +537,12 @@ public partial class BlockEntitySawhorse
     /// <c>debarkedlog</c> variant, so <see cref="CompleteDebark"/> can't swap — is handled inside CompleteDebark,
     /// which warns then calls <see cref="ResetDebarkState"/> to ZERO <see cref="barkProgress"/> AND <c>barkStagesFired</c>:
     /// the log renders as FULL bark again (state 1) and stays barked and recoverable by Ctrl+RMB, never the fully-bare
-    /// core on a still-barked log. That reset keeps <c>barkStagesFired</c> back under <c>Length</c>, so the guard above
-    /// is now vestigial (always true while a barked log is held) — kept as belt-and-suspenders and still correct if E04
-    /// later subdivides <see cref="BarkStageFractions"/>. Caller guards <c>heldLog != null</c>;
+    /// core on a still-barked log. That reset keeps <c>barkStagesFired</c> back under <c>Length</c>. The guard above still
+    /// matters for a barked log whose strip stage counted but whose CompleteDebark never finished: its defensive species
+    /// guard returning early, or a log a throw left that way in 1.3.14 or older and a save still carries (those throws
+    /// are contained since ModDbFeedbackPlan T05.02 and T05.04; a log already stuck stays stuck). Such a log shows the
+    /// cut model, the whole barked log, instead of the bare core. Still correct if E04 later subdivides
+    /// <see cref="BarkStageFractions"/>. Caller guards <c>heldLog != null</c>;
     /// master-only state (only the master holds the log).</summary>
     bool ShowDebarkModel() => sawProgress <= 0f
                               && barkStagesFired < BarkStageFractions.Length

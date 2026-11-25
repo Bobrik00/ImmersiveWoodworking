@@ -7,7 +7,7 @@ using Vintagestory.API.MathTools;
 namespace ImmersiveWoodworking;
 
 /// <summary>
-/// The BARK DROP TABLE (BarkPlan/E02): which SPECIAL bark, if any, a fully-stripped log yields on the sawhorse,
+/// The BARK DROP TABLE (BarkPlan/E02): which SPECIAL bark, if any, a fully-stripped log yields on the sawhorse or the debarker,
 /// keyed by wood species. Parsed once from the mod asset <c>config/barkdrops.json</c> in
 /// <see cref="ImmersiveWoodworkingModSystem.AssetsLoaded"/> on BOTH sides — the <c>config</c> asset category is
 /// <c>EnumAppSide.Universal</c>, so the file loads on each; the server rolls it (T02.03), the client builds the
@@ -122,8 +122,10 @@ public sealed class BarkDropTable
     /// collapses all special chances to 0 → always generic. Consumes EXACTLY ONE draw. Order matters (the
     /// authored/preserved order), so multi-kind species like willow keep their intended slices.
     ///
-    /// SERVER-ONLY by contract: <see cref="BlockEntitySawhorse.CompleteDebark"/> calls this on
-    /// <c>Api.Side == EnumAppSide.Server</c> and the resulting bark travels to clients as a normal ItemEntity, so there
+    /// SERVER-ONLY by contract: <see cref="BuildBarkStack"/> calls this from <see cref="BlockEntitySawhorse.CompleteDebark"/>
+    /// (through <c>DropRolledBark</c>) and <see cref="BlockEntityDebarker.CompleteDebark"/>, both on
+    /// <c>Api.Side == EnumAppSide.Server</c>, and the
+    /// resulting bark travels to clients as a normal ItemEntity, so there
     /// is NO client/server determinism concern (unlike the cross-side visual jitter that must never touch
     /// <c>World.Rand</c>) — <c>Api.World.Rand</c> is the correct, idiomatic RNG here, the very one
     /// <see cref="BlockEntitySawhorse.SpawnEjectedItem"/> already uses for the drop's along-jitter.</summary>
@@ -141,6 +143,37 @@ public sealed class BarkDropTable
             if (roll < cumulative) return e.Kind;  // fell inside this kind's (scaled) slice
         }
         return null; // past every scaled special slice → the generic remainder
+    }
+
+    /// <summary>The bark of one fully stripped log of <paramref name="wood"/>, as ONE stack: one
+    /// <see cref="Roll(string?, System.Random, double)"/> of <c>mod.BarkDrops</c> at <paramref name="chanceMult"/> picks
+    /// the kind, <see cref="ItemCodeForKind"/> maps it to a bark item in the mod's own domain (all bark items register
+    /// there), and <see cref="ImmersiveWoodworkingConfig.BarkPerLogFor"/> gives the count (the species'
+    /// <c>BarkPerLogBySpecies</c> line, else <c>BarkPerLog</c>, default 3), so every bark off the log is the one rolled
+    /// kind and the count never touches the kind odds. Unknown, generic-only and foreign woods roll to
+    /// <c>bark-generic</c>, so every log yields bark.
+    ///
+    /// The one build behind both strips (AutoDebarkerPlan T06.02, <c>source-conventions.md</c> §2): the sawhorse pair's
+    /// <c>DropRolledBark</c> passes its best active debarker's multiplier (tool tier and <c>carefulsawyer</c>), the
+    /// debarker machine the spud's
+    /// <see cref="ImmersiveWoodworkingConfig.BarkChanceMultSpud"/>, and each puts the stack into the world its own way.
+    /// Null, with a warning, only when the bark item is missing, which a normal install never hits. Server-side, like
+    /// <see cref="Roll(string?, System.Random, double)"/>: it takes at most one draw of <c>World.Rand</c>.</summary>
+    internal static ItemStack? BuildBarkStack(ICoreAPI api, ImmersiveWoodworkingModSystem mod, string wood, double chanceMult)
+    {
+        string? kind = mod.BarkDrops.Roll(wood, api.World.Rand, chanceMult);  // one server-side roll; null = the generic remainder
+        string code = ItemCodeForKind(kind);                                   // kind → bark item path (fresh = green where a state exists)
+        int count = mod.Config.BarkPerLogFor(wood);                            // per-species config line, else the global BarkPerLog
+
+        Item? bark = api.World.GetItem(new AssetLocation("immersivewoodworking", code));
+        if (bark == null)
+        {
+            // Our own bark items always register, so this is unreachable in a normal install. A broken asset set gives
+            // no bark rather than a throw, and the caller still ejects the debarked log.
+            api.Logger.Warning("[immersivewoodworking] Bark item immersivewoodworking:{0} not found — no bark dropped for the {1} strip.", code, wood);
+            return null;
+        }
+        return new ItemStack(bark, count);
     }
 
     // ── Parsing ────────────────────────────────────────────────────────────────────────────────────────────
